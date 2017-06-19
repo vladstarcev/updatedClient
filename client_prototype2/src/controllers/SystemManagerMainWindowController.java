@@ -1,18 +1,21 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
+
+import application.Main;
+import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-public class SystemManagerMainWindowController {
+public class SystemManagerMainWindowController implements IController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private Button deleteUserBtn;
@@ -21,27 +24,17 @@ public class SystemManagerMainWindowController {
     private Button addCourseBtn;
 
     @FXML
-    private Button exitBtn;
-
-    @FXML
     private Button addUserBtn;
 
     @FXML
     private Button deleteCourseBtn;
 
     @FXML
+    private Button LogOutButton;
+
+    @FXML
     void addUser(ActionEvent event) {
 
-    }
-    
-    public void start() throws IOException{
-    	Stage primaryStage = new Stage();
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/GUI/SystemManagerMainWindow.fxml").openStream());
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/GUI/SystemManagerMainWindow.css").toExternalForm());
-		primaryStage.setScene(scene);		
-		primaryStage.show();	
     }
 
     @FXML
@@ -60,12 +53,24 @@ public class SystemManagerMainWindowController {
     }
 
     @FXML
-    void exitMenu(ActionEvent event) {
+    void LogOutSystemManager(ActionEvent event) {
 
     }
-    
-	public void start(Stage primaryStage) throws Exception {	
+
+    @FXML
+    void initialize() {
+        assert deleteUserBtn != null : "fx:id=\"deleteUserBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
+        assert addCourseBtn != null : "fx:id=\"addCourseBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
+        assert addUserBtn != null : "fx:id=\"addUserBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
+        assert deleteCourseBtn != null : "fx:id=\"deleteCourseBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
+        assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
+
+        Main.client.controller=this;
+    }
+
+	@Override
+	public void handleAnswer(Object msg) {
+		// TODO Auto-generated method stub
 		
 	}
-
 }

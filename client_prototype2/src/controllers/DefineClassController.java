@@ -1,13 +1,23 @@
 package controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import application.Main;
+import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class DefineClassController {
+public class DefineClassController implements IController{
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private TextField MaximumPupilInClassTextField;
@@ -52,9 +62,24 @@ public class DefineClassController {
     void BackToMenu(ActionEvent event) {
 
     }
-    
-	public void start(Stage primaryStage) throws Exception {	
+
+    @FXML
+    void initialize() {
+        assert MaximumPupilInClassTextField != null : "fx:id=\"MaximumPupilInClassTextField\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+        assert EnterClassNameLabel != null : "fx:id=\"EnterClassNameLabel\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+        assert ClassNameTextField != null : "fx:id=\"ClassNameTextField\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+        assert EnterMAximumPupilLabel != null : "fx:id=\"EnterMAximumPupilLabel\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+        assert DefineClassLabel != null : "fx:id=\"DefineClassLabel\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+        assert FillFormLabel != null : "fx:id=\"FillFormLabel\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+        assert DefineClassButton != null : "fx:id=\"DefineClassButton\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
+
+        Main.client.controller=this;
+    }
+
+	@Override
+	public void handleAnswer(Object msg) {
+		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -1,13 +1,23 @@
 package controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import application.Main;
+import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class DeletePupilFromCourseController {
+public class DeletePupilFromCourseController implements IController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private Button SendButton2;
@@ -60,9 +70,25 @@ public class DeletePupilFromCourseController {
     void DeletePupilCourse(ActionEvent event) {
 
     }
-    
-	public void start(Stage primaryStage) throws Exception {	
+
+    @FXML
+    void initialize() {
+        assert SendButton2 != null : "fx:id=\"SendButton2\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert PupilIDLable != null : "fx:id=\"PupilIDLable\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert PupilIDTextField != null : "fx:id=\"PupilIDTextField\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert DeleteButton != null : "fx:id=\"DeleteButton\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert CourseIDTextField != null : "fx:id=\"CourseIDTextField\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert CourseIDLable != null : "fx:id=\"CourseIDLable\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert DeleteLable2 != null : "fx:id=\"DeleteLable2\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert DeleteLable1 != null : "fx:id=\"DeleteLable1\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+        assert SendButton1 != null : "fx:id=\"SendButton1\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
+
+        Main.client.controller=this;
+    }
+
+	@Override
+	public void handleAnswer(Object msg) {
+		// TODO Auto-generated method stub
 		
 	}
-
 }

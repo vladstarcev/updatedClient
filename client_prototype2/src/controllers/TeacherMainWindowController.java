@@ -1,13 +1,24 @@
 package controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import application.Main;
+import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.stage.Stage;
 
-public class TeacherMainWindowController {
+public class TeacherMainWindowController implements IController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private MenuItem DefineAssignment;
@@ -20,6 +31,9 @@ public class TeacherMainWindowController {
 
     @FXML
     private Label TeacherChooseLable;
+
+    @FXML
+    private Button LogOutButton;
 
     @FXML
     private Label TeacherMainLable;
@@ -48,9 +62,27 @@ public class TeacherMainWindowController {
     void GradeAndComments(ActionEvent event) {
 
     }
-    
-	public void start(Stage primaryStage) throws Exception {	
+
+    @FXML
+    void LogOutTeacher(ActionEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+        assert DefineAssignment != null : "fx:id=\"DefineAssignment\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
+        assert TeacherMenuButton != null : "fx:id=\"TeacherMenuButton\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
+        assert EvaluationForm != null : "fx:id=\"EvaluationForm\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
+        assert TeacherChooseLable != null : "fx:id=\"TeacherChooseLable\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
+        assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
+        assert TeacherMainLable != null : "fx:id=\"TeacherMainLable\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
+
+        Main.client.controller=this;
+    }
+
+	@Override
+	public void handleAnswer(Object msg) {
+		// TODO Auto-generated method stub
 		
 	}
-
 }
