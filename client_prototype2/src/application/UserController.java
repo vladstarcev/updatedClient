@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 public class UserController implements IController
 {
@@ -27,12 +29,27 @@ public class UserController implements IController
 
 	@FXML
 	private TextField userIdTextField;
+	
+    @FXML
+    private Label AISFHSlable;
+
+    @FXML
+    private Label ASHlable;
+
+    @FXML
+    private ImageView LoginImage;
+	
+	
+	
 
 	@FXML
 	void login(ActionEvent event)
 	{
 		authorizeUser(userIdTextField.getText(), passwordTextField.getText());
 	}
+	
+
+	
 
 	public void authorizeUser(String name, String pass)
 	{
@@ -53,34 +70,17 @@ public class UserController implements IController
 
 	public void handleAnswer(Object result)
 	{
-		/*switch(permission){
-		case "1":{
-			Main.client.ui.hideWindow();
-			SystemManagerUI sysadmin = new SystemManagerUI();
-			sysadmin.createUserWindow();
-			break;
-		}
-		case "2":{
-			Main.client.ui.hideWindow();
-			SchoolManagerInterface schoolmanager = new SchoolManagerInterface();
-			schoolmanager.createUserWindow();
-			break;
-		}
-		case "3":{
-		
-		}
-		case "4":{
-			
-		}
-		case "5":{
-			
-		}
-		}*/
+
 	}
 
 	@FXML
 	void initialize()
 	{
-		// dont push login to stack please
+        assert passwordTextField != null : "fx:id=\"passwordTextField\" was not injected: check your FXML file 'loginFrame.fxml'.";
+        assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'loginFrame.fxml'.";
+        assert userIdTextField != null : "fx:id=\"userIdTextField\" was not injected: check your FXML file 'loginFrame.fxml'.";
+        assert AISFHSlable != null : "fx:id=\"AISFHSlable\" was not injected: check your FXML file 'loginFrame.fxml'.";
+        assert ASHlable != null : "fx:id=\"ASHlable\" was not injected: check your FXML file 'loginFrame.fxml'.";
+        assert LoginImage != null : "fx:id=\"LoginImage\" was not injected: check your FXML file 'loginFrame.fxml'.";
 	}
 }
