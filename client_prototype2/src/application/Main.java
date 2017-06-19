@@ -18,14 +18,14 @@ public class Main extends Application
 	{
 		stack = new Stack<>();
 		client = new SchoolClient("localhost", 5556);
-		UserWindow.createUserWindow(primaryStage, "loginFrame", getClass());
-		stack.push("loginFrame");
+		//UserWindow.createUserWindow(primaryStage, "loginFrame", getClass());
+		//stack.push("loginFrame");
 		
 		
 		///*********************************test********************************/
-		//UserWindow.createUserWindow(primaryStage, "Parent", getClass());
-		//stack.push("Parent");
-		//userId = "444444444";
+		UserWindow.createUserWindow(primaryStage, "SecretaryAssignPupilToClass", getClass());
+		stack.push("SecretaryAssignPupilToClass");
+		userId = "444444444";
 		///*********************************test********************************/
 	
 	}

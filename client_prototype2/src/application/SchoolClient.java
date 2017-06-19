@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import entities.User;
 import interfaces.IController;
+import javafx.application.Platform;
 import OCSF.*;
 
 public class SchoolClient extends AbstractClient
@@ -23,7 +24,14 @@ public class SchoolClient extends AbstractClient
 		{
 			try
 			{
-				controller.handleAnswer(msg);
+				Platform.runLater(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						controller.handleAnswer(msg);
+					}
+				});
 			}
 			catch (Exception e)
 			{
