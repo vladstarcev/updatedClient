@@ -65,7 +65,6 @@ public class AssignPupilToClassController implements IController
 		data.add("pupil");
 		data.add("userID");
 		data.add(PupilIdTextField.getText());
-
 		try
 		{
 			Main.client.sendToServer(data);
