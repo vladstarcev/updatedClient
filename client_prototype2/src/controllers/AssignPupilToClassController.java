@@ -102,8 +102,8 @@ public class AssignPupilToClassController implements IController
 		data.add("Check Class");
 		data.add("select");
 		data.add("pre_course");
-		data.add("pre_course_id");
-		//	data.add(Main.userId);
+		data.add("course_id");
+		data.add(Main.userId);
 		try
 		{
 			Main.client.sendToServer(data);
@@ -119,9 +119,9 @@ public class AssignPupilToClassController implements IController
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Class");
 		data.add("select");
-		data.add("courses");
-		data.add("courseId");
-		//	data.add(Main.userId);
+		data.add("pupil_in_course");
+		data.add("userID");
+		data.add(Main.userId);
 		try
 		{
 			Main.client.sendToServer(data);
@@ -193,7 +193,7 @@ public class AssignPupilToClassController implements IController
 			}
 			else
 			{
-				//if () //if pupil ha not pre courses for selected class
+				if () //if pupil ha not pre courses for selected class
 				{
 					new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK).showAndWait();
 				}
