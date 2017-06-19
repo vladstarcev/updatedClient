@@ -23,5 +23,6 @@
       <Label fx:id="CourseTextField" layoutX="34.0" layoutY="142.0" prefHeight="21.0" prefWidth="145.0" text="Choose Course:" />
       <ChoiceBox fx:id="DisplayCourseList" layoutX="32.0" layoutY="173.0" prefWidth="150.0" />
       <Hyperlink fx:id="FileHyperLink" layoutX="36.0" layoutY="405.0" onAction="#ChooseSolutionFile" prefHeight="29.0" prefWidth="102.0" text="Choose File" />
+      <Button fx:id="BackButton" layoutX="410.0" layoutY="403.0" mnemonicParsing="false" onAction="#BackToPupilMenu" prefHeight="33.0" prefWidth="71.0" text="Back" />
    </children>
 </AnchorPane>

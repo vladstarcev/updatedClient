@@ -20,5 +20,6 @@
         </items>
       </MenuButton>
       <Label fx:id="ChooseOperationLable" layoutX="103.0" layoutY="152.0" text="Choose Your Operation:" />
+      <Button fx:id="LogOutButton" layoutX="165.0" layoutY="254.0" mnemonicParsing="false" onAction="#PupilLogOut" text="Log Out" />
    </children>
 </AnchorPane>

@@ -1,14 +1,24 @@
 package controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import application.Main;
+import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class ReportGenerationController {
+public class ReportGenerationController implements IController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
 
     @FXML
     private TextField RequestReportTextField;
@@ -47,9 +57,22 @@ public class ReportGenerationController {
     void BackToMenu(ActionEvent event) {
 
     }
-    
-	public void start(Stage primaryStage) throws Exception {	
+
+    @FXML
+    void initialize() {
+        assert RequestReportTextField != null : "fx:id=\"RequestReportTextField\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+        assert DisplayReportButton != null : "fx:id=\"DisplayReportButton\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+        assert ReportWindowLabel != null : "fx:id=\"ReportWindowLabel\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+        assert ChooseReportFromListBox != null : "fx:id=\"ChooseReportFromListBox\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+        assert EnterRequstedReportLabel != null : "fx:id=\"EnterRequstedReportLabel\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+
+        Main.client.controller=this;
+    }
+
+	@Override
+	public void handleAnswer(Object msg) {
+		// TODO Auto-generated method stub
 		
 	}
-
 }
