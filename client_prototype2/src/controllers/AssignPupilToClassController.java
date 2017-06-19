@@ -193,7 +193,7 @@ public class AssignPupilToClassController implements IController
 			}
 			else
 			{
-				if () //if pupil ha not pre courses for selected class
+				//if () //if pupil ha not pre courses for selected class
 				{
 					new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK).showAndWait();
 				}
