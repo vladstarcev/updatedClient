@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SystemManagerMainWindowController">
+   <children>
+      <Label layoutX="66.0" layoutY="29.0" text="System Manager Menu" underline="true">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="addUserBtn" layoutX="66.0" layoutY="151.0" mnemonicParsing="false" onAction="#addUser" prefHeight="31.0" prefWidth="127.0" text="Add new user" />
+      <Button fx:id="addCourseBtn" layoutX="66.0" layoutY="216.0" mnemonicParsing="false" onAction="#addCourse" text="Add new course" />
+      <Button fx:id="deleteUserBtn" layoutX="299.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="31.0" prefWidth="166.0" text="Delete existing user" />
+      <Button fx:id="deleteCourseBtn" layoutX="299.0" layoutY="216.0" mnemonicParsing="false" onAction="#deleteCourse" text="Delete existing course" />
+      <Button fx:id="exitBtn" layoutX="228.0" layoutY="325.0" mnemonicParsing="false" onAction="#exitMenu" text="Exit" />
+   </children>
+</AnchorPane>

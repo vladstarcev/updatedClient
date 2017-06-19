@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="462.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HandlingExeptionalRequestController">
+   <children>
+      <Label fx:id="HandleExeptionalRequestLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="26.0" prefHeight="42.0" prefWidth="560.0" text="Handle Exeptional Request" underline="true">
+         <font>
+            <Font name="Bookman Old Style Bold" size="35.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ExeptionalRequstBox" layoutX="63.0" layoutY="122.0" onAction="#ChooseExeptionalRequst" prefHeight="35.0" prefWidth="217.0" promptText="Choose Exeptional Request" />
+      <MenuButton fx:id="DecisionMenu" layoutX="63.0" layoutY="188.0" mnemonicParsing="false" onAction="#ChooseDecision" text="Choose decision">
+        <items>
+          <MenuItem fx:id="ConformMenuItem" mnemonicParsing="false" onAction="#ConformExeptionalRequest" onMenuValidation="#Confirm" text="Confirm" />
+          <MenuItem fx:id="DenyMenuItem" mnemonicParsing="false" onAction="#DenyExeptionalRequest" onMenuValidation="#Deny" text="Deny" />
+        </items>
+      </MenuButton>
+      <Label fx:id="CommentsLabel" layoutX="63.0" layoutY="245.0" text="Comments:" />
+      <TextArea fx:id="CommentsAreaText" layoutX="63.0" layoutY="272.0" prefHeight="115.0" prefWidth="274.0" />
+      <Button fx:id="SendAnswarButton" layoutX="417.0" layoutY="288.0" mnemonicParsing="false" onAction="#SendAnswar" prefHeight="42.0" prefWidth="95.0" text="Send" />
+      <Button fx:id="BackButton" layoutX="418.0" layoutY="352.0" mnemonicParsing="false" onAction="#BackToMenu" text="Back To Menu" />
+   </children>
+</AnchorPane>

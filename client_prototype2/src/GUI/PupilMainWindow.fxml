@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="304.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PupilMainWindow">
+   <children>
+      <Label fx:id="PupilMenuLable" layoutX="57.0" layoutY="22.0" text="Pupil Main">
+         <font>
+            <Font name="Bookman Old Style Bold" size="48.0" />
+         </font>
+      </Label>
+      <MenuButton fx:id="ChooseMenuButton" layoutX="81.0" layoutY="190.0" mnemonicParsing="false" onAction="#PupilChooseOperation" prefHeight="46.0" prefWidth="220.0" text="Choose">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Upload Assignment Solution" />
+          <MenuItem mnemonicParsing="false" text="Open Pupil File" />
+        </items>
+      </MenuButton>
+      <Label fx:id="ChooseOperationLable" layoutX="103.0" layoutY="152.0" text="Choose Your Operation:" />
+   </children>
+</AnchorPane>
