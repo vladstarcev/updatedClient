@@ -127,6 +127,7 @@ public class AssignPupilToClassController implements IController
 		{
 			data.add("courseId");
 			
+			
 		}
 		data.add("course_id");
 		data.add(Main.userId);
