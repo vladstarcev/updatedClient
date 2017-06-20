@@ -134,8 +134,6 @@ public class AssignPupilToClassController implements IController
 			data.add("" + allCoursesInClass.get(i));
 
 		}
-
-		data.add(Main.userId);
 		try
 		{
 			Main.client.sendToServer(data);
@@ -213,82 +211,80 @@ public class AssignPupilToClassController implements IController
 				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
 			}
 			else
-			{
-				loadCourseInClass();
+			{				
 				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
-				if (type.equals("Check Class"))
+			}
+		}
+		loadCourseInClass();
+		if (type.equals("Check Class"))
+		{
+			if (arr.size() == 0)
+			{
+				new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				if (type.equals("Check Course In Class"))
 				{
-					if (arr.size() == 0)
+					for (String row : arr)
 					{
-						new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
+						String[] cols = row.split(";");
+						HashMap<String, String> map = new HashMap<>();
+						for (String col : cols)
+						{
+							String[] field = col.split("=");
+							map.put(field[0], field[1]);
+						}
+						allCoursesInClass.put(map.get("userId"), map);
+					}
+					loadPreCourses();
+				}
+				else if (type.equals("Check Pre Courses"))
+				{
+					for (String row : arr)
+					{
+						String[] cols = row.split(";");
+						HashMap<String, String> map = new HashMap<>();
+						for (String col : cols)
+						{
+							String[] field = col.split("=");
+							map.put(field[0], field[1]);
+						}
+						PreCoursesID.add(map.get("pre_course_id"));
+					}
+					loadCourses();
+				}
+				else if (type.equals("Check Course Of Pupil"))
+				{
+					int flag = 0;
+					ArrayList<String> PupilsCourses = new ArrayList<String>();
+					for (String row : arr)
+					{
+						String[] cols = row.split(";");
+						HashMap<String, String> map = new HashMap<>();
+						for (String col : cols)
+						{
+							String[] field = col.split("=");
+							map.put(field[0], field[1]);
+						}
+						PupilsCourses.add(map.get("courseID"));
+					}
+					if (PupilsCourses.equals(PreCoursesID))
+					{
+						flag = 1;
+					}
+					if (flag == 1)
+					{
+						new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK)
+								.showAndWait();
 					}
 					else
 					{
-						if (type.equals("Check Course In Class"))
-						{
-							for (String row : arr)
-							{
-								String[] cols = row.split(";");
-								HashMap<String, String> map = new HashMap<>();
-								for (String col : cols)
-								{
-									String[] field = col.split("=");
-									map.put(field[0], field[1]);
-								}
-								allCoursesInClass.put(map.get("userId"), map);
-							}
-							loadPreCourses();
-						}
-
-						else if (type.equals("Check Pre Courses"))
-						{
-							for (String row : arr)
-							{
-								String[] cols = row.split(";");
-								HashMap<String, String> map = new HashMap<>();
-								for (String col : cols)
-								{
-									String[] field = col.split("=");
-									map.put(field[0], field[1]);
-								}
-								PreCoursesID.add(map.get("pre_course_id"));
-							}
-							loadCourses();
-						}
-						else if (type.equals("Check Course Of Pupil"))
-						{
-							int flag = 0;
-							ArrayList<String> PupilsCourses = new ArrayList<String>();
-							for (String row : arr)
-							{
-								String[] cols = row.split(";");
-								HashMap<String, String> map = new HashMap<>();
-								for (String col : cols)
-								{
-									String[] field = col.split("=");
-									map.put(field[0], field[1]);
-								}
-								PupilsCourses.add(map.get("courseID"));
-							}
-							if (PupilsCourses.equals(PreCoursesID))
-							{
-								flag = 1;
-							}
-							if (flag == 1)
-							{
-								new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK)
-										.showAndWait();
-							}
-							else
-							{
-								new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK)
-										.showAndWait();
-							}
-						}
+						new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK)
+								.showAndWait();
 					}
 				}
 			}
-		}
+		}	
 	}
-
 }
