@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.AddUserController">
+   <children>
+      <Label fx:id="idLbl" layoutX="113.0" layoutY="66.0" text="ID:" />
+      <Label fx:id="passLbl" layoutX="113.0" layoutY="190.0" text="User Password:" />
+      <Label fx:id="fNameLblb" layoutX="111.0" layoutY="108.0" text="First Name:" />
+      <Label fx:id="lNameLbl" layoutX="113.0" layoutY="146.0" text="Last Name:" />
+      <Label fx:id="permLbl" layoutX="113.0" layoutY="235.0" text="Permission:" />
+      <TextField fx:id="idTxt" layoutX="232.0" layoutY="61.0" />
+      <TextField fx:id="fNameTxt" layoutX="232.0" layoutY="103.0" />
+      <TextField fx:id="lNameTxt" layoutX="232.0" layoutY="141.0" />
+      <TextField fx:id="passTxt" layoutX="232.0" layoutY="185.0" />
+      <TextField fx:id="permTxt" layoutX="232.0" layoutY="230.0" />
+      <Button fx:id="addUserBtn" layoutX="280.0" layoutY="316.0" mnemonicParsing="false" onAction="#AddUser" text="Add User" />
+      <Button fx:id="cancelBtn" layoutX="99.0" layoutY="316.0" mnemonicParsing="false" onAction="#backToMenu" text="Cancel" />
+   </children>
+</AnchorPane>
