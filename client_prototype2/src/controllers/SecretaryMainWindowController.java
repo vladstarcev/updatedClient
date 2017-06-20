@@ -24,9 +24,6 @@ public class SecretaryMainWindowController implements IController {
     private MenuButton ChooseMenuButton;
 
     @FXML
-    private MenuItem AssignPupil;
-
-    @FXML
     private MenuItem OpenCourse;
 
     @FXML
@@ -36,19 +33,13 @@ public class SecretaryMainWindowController implements IController {
     private Label SecretaryMenuLable;
 
     @FXML
-    private MenuItem AssignTeacherCourseInClass;
+    private MenuItem OpenExeptionalRequstMenu;
 
     @FXML
     private Label ChooseOperationalMenu;
 
     @FXML
     private Button LogOutButton;
-
-    @FXML
-    private MenuItem DeletePupil;
-
-    @FXML
-    private MenuItem OpenExeptionalRequest;
 
     @FXML
     private MenuItem OpenSemester;
@@ -62,22 +53,12 @@ public class SecretaryMainWindowController implements IController {
     }
 
     @FXML
-    void DeletePupilWindow(ActionEvent event) {
+    void OpenExeptionalRequstWindow(ActionEvent event) {
 
     }
 
     @FXML
     void Delete(ActionEvent event) {
-
-    }
-
-    @FXML
-    void AssignPupilWindow(ActionEvent event) {
-
-    }
-
-    @FXML
-    void AssignToCourse(ActionEvent event) {
 
     }
 
@@ -88,16 +69,6 @@ public class SecretaryMainWindowController implements IController {
 
     @FXML
     void AssignPupil(ActionEvent event) {
-
-    }
-
-    @FXML
-    void AssignTeacherWindow(ActionEvent event) {
-
-    }
-
-    @FXML
-    void AssignTeacher(ActionEvent event) {
 
     }
 
@@ -132,16 +103,6 @@ public class SecretaryMainWindowController implements IController {
     }
 
     @FXML
-    void OpenExeptionalRequestWindow(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OpenR(ActionEvent event) {
-
-    }
-
-    @FXML
     void SecretaryLogOut(ActionEvent event) {
 
     }
@@ -149,19 +110,16 @@ public class SecretaryMainWindowController implements IController {
     @FXML
     void initialize() {
         assert ChooseMenuButton != null : "fx:id=\"ChooseMenuButton\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
-        assert AssignPupil != null : "fx:id=\"AssignPupil\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert OpenCourse != null : "fx:id=\"OpenCourse\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert AssignPupilToClass != null : "fx:id=\"AssignPupilToClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert SecretaryMenuLable != null : "fx:id=\"SecretaryMenuLable\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
-        assert AssignTeacherCourseInClass != null : "fx:id=\"AssignTeacherCourseInClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
+        assert OpenExeptionalRequstMenu != null : "fx:id=\"OpenExeptionalRequstMenu\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert ChooseOperationalMenu != null : "fx:id=\"ChooseOperationalMenu\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
-        assert DeletePupil != null : "fx:id=\"DeletePupil\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
-        assert OpenExeptionalRequest != null : "fx:id=\"OpenExeptionalRequest\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert OpenSemester != null : "fx:id=\"OpenSemester\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert DefineClass != null : "fx:id=\"DefineClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
 
-       Main.client.controller=this;
+        Main.client.controller=this;
     }
 
 	@Override
