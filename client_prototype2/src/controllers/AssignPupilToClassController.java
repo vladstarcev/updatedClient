@@ -56,9 +56,13 @@ public class AssignPupilToClassController implements IController
 
 	@FXML
 	private Button SendButton1;
-	
+
 	private HashMap<String, HashMap<String, String>> allCoursesInClass;
 
+	private ArrayList<String> PreCoursesID = new ArrayList<String>();
+
+	private String classID;
+	
 	@FXML
 	void SendPupilID(ActionEvent event)
 	{
@@ -86,18 +90,20 @@ public class AssignPupilToClassController implements IController
 		data.add("select");
 		data.add("class");
 		data.add("classId");
-		data.add(ClassIDTextField.getText());
+		classID=ClassIDTextField.getText();
+		data.add(classID);
 
 		try
 		{
 			Main.client.sendToServer(data);
+			loadCourseInClass();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
+
 	void loadCourseInClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -105,7 +111,7 @@ public class AssignPupilToClassController implements IController
 		data.add("select");
 		data.add("course_in_class");
 		data.add("classId");
-		data.add(ClassIDTextField.getText());
+		data.add(classID);
 
 		try
 		{
@@ -123,13 +129,13 @@ public class AssignPupilToClassController implements IController
 		data.add("Check Pre Courses");
 		data.add("select");
 		data.add("pre_course");
-		for(int i=0; i<allCoursesInClass.size(); i+=2)
+		for (int i = 0; i < allCoursesInClass.size(); i++)
 		{
-			data.add("courseId");
-			
-			
+			data.add("course_id");
+			data.add("" + allCoursesInClass.get(i));
+
 		}
-		data.add("course_id");
+
 		data.add(Main.userId);
 		try
 		{
@@ -144,11 +150,11 @@ public class AssignPupilToClassController implements IController
 	void loadCourses()
 	{
 		ArrayList<String> data = new ArrayList<String>();
-		data.add("Check Class");
+		data.add("Check Course Of Pupil");
 		data.add("select");
 		data.add("pupil_in_course");
 		data.add("userID");
-		data.add(Main.userId);
+		data.add(PupilIdTextField.getText());
 		try
 		{
 			Main.client.sendToServer(data);
@@ -187,6 +193,7 @@ public class AssignPupilToClassController implements IController
 
 		Main.client.controller = this;
 		Main.stack.push("SecretaryAssignPupilToClass");
+
 	}
 
 	@Override
@@ -203,7 +210,7 @@ public class AssignPupilToClassController implements IController
 		String type = arr.remove(0);
 		if (type.equals("Check Pupil"))
 		{
-			if(arr.size() == 0)
+			if (arr.size() == 0)
 			{
 				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
 			}
@@ -214,13 +221,14 @@ public class AssignPupilToClassController implements IController
 		}
 		else if (type.equals("Check Class"))
 		{
-			if(arr.size() == 0)
+			
+			if (arr.size() == 0)
 			{
 				new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
 			}
 			else
 			{
-				loadCourseInClass();
+
 				if (type.equals("Check Course In Class"))
 				{
 					for (String row : arr)
@@ -238,7 +246,7 @@ public class AssignPupilToClassController implements IController
 				}
 				else if (type.equals("Check Pre Courses"))
 				{
-					ArrayList<String> PreCoursesID = new ArrayList<String>();
+
 					for (String row : arr)
 					{
 						String[] cols = row.split(";");
@@ -250,21 +258,40 @@ public class AssignPupilToClassController implements IController
 						}
 						PreCoursesID.add(map.get("pre_course_id"));
 					}
+					loadCourses();
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				//if () //if pupil ha not pre courses for selected class
+				else if (type.equals("Check Course Of Pupil"))
 				{
-					new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK).showAndWait();
+					int flag = 0;
+					ArrayList<String> PupilsCourses = new ArrayList<String>();
+					for (String row : arr)
+					{
+						String[] cols = row.split(";");
+						HashMap<String, String> map = new HashMap<>();
+						for (String col : cols)
+						{
+							String[] field = col.split("=");
+							map.put(field[0], field[1]);
+						}
+						PupilsCourses.add(map.get("courseID"));
+					}
+					if (PupilsCourses.equals(PreCoursesID))
+					{
+						flag = 1;
+					}
+					if (flag == 1)
+					{
+						new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK)
+								.showAndWait();
+					}
+					else
+					{
+						new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK)
+								.showAndWait();
+					}
 				}
+
+
 			}
 		}
 	}
