@@ -225,6 +225,7 @@ public class AssignPupilToClassController implements IController
 			if (arr.size() == 0)
 			{
 				new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
+				
 			}
 			else
 			{
