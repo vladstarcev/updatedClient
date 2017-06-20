@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -55,6 +56,8 @@ public class AssignPupilToClassController implements IController
 
 	@FXML
 	private Button SendButton1;
+	
+	private HashMap<String, HashMap<String, String>> allCoursesInClass;
 
 	@FXML
 	void SendPupilID(ActionEvent event)
@@ -94,13 +97,37 @@ public class AssignPupilToClassController implements IController
 			e.printStackTrace();
 		}
 	}
+	
+	void loadCourseInClass()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Course In Class");
+		data.add("select");
+		data.add("course_in_class");
+		data.add("classId");
+		data.add(ClassIDTextField.getText());
+
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	void loadPreCourses()
 	{
 		ArrayList<String> data = new ArrayList<String>();
-		data.add("Check Class");
+		data.add("Check Pre Courses");
 		data.add("select");
 		data.add("pre_course");
+		for(int i=0; i<allCoursesInClass.size(); i+=2)
+		{
+			data.add("courseId");
+			
+		}
 		data.add("course_id");
 		data.add(Main.userId);
 		try
@@ -192,6 +219,47 @@ public class AssignPupilToClassController implements IController
 			}
 			else
 			{
+				loadCourseInClass();
+				if (type.equals("Check Course In Class"))
+				{
+					for (String row : arr)
+					{
+						String[] cols = row.split(";");
+						HashMap<String, String> map = new HashMap<>();
+						for (String col : cols)
+						{
+							String[] field = col.split("=");
+							map.put(field[0], field[1]);
+						}
+						allCoursesInClass.put(map.get("userId"), map);
+					}
+					loadPreCourses();
+				}
+				else if (type.equals("Check Pre Courses"))
+				{
+					ArrayList<String> PreCoursesID = new ArrayList<String>();
+					for (String row : arr)
+					{
+						String[] cols = row.split(";");
+						HashMap<String, String> map = new HashMap<>();
+						for (String col : cols)
+						{
+							String[] field = col.split("=");
+							map.put(field[0], field[1]);
+						}
+						PreCoursesID.add(map.get("pre_course_id"));
+					}
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				//if () //if pupil ha not pre courses for selected class
 				{
 					new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK).showAndWait();
