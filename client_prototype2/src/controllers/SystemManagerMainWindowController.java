@@ -8,6 +8,8 @@ import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class SystemManagerMainWindowController implements IController {
 
@@ -34,7 +36,9 @@ public class SystemManagerMainWindowController implements IController {
 
     @FXML
     void addUser(ActionEvent event) {
-
+    	Stage stage = new Stage();
+    	UserWindow.createUserWindow(stage, "SystemManagerAddUser", getClass());
+		Main.stack.push("SystemManagerAddUser");
     }
 
     @FXML
