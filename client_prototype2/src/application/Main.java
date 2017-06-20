@@ -26,7 +26,7 @@ public class Main extends Application
 		UserWindow.createUserWindow(primaryStage, "SystemManagerMainWindow", getClass());
 		stack.push("SystemManagerMainWindow");
 		userId = "111111111";
-		System.out.println("check");
+
 		///*********************************test********************************/
 	
 	}
