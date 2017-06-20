@@ -270,6 +270,7 @@ public class AssignPupilToClassController implements IController
 				if (!PupilsCourses.contains(PreCoursesID.get(i)))
 				{
 					flag = 1;
+					break;
 				}
 			}
 			if (flag == 0)
