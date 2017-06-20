@@ -48,7 +48,8 @@ public class SystemManagerMainWindowController implements IController {
 
     @FXML
     void deleteUser(ActionEvent event) {
-
+    	UserWindow.createUserWindow((Stage)deleteUserBtn.getScene().getWindow(), "SystemManagerDeleteUser", getClass());
+		Main.stack.push("SystemManagerDeleteUser");
     }
 
     @FXML

@@ -16,65 +16,29 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
-public class AddUserController implements IController {
-
-    @FXML
-    private Label fNameLblb;
+public class DeleteUserController implements IController {
 
     @FXML
     private TextField idTxt;
 
     @FXML
-    private TextField lNameTxt;
-
-    @FXML
-    private Label lNameLbl;
-
-    @FXML
-    private TextField passTxt;
-
-    @FXML
     private Button cancelBtn;
 
     @FXML
-    private Button addUserBtn;
+    private Label enterUserLbl;
 
     @FXML
-    private Label permLbl;
+    private Button deleteBtn;
 
     @FXML
-    private Label passLbl;
+    void deleteUser(ActionEvent event) {
 
-    @FXML
-    private TextField fNameTxt;
-
-    @FXML
-    private TextField permTxt;
-
-    @FXML
-    private Label idLbl;
-
-    @FXML
-    void AddUser(ActionEvent event) {
-    	
     	ArrayList<String> data = new ArrayList<>();
-    	data.add("add user");
-    	data.add("insert");
+    	data.add("delete user");
+    	data.add("delete");
     	data.add("user");
     	data.add("userId");
-    	data.add("userFirstName");
-    	data.add("userLastName");
-    	data.add("userPassword");
-    	data.add("isLogged");
-    	data.add("permission");
-    	
-    	data.add("values");
     	data.add(idTxt.getText());
-    	data.add(fNameTxt.getText());
-    	data.add(lNameTxt.getText());
-    	data.add(passTxt.getText());
-    	data.add("0");
-    	data.add(permTxt.getText());
     	
     	try {
 			Main.client.sendToServer(data);
@@ -82,15 +46,13 @@ public class AddUserController implements IController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
     }
 
     @FXML
     void backToMenu(ActionEvent event) {
-    	
     	UserWindow.closeUserWindow(getClass(), (Stage)cancelBtn.getScene().getWindow());
     }
-    
+
     @FXML
     void initialize(){
     	Main.client.controller=this;
@@ -106,18 +68,19 @@ public class AddUserController implements IController {
 		}
 		ArrayList<String> arr = (ArrayList<String>) msg;
 		String type = arr.remove(0);
-		if (type.equals("add user"))
+		if (type.equals("delete user"))
 		{
 			if (arr.size() == 0)
 			{
-				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
+				new Alert(AlertType.ERROR, "There is no user with such ID", ButtonType.OK).showAndWait();
 			}
 			else
 			{
-				new Alert(AlertType.INFORMATION, "User was successfully added to DB", ButtonType.OK).showAndWait();
+				new Alert(AlertType.INFORMATION, "User was successfully deleted from DB", ButtonType.OK).showAndWait();
 			}
 		}
 		UserWindow.closeUserWindow(getClass(), (Stage)cancelBtn.getScene().getWindow());
+		
 	}
 
 }
