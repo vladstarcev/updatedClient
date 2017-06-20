@@ -37,8 +37,7 @@ public class SystemManagerMainWindowController implements IController {
     @FXML
     void addUser(ActionEvent event) {
     	
-    	Stage stage = new Stage();
-    	UserWindow.createUserWindow(stage, "SystemManagerAddUser", getClass());
+    	UserWindow.createUserWindow((Stage)addUserBtn.getScene().getWindow(), "SystemManagerAddUser", getClass());
 		Main.stack.push("SystemManagerAddUser");
     }
 
