@@ -59,7 +59,7 @@ public class AssignPupilToClassController implements IController
 
 	private HashMap<String, HashMap<String, String>> allCoursesInClass;
 
-	private ArrayList<String> PreCoursesID = new ArrayList<String>();
+	private ArrayList<String> PreCoursesID;
 
 	private String classID;
 
@@ -167,6 +167,27 @@ public class AssignPupilToClassController implements IController
 			e.printStackTrace();
 		}
 	}
+	
+	void InsertPupilToClass()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Assign Pupil To Class");
+		data.add("insert");
+		data.add("pupil_in_class");
+		data.add("pupil_ID");
+		data.add("class_ID");
+		data.add("values");
+		data.add(PupilIdTextField.getText());
+		data.add(ClassIDTextField.getText());
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	@FXML
 	void initialize()
@@ -185,6 +206,8 @@ public class AssignPupilToClassController implements IController
 		Main.client.controller = this;
 		Main.stack.push("SecretaryAssignPupilToClass");
 
+		allCoursesInClass = new HashMap<>();
+		PreCoursesID = new ArrayList<String>();
 	}
 
 	@Override
@@ -275,12 +298,19 @@ public class AssignPupilToClassController implements IController
 			}
 			if (flag == 0)
 			{
-				new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK).showAndWait();
+				InsertPupilToClass();
+				//new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK).showAndWait();
 			}
 			else
 			{
 				new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK).showAndWait();
 			}
+		}
+		else if (type.equals("Assign Pupil To Class"))
+		{
+			if (arr.size()!=0) 
+				new Alert(AlertType.INFORMATION, "Pupil add succesfully to class.", ButtonType.OK).showAndWait();
+				
 		}
 	}
 }

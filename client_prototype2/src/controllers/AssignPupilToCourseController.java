@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -56,7 +57,8 @@ public class AssignPupilToCourseController implements IController {
     @FXML
     private Label CourseIDlable;
     
-
+    private ArrayList<String> PreCoursesID;
+    
     @FXML
     void EnterPupilID(ActionEvent event) {
 
@@ -108,7 +110,21 @@ public class AssignPupilToCourseController implements IController {
 
     @FXML
     void AssignPupilCourse(ActionEvent event) {
-
+    	
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Pre Courses");
+		data.add("select");
+		data.add("pre_course");
+		data.add("course_id");
+		data.add(CourseIDtextField.getText());
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
     }
 
     @FXML
@@ -131,7 +147,55 @@ public class AssignPupilToCourseController implements IController {
         assert CourseIDlable != null : "fx:id=\"CourseIDlable\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
 
         Main.client.controller=this;
+        
+        PreCoursesID = new ArrayList<String>();
     }
+    
+	void loadCourses()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Course Of Pupil");
+		data.add("select");
+		data.add("pupil_in_course");
+		data.add("userID");
+		data.add(PupilIDtextField.getText());
+		data.add("passed");
+		data.add("1");
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	void InsertPupilToCourse()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Assign Pupil To Course");
+		data.add("insert");
+		data.add("pupil_in_course");
+		data.add("userID");
+		data.add("courseID");
+		data.add("passed");
+		data.add("values");
+		data.add(PupilIDtextField.getText());
+		data.add(CourseIDtextField.getText());
+		data.add("1");
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+    
 
 	@Override
 	public void handleAnswer(Object result) {
@@ -157,20 +221,74 @@ public class AssignPupilToCourseController implements IController {
 				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
 			}
 		}
-		else if (type.equals("Check Course"))
+		else if(type.equals( "Check Course"))
 		{
-			if(arr.size() == 0)
+			if(arr.size()==0)
 			{
 				new Alert(AlertType.ERROR, "Course has not found.", ButtonType.OK).showAndWait();
 			}
-			else
+				
+			else 
 			{
-				//if () //if pupil ha not pre courses for selected class
+				new Alert(AlertType.INFORMATION, "Course has found.", ButtonType.OK).showAndWait();
+			}		
+		}
+		else if(type.equals("Check Pre Courses"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
 				{
-					new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK).showAndWait();
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				PreCoursesID.add(map.get("pre_course_id"));
+			}
+			loadCourses();
+		}
+		else if(type.equals("Check Course Of Pupil"))
+		{
+			int flag = 0;
+			ArrayList<String> PupilsCourses = new ArrayList<String>();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				PupilsCourses.add(map.get("courseID"));
+			}
+			for (int i = 0; i < PreCoursesID.size(); i++)
+			{
+				if (!PupilsCourses.contains(PreCoursesID.get(i)))
+				{
+					flag = 1;
+					break;
 				}
 			}
+			if (flag == 0)
+			{
+				InsertPupilToCourse();
+				//new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				new Alert(AlertType.ERROR, "Pupil has not pre-courses for this course.", ButtonType.OK).showAndWait();
+			}
+		}
+		else if (type.equals("Assign Pupil To Course"))
+		{
+			if (arr.size()!=0) 
+				new Alert(AlertType.INFORMATION, "Pupil add succesfully to course.", ButtonType.OK).showAndWait();
+				
 		}
 	}
 }
+	
+
 
