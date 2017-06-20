@@ -62,7 +62,7 @@ public class AssignPupilToClassController implements IController
 	private ArrayList<String> PreCoursesID = new ArrayList<String>();
 
 	private String classID;
-	
+
 	@FXML
 	void SendPupilID(ActionEvent event)
 	{
@@ -90,13 +90,12 @@ public class AssignPupilToClassController implements IController
 		data.add("select");
 		data.add("class");
 		data.add("classId");
-		classID=ClassIDTextField.getText();
+		classID = ClassIDTextField.getText();
 		data.add(classID);
 
 		try
 		{
 			Main.client.sendToServer(data);
-			loadCourseInClass();
 		}
 		catch (IOException e)
 		{
@@ -205,7 +204,6 @@ public class AssignPupilToClassController implements IController
 			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
 			return;
 		}
-
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
 		if (type.equals("Check Pupil"))
@@ -216,84 +214,81 @@ public class AssignPupilToClassController implements IController
 			}
 			else
 			{
+				loadCourseInClass();
 				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
-			}
-		}
-		else if (type.equals("Check Class"))
-		{
-			
-			if (arr.size() == 0)
-			{
-				new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
-				
-			}
-			else
-			{
-
-				if (type.equals("Check Course In Class"))
+				if (type.equals("Check Class"))
 				{
-					for (String row : arr)
+					if (arr.size() == 0)
 					{
-						String[] cols = row.split(";");
-						HashMap<String, String> map = new HashMap<>();
-						for (String col : cols)
-						{
-							String[] field = col.split("=");
-							map.put(field[0], field[1]);
-						}
-						allCoursesInClass.put(map.get("userId"), map);
-					}
-					loadPreCourses();
-				}
-				else if (type.equals("Check Pre Courses"))
-				{
-
-					for (String row : arr)
-					{
-						String[] cols = row.split(";");
-						HashMap<String, String> map = new HashMap<>();
-						for (String col : cols)
-						{
-							String[] field = col.split("=");
-							map.put(field[0], field[1]);
-						}
-						PreCoursesID.add(map.get("pre_course_id"));
-					}
-					loadCourses();
-				}
-				else if (type.equals("Check Course Of Pupil"))
-				{
-					int flag = 0;
-					ArrayList<String> PupilsCourses = new ArrayList<String>();
-					for (String row : arr)
-					{
-						String[] cols = row.split(";");
-						HashMap<String, String> map = new HashMap<>();
-						for (String col : cols)
-						{
-							String[] field = col.split("=");
-							map.put(field[0], field[1]);
-						}
-						PupilsCourses.add(map.get("courseID"));
-					}
-					if (PupilsCourses.equals(PreCoursesID))
-					{
-						flag = 1;
-					}
-					if (flag == 1)
-					{
-						new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK)
-								.showAndWait();
+						new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
 					}
 					else
 					{
-						new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK)
-								.showAndWait();
+						if (type.equals("Check Course In Class"))
+						{
+							for (String row : arr)
+							{
+								String[] cols = row.split(";");
+								HashMap<String, String> map = new HashMap<>();
+								for (String col : cols)
+								{
+									String[] field = col.split("=");
+									map.put(field[0], field[1]);
+								}
+								allCoursesInClass.put(map.get("userId"), map);
+							}
+							loadPreCourses();
+						}
+
+						else if (type.equals("Check Pre Courses"))
+						{
+							for (String row : arr)
+							{
+								String[] cols = row.split(";");
+								HashMap<String, String> map = new HashMap<>();
+								for (String col : cols)
+								{
+									String[] field = col.split("=");
+									map.put(field[0], field[1]);
+								}
+								PreCoursesID.add(map.get("pre_course_id"));
+							}
+							loadCourses();
+						}
+						else if (type.equals("Check Course Of Pupil"))
+						{
+							int flag = 0;
+							ArrayList<String> PupilsCourses = new ArrayList<String>();
+							for (String row : arr)
+							{
+								String[] cols = row.split(";");
+								HashMap<String, String> map = new HashMap<>();
+								for (String col : cols)
+								{
+									String[] field = col.split("=");
+									map.put(field[0], field[1]);
+								}
+								PupilsCourses.add(map.get("courseID"));
+							}
+							if (PupilsCourses.equals(PreCoursesID))
+							{
+								flag = 1;
+							}
+							if (flag == 1)
+							{
+								new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK)
+										.showAndWait();
+							}
+							else
+							{
+								new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK)
+										.showAndWait();
+							}
+						}
 					}
 				}
-
-
 			}
 		}
 	}
+
 }
