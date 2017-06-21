@@ -101,7 +101,7 @@ public class DefineClassController implements IController {
 			e.printStackTrace();
 		}
     }
-
+    
     @FXML
     void BackToMenu(ActionEvent event) {
 
