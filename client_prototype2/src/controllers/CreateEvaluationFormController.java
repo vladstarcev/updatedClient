@@ -1,6 +1,7 @@
 package controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class CreateEvaluationFormController implements IController {
 
@@ -59,11 +62,25 @@ public class CreateEvaluationFormController implements IController {
 
     @FXML
     void CreateEvaluationForm(ActionEvent event) {
-
+          	ArrayList<String> data = new ArrayList<>();
+        	data.add("create evaluation form");
+        	data.add("insert");
+        	data.add("evaluation_form");
+        	//data.add("fileNumber");
+        	data.add("generalComments");
+        	data.add("finalGrade");
+        	//data.add("format");
+        	
+        	data.add("values");
+        	//data.add(); //number of file
+        	data.add(CommentsTextArea.getText());
+        	data.add(PupilGradeTextLabel.getText());
+        	//data.add(); //format of file
     }
 
     @FXML
     void BackToMenu(ActionEvent event) {
+    	UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
 
     }
 
