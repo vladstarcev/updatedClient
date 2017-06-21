@@ -130,7 +130,7 @@ public class ParentController implements IController
 	@FXML
 	void BackToMenu(ActionEvent event) // change to logout
 	{
-
+		UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
 	}
 
 	@FXML

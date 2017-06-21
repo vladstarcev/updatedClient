@@ -60,6 +60,7 @@ public class ExeptionalRequestController implements IController {
     @FXML
     void BackToMenu(ActionEvent event) {
 
+    	UserWindow.closeUserWindow(getClass(), (Stage) ExeptionalRequestLabel.getScene().getWindow());
     }
 
     @FXML
