@@ -116,7 +116,26 @@ public class OpenCourseController implements IController {
 		data.add("select");
 		data.add("teacher_in_studyunit");
 		data.add("studyUnitID");
-		data.add(studyUnit);
+		data.add("01");
+
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+    }
+    
+    void loadStudyUnit()
+    {
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Load Study Unit");
+		data.add("select");
+		data.add("courses");
+		data.add("courseId");
+		data.add(ChooseCourseComboBox.getSelectionModel().getSelectedItem());
 
 		try
 		{
@@ -139,7 +158,9 @@ public class OpenCourseController implements IController {
 
         Main.client.controller=this;
         StudyUnit="";
-        loadCourses();
+        
+    	loadCourses();
+        
         
     }
 
@@ -172,6 +193,24 @@ public class OpenCourseController implements IController {
 				String coursename = map.get("courseName");
 				ChooseCourseComboBox.getItems().add(coursename);
 			}
+			
+			loadStudyUnit();
+			
+		}
+		if(type.equals("Load Study Unit"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				StudyUnit = map.get("studyUnit");
+			}
 			loadAllClass();
 		}
 		
@@ -196,7 +235,20 @@ public class OpenCourseController implements IController {
 		
 		if(type.equals("Teacher List"))
 		{
-	        // i need to select the user name from user table by user id and save them.
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String username = map.get("userName");
+				String userID=map.get("userId");
+				ChooseTeacherComboBox.getItems().add(username + ": " + userID);
+			}
 		}
 	}
 }
