@@ -1,19 +1,20 @@
 package controllers;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
 import interfaces.IController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 
 public class PupilAssignmentController implements IController {
+
 
     @FXML
     private ResourceBundle resources;
@@ -25,7 +26,7 @@ public class PupilAssignmentController implements IController {
     private Label UploadTextField;
 
     @FXML
-    private ChoiceBox<?> DisplayAssignmentList;
+    private ComboBox<?> chooseCourseCB;
 
     @FXML
     private Label AssignmentTextField;
@@ -37,10 +38,10 @@ public class PupilAssignmentController implements IController {
     private Button BackButton;
 
     @FXML
-    private ChoiceBox<?> DisplayCourseList;
+    private Hyperlink FileHyperLink;
 
     @FXML
-    private Hyperlink FileHyperLink;
+    private ComboBox<?> chooseAssCB;
 
     @FXML
     private ProgressIndicator ProgressUpload;
@@ -64,16 +65,26 @@ public class PupilAssignmentController implements IController {
     }
 
     @FXML
+    void chooseCourse(ActionEvent event) {
+
+    }
+
+    @FXML
+    void chooseAss(ActionEvent event) {
+
+    }
+
+    @FXML
     void initialize() {
-        assert UploadTextField != null : "fx:id=\"UploadTextField\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert DisplayAssignmentList != null : "fx:id=\"DisplayAssignmentList\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert AssignmentTextField != null : "fx:id=\"AssignmentTextField\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert UploadButton != null : "fx:id=\"UploadButton\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert DisplayCourseList != null : "fx:id=\"DisplayCourseList\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert FileHyperLink != null : "fx:id=\"FileHyperLink\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert ProgressUpload != null : "fx:id=\"ProgressUpload\" was not injected: check your FXML file 'Pupil.fxml'.";
-        assert CourseTextField != null : "fx:id=\"CourseTextField\" was not injected: check your FXML file 'Pupil.fxml'.";
+        assert UploadTextField != null : "fx:id=\"UploadTextField\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert chooseCourseCB != null : "fx:id=\"chooseCourseCB\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert AssignmentTextField != null : "fx:id=\"AssignmentTextField\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert UploadButton != null : "fx:id=\"UploadButton\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert FileHyperLink != null : "fx:id=\"FileHyperLink\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert chooseAssCB != null : "fx:id=\"chooseAssCB\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert ProgressUpload != null : "fx:id=\"ProgressUpload\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
+        assert CourseTextField != null : "fx:id=\"CourseTextField\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
 
         Main.client.controller=this;
     }
