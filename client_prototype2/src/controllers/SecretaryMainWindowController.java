@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class SecretaryMainWindowController implements IController {
 
@@ -55,29 +57,32 @@ public class SecretaryMainWindowController implements IController {
     @FXML
     void OpenExeptionalRequstWindow(ActionEvent event) {
 
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenExeptionalRequest", getClass());
     }
 
-    @FXML
+    @FXML // Dont delete!
     void Delete(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void AssignPupilToClassWindow(ActionEvent event) {
 
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryAssignPupilToClass", getClass());
     }
 
-    @FXML
+    @FXML // Dont delete!
     void AssignPupil(ActionEvent event) {
 
     }
 
     @FXML
     void OpenCourseWindow(ActionEvent event) {
-
+    	
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenCourse", getClass());
     }
 
-    @FXML
+    @FXML // Dont delete!
     void OpenC(ActionEvent event) {
 
     }
@@ -85,9 +90,10 @@ public class SecretaryMainWindowController implements IController {
     @FXML
     void OpenSemesterWindow(ActionEvent event) {
 
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenSemester", getClass());
     }
 
-    @FXML
+    @FXML // Dont delete!
     void OpenS(ActionEvent event) {
 
     }
@@ -95,9 +101,10 @@ public class SecretaryMainWindowController implements IController {
     @FXML
     void DefineClassWindow(ActionEvent event) {
 
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryDefineClass", getClass());
     }
 
-    @FXML
+    @FXML // Dont delete!
     void Define(ActionEvent event) {
 
     }

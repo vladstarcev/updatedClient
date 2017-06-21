@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class ExeptionalRequestController implements IController {
 
@@ -38,16 +40,20 @@ public class ExeptionalRequestController implements IController {
 
     @FXML
     void AssignPupil(ActionEvent event) {
+    	
+    	UserWindow.createUserWindow((Stage) BackButton.getScene().getWindow(), "SecretaryAssignPupilToCourse", getClass());
 
     }
 
     @FXML
     void DeletePupil(ActionEvent event) {
 
+    	UserWindow.createUserWindow((Stage) BackButton.getScene().getWindow(), "SecretaryDeletePupilFromCourse", getClass());
     }
 
     @FXML
     void ChangeAppoinment(ActionEvent event) {
+    	
 
     }
 
