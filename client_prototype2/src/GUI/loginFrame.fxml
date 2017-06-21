@@ -49,6 +49,5 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <ImageView fx:id="LoginImage" fitHeight="170.0" fitWidth="260.0" layoutX="457.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
