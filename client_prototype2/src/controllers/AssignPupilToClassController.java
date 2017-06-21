@@ -62,6 +62,9 @@ public class AssignPupilToClassController implements IController
 	private ArrayList<String> PreCoursesID;
 
 	private String classID;
+	
+	private int pupilFLAG=0;
+	private int classFLAG=0;
 
 	@FXML
 	void SendPupilID(ActionEvent event)
@@ -112,7 +115,7 @@ public class AssignPupilToClassController implements IController
 		for (int i = 0; i < allCoursesInClass.size(); i++)
 		{
 			data.add("course_id");
-			data.add("" + allCoursesInClass.get(i));
+			data.add("\"" +allCoursesInClass.get("courseId") + "\"");
 
 		}
 		try
@@ -188,6 +191,25 @@ public class AssignPupilToClassController implements IController
 			e.printStackTrace();
 		}
 	}
+	
+	void CheckClassCapacity()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Class Capacity");
+		data.add("select field");
+		data.add("capacity");
+		data.add("class");
+		data.add("classId");
+		data.add(classID);
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	@FXML
 	void initialize()
@@ -229,6 +251,7 @@ public class AssignPupilToClassController implements IController
 			}
 			else
 			{
+				pupilFLAG=1;
 				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
 			}
 		}
@@ -240,6 +263,7 @@ public class AssignPupilToClassController implements IController
 			}
 			else
 			{
+				classFLAG=1;
 				new Alert(AlertType.INFORMATION, "Class has found.", ButtonType.OK).showAndWait();
 			}
 		}
@@ -277,6 +301,7 @@ public class AssignPupilToClassController implements IController
 		{
 			int flag = 0;
 			ArrayList<String> PupilsCourses = new ArrayList<String>();
+			ArrayList<String> PupilsGrades = new ArrayList<String>();
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
@@ -287,6 +312,7 @@ public class AssignPupilToClassController implements IController
 					map.put(field[0], field[1]);
 				}
 				PupilsCourses.add(map.get("courseID"));
+				PupilsGrades.add(map.get("gradeInCourse"));
 			}
 			for (int i = 0; i < PreCoursesID.size(); i++)
 			{
@@ -295,10 +321,23 @@ public class AssignPupilToClassController implements IController
 					flag = 1;
 					break;
 				}
+				if (PupilsCourses.contains(PreCoursesID.get(i)))
+				{
+					int j;
+					int num;
+					j=PupilsCourses.indexOf(PreCoursesID.get(i));
+					num=Integer.parseInt(PupilsGrades.get(j));
+					if (num==0)
+					{
+						flag=1;
+						break;
+					}
+				}
 			}
 			if (flag == 0)
 			{
-				InsertPupilToClass();
+				CheckClassCapacity();
+			
 				//new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK).showAndWait();
 			}
 			else
@@ -308,9 +347,29 @@ public class AssignPupilToClassController implements IController
 		}
 		else if (type.equals("Assign Pupil To Class"))
 		{
-			if (arr.size()!=0) 
+			if (pupilFLAG==1 && classFLAG==1) 
 				new Alert(AlertType.INFORMATION, "Pupil add succesfully to class.", ButtonType.OK).showAndWait();
 				
+		}
+		else if (type.equals("Check Class Capacity"))
+		{
+			if (arr.size()==0)
+			{
+				new Alert(AlertType.ERROR, "The Capacity Fot This Class Is Not Defined", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				if(Integer.parseInt(arr.get(0))==0)
+				{
+					new Alert(AlertType.ERROR, "This Class Is Already Full", ButtonType.OK).showAndWait();
+				}
+				else
+				{
+					
+					new Alert(AlertType.ERROR, "There Is Romm For This Pupil In This Class", ButtonType.OK).showAndWait();
+					InsertPupilToClass();
+				}
+			}
 		}
 	}
 }
