@@ -111,6 +111,8 @@ public class SecretaryMainWindowController implements IController {
 
     @FXML
     void SecretaryLogOut(ActionEvent event) {
+    	
+    	UserWindow.closeUserWindow(getClass(), (Stage) SecretaryMenuLable.getScene().getWindow());
 
     }
 

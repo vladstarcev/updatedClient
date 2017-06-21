@@ -231,9 +231,12 @@ public class DefineClassController implements IController{
 		if (type.equals("Insert New Class"))
 		{
 			if (arr.size() != 0)
+			{
 				new Alert(AlertType.INFORMATION, "Class Defined Succesfully!", ButtonType.OK).showAndWait();
-			//close window and back to secretary main
+				UserWindow.closeUserWindow(getClass(), (Stage) FillFormLabel.getScene().getWindow());
+			}
 		}
+			
 	}
 }
 
