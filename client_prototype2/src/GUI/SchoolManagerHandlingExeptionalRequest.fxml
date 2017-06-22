@@ -24,6 +24,6 @@
       <TextArea fx:id="CommentsAreaText" layoutX="61.0" layoutY="373.0" prefHeight="165.0" prefWidth="376.0" />
       <Button fx:id="SendAnswarButton" layoutX="465.0" layoutY="420.0" mnemonicParsing="false" onAction="#SendAnswar" prefHeight="35.0" prefWidth="95.0" text="Send" />
       <Button fx:id="BackButton" layoutX="465.0" layoutY="476.0" mnemonicParsing="false" onAction="#BackToMenu" text="Back To Menu" />
-      <ComboBox layoutX="63.0" layoutY="115.0" prefHeight="31.0" prefWidth="376.0" promptText="ChooseType of Exeptional Request" />
+      <ComboBox fx:id="chooseTypeCB" layoutX="63.0" layoutY="115.0" onAction="#chooseType" prefHeight="31.0" prefWidth="376.0" promptText="ChooseType of Exeptional Request" />
    </children>
 </AnchorPane>
