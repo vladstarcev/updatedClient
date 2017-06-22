@@ -23,8 +23,8 @@ public class Main extends Application
 		
 		
 		///*********************************test********************************/
-		UserWindow.createUserWindow(primaryStage, "SecretaryAssignPupilToClass", getClass());
-		   stack.push("SecretaryAssignPupilToClass");
+		UserWindow.createUserWindow(primaryStage, "SecretaryMainWindow", getClass());
+		   stack.push("SecretaryMainWindow");
 		   userId = "333333333";
 		///*********************************test********************************/
 	

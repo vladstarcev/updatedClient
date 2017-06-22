@@ -445,11 +445,20 @@ public class OpenCourseController implements IController {
 			else
 			{
 				new Alert(AlertType.INFORMATION, "Course Opened Succesfully", ButtonType.OK).showAndWait();
-				InsertCourseToClass();
 				int num=Integer.parseInt(TeachingHours);
 				num=num+CourseHours;
-				UpdateWorkHoursTeacher(Integer.toString(num));
+				TeachingHours=Integer.toString(num);
+				InsertCourseToClass();
 			}
+		}
+		
+		if(type.equals("Insert to course_in_class"))
+		{
+			if(arr.size()>0)
+			{
+			UpdateWorkHoursTeacher(TeachingHours);
+			}
+			else new Alert(AlertType.ERROR, "Error", ButtonType.OK).showAndWait();
 		}
 	}
 }
