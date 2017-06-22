@@ -80,7 +80,8 @@ public class AssignPupilToClassController implements IController
 		data.add("select");
 		data.add("pupil");
 		data.add("userID");
-		data.add(PupilIdTextField.getText());
+		pupilID=PupilIdTextField.getText();
+		data.add(pupilID);
 		try
 		{
 			Main.client.sendToServer(data);
@@ -145,7 +146,7 @@ public class AssignPupilToClassController implements IController
 		data.add("select");
 		data.add("pupil_in_course");
 		data.add("userID");
-		data.add(PupilIdTextField.getText());
+		data.add(pupilID);
 		try
 		{
 			Main.client.sendToServer(data);
@@ -190,8 +191,8 @@ public class AssignPupilToClassController implements IController
 		data.add("pupil_ID");
 		data.add("class_ID");
 		data.add("values");
-		data.add(PupilIdTextField.getText());
-		data.add(ClassIDTextField.getText());
+		data.add(pupilID);
+		data.add(classID);
 		try
 		{
 			Main.client.sendToServer(data);
@@ -293,7 +294,7 @@ public class AssignPupilToClassController implements IController
 			}
 			loadPreCourses();
 		}
-		else if (type.equals("Check Pre Courses"))
+		if (type.equals("Check Pre Courses"))
 		{
 			for (String row : arr)
 			{
@@ -308,7 +309,7 @@ public class AssignPupilToClassController implements IController
 			}
 			loadCourses();
 		}
-		else if (type.equals("Check Course Of Pupil"))
+		if (type.equals("Check Course Of Pupil"))
 		{
 			int flag = 0;
 			ArrayList<String> PupilsCourses = new ArrayList<String>();
@@ -323,8 +324,7 @@ public class AssignPupilToClassController implements IController
 					map.put(field[0], field[1]);
 				}
 				PupilsCourses.add(map.get("courseID"));
-				
-				//PupilsGrades.add(map.get("gradeInCourse"));
+				PupilsGrades.add(map.get("gradeInCourse"));
 			}
 			for (int i = 0; i < PreCoursesID.size(); i++)
 			{
@@ -357,13 +357,13 @@ public class AssignPupilToClassController implements IController
 				new Alert(AlertType.ERROR, "Pupil has not pre-courses for this class.", ButtonType.OK).showAndWait();
 			}
 		}
-		else if (type.equals("Assign Pupil To Class"))
+		if (type.equals("Assign Pupil To Class"))
 		{
 			
 				new Alert(AlertType.INFORMATION, "Pupil add succesfully to class.", ButtonType.OK).showAndWait();
 				
 		}
-		else if (type.equals("Check Class Capacity"))
+		if (type.equals("Check Class Capacity"))
 		{
 			if (arr.size()==0)
 			{
