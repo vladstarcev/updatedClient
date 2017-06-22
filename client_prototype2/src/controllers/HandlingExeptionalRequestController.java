@@ -1,11 +1,8 @@
 package controllers;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import application.Main;
-import interfaces.IController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -14,7 +11,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 
-public class HandlingExeptionalRequestController implements IController {
+public class HandlingExeptionalRequestController {
 
     @FXML
     private ResourceBundle resources;
@@ -101,12 +98,5 @@ public class HandlingExeptionalRequestController implements IController {
         assert DecisionMenu != null : "fx:id=\"DecisionMenu\" was not injected: check your FXML file 'SchoolManagerHandlingExeptionalRequest.fxml'.";
         assert SendAnswarButton != null : "fx:id=\"SendAnswarButton\" was not injected: check your FXML file 'SchoolManagerHandlingExeptionalRequest.fxml'.";
 
-        Main.client.controller=this;
     }
-
-	@Override
-	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
-		
-	}
 }
