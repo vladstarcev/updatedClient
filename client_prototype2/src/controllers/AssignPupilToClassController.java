@@ -62,13 +62,17 @@ public class AssignPupilToClassController implements IController
 	private ArrayList<String> PreCoursesID;
 
 	private String classID;
+	private String pupilID;
 	
 	private int pupilFLAG=0;
 	private int classFLAG=0;
+	
 
 	@FXML
+	/**Function That Called When Secretary Presses On SensButton1**/
 	void SendPupilID(ActionEvent event)
 	{
+		/**Query That Asks For The Field userID Where He Equals To PupilIdTextField.getText() From pupil Table**/
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Pupil");
 		data.add("select");
@@ -86,8 +90,10 @@ public class AssignPupilToClassController implements IController
 	}
 
 	@FXML
+	/**Function That Called When Secretary Presses On SensButton2**/
 	void SendClassID(ActionEvent event)
 	{
+		/**Query That Asks For The Field classId Where He Equals To ClassIDTextField.getText() From class Table**/
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Class");
 		data.add("select");
@@ -106,6 +112,7 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	
 	void loadPreCourses()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -115,8 +122,7 @@ public class AssignPupilToClassController implements IController
 		for (int i = 0; i < allCoursesInClass.size(); i++)
 		{
 			data.add("course_id");
-			data.add("\"" +allCoursesInClass.get("courseId") + "\"");
-
+			data.add(" " +allCoursesInClass.get("courseId"));
 		}
 		try
 		{
@@ -347,7 +353,7 @@ public class AssignPupilToClassController implements IController
 		}
 		else if (type.equals("Assign Pupil To Class"))
 		{
-			if (pupilFLAG==1 && classFLAG==1) 
+			
 				new Alert(AlertType.INFORMATION, "Pupil add succesfully to class.", ButtonType.OK).showAndWait();
 				
 		}
@@ -367,7 +373,11 @@ public class AssignPupilToClassController implements IController
 				{
 					
 					new Alert(AlertType.ERROR, "There Is Romm For This Pupil In This Class", ButtonType.OK).showAndWait();
-					InsertPupilToClass();
+					if (pupilFLAG==1 && classFLAG==1) 
+					{
+						InsertPupilToClass();
+					}
+					
 				}
 			}
 		}
