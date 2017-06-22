@@ -58,7 +58,7 @@ public class AssignPupilToClassController implements IController
 	private Button SendButton1;
 
 	private HashMap<String, HashMap<String, String>> allCoursesInClass;
-	private ArrayList<String> allCoursesID;
+	private ArrayList<String> CoursesID;
 
 
 	private ArrayList<String> PreCoursesID;
@@ -122,10 +122,10 @@ public class AssignPupilToClassController implements IController
 		data.add("select");
 		data.add("pre_course");
 		
-		for (int i = 0; i < allCoursesInClass.size(); i++)
+		for (int i = 0; i < CoursesID.size(); i++)
 		{
 			data.add("course_id");
-			String str = " " + allCoursesInClass.get("courseId");
+			String str = " " + CoursesID.get(i);
 			data.add(str); 
 		}
 		try
@@ -240,6 +240,7 @@ public class AssignPupilToClassController implements IController
 
 		allCoursesInClass = new HashMap<>();
 		PreCoursesID = new ArrayList<String>();
+		CoursesID = new ArrayList<String>();
 	}
 
 	@Override
@@ -288,8 +289,7 @@ public class AssignPupilToClassController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-				allCoursesInClass.put(map.get("courseId"), map);
-				
+				CoursesID.add(map.get("courseId"));	
 			}
 			loadPreCourses();
 		}
