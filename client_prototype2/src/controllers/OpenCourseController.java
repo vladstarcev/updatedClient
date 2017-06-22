@@ -262,15 +262,13 @@ public class OpenCourseController implements IController {
      {
  		ArrayList<String> data = new ArrayList<String>();
 		data.add("Update Hours");
-		data.add("Update");
+		data.add("update");
 		data.add("teacher");
-		data.add("SET");
 		data.add("workHours");
 		data.add(S);
 		data.add("conditions");
 		data.add("userID");
 		data.add(TeacherID);
-		
 		
  		try
  		{
@@ -460,6 +458,11 @@ public class OpenCourseController implements IController {
 			UpdateWorkHoursTeacher(TeachingHours);
 			}
 			else new Alert(AlertType.ERROR, "Error", ButtonType.OK).showAndWait();
+		}
+		
+		if (type.equals("Update Hours"))
+		{
+			new Alert(AlertType.INFORMATION, "Update Hours Of Teacher", ButtonType.OK).showAndWait();
 		}
 	}
 }
