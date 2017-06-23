@@ -6,24 +6,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="604.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HandlingExeptionalRequestController">
+<AnchorPane prefHeight="503.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HandlingExeptionalRequestController">
    <children>
       <Label fx:id="HandleExeptionalRequestLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="26.0" prefHeight="42.0" prefWidth="560.0" text="Handle Exeptional Request" underline="true">
          <font>
             <Font name="Bookman Old Style Bold" size="35.0" />
          </font>
       </Label>
-      <ComboBox fx:id="ExeptionalRequstBox" layoutX="63.0" layoutY="178.0" onAction="#ChooseExeptionalRequst" prefHeight="35.0" prefWidth="376.0" promptText="Choose Exeptional Request" />
-      <MenuButton fx:id="DecisionMenu" layoutX="63.0" layoutY="257.0" mnemonicParsing="false" onAction="#ChooseDecision" prefHeight="31.0" prefWidth="376.0" text="Choose decision">
+      <ComboBox fx:id="ExeptionalRequstBox" layoutX="63.0" layoutY="104.0" onAction="#ChooseExeptionalRequst" prefHeight="35.0" prefWidth="376.0" promptText="Choose Exeptional Request" />
+      <MenuButton fx:id="DecisionMenu" layoutX="61.0" layoutY="186.0" mnemonicParsing="false" onAction="#ChooseDecision" prefHeight="31.0" prefWidth="376.0" text="Choose decision">
         <items>
           <MenuItem fx:id="ConformMenuItem" mnemonicParsing="false" onAction="#ConformExeptionalRequest" onMenuValidation="#Confirm" text="Confirm" />
           <MenuItem fx:id="DenyMenuItem" mnemonicParsing="false" onAction="#DenyExeptionalRequest" onMenuValidation="#Deny" text="Deny" />
         </items>
       </MenuButton>
-      <Label fx:id="CommentsLabel" layoutX="63.0" layoutY="334.0" text="Comments:" />
-      <TextArea fx:id="CommentsAreaText" layoutX="61.0" layoutY="373.0" prefHeight="165.0" prefWidth="376.0" />
-      <Button fx:id="SendAnswarButton" layoutX="465.0" layoutY="420.0" mnemonicParsing="false" onAction="#SendAnswar" prefHeight="35.0" prefWidth="95.0" text="Send" />
-      <Button fx:id="BackButton" layoutX="465.0" layoutY="476.0" mnemonicParsing="false" onAction="#BackToMenu" text="Back To Menu" />
-      <ComboBox fx:id="chooseTypeCB" layoutX="63.0" layoutY="115.0" onAction="#chooseType" prefHeight="31.0" prefWidth="376.0" promptText="ChooseType of Exeptional Request" />
+      <Label fx:id="CommentsLabel" layoutX="63.0" layoutY="277.0" text="Comments:" />
+      <Button fx:id="SendAnswarButton" layoutX="475.0" layoutY="344.0" mnemonicParsing="false" onAction="#SendAnswar" prefHeight="35.0" prefWidth="95.0" text="Send" />
+      <Button fx:id="BackButton" layoutX="475.0" layoutY="406.0" mnemonicParsing="false" onAction="#BackToMenu" text="Back To Menu" />
+      <TextField fx:id="commentTF" layoutX="63.0" layoutY="313.0" onAction="#commentTextField" prefHeight="146.0" prefWidth="353.0" />
    </children>
 </AnchorPane>
