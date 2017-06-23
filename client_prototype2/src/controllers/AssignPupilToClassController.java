@@ -62,11 +62,10 @@ public class AssignPupilToClassController implements IController
 
 	private String classID;
 	private String pupilID;
-	
+
 	private int pupilFLAG;
 	private int classFLAG;
 	private int notAssigned;
-	
 
 	@FXML
 	/**Function That Called When Secretary Presses On SensButton1**/
@@ -78,7 +77,7 @@ public class AssignPupilToClassController implements IController
 		data.add("select");
 		data.add("pupil");
 		data.add("userID");
-		pupilID=PupilIdTextField.getText();
+		pupilID = PupilIdTextField.getText();
 		data.add(pupilID);
 		try
 		{
@@ -158,22 +157,24 @@ public class AssignPupilToClassController implements IController
 	@FXML
 	void AssignPupilToClass(ActionEvent event)
 	{
-		String currClassID=ClassIDTextField.getText();
-		String currPupilID=PupilIdTextField.getText();
-		if((pupilFLAG==1)&&(classFLAG==1)&&(classID.equals(currClassID))&&(pupilID.equals(currPupilID)))
+		String currClassID = ClassIDTextField.getText();
+		String currPupilID = PupilIdTextField.getText();
+		if ((pupilFLAG == 1) && (classFLAG == 1) && (classID.equals(currClassID)) && (pupilID.equals(currPupilID)))
 		{
-		CheackIfPupilAlreadyAssignedToClass();
-			if(notAssigned==1)
+			CheackIfPupilAlreadyAssignedToClass();
+			if (notAssigned == 1)
 			{
 				loadCoursesInClass();
 				loadCourses();
 			}
 		}
-		else 
+		else
 		{
-			new Alert(AlertType.ERROR, "Enter Proper Pupil/Class ID And Ceack them Before Assigning .", ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, "Enter Proper Pupil/Class ID And Ceack them Before Assigning .", ButtonType.OK)
+					.showAndWait();
 		}
 	}
+
 	void CheackIfPupilAlreadyAssignedToClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -191,6 +192,7 @@ public class AssignPupilToClassController implements IController
 			e.printStackTrace();
 		}
 	}
+
 	void loadCoursesInClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -208,7 +210,7 @@ public class AssignPupilToClassController implements IController
 			e.printStackTrace();
 		}
 	}
-	
+
 	void InsertPupilToClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -229,7 +231,7 @@ public class AssignPupilToClassController implements IController
 			e.printStackTrace();
 		}
 	}
-	
+
 	void CheckClassCapacity()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -267,11 +269,11 @@ public class AssignPupilToClassController implements IController
 
 		PreCoursesID = new ArrayList<String>();
 		CoursesID = new ArrayList<String>();
-		notAssigned=0;
-		pupilFLAG=0;
-		classFLAG=0;
-		pupilID="";
-		classID="";
+		notAssigned = 0;
+		pupilFLAG = 0;
+		classFLAG = 0;
+		pupilID = "";
+		classID = "";
 	}
 
 	@Override
@@ -285,17 +287,17 @@ public class AssignPupilToClassController implements IController
 		}
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
-		
+
 		if (type.equals("Check Pupil"))
 		{
 			if (arr.size() == 0)
 			{
-				pupilFLAG=0;
+				pupilFLAG = 0;
 				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
 			}
 			else
 			{
-				pupilFLAG=1;
+				pupilFLAG = 1;
 				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
 			}
 		}
@@ -303,25 +305,25 @@ public class AssignPupilToClassController implements IController
 		{
 			if (arr.size() == 0)
 			{
-				classFLAG=0;
+				classFLAG = 0;
 				new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
 			}
 			else
 			{
-				classFLAG=1;
+				classFLAG = 1;
 				new Alert(AlertType.INFORMATION, "Class has found.", ButtonType.OK).showAndWait();
 			}
 		}
-		
-		if(type.equals("Check if pupil assigned"))
+
+		if (type.equals("Check if pupil assigned"))
 		{
-			if(arr.size()!=0)
+			if (arr.size() != 0)
 			{
 				new Alert(AlertType.ERROR, "Pupil Already Assigned To Class.", ButtonType.OK).showAndWait();
 			}
-			notAssigned=1;
+			notAssigned = 1;
 		}
-		
+
 		if (type.equals("Check Course In Class"))
 		{
 			for (String row : arr)
@@ -333,11 +335,11 @@ public class AssignPupilToClassController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-				CoursesID.add(map.get("courseId"));	
+				CoursesID.add(map.get("courseId"));
 			}
-			for(int i=0;i<CoursesID.size();i++)
+			for (int i = 0; i < CoursesID.size(); i++)
 			{
-			loadPreCourses(CoursesID.get(i));
+				loadPreCourses(CoursesID.get(i));
 			}
 		}
 		if (type.equals("Check Pre Courses"))
@@ -346,17 +348,17 @@ public class AssignPupilToClassController implements IController
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
-				
+
 				for (String col : cols)
 				{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-				String pre_course=map.get("pre_course_id");
+				String pre_course = map.get("pre_course_id");
 				PreCoursesID.add(pre_course);
-			}	
+			}
 		}
-		
+
 		if (type.equals("Check Course Of Pupil"))
 		{
 			int flag = 0;
@@ -385,11 +387,11 @@ public class AssignPupilToClassController implements IController
 				{
 					int j;
 					int num;
-					j=PupilsCourses.indexOf(PreCoursesID.get(i));
-					num=Integer.parseInt(PupilsGrades.get(j));
-					if (num==0)
+					j = PupilsCourses.indexOf(PreCoursesID.get(i));
+					num = Integer.parseInt(PupilsGrades.get(j));
+					if (num == 0)
 					{
-						flag=1;
+						flag = 1;
 						break;
 					}
 				}
@@ -397,7 +399,7 @@ public class AssignPupilToClassController implements IController
 			if (flag == 0)
 			{
 				CheckClassCapacity();
-			
+
 				//new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK).showAndWait();
 			}
 			else
@@ -407,27 +409,29 @@ public class AssignPupilToClassController implements IController
 		}
 		if (type.equals("Assign Pupil To Class"))
 		{
-			
-				new Alert(AlertType.INFORMATION, "Pupil add succesfully to class.", ButtonType.OK).showAndWait();
-				
+
+			new Alert(AlertType.INFORMATION, "Pupil add succesfully to class.", ButtonType.OK).showAndWait();
+
 		}
 		if (type.equals("Check Class Capacity"))
 		{
-		for (String row : arr)
+			for (String row : arr)
 			{
-			String[] cols = row.split(";");
-			HashMap<String, String> map = new HashMap<>();
-			for (String col : cols)
-			{
-				String[] field = col.split("=");
-				map.put(field[0], field[1]);
-			}
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
 
-			String capacity = map.get("capacity");
-			String AssignedPupils= map.get("AssignedPupils");
-			int num=Integer.parseInt(capacity)-Integer.parseInt(AssignedPupils);
-			if(num==0) new Alert(AlertType.ERROR, "This Class Is Already Full", ButtonType.OK).showAndWait();
-			else InsertPupilToClass();
+				String capacity = map.get("capacity");
+				String AssignedPupils = map.get("AssignedPupils");
+				int num = Integer.parseInt(capacity) - Integer.parseInt(AssignedPupils);
+				if (num == 0)
+					new Alert(AlertType.ERROR, "This Class Is Already Full", ButtonType.OK).showAndWait();
+				else
+					InsertPupilToClass();
 			}
 		}
 	}
