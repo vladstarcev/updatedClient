@@ -462,6 +462,7 @@ public class OpenCourseController implements IController {
 		if (type.equals("Update Hours"))
 		{
 			new Alert(AlertType.INFORMATION, "Updated Working Hours Of Teacher", ButtonType.OK).showAndWait();
+			UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
 		}
 	}
 }

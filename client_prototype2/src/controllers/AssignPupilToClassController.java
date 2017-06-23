@@ -57,17 +57,15 @@ public class AssignPupilToClassController implements IController
 	@FXML
 	private Button SendButton1;
 
-	private HashMap<String, HashMap<String, String>> allCoursesInClass;
 	private ArrayList<String> CoursesID;
-
-
 	private ArrayList<String> PreCoursesID;
 
 	private String classID;
 	private String pupilID;
 	
-	private int pupilFLAG=0;
-	private int classFLAG=0;
+	private int pupilFLAG;
+	private int classFLAG;
+	private int notAssigned;
 	
 
 	@FXML
@@ -115,20 +113,14 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
-	
-	void loadPreCourses()
+	void loadPreCourses(String str)
 	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Pre Courses");
 		data.add("select");
 		data.add("pre_course");
-		
-		for (int i = 0; i < CoursesID.size(); i++)
-		{
-			data.add("course_id");
-			String str = " " + CoursesID.get(i);
-			data.add(str); 
-		}
+		data.add("course_id");
+		data.add(str);
 		try
 		{
 			Main.client.sendToServer(data);
@@ -165,6 +157,41 @@ public class AssignPupilToClassController implements IController
 
 	@FXML
 	void AssignPupilToClass(ActionEvent event)
+	{
+		String currClassID=ClassIDTextField.getText();
+		String currPupilID=PupilIdTextField.getText();
+		if((pupilFLAG==1)&&(classFLAG==1)&&(classID.equals(currClassID))&&(pupilID.equals(currPupilID)))
+		{
+		CheackIfPupilAlreadyAssignedToClass();
+			if(notAssigned==1)
+			{
+				loadCoursesInClass();
+				loadCourses();
+			}
+		}
+		else 
+		{
+			new Alert(AlertType.ERROR, "Enter Proper Pupil/Class ID And Ceack them Before Assigning .", ButtonType.OK).showAndWait();
+		}
+	}
+	void CheackIfPupilAlreadyAssignedToClass()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check if pupil assigned");
+		data.add("select");
+		data.add("pupil_in_class");
+		data.add("pupil_ID");
+		data.add(PupilIdTextField.getText());
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	void loadCoursesInClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Course In Class");
@@ -207,8 +234,7 @@ public class AssignPupilToClassController implements IController
 	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Class Capacity");
-		data.add("select field");
-		data.add("capacity");
+		data.add("select");
 		data.add("class");
 		data.add("classId");
 		data.add(classID);
@@ -239,9 +265,13 @@ public class AssignPupilToClassController implements IController
 		Main.client.controller = this;
 		Main.stack.push("SecretaryAssignPupilToClass");
 
-		allCoursesInClass = new HashMap<>();
 		PreCoursesID = new ArrayList<String>();
 		CoursesID = new ArrayList<String>();
+		notAssigned=0;
+		pupilFLAG=0;
+		classFLAG=0;
+		pupilID="";
+		classID="";
 	}
 
 	@Override
@@ -255,10 +285,12 @@ public class AssignPupilToClassController implements IController
 		}
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
+		
 		if (type.equals("Check Pupil"))
 		{
 			if (arr.size() == 0)
 			{
+				pupilFLAG=0;
 				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
 			}
 			else
@@ -267,10 +299,11 @@ public class AssignPupilToClassController implements IController
 				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
 			}
 		}
-		else if (type.equals("Check Class"))
+		if (type.equals("Check Class"))
 		{
 			if (arr.size() == 0)
 			{
+				classFLAG=0;
 				new Alert(AlertType.ERROR, "Class has not found.", ButtonType.OK).showAndWait();
 			}
 			else
@@ -279,7 +312,17 @@ public class AssignPupilToClassController implements IController
 				new Alert(AlertType.INFORMATION, "Class has found.", ButtonType.OK).showAndWait();
 			}
 		}
-		else if (type.equals("Check Course In Class"))
+		
+		if(type.equals("Check if pupil assigned"))
+		{
+			if(arr.size()!=0)
+			{
+				new Alert(AlertType.ERROR, "Pupil Already Assigned To Class.", ButtonType.OK).showAndWait();
+			}
+			notAssigned=1;
+		}
+		
+		if (type.equals("Check Course In Class"))
 		{
 			for (String row : arr)
 			{
@@ -292,23 +335,28 @@ public class AssignPupilToClassController implements IController
 				}
 				CoursesID.add(map.get("courseId"));	
 			}
-			loadPreCourses();
+			for(int i=0;i<CoursesID.size();i++)
+			{
+			loadPreCourses(CoursesID.get(i));
+			}
 		}
 		if (type.equals("Check Pre Courses"))
 		{
+			HashMap<String, String> map = new HashMap<>();
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
-				HashMap<String, String> map = new HashMap<>();
+				
 				for (String col : cols)
 				{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-				PreCoursesID.add(map.get("pre_course_id"));
-			}
-			loadCourses();
+				String pre_course=map.get("pre_course_id");
+				PreCoursesID.add(pre_course);
+			}	
 		}
+		
 		if (type.equals("Check Course Of Pupil"))
 		{
 			int flag = 0;
@@ -365,26 +413,21 @@ public class AssignPupilToClassController implements IController
 		}
 		if (type.equals("Check Class Capacity"))
 		{
-			if (arr.size()==0)
+		for (String row : arr)
 			{
-				new Alert(AlertType.ERROR, "The Capacity Fot This Class Is Not Defined", ButtonType.OK).showAndWait();
+			String[] cols = row.split(";");
+			HashMap<String, String> map = new HashMap<>();
+			for (String col : cols)
+			{
+				String[] field = col.split("=");
+				map.put(field[0], field[1]);
 			}
-			else
-			{
-				if(Integer.parseInt(arr.get(0))==0)
-				{
-					new Alert(AlertType.ERROR, "This Class Is Already Full", ButtonType.OK).showAndWait();
-				}
-				else
-				{
-					
-					new Alert(AlertType.ERROR, "There Is Romm For This Pupil In This Class", ButtonType.OK).showAndWait();
-					if (pupilFLAG==1 && classFLAG==1) 
-					{
-						InsertPupilToClass();
-					}
-					
-				}
+
+			String capacity = map.get("capacity");
+			String AssignedPupils= map.get("AssignedPupils");
+			int num=Integer.parseInt(capacity)-Integer.parseInt(AssignedPupils);
+			if(num==0) new Alert(AlertType.ERROR, "This Class Is Already Full", ButtonType.OK).showAndWait();
+			else InsertPupilToClass();
 			}
 		}
 	}
