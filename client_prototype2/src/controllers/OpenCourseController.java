@@ -67,38 +67,33 @@ public class OpenCourseController implements IController {
     @FXML
     void CourseList(ActionEvent event) {
     	
-    	while(cbCourseName.equals(""))
-		{
-    		cbCourseName=ChooseCourseComboBox.getSelectionModel().getSelectedItem();
-		}
-    	
+    	cbCourseName=ChooseCourseComboBox.getSelectionModel().getSelectedItem();
     	loadStudyUnit();
     	 
     }
 
     @FXML
     void OpenCourseInClass(ActionEvent event) {
-
+    	
     	checkIFcourseAlreadyOpen();
     }
 
     @FXML
     void ChooseTeacher(ActionEvent event) {
 
-    	while(cbTeacherDetails.equals(""))
-		{
-    		cbTeacherDetails=ChooseTeacherComboBox.getSelectionModel().getSelectedItem();
-		}
+    
+    cbTeacherDetails=ChooseTeacherComboBox.getSelectionModel().getSelectedItem();
+		
     }
 
     @FXML
     void ChooseClass(ActionEvent event) {
 
-    	while(cbClassName.equals(""))
-		{
-    		cbClassName=ChooseClassComboBox.getSelectionModel().getSelectedItem();
-		}
-    	loadteacher();
+    
+    cbClassName=ChooseClassComboBox.getSelectionModel().getSelectedItem();
+    loadClassID();
+	
+    
     }
     
     void loadCourses()
@@ -116,6 +111,7 @@ public class OpenCourseController implements IController {
 		{
 			e.printStackTrace();
 		}
+		loadStudyUnit();
     }
     
     void loadAllClass()
@@ -301,7 +297,7 @@ public class OpenCourseController implements IController {
     	TeachingHours="";
         
     	loadCourses();
-        
+        loadAllClass();
         
     }
     
@@ -354,7 +350,8 @@ public class OpenCourseController implements IController {
 				CourseID= map.get("courseId");
 				CourseWeeklyHour=map.get("weeklyStudyHours");
 			}
-			loadAllClass();
+			//loadAllClass();
+			loadteacher();
 		}
 		
 		if(type.equals("Class List"))
@@ -372,6 +369,7 @@ public class OpenCourseController implements IController {
 				String classname = map.get("className");
 				ChooseClassComboBox.getItems().add(classname);
 			}
+			//loadCourses();
 		}
 		
 		if(type.equals("Load ClassID"))
@@ -392,6 +390,7 @@ public class OpenCourseController implements IController {
 		
 		if(type.equals("Teacher List"))
 		{
+			ChooseTeacherComboBox.getItems().clear();
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
@@ -406,7 +405,7 @@ public class OpenCourseController implements IController {
 				String userID=map.get("userId");
 				ChooseTeacherComboBox.getItems().add(username + ":" + userID);
 			}
-			loadClassID();
+			//loadClassID();
 		}
 		
 		if(type.equals("Load Course In Class"))
@@ -462,7 +461,7 @@ public class OpenCourseController implements IController {
 		
 		if (type.equals("Update Hours"))
 		{
-			new Alert(AlertType.INFORMATION, "Update Hours Of Teacher", ButtonType.OK).showAndWait();
+			new Alert(AlertType.INFORMATION, "Updated Working Hours Of Teacher", ButtonType.OK).showAndWait();
 		}
 	}
 }
