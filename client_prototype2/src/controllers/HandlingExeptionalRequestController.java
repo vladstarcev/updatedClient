@@ -60,9 +60,10 @@ public class HandlingExeptionalRequestController implements IController{
     private HashMap<String, HashMap<String, String>> allExeptionalRequests;
     private String com;
     private String des;
+    private String req;
     @FXML
     void ChooseExeptionalRequst(ActionEvent event) {
-
+    	req = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -73,6 +74,7 @@ public class HandlingExeptionalRequestController implements IController{
     @FXML
     void ConformExeptionalRequest(ActionEvent event) {
     	DecisionMenu.setText(ConformMenuItem.getText());
+    	des= DecisionMenu.getText();
     }
 
     @FXML
@@ -83,6 +85,7 @@ public class HandlingExeptionalRequestController implements IController{
     @FXML
     void DenyExeptionalRequest(ActionEvent event) {
     	DecisionMenu.setText(DenyMenuItem.getText());
+    	des= DecisionMenu.getText();
 
     }
 
@@ -93,9 +96,13 @@ public class HandlingExeptionalRequestController implements IController{
 
     @FXML
     void SendAnswar(ActionEvent event) {
-    	updateDescision(des);
-    	updateComment(com);
-		new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
+    	if(req==null) 	new Alert(AlertType.ERROR, "No request selected!", ButtonType.OK).showAndWait();
+    	else if(des==null) 	new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
+    	else{
+	    	updateDescision(des);
+	    	updateComment(com);
+			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
+    	}
     }
 
     @FXML
@@ -131,7 +138,6 @@ public class HandlingExeptionalRequestController implements IController{
 		if (selectedDes == null)
 			return;
     	ArrayList<String> data = new ArrayList<String>();
-    	String er;
     	data.add("update descision");
     	data.add("update");
     	data.add("exceptional_request");
@@ -156,9 +162,7 @@ public class HandlingExeptionalRequestController implements IController{
 		String selectedER = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
 		if (selectedER == null)
 			return;
-		String ans[] = selectedER.split(":");
     	ArrayList<String> data = new ArrayList<String>();
-    	String er;
     	data.add("update descision");
     	data.add("update");
     	data.add("exceptional_request");
