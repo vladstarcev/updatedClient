@@ -16,14 +16,12 @@ import ui.UserWindow;
 
 public class SecretaryMainWindowController implements IController {
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private MenuButton ChooseMenuButton;
+
+    @FXML
+    private MenuItem AssignPupil;
 
     @FXML
     private MenuItem OpenCourse;
@@ -44,6 +42,12 @@ public class SecretaryMainWindowController implements IController {
     private Button LogOutButton;
 
     @FXML
+    private MenuItem ReAssign;
+
+    @FXML
+    private MenuItem DeletePupil;
+
+    @FXML
     private MenuItem OpenSemester;
 
     @FXML
@@ -60,20 +64,10 @@ public class SecretaryMainWindowController implements IController {
     	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenExeptionalRequest", getClass());
     }
 
-    @FXML // Dont delete!
-    void Delete(ActionEvent event) {
-    	
-    }
-
     @FXML
     void AssignPupilToClassWindow(ActionEvent event) {
 
     	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryAssignPupilToClass", getClass());
-    }
-
-    @FXML // Dont delete!
-    void AssignPupil(ActionEvent event) {
-
     }
 
     @FXML
@@ -82,21 +76,12 @@ public class SecretaryMainWindowController implements IController {
     	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenCourse", getClass());
     }
 
-    @FXML // Dont delete!
-    void OpenC(ActionEvent event) {
-
-    }
-
     @FXML
     void OpenSemesterWindow(ActionEvent event) {
 
     	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenSemester", getClass());
     }
 
-    @FXML // Dont delete!
-    void OpenS(ActionEvent event) {
-
-    }
 
     @FXML
     void DefineClassWindow(ActionEvent event) {
@@ -104,9 +89,22 @@ public class SecretaryMainWindowController implements IController {
     	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryDefineClass", getClass());
     }
 
-    @FXML // Dont delete!
-    void Define(ActionEvent event) {
+    @FXML
+    void AssignPupilToCourse(ActionEvent event) {
 
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryAssignPupilToCourse", getClass());
+    }
+
+    @FXML
+    void DeletePupilFromCourse(ActionEvent event) {
+
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryDeletePupilFromCourse", getClass());
+    }
+
+    @FXML
+    void ReAssignTeacherToCourse(ActionEvent event) {
+
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryAssignTeacher", getClass());
     }
 
     @FXML
@@ -119,12 +117,15 @@ public class SecretaryMainWindowController implements IController {
     @FXML
     void initialize() {
         assert ChooseMenuButton != null : "fx:id=\"ChooseMenuButton\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
+        assert AssignPupil != null : "fx:id=\"AssignPupil\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert OpenCourse != null : "fx:id=\"OpenCourse\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert AssignPupilToClass != null : "fx:id=\"AssignPupilToClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert SecretaryMenuLable != null : "fx:id=\"SecretaryMenuLable\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert OpenExeptionalRequstMenu != null : "fx:id=\"OpenExeptionalRequstMenu\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert ChooseOperationalMenu != null : "fx:id=\"ChooseOperationalMenu\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
+        assert ReAssign != null : "fx:id=\"ReAssign\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
+        assert DeletePupil != null : "fx:id=\"DeletePupil\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert OpenSemester != null : "fx:id=\"OpenSemester\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert DefineClass != null : "fx:id=\"DefineClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
 
