@@ -50,7 +50,7 @@ public class ParentController implements IController
 		data.add("select");
 		data.add("user");
 		data.add("permission");
-		data.add("5");
+		data.add("6");
 
 		try
 		{
