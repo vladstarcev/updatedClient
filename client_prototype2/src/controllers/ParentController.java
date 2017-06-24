@@ -52,6 +52,7 @@ public class ParentController implements IController
 		data.add("permission");
 		data.add("6");
 
+		
 		try
 		{
 			Main.client.sendToServer(data);
