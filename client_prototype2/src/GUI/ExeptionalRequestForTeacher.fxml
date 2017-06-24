@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="538.0" prefWidth="824.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.TeacherExeptionalRequestController">
+   <children>
+      <Label fx:id="TeacherExeptionalLabel" text="Teacher Exeptional Request Window" underline="true">
+         <font>
+            <Font name="Bookman Old Style Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="RequestIdLabel" layoutX="27.0" layoutY="81.0" prefHeight="26.0" prefWidth="209.0" text="Enter Request ID Number:" />
+      <TextField fx:id="RequestIdTextField" layoutX="27.0" layoutY="114.0" prefHeight="36.0" prefWidth="444.0" />
+      <Label fx:id="CourseLabel" layoutX="27.0" layoutY="178.0" prefHeight="26.0" prefWidth="270.0" text="Choose Course ID From The List Above:" />
+      <ComboBox fx:id="ListCurseComboBox" layoutX="27.0" layoutY="213.0" onAction="#ChooseCourse" prefHeight="36.0" prefWidth="165.0" promptText="Choose:" />
+      <Label fx:id="TeacherLabel" layoutX="27.0" layoutY="272.0" prefHeight="26.0" prefWidth="270.0" text="Choose Teacher ID From The List Above:" />
+      <ComboBox fx:id="ListTeacherComboBox" layoutX="27.0" layoutY="305.0" onAction="#ChooseTeacher" prefHeight="36.0" prefWidth="165.0" promptText="Choose:" />
+      <Label fx:id="OperationLabel" layoutX="27.0" layoutY="364.0" prefHeight="26.0" prefWidth="270.0" text="Choose Your Operation:" />
+      <MenuButton fx:id="OperationMenuButton" layoutX="27.0" layoutY="397.0" mnemonicParsing="false" onAction="#ChooseOperation" prefHeight="36.0" prefWidth="165.0" text="Choose:">
+        <items>
+          <MenuItem fx:id="ReAssignLabel" mnemonicParsing="false" onAction="#ReAssignTeacher" onMenuValidation="#ReAssignMenu" text="Re Assign Teacher" />
+        </items>
+      </MenuButton>
+      <Button fx:id="SendButton" layoutX="99.0" layoutY="465.0" mnemonicParsing="false" onAction="#SendToSchoolManager" prefHeight="36.0" prefWidth="316.0" text="Send Exeptional Requset To School Manager" />
+      <Button fx:id="BackButton" layoutX="540.0" layoutY="465.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="36.0" prefWidth="165.0" text="Back To Menu" />
+      <Button fx:id="CheckIdButton" layoutX="547.0" layoutY="114.0" mnemonicParsing="false" onAction="#CeckIdAvailability" prefHeight="36.0" prefWidth="165.0" text="Check Availability" />
+   </children>
+</AnchorPane>
