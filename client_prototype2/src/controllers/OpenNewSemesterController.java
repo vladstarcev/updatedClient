@@ -73,6 +73,7 @@ public class OpenNewSemesterController implements IController
 	private TextField SemesterIdTextField;
 
 	private ArrayList<String> ActivityID;
+	private ArrayList<String> SemID;
 	private String Type;
 	private String Status;
 	private String SemesterID;
@@ -80,6 +81,7 @@ public class OpenNewSemesterController implements IController
 	private int IdFlag;
 	private int TypeFlag;
 	private int StatusFlag;
+	private int ActivityFlag;
 
 	@FXML
 	void EnterSemesterID(ActionEvent event)
@@ -96,7 +98,92 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	void SendSemesterForm(ActionEvent event)
 	{
+		if (StatusFlag == 0)
+		{
+			new Alert(AlertType.ERROR, "Please choose semester status.", ButtonType.OK).showAndWait();
+			return;
+		}
+		if (StatusFlag == 1)
+		{
+			ArrayList<String> data = new ArrayList<String>();
+			data.add("Update Status and Permission");
+			data.add("update");
+			data.add("semester");
+			data.add("semesterStatus");
+			data.add("Previous");
+			data.add("semesterPermission");
+			data.add("Read Only");
+			data.add("conditions");
+			data.add("semesterStatus");
+			data.add("Current");
+			data.add("semesterPermission");
+			data.add("Read and Write");
+			try
+			{
+				Main.client.sendToServer(data);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		if (IdFlag == 1 && TypeFlag == 1 && StatusFlag == 1)
+		{
+			ArrayList<String> data = new ArrayList<String>();
+			data.add("Insert To Semester");
+			data.add("insert");
+			data.add("semester");
+			data.add("semesterId");
+			data.add("semesterType");
+			data.add("semesterStatus");
+			data.add("semesterPermission");
+			data.add("values");
+			data.add(SemesterID);
+			data.add(Type);
+			data.add(Status);
+			data.add("Read and Write");
+			try
+			{
+				Main.client.sendToServer(data);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		if (IdFlag == 0)
+		{
+			new Alert(AlertType.ERROR, "Please enter semester ID.", ButtonType.OK).showAndWait();
+			return;
+		}
+		if (TypeFlag == 0)
+		{
+			new Alert(AlertType.ERROR, "Please choose semester type.", ButtonType.OK).showAndWait();
+			return;
+		}
 
+	}
+
+	void loadAcaemicActivities(String ID)
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Insert Activities");
+		data.add("insert");
+		data.add("activity_in_semester");
+		data.add("ActivityID");
+		data.add("SemesterID");
+		data.add("values");
+		data.add(ID);
+		data.add(SemesterID);
+
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -156,7 +243,8 @@ public class OpenNewSemesterController implements IController
 	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Activity ID");
-		data.add("select");
+		data.add("select field");
+		data.add("academicActivityId");
 		data.add("academic_activity");
 		try
 		{
@@ -167,7 +255,6 @@ public class OpenNewSemesterController implements IController
 			e.printStackTrace();
 		}
 	}
-
 
 	@FXML
 	void initialize()
@@ -192,6 +279,7 @@ public class OpenNewSemesterController implements IController
 		Main.stack.push("SecretaryOpenSemester");
 
 		ActivityID = new ArrayList<String>();
+		SemID = new ArrayList<String>();
 		Type = "";
 		Status = "";
 		SemesterID = "";
@@ -199,6 +287,7 @@ public class OpenNewSemesterController implements IController
 		IdFlag = 0;
 		TypeFlag = 0;
 		StatusFlag = 0;
+		ActivityFlag = 0;
 	}
 
 	@Override
@@ -215,7 +304,18 @@ public class OpenNewSemesterController implements IController
 
 		if (type.equals("Check Semester ID"))
 		{
-			if (arr.size() == 0)
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				SemID.add(map.get("semesterId"));
+			}
+			if (!SemID.contains(SemesterID))
 			{
 				if (SemesterID.length() == 6)
 				{
@@ -255,6 +355,7 @@ public class OpenNewSemesterController implements IController
 			{
 				if (!ActivityID.contains(activityID[i]))
 				{
+					ActivityFlag = 0;
 					new Alert(AlertType.ERROR, "Academic Activity ID " + activityID[i] + " does not exist.",
 							ButtonType.OK).showAndWait();
 					break;
@@ -267,8 +368,35 @@ public class OpenNewSemesterController implements IController
 
 			if (ActivityFlag == activityID.length)
 			{
+				ActivityFlag = 1;
 				new Alert(AlertType.INFORMATION, "All academic activities ID are correct.", ButtonType.OK)
 						.showAndWait();
+				ActivityID.clear();
+				for(i=0; i<activityID.length; i++)
+				{
+					ActivityID.add(activityID[i]);
+				}
+			}
+		}
+		if (type.equals("Insert To Semester"))
+		{
+			if (arr.size() > 0)
+			{
+				int i;
+				for (i = 0; i < ActivityID.size(); i++)
+				{
+					loadAcaemicActivities(ActivityID.get(i));
+				}
+				new Alert(AlertType.INFORMATION, "Semester opened successfuly.", ButtonType.OK).showAndWait();
+
+				Type = "";
+				Status = "";
+				SemesterID = "";
+				AcademicActivityID = "";
+				IdFlag = 0;
+				TypeFlag = 0;
+				StatusFlag = 0;
+				ActivityFlag = 0;
 			}
 		}
 
