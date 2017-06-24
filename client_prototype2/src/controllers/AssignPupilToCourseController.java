@@ -21,54 +21,52 @@ import ui.UserWindow;
 
 public class AssignPupilToCourseController implements IController {
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private Label PupilIDlabla;
+	@FXML
+	private Button CheckPupilButton;
 
-    @FXML
-    private Button CheckCourseButton;
+	@FXML
+	private Label PupilIDlabla;
 
-    @FXML
-    private TextField PupilIDtextField;
+	@FXML
+	private Button CheckCourseButton;
 
-    @FXML
-    private Button AssignButton;
+	@FXML
+	private TextField RequestIdTextField;
 
-    @FXML
-    private Label AssignPupilCourseLable2;
+	@FXML
+	private TextField PupilIDtextField;
 
-    @FXML
-    private Label AssignPupilCourseLable1;
+	@FXML
+	private Button CheckRequestButton;
 
-    @FXML
-    private TextField CourseIDtextField;
+	@FXML
+	private Button AssignButton;
 
-    @FXML
-    private Button BackButton;
+	@FXML
+	private Label RequestIdLabel;
 
-    @FXML
-    private Button CheckPupilButton1;
+	@FXML
+	private Label AssignPupilCourseLable1;
 
-    @FXML
-    private Label CourseIDlable;
+	@FXML
+	private TextField CourseIDtextField;
+
+	@FXML
+	private Button BackButton;
+
+	@FXML
+	private Label CourseIDlable;
+
+    private int checkCourseID;
+    private int checkPupilID;
+    private int ExeReFLAG;
     
-    private ArrayList<String> PreCoursesID;
-    
-    @FXML
-    void EnterPupilID(ActionEvent event) {
-
-    }
-
-    @FXML
-    void EnterCourseID(ActionEvent event) {
-
-    }
-
     @FXML
     void CheckPupilID(ActionEvent event) {
     	
@@ -111,12 +109,29 @@ public class AssignPupilToCourseController implements IController {
     @FXML
     void AssignPupilCourse(ActionEvent event) {
     	
+    	if(checkCourseID==1 && checkPupilID==1 && ExeReFLAG==1)
+    	{
+    		loadDecision();
+    	}
+    }
+
+    @FXML
+    void BackToMenu(ActionEvent event) {
+
+    	UserWindow.closeUserWindow(getClass(), (Stage) AssignPupilCourseLable1.getScene().getWindow());
+    }
+    
+	@FXML
+	void CheckRequestID(ActionEvent event)
+	{
+
 		ArrayList<String> data = new ArrayList<String>();
-		data.add("Check Pre Courses");
+		data.add("Check RequestID");
 		data.add("select");
-		data.add("pre_course");
-		data.add("course_id");
-		data.add(CourseIDtextField.getText());
+		data.add("exceptional_request");
+		data.add("exceptonalRequestID");
+		data.add(RequestIdTextField.getText());
+
 		try
 		{
 			Main.client.sendToServer(data);
@@ -125,42 +140,46 @@ public class AssignPupilToCourseController implements IController {
 		{
 			e.printStackTrace();
 		}
-    }
+	}
 
-    @FXML
-    void BackToMenu(ActionEvent event) {
-
-    	UserWindow.closeUserWindow(getClass(), (Stage) AssignPupilCourseLable2.getScene().getWindow());
-    }
 
     @FXML
     void initialize() {
-        assert PupilIDlabla != null : "fx:id=\"PupilIDlabla\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert CheckCourseButton != null : "fx:id=\"CheckCourseButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert PupilIDtextField != null : "fx:id=\"PupilIDtextField\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert AssignButton != null : "fx:id=\"AssignButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert AssignPupilCourseLable2 != null : "fx:id=\"AssignPupilCourseLable2\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert AssignPupilCourseLable1 != null : "fx:id=\"AssignPupilCourseLable1\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert CourseIDtextField != null : "fx:id=\"CourseIDtextField\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert CheckPupilButton1 != null : "fx:id=\"CheckPupilButton1\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
-        assert CourseIDlable != null : "fx:id=\"CourseIDlable\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert CheckPupilButton != null : "fx:id=\"CheckPupilButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert PupilIDlabla != null : "fx:id=\"PupilIDlabla\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert CheckCourseButton != null : "fx:id=\"CheckCourseButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert RequestIdTextField != null : "fx:id=\"RequestIdTextField\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert PupilIDtextField != null : "fx:id=\"PupilIDtextField\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert CheckRequestButton != null : "fx:id=\"CheckRequestButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert AssignButton != null : "fx:id=\"AssignButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert RequestIdLabel != null : "fx:id=\"RequestIdLabel\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert AssignPupilCourseLable1 != null : "fx:id=\"AssignPupilCourseLable1\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert CourseIDtextField != null : "fx:id=\"CourseIDtextField\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+		assert CourseIDlable != null : "fx:id=\"CourseIDlable\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
+
 
         Main.client.controller=this;
         
-        PreCoursesID = new ArrayList<String>();
+        checkCourseID=0;
+        checkPupilID=0;
+        ExeReFLAG=0;
     }
     
-	void loadCourses()
+	
+	void InsertPupilToCourse()
 	{
 		ArrayList<String> data = new ArrayList<String>();
-		data.add("Check Course Of Pupil");
-		data.add("select");
+		data.add("Assign Pupil To Course");
+		data.add("insert");
 		data.add("pupil_in_course");
 		data.add("userID");
+		data.add("courseID");
+		data.add("gradeInCourse");
+		data.add("values");
 		data.add(PupilIDtextField.getText());
-		data.add("passed");
-		data.add("1");
+		data.add(CourseIDtextField.getText());
+		data.add("0");
 		
 		try
 		{
@@ -172,20 +191,21 @@ public class AssignPupilToCourseController implements IController {
 		}
 	}
 	
-	void InsertPupilToCourse()
-	{
+	void loadDecision()
+	 {
 		ArrayList<String> data = new ArrayList<String>();
-		data.add("Assign Pupil To Course");
-		data.add("insert");
-		data.add("pupil_in_course");
-		data.add("userID");
-		data.add("courseID");
-		data.add("passed");
-		data.add("values");
-		data.add(PupilIDtextField.getText());
-		data.add(CourseIDtextField.getText());
+   		data.add("Check Exeptional Request Descision");
+   		data.add("select");
+   		data.add("exceptional_request");
+   		data.add("CourseID");
+   		data.add(CourseIDtextField.getText());
+   		data.add("userID");
+   		data.add(PupilIDtextField.getText());
+   		data.add("type");
+   		data.add("assign");
+   		data.add("descision");
 		data.add("1");
-		
+			
 		try
 		{
 			Main.client.sendToServer(data);
@@ -193,8 +213,8 @@ public class AssignPupilToCourseController implements IController {
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}
-	}
+		} 
+	 }
     
 
 	@Override
@@ -210,6 +230,19 @@ public class AssignPupilToCourseController implements IController {
 
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
+			
+		if(type.equals("Check RequestID"))
+		{
+			if(arr.size()==0)
+			{
+				new Alert(AlertType.ERROR, "Exceptional Request has not found.", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				ExeReFLAG=1;
+				new Alert(AlertType.INFORMATION, "Exceptional Request has found.", ButtonType.OK).showAndWait();
+			}
+		}
 		if (type.equals("Check Pupil"))
 		{
 			if(arr.size() == 0)
@@ -218,10 +251,13 @@ public class AssignPupilToCourseController implements IController {
 			}
 			else
 			{
+				 
+			    checkPupilID=1;
 				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
 			}
 		}
-		else if(type.equals( "Check Course"))
+		
+		if(type.equals( "Check Course"))
 		{
 			if(arr.size()==0)
 			{
@@ -230,62 +266,36 @@ public class AssignPupilToCourseController implements IController {
 				
 			else 
 			{
+				checkCourseID=1;
 				new Alert(AlertType.INFORMATION, "Course has found.", ButtonType.OK).showAndWait();
 			}		
 		}
-		else if(type.equals("Check Pre Courses"))
+		
+		if(type.equals("Check Exeptional Request Descision"))
+			
 		{
-			for (String row : arr)
+			if(arr.size()==0)
 			{
-				String[] cols = row.split(";");
-				HashMap<String, String> map = new HashMap<>();
-				for (String col : cols)
-				{
-					String[] field = col.split("=");
-					map.put(field[0], field[1]);
-				}
-				PreCoursesID.add(map.get("pre_course_id"));
-			}
-			loadCourses();
-		}
-		else if(type.equals("Check Course Of Pupil"))
-		{
-			int flag = 0;
-			ArrayList<String> PupilsCourses = new ArrayList<String>();
-			for (String row : arr)
-			{
-				String[] cols = row.split(";");
-				HashMap<String, String> map = new HashMap<>();
-				for (String col : cols)
-				{
-					String[] field = col.split("=");
-					map.put(field[0], field[1]);
-				}
-				PupilsCourses.add(map.get("courseID"));
-			}
-			for (int i = 0; i < PreCoursesID.size(); i++)
-			{
-				if (!PupilsCourses.contains(PreCoursesID.get(i)))
-				{
-					flag = 1;
-					break;
-				}
-			}
-			if (flag == 0)
-			{
-				InsertPupilToCourse();
-				//new Alert(AlertType.INFORMATION, "Pupil has pre-courses for this class.", ButtonType.OK).showAndWait();
+				new Alert(AlertType.ERROR, "The requst to assign pupil to this course not confirmed", ButtonType.OK).showAndWait();
 			}
 			else
 			{
-				new Alert(AlertType.ERROR, "Pupil has not pre-courses for this course.", ButtonType.OK).showAndWait();
+				InsertPupilToCourse();
 			}
 		}
-		else if (type.equals("Assign Pupil To Course"))
+		
+		if(type.equals("Assign Pupil To Course"))
 		{
-			if (arr.size()!=0) 
-				new Alert(AlertType.INFORMATION, "Pupil add succesfully to course.", ButtonType.OK).showAndWait();
+			if(arr.size()==0)
 				
+			{
+				new Alert(AlertType.ERROR, "Assigning failed", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				new Alert(AlertType.INFORMATION, "Pupil Succesfully Assigned To Course", ButtonType.OK).showAndWait();
+				UserWindow.closeUserWindow(getClass(), (Stage) AssignPupilCourseLable1.getScene().getWindow());	
+			}
 		}
 	}
 }
