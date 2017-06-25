@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="623.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReportBetweenCoursesController">
+<AnchorPane prefHeight="726.0" prefWidth="885.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReportBetweenCoursesController">
    <children>
       <Label fx:id="ReportLabel1" text="Report Between Differnt Courses" underline="true">
          <font>
@@ -19,7 +19,7 @@
             <Font name="Bookman Old Style Bold" size="48.0" />
          </font>
       </Label>
-      <BarChart fx:id="ReportChart" layoutX="38.0" layoutY="153.0" prefHeight="421.0" prefWidth="566.0">
+      <BarChart fx:id="ReportChart" layoutX="67.0" layoutY="230.0" prefHeight="421.0" prefWidth="566.0">
         <xAxis>
           <CategoryAxis fx:id="SpecificClassAxis" label="Spesific Class" side="BOTTOM" />
         </xAxis>
@@ -27,6 +27,8 @@
           <NumberAxis fx:id="DifferentCoursesAxis" label="Different Courses In Class" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button fx:id="BackButton" layoutX="620.0" layoutY="554.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="41.0" prefWidth="143.0" text="Back To Menu" />
+      <Button fx:id="BackButton" layoutX="680.0" layoutY="617.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="41.0" prefWidth="143.0" text="Back To Menu" />
+      <ComboBox fx:id="ChooseComboBox" layoutX="67.0" layoutY="156.0" onAction="#ChooseClass" prefHeight="41.0" prefWidth="168.0" promptText="Choose:" />
+      <Label fx:id="ChooseLabel" layoutX="67.0" layoutY="128.0" text="Choose Class ID:" />
    </children>
 </AnchorPane>

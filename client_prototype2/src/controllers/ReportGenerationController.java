@@ -3,76 +3,96 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
-public class ReportGenerationController implements IController {
+public class ReportGenerationController implements IController
+{
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private TextField RequestReportTextField;
+	@FXML
+	private MenuButton ReportMenuButton;
 
-    @FXML
-    private Button DisplayReportButton;
+	@FXML
+	private Button BackButton;
 
-    @FXML
-    private Button BackButton;
+	@FXML
+	private MenuItem BetweenCourses;
 
-    @FXML
-    private Label ReportWindowLabel;
+	@FXML
+	private MenuItem BetweenTeachers;
 
-    @FXML
-    private ComboBox<?> ChooseReportFromListBox;
+	@FXML
+	private Label ReportWindowLabel;
 
-    @FXML
-    private Label EnterRequstedReportLabel;
+	@FXML
+	private MenuItem BetweenClasses;
 
-    @FXML
-    void ChooseReport(ActionEvent event) {
+	@FXML
+	void BackToMenu(ActionEvent event)
+	{
 
-    }
+	}
 
-    @FXML
-    void EnterRequstedReport(ActionEvent event) {
+	@FXML
+	void ChooseReport(ActionEvent event)
+	{
 
-    }
+	}
 
-    @FXML
-    void DisplayReport(ActionEvent event) {
+	@FXML
+	void ClassesOfTeacher(ActionEvent event)
+	{
 
-    }
+		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
+				"ReportBetweenClassesOfSpecificTeacher", getClass());
 
-    @FXML
-    void BackToMenu(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void CoursesInClass(ActionEvent event)
+	{
 
-    @FXML
-    void initialize() {
-        assert RequestReportTextField != null : "fx:id=\"RequestReportTextField\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
-        assert DisplayReportButton != null : "fx:id=\"DisplayReportButton\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
-        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
-        assert ReportWindowLabel != null : "fx:id=\"ReportWindowLabel\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
-        assert ChooseReportFromListBox != null : "fx:id=\"ChooseReportFromListBox\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
-        assert EnterRequstedReportLabel != null : "fx:id=\"EnterRequstedReportLabel\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
+				"ReportBetweenDiferentCoursesOfCpecificClass", getClass());
+	}
 
-        Main.client.controller=this;
-    }
+	@FXML
+	void TeachersInClass(ActionEvent event)
+	{
+
+		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
+				"ReportBetweenTeachersOfCpecificClass", getClass());
+	}
+
+	@FXML
+	void initialize()
+	{
+		assert ReportMenuButton != null : "fx:id=\"ReportMenuButton\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+		assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+		assert BetweenCourses != null : "fx:id=\"BetweenCourses\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+		assert BetweenTeachers != null : "fx:id=\"BetweenTeachers\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+		assert ReportWindowLabel != null : "fx:id=\"ReportWindowLabel\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+		assert BetweenClasses != null : "fx:id=\"BetweenClasses\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
+
+	}
 
 	@Override
-	public void handleAnswer(Object msg) {
+	public void handleAnswer(Object msg)
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 }
