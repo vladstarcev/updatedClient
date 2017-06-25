@@ -1,8 +1,12 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +27,7 @@ public class ReportBetweenClassesController implements IController
 	private URL location;
 
 	@FXML
-	private BarChart<?, ?> ReportBarChart;
+	private BarChart<String, Number> ReportBarChart;
 
 	@FXML
 	private CategoryAxis SpecificTeacherAxis;
@@ -32,7 +36,7 @@ public class ReportBetweenClassesController implements IController
 	private Button BackButton;
 
 	@FXML
-	private ComboBox<?> ChooseComboBox;
+	private ComboBox<String> ChooseComboBox;
 
 	@FXML
 	private Label ReportLabel1;
@@ -55,7 +59,30 @@ public class ReportBetweenClassesController implements IController
 	@FXML
 	void ChooseTeacher(ActionEvent event)
 	{
+		ArrayList<String> semestersId = new ArrayList<>();
+		semestersId.add("111111");
+		semestersId.add("111112");
+		
+		String selectTeacherId = ChooseComboBox.getSelectionModel().getSelectedItem();
+		if(selectTeacherId == null)
+			return;
+		
+		ReportBarChart.getData().clear();
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("histogram 1"); // for answer
+		data.add("histogram 1"); // for sql type
+		data.add(selectTeacherId);
+		data.add(semestersId.get(0));
 
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -70,12 +97,39 @@ public class ReportBetweenClassesController implements IController
 		assert ReportLable2 != null : "fx:id=\"ReportLable2\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert DifferentClassesAxis != null : "fx:id=\"DifferentClassesAxis\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 
+		ReportBarChart.getXAxis().setLabel("Different Classes");
+		ReportBarChart.getXAxis().setMaxWidth(0.3);
+		ReportBarChart.getYAxis().setLabel("Average Grade");
+		ReportBarChart.setTitle("");
+		ReportBarChart.setCategoryGap(22.0);
 	}
 
 	@Override
-	public void handleAnswer(Object msg)
+	public void handleAnswer(Object result)
 	{
-		// TODO Auto-generated method stub
+		if (result == null)
+		{
+			// error
 
+			return;
+		}
+
+		ArrayList<String> arr = (ArrayList<String>) result;
+		String type = arr.remove(0);
+		if (type.equals("histogram 1"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+			//	allPupils.put(map.get("userId"), map);
+			}
+			//loadPupilsParent();
+		}
 	}
 }
