@@ -1,17 +1,26 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class PupilExeptionalRequestController implements IController {
 
@@ -22,7 +31,7 @@ public class PupilExeptionalRequestController implements IController {
     private URL location;
 
     @FXML
-    private ComboBox<?> ChooseCourseComboBox;
+    private ComboBox<String> ChooseCourseComboBox;
 
     @FXML
     private MenuItem AssignPupil;
@@ -34,7 +43,7 @@ public class PupilExeptionalRequestController implements IController {
     private Button CheckIdButton;
 
     @FXML
-    private ComboBox<?> ChoosePupilComboBox;
+    private ComboBox<String> ChoosePupilComboBox;
 
     @FXML
     private Button BackButton;
@@ -62,39 +71,70 @@ public class PupilExeptionalRequestController implements IController {
 
     @FXML
     private Label CourseListLable;
+    
+    private int ReqIDflag;
+	private String cbCourseIDName;
+	private String cbPupilIDName;
+	private String Operation;
+	private String PupilID;
+	private String CourseID; 
 
     @FXML
     void CeckIdAvailability(ActionEvent event) {
 
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check RequestID Availbility");
+		data.add("select");
+		data.add("exceptional_request");
+		data.add("exceptonalRequestID");
+		data.add(RequestIdTextField.getText());
+
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
     }
 
     @FXML
     void ChooseCourse(ActionEvent event) {
 
+    	cbCourseIDName=ChooseCourseComboBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void ChoosePupil(ActionEvent event) {
 
+    	cbPupilIDName=ChoosePupilComboBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void ChooseOperation(ActionEvent event) {
-
+    	
+    	
+    	
     }
 
     @FXML
     void AssignPupilToCourse(ActionEvent event) {
 
+    	Operation="assign";
     }
 
     @FXML
     void AssignPupilMenu(ActionEvent event) {
+    	
+    	
 
     }
 
     @FXML
     void DeletePupilFromCourse(ActionEvent event) {
+    	
+    	Operation="delete";
 
     }
 
@@ -105,13 +145,127 @@ public class PupilExeptionalRequestController implements IController {
 
     @FXML
     void SendToSchoolManager(ActionEvent event) {
+    	
+    	if(ReqIDflag==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabile Request ID.", ButtonType.OK).showAndWait();
+    		
+    	}
+    	else if(cbPupilIDName.equals(""))
+    	{
+    		new Alert(AlertType.ERROR, "Please Choose Pupil For The Request", ButtonType.OK).showAndWait();
+    	}
+    	else if(cbCourseIDName.equals(""))
+    	{
+    		new Alert(AlertType.ERROR, "Please Choose Course For The Request", ButtonType.OK).showAndWait();
+    	}
+    	else if(Operation.equals(""))
+    	{
+    		new Alert(AlertType.ERROR, "Please Choose Operation For Request", ButtonType.OK).showAndWait();
+    	}
+    	else
+    	{
+    		String[] temp=cbPupilIDName.split(":");
+    		PupilID=temp[0];
+    		temp=cbCourseIDName.split(":");
+    		CourseID=temp[0];
+    		loadPupilInCourse();
+    	}
+    		
 
     }
 
     @FXML
     void BackToMenu(ActionEvent event) {
+    	
+    	UserWindow.closeUserWindow(getClass(), (Stage) OperationLable.getScene().getWindow());
 
     }
+    
+    void loadPupils()
+    {
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Load Pupils");
+		data.add("select");
+		data.add("user");
+		data.add("permission");
+		data.add("6");
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+    }
+    
+     void loadCourses()
+     {
+ 		ArrayList<String> data = new ArrayList<String>();
+ 		data.add("Load Courses");
+ 		data.add("select");
+ 		data.add("courses");
+ 		
+ 		try
+ 		{
+ 			Main.client.sendToServer(data);
+ 		}
+ 		catch (IOException e)
+ 		{
+ 			e.printStackTrace();
+ 		}
+     }
+     
+     void loadPupilInCourse()
+     {
+    	ArrayList<String> data = new ArrayList<String>();
+ 		data.add("Load pupil in Course");
+ 		data.add("select");
+ 		data.add("pupil_in_course");
+ 		data.add("userID");
+ 		data.add(PupilID);
+ 		data.add("courseID");
+ 		data.add(CourseID);
+ 		
+ 		try
+ 		{
+ 			Main.client.sendToServer(data);
+ 		}
+ 		catch (IOException e)
+ 		{
+ 			e.printStackTrace();
+ 		}
+     }
+     
+     void InsertExceptionalRequst(String str)
+     {
+ 		ArrayList<String> data = new ArrayList<String>();
+ 		data.add("Insert new Exeptional Request");
+ 		data.add("insert");
+ 		data.add("exceptional_request");
+ 		data.add("exceptonalRequestID");
+ 		data.add("type");
+ 		data.add("descision");
+ 		data.add("CourseID");
+ 		data.add("userID");
+ 		data.add("values");
+ 		data.add(RequestIdTextField.getText());
+ 		data.add(str);
+ 		data.add("panding");
+ 		data.add(CourseID);
+ 		data.add(PupilID);
+
+ 		try
+ 		{
+ 			Main.client.sendToServer(data);
+ 		}
+ 		catch (IOException e)
+ 		{
+ 			e.printStackTrace();
+ 		}
+     }
 
     @FXML
     void initialize() {
@@ -129,13 +283,121 @@ public class PupilExeptionalRequestController implements IController {
         assert SendButton != null : "fx:id=\"SendButton\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert PupilIdLable != null : "fx:id=\"PupilIdLable\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert CourseListLable != null : "fx:id=\"CourseListLable\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
-
+        
+        Main.client.controller=this;
+        ReqIDflag=0;
+    	cbCourseIDName="";
+    	cbPupilIDName="";
+    	Operation="";
+    	PupilID="";
+    	CourseID=""; 
+        
+        loadPupils();
+        loadCourses();
     }
 
 	@Override
-	public void handleAnswer(Object msg)
+	public void handleAnswer(Object result)
 	{
 		// TODO Auto-generated method stub
 		
+		if (result == null)
+		{
+			// error
+			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
+			return;
+		}
+
+		ArrayList<String> arr = (ArrayList<String>) result;
+		String type = arr.remove(0);
+		
+		if(type.equals("Check RequestID Availbility"))  
+		{
+			if(arr.size()==0)
+			{
+				ReqIDflag=1;
+				new Alert(AlertType.INFORMATION, "Exceptional Request ID is Available.", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				new Alert(AlertType.INFORMATION, "Already Exist Exceptional Reuest With Same ID.", ButtonType.OK).showAndWait();
+			}
+		}
+		
+		if(type.equals("Load Pupils"))
+		{
+			{
+				for (String row : arr)
+				{
+					String[] cols = row.split(";");
+					HashMap<String, String> map = new HashMap<>();
+					for (String col : cols)
+					{
+						String[] field = col.split("=");
+						map.put(field[0], field[1]);
+					}
+
+					String userId = map.get("userId");
+					String PupilFName=map.get("userFirstName");
+					String PupilLName=map.get("userLastName");
+					ChoosePupilComboBox.getItems().add(userId + ": " + PupilFName + " "
+							+ PupilLName);
+				}
+			}
+		}
+		
+		if(type.equals("Load Courses"))
+		{
+			{
+				for (String row : arr)
+				{
+					String[] cols = row.split(";");
+					HashMap<String, String> map = new HashMap<>();
+					for (String col : cols)
+					{
+						String[] field = col.split("=");
+						map.put(field[0], field[1]);
+					}
+
+					String CourseId = map.get("courseId");
+					String CourseName=map.get("courseName");
+					ChooseCourseComboBox.getItems().add(CourseId + ": " + CourseName);
+				}
+			}
+		}
+		
+		if(type.equals("Load pupil in Course"))
+		{
+			if(arr.size()==0)
+			{
+				if(Operation.equals("assign"))
+				{
+					InsertExceptionalRequst("assign");
+				}
+				else
+				{
+					new Alert(AlertType.ERROR, "Pupil not assigned to the course.", ButtonType.OK).showAndWait();
+				}
+			}
+			if(arr.size()!=0)
+			{
+				if(Operation.equals("assign"))
+				{
+					new Alert(AlertType.ERROR, "Pupil Already Assigned To This Course", ButtonType.OK).showAndWait();
+				}
+				else
+				{
+					InsertExceptionalRequst("delete");
+				}
+			}
+		}
+		if(type.equals("Insert new Exeptional Request"))
+		{
+			if(arr.size()> 0)
+			{
+				new Alert(AlertType.INFORMATION, "Exceptional Request Opened Susccesfully", ButtonType.OK).showAndWait();
+				UserWindow.closeUserWindow(getClass(), (Stage) OperationLable.getScene().getWindow());
+			}
+		}		
 	}
 }

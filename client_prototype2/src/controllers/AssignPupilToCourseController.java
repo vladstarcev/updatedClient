@@ -131,6 +131,8 @@ public class AssignPupilToCourseController implements IController {
 		data.add("exceptional_request");
 		data.add("exceptonalRequestID");
 		data.add(RequestIdTextField.getText());
+		data.add("type");
+		data.add("assign");
 
 		try
 		{
@@ -195,7 +197,8 @@ public class AssignPupilToCourseController implements IController {
 	 {
 		ArrayList<String> data = new ArrayList<String>();
    		data.add("Check Exeptional Request Descision");
-   		data.add("select");
+   		data.add("select field");
+   		data.add("descision");
    		data.add("exceptional_request");
    		data.add("CourseID");
    		data.add(CourseIDtextField.getText());
@@ -203,8 +206,9 @@ public class AssignPupilToCourseController implements IController {
    		data.add(PupilIDtextField.getText());
    		data.add("type");
    		data.add("assign");
-   		data.add("descision");
-		data.add("1");
+   		data.add("exceptonalRequestID");
+   		data.add(RequestIdTextField.getText());
+   		
 			
 		try
 		{
@@ -274,14 +278,37 @@ public class AssignPupilToCourseController implements IController {
 		if(type.equals("Check Exeptional Request Descision"))
 			
 		{
-			if(arr.size()==0)
+		String des="";
+		if(arr.isEmpty()==true)
+		{
+			new Alert(AlertType.ERROR, "Exceptional Request for assigning pupil to course by details you entered not exist.", ButtonType.OK).showAndWait();	
+		}
+		else
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+			   des=map.get("descision");
+			}
+			if(des.equals("diny"))
 			{
 				new Alert(AlertType.ERROR, "The requst to assign pupil to this course not confirmed", ButtonType.OK).showAndWait();
 			}
-			else
+			else if(des.equals("confirm"))
 			{
 				InsertPupilToCourse();
 			}
+			else if(des.equals("pending"))
+			{
+				new Alert(AlertType.ERROR, "No Response To This Request Yet", ButtonType.OK).showAndWait();
+			}
+		}
 		}
 		
 		if(type.equals("Assign Pupil To Course"))
