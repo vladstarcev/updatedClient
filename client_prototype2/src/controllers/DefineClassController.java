@@ -94,7 +94,7 @@ public class DefineClassController implements IController
 			new Alert(AlertType.ERROR, "Wrong Capacity", ButtonType.OK).showAndWait();
 			return;
 		}
-		else if ((ClassIDF == 1) && (ClassIDF == 11)&& ClassNAME.equals(ClassNameTextField.getText()) && ClassID.equals(ClassIdTextField.getText()))
+		else if ((ClassIDF == 1) && (ClassIDF == 1)&& ClassNAME.equals(ClassNameTextField.getText()) && ClassID.equals(ClassIdTextField.getText()))
 		{
 			InsertNewClass();
 		}
