@@ -7,19 +7,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="730.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReportBetweenClassesController">
+<AnchorPane prefHeight="863.0" prefWidth="1140.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReportBetweenClassesController">
    <children>
-      <Label fx:id="ReportLable2" layoutX="149.0" layoutY="71.0" text="Of Specific Teacher" underline="true">
+      <Label fx:id="ReportLabel1" layoutX="20.0" layoutY="14.0" text="Report Between Classes Of Specific Teacher" underline="true">
          <font>
             <Font name="Bookman Old Style Bold" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="ReportLabel1" layoutX="94.0" layoutY="14.0" text="Report Between Classes" underline="true">
-         <font>
-            <Font name="Bookman Old Style Bold" size="48.0" />
-         </font>
-      </Label>
-      <BarChart fx:id="ReportBarChart" layoutX="63.0" layoutY="256.0" prefHeight="421.0" prefWidth="566.0">
+      <BarChart fx:id="ReportBarChart" layoutX="41.0" layoutY="333.0" prefHeight="506.0" prefWidth="734.0">
         <xAxis>
           <CategoryAxis fx:id="SpecificTeacherAxis" label="Specific Teacher" side="BOTTOM" />
         </xAxis>
@@ -27,8 +22,12 @@
           <NumberAxis fx:id="DifferentClassesAxis" label="Different Classes Of Teacher" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button fx:id="BackButton" layoutX="682.0" layoutY="650.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="41.0" prefWidth="143.0" text="Back To Menu" />
-      <ComboBox fx:id="ChooseComboBox" layoutX="60.0" layoutY="186.0" onAction="#ChooseTeacher" prefHeight="41.0" prefWidth="184.0" promptText="Choose:" />
-      <Label fx:id="ChooseLabel" layoutX="63.0" layoutY="153.0" prefHeight="21.0" prefWidth="143.0" text="Choose Teacher ID:" />
+      <Button fx:id="BackButton" layoutX="903.0" layoutY="737.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="41.0" prefWidth="143.0" text="Back To Menu" />
+      <ComboBox fx:id="ChooseComboBox" layoutX="41.0" layoutY="133.0" onAction="#ChooseTeacher" prefHeight="41.0" prefWidth="209.0" promptText="Choose:" />
+      <Label fx:id="ChooseLabel" layoutX="41.0" layoutY="100.0" prefHeight="21.0" prefWidth="275.0" text="Choose Teacher ID From The List Above:" />
+      <TextField fx:id="SemesterTextField" layoutX="41.0" layoutY="229.0" prefHeight="41.0" prefWidth="475.0" />
+      <Label fx:id="SemesterLabel" layoutX="41.0" layoutY="196.0" text="Enter 4 Semesters ID Seperated By ( ):" />
+      <Button fx:id="CheckSemesterButton" layoutX="581.0" layoutY="229.0" mnemonicParsing="false" onAction="#CheckSemesterID" prefHeight="41.0" prefWidth="198.0" text="Check Semester ID" />
+      <Button fx:id="DisplayButton" layoutX="903.0" layoutY="660.0" mnemonicParsing="false" onAction="#DisplayReport" prefHeight="41.0" prefWidth="143.0" text="Display Report" />
    </children>
 </AnchorPane>

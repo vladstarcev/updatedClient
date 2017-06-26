@@ -3,6 +3,7 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,8 +66,7 @@ public class ReportGenerationController implements IController
 	void CoursesInClass(ActionEvent event)
 	{
 
-		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
-				"ReportBetweenDiferentCoursesOfCpecificClass", getClass());
+		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(), "ReportBetweenDiferentCoursesOfSpecificClass", getClass());
 	}
 
 	@FXML
@@ -74,7 +74,7 @@ public class ReportGenerationController implements IController
 	{
 
 		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
-				"ReportBetweenTeachersOfCpecificClass", getClass());
+				"ReportBetweenTeachersOfSpecificClass", getClass());
 	}
 
 	@FXML
@@ -87,6 +87,7 @@ public class ReportGenerationController implements IController
 		assert ReportWindowLabel != null : "fx:id=\"ReportWindowLabel\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
 		assert BetweenClasses != null : "fx:id=\"BetweenClasses\" was not injected: check your FXML file 'SchoolManagerReportGeneration.fxml'.";
 
+		Main.client.controller = this;
 	}
 
 	@Override

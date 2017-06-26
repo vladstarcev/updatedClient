@@ -13,9 +13,15 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class ReportBetweenClassesController implements IController
 {
@@ -27,10 +33,19 @@ public class ReportBetweenClassesController implements IController
 	private URL location;
 
 	@FXML
-	private BarChart<String, Number> ReportBarChart;
+	private Button DisplayButton;
+
+	@FXML
+	private BarChart<String, String> ReportBarChart;
+
+	@FXML
+	private Label SemesterLabel;
 
 	@FXML
 	private CategoryAxis SpecificTeacherAxis;
+
+	@FXML
+	private Button CheckSemesterButton;
 
 	@FXML
 	private Button BackButton;
@@ -45,36 +60,43 @@ public class ReportBetweenClassesController implements IController
 	private Label ChooseLabel;
 
 	@FXML
-	private Label ReportLable2;
+	private NumberAxis DifferentClassesAxis;
 
 	@FXML
-	private NumberAxis DifferentClassesAxis;
+	private TextField SemesterTextField;
+
+	private ArrayList<String> SemesterID;
+	private String Teacher;
+	private String SelectedTeacher;
+	private int SemesterFLAG;
+	private int TeacherFLAG;
 
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
-
+		UserWindow.closeUserWindow(getClass(), (Stage) ReportLabel1.getScene().getWindow());
 	}
 
 	@FXML
 	void ChooseTeacher(ActionEvent event)
 	{
-		ArrayList<String> semestersId = new ArrayList<>();
-		semestersId.add("111111");
-		semestersId.add("111112");
-		
-		String selectTeacherId = ChooseComboBox.getSelectionModel().getSelectedItem();
-		if(selectTeacherId == null)
+		Teacher = ChooseComboBox.getSelectionModel().getSelectedItem();
+		if (Teacher == null)
+		{
+			new Alert(AlertType.ERROR, "Item Not Found.", ButtonType.OK).showAndWait();
 			return;
-		
-		ReportBarChart.getData().clear();
-		ArrayList<String> data = new ArrayList<String>();
-		data.add("histogram 1"); // for answer
-		data.add("histogram 1"); // for sql type
-		data.add(selectTeacherId);
-		data.add(semestersId.get(0));
+		}
 
-		
+	}
+
+	void loadTeachers()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Teacher List");
+		data.add("select");
+		data.add("user");
+		data.add("permission");
+		data.add("4");
 		try
 		{
 			Main.client.sendToServer(data);
@@ -86,22 +108,101 @@ public class ReportBetweenClassesController implements IController
 	}
 
 	@FXML
+	void CheckSemesterID(ActionEvent event)
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Semester ID");
+		data.add("select field");
+		data.add("semesterId");
+		data.add("semester");
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void DisplayReport(ActionEvent event)
+	{
+		if (TeacherFLAG == 1 && SemesterFLAG == 1)
+		{
+			SelectedTeacher = Teacher.substring(0, 8);
+			if (SelectedTeacher == null)
+				return;
+
+			ReportBarChart.getData().clear();
+			ArrayList<String> data = new ArrayList<String>();
+			data.add("histogram 1"); // for answer
+			data.add("histogram 1"); // for sql type
+			data.add(SelectedTeacher);
+			data.add(SemesterID.get(0));
+			data.add(SemesterID.get(1));
+			data.add(SemesterID.get(2));
+			data.add(SemesterID.get(3));
+
+			try
+			{
+				Main.client.sendToServer(data);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			if (TeacherFLAG == 0 && SemesterFLAG == 0)
+			{
+				new Alert(AlertType.ERROR, "You must choose teacher and 4 semesters ID first!!", ButtonType.OK)
+						.showAndWait();
+			}
+			if (TeacherFLAG == 0)
+			{
+				new Alert(AlertType.ERROR, "You must choose teacher first!!", ButtonType.OK).showAndWait();
+			}
+			if (SemesterFLAG == 0)
+			{
+				new Alert(AlertType.ERROR, "You must enter 4 semesters ID first!!", ButtonType.OK).showAndWait();
+			}
+		}
+
+	}
+
+	@FXML
 	void initialize()
 	{
+		assert DisplayButton != null : "fx:id=\"DisplayButton\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert ReportBarChart != null : "fx:id=\"ReportBarChart\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
+		assert SemesterLabel != null : "fx:id=\"SemesterLabel\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert SpecificTeacherAxis != null : "fx:id=\"SpecificTeacherAxis\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
+		assert CheckSemesterButton != null : "fx:id=\"CheckSemesterButton\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert ChooseComboBox != null : "fx:id=\"ChooseComboBox\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert ReportLabel1 != null : "fx:id=\"ReportLabel1\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert ChooseLabel != null : "fx:id=\"ChooseLabel\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
-		assert ReportLable2 != null : "fx:id=\"ReportLable2\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 		assert DifferentClassesAxis != null : "fx:id=\"DifferentClassesAxis\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
+		assert SemesterTextField != null : "fx:id=\"SemesterTextField\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
+
+		Main.client.controller = this;
+
+		SemesterID = new ArrayList<String>();
+		Teacher = "";
+		SelectedTeacher = "";
+		TeacherFLAG = 0;
+		SemesterFLAG = 0;
 
 		ReportBarChart.getXAxis().setLabel("Different Classes");
 		ReportBarChart.getXAxis().setMaxWidth(0.3);
 		ReportBarChart.getYAxis().setLabel("Average Grade");
 		ReportBarChart.setTitle("");
 		ReportBarChart.setCategoryGap(22.0);
+
+		loadTeachers();
+
 	}
 
 	@Override
@@ -109,13 +210,14 @@ public class ReportBetweenClassesController implements IController
 	{
 		if (result == null)
 		{
-			// error
+			new Alert(AlertType.ERROR, "Item Not Found.", ButtonType.OK).showAndWait();
 
 			return;
 		}
 
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
+
 		if (type.equals("histogram 1"))
 		{
 			for (String row : arr)
@@ -127,9 +229,78 @@ public class ReportBetweenClassesController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-			//	allPupils.put(map.get("userId"), map);
 			}
-			//loadPupilsParent();
+		}
+		if (type.equals("Teacher List"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				String TeacherID = map.get("userId");
+				String TeacherNAME = map.get("userFirstName");
+				ChooseComboBox.getItems().add(TeacherID + " : " + TeacherNAME);
+			}
+			TeacherFLAG = 1;
+		}
+
+		if (type.equals("Check Semester ID"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				SemesterID.add(map.get("semesterId"));
+			}
+
+			int i, j;
+			String str = SemesterTextField.getText();
+			String[] semesterID = str.split(" ");
+			int SemesterFlag = 0;
+			if (semesterID.length > 4 || semesterID.length < 4)
+			{
+				new Alert(AlertType.ERROR, "You can only choose 4 semesters for the report", ButtonType.OK)
+						.showAndWait();
+			}
+			else
+			{
+				for (i = 0; i < semesterID.length; i++)
+				{
+					if (!SemesterID.contains(semesterID[i]))
+					{
+						SemesterFlag = 0;
+						new Alert(AlertType.ERROR, "Semester ID " + semesterID[i] + " does not exist.", ButtonType.OK)
+								.showAndWait();
+						break;
+					}
+					else
+					{
+						SemesterFlag++;
+					}
+				}
+			}
+			if (SemesterFlag == semesterID.length)
+			{
+				SemesterFlag = 1;
+				new Alert(AlertType.INFORMATION, "All semester ID are correct.", ButtonType.OK).showAndWait();
+				SemesterID.clear();
+				for (i = 0; i < semesterID.length; i++)
+				{
+					SemesterID.add(semesterID[i]);
+				}
+				SemesterFLAG = 1;
+			}
+
 		}
 	}
 }
