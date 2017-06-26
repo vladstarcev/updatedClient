@@ -28,8 +28,8 @@ public class Main extends Application
 	     stack.push("TeacherDefineAssignment");
 	     userId = "101010101";*/
 
-		 UserWindow.createUserWindow(primaryStage, "SystemManagerMainWindow", getClass());
-	     stack.push("SystemManagerMainWindow");
+		 UserWindow.createUserWindow(primaryStage, "TeacherCreateEvaluationForm", getClass());
+	     stack.push("TeacherCreateEvaluationForm");
 	     userId = "111111111";
 
 		///*********************************test********************************/

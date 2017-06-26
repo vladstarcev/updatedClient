@@ -1,27 +1,23 @@
 package controllers;
 
-import java.net.URL;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
 public class CreateEvaluationFormController implements IController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Label EvaluationFormWindowLabel;
@@ -43,6 +39,9 @@ public class CreateEvaluationFormController implements IController {
 
     @FXML
     private Button BackButton;
+    
+    @FXML
+    private Button CheckPupilBtn;
 
     @FXML
     private Button CreateEvaluationFormButton;
@@ -51,8 +50,21 @@ public class CreateEvaluationFormController implements IController {
     private TextField PupilGradeTextLabel;
 
     @FXML
-    void EnterPupilID(ActionEvent event) {
-
+    void CheckPupil(ActionEvent event) {
+    	ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Pupil");
+		data.add("select");
+		data.add("pupil");
+		data.add("userID");
+		data.add(PupilIDTextField.getText());
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
     }
 
     @FXML
@@ -62,46 +74,55 @@ public class CreateEvaluationFormController implements IController {
 
     @FXML
     void CreateEvaluationForm(ActionEvent event) {
-          	ArrayList<String> data = new ArrayList<>();
-        	data.add("create evaluation form");
-        	data.add("insert");
-        	data.add("evaluation_form");
-        	//data.add("fileNumber");
-        	data.add("generalComments");
-        	data.add("finalGrade");
-        	//data.add("format");
-        	
-        	data.add("values");
-        	//data.add(); //number of file
-        	data.add(CommentsTextArea.getText());
-        	data.add(PupilGradeTextLabel.getText());
-        	//data.add(); //format of file
+    	ArrayList<String> data = new ArrayList<>();
+    	data.add("create evaluation form");
+    	data.add("insert");
+    	data.add("evaluation_form");
+    	//data.add("fileNumber");
+    	data.add("generalComments");
+    	data.add("finalGrade");
+    	//data.add("format");
+    	
+    	data.add("values");
+    	//data.add(); //number of file
+    	data.add(CommentsTextArea.getText());
+    	data.add(PupilGradeTextLabel.getText());
+    	//data.add(); //format of file
     }
 
     @FXML
     void BackToMenu(ActionEvent event) {
     	UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
-
     }
-
+    
     @FXML
-    void initialize() {
-        assert EvaluationFormWindowLabel != null : "fx:id=\"EvaluationFormWindowLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert PupilIDLabel != null : "fx:id=\"PupilIDLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert GradeLabel != null : "fx:id=\"GradeLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert CommentsLabel != null : "fx:id=\"CommentsLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert PupilIDTextField != null : "fx:id=\"PupilIDTextField\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert CommentsTextArea != null : "fx:id=\"CommentsTextArea\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert CreateEvaluationFormButton != null : "fx:id=\"CreateEvaluationFormButton\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-        assert PupilGradeTextLabel != null : "fx:id=\"PupilGradeTextLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
-
-        Main.client.controller=this;
+    void initialize(){
+    	Main.client.controller=this;
     }
 
 	@Override
 	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
+		if (msg == null)
+		{
+			// error
+			new Alert(AlertType.ERROR, "Error during executing the action.", ButtonType.OK).showAndWait();
+			return;
+		}
+		ArrayList<String> arr = (ArrayList<String>) msg;
+		String type = arr.remove(0);
+		
+		if (type.equals("Check Pupil"))
+		{
+			if (arr.size() == 0)
+			{
+				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
+			}
+		}
 		
 	}
+
 }
