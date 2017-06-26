@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="375.0" prefWidth="661.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.ViewAllDataController">
+<AnchorPane prefHeight="375.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewAllDataController">
    <children>
       <Label fx:id="ViewLabel" layoutX="1.0" text="View System Data Window" underline="true">
          <font>
@@ -16,18 +15,16 @@
       </Label>
       <MenuButton fx:id="MenuButton" layoutX="223.0" layoutY="125.0" mnemonicParsing="false" onAction="#ViewAllOptions" prefHeight="39.0" prefWidth="181.0" text="Menu:">
         <items>
-          <MenuItem mnemonicParsing="false" text="Display Pupils" />
-          <MenuItem mnemonicParsing="false" text="Display Parents" />
-            <MenuItem mnemonicParsing="false" text="Display Teachers" />
-            <MenuItem mnemonicParsing="false" text="Display Classes" />
-            <MenuItem mnemonicParsing="false" text="Display Academic Activities" />
-            <MenuItem mnemonicParsing="false" text="Display Semesters" />
-            <MenuItem mnemonicParsing="false" text="Display Semesters" />
-            <MenuItem mnemonicParsing="false" text="Display Semesters" />
-            <MenuItem mnemonicParsing="false" text="Display Exeptional Requests" />
-            <MenuItem mnemonicParsing="false" text="Display Assignments" />
-            <MenuItem mnemonicParsing="false" text="Display Secretary" />
-            <MenuItem mnemonicParsing="false" text="Display System Manager" />
+          <MenuItem fx:id="DisplayPupils" mnemonicParsing="false" onAction="#DisplayAllPupil" text="Display Pupils" />
+          <MenuItem fx:id="DisplayParents" mnemonicParsing="false" onAction="#DisplayAllParents" text="Display Parents" />
+            <MenuItem fx:id="DisplayTeachers" mnemonicParsing="false" onAction="#DisplayAllTeachers" text="Display Teachers" />
+            <MenuItem fx:id="DisplayClasses" mnemonicParsing="false" onAction="#DisplayAllClasses" text="Display Classes" />
+            <MenuItem fx:id="DisplayAcademicActivities" mnemonicParsing="false" onAction="#DisplayAllAcademicActivities" text="Display Academic Activities" />
+            <MenuItem fx:id="DisplaySemesters" mnemonicParsing="false" onAction="#DisplayAllSemester" text="Display Semesters" />
+            <MenuItem fx:id="DisplayExeptionalRequests" mnemonicParsing="false" onAction="#DisplayAllExeptionalRequests" text="Display Exeptional Requests" />
+            <MenuItem fx:id="DisplayAssignments" mnemonicParsing="false" onAction="#DisplayAllAssignments" text="Display Assignments" />
+            <MenuItem fx:id="DisplaySecretary" mnemonicParsing="false" onAction="#DisplaySecretaryData" text="Display Secretary" />
+            <MenuItem fx:id="DisplaySystemManager" mnemonicParsing="false" onAction="#DisplaySystemManagerData" text="Display System Manager" />
         </items>
       </MenuButton>
       <Label fx:id="ChooseLabel" layoutX="144.0" layoutY="86.0" prefHeight="31.0" prefWidth="357.0" text="Choose Table For Which You Want To Display Data:" />
