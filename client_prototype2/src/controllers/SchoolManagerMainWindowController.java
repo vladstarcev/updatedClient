@@ -42,6 +42,9 @@ public class SchoolManagerMainWindowController implements IController
 	private MenuItem BlockUserMenuItem;
 
 	@FXML
+	private MenuItem ViewSystemData;
+
+	@FXML
 	private Label ChooseOperationLabel;
 
 	@FXML
@@ -65,8 +68,8 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void ReportGeneration(ActionEvent event)
 	{
-		UserWindow.createUserWindow((Stage) SchoolManagerMenuLabel.getScene().getWindow(), "SchoolManagerReportGeneration",
-				getClass());
+		UserWindow.createUserWindow((Stage) SchoolManagerMenuLabel.getScene().getWindow(),
+				"SchoolManagerReportGeneration", getClass());
 
 	}
 
@@ -89,6 +92,12 @@ public class SchoolManagerMainWindowController implements IController
 	}
 
 	@FXML
+	void ViewAllData(ActionEvent event)
+	{
+
+	}
+
+	@FXML
 	void SchoolManagerLogOut(ActionEvent event)
 	{
 
@@ -103,6 +112,7 @@ public class SchoolManagerMainWindowController implements IController
 		assert ReportGenarationMenuItem != null : "fx:id=\"ReportGenarationMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
 		assert SchoolManagerMenuLabel != null : "fx:id=\"SchoolManagerMenuLabel\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
 		assert BlockUserMenuItem != null : "fx:id=\"BlockUserMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+		assert ViewSystemData != null : "fx:id=\"ViewSystemData\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
 		assert ChooseOperationLabel != null : "fx:id=\"ChooseOperationLabel\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
 
 		Main.client.controller = this;
