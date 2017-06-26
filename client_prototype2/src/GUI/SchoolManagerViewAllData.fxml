@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="375.0" prefWidth="661.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.ViewAllDataController">
+   <children>
+      <Label fx:id="ViewLabel" layoutX="1.0" text="View System Data Window" underline="true">
+         <font>
+            <Font name="Bookman Old Style Bold" size="48.0" />
+         </font>
+      </Label>
+      <MenuButton fx:id="MenuButton" layoutX="223.0" layoutY="125.0" mnemonicParsing="false" onAction="#ViewAllOptions" prefHeight="39.0" prefWidth="181.0" text="Menu:">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Display Pupils" />
+          <MenuItem mnemonicParsing="false" text="Display Parents" />
+            <MenuItem mnemonicParsing="false" text="Display Teachers" />
+            <MenuItem mnemonicParsing="false" text="Display Classes" />
+            <MenuItem mnemonicParsing="false" text="Display Academic Activities" />
+            <MenuItem mnemonicParsing="false" text="Display Semesters" />
+            <MenuItem mnemonicParsing="false" text="Display Semesters" />
+            <MenuItem mnemonicParsing="false" text="Display Semesters" />
+            <MenuItem mnemonicParsing="false" text="Display Exeptional Requests" />
+            <MenuItem mnemonicParsing="false" text="Display Assignments" />
+            <MenuItem mnemonicParsing="false" text="Display Secretary" />
+            <MenuItem mnemonicParsing="false" text="Display System Manager" />
+        </items>
+      </MenuButton>
+      <Label fx:id="ChooseLabel" layoutX="144.0" layoutY="86.0" prefHeight="31.0" prefWidth="357.0" text="Choose Table For Which You Want To Display Data:" />
+      <Button fx:id="BackButton" layoutX="223.0" layoutY="292.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="39.0" prefWidth="181.0" text="Back To Menu" />
+      <ComboBox fx:id="DataComboBox" layoutX="135.0" layoutY="211.0" onAction="#ViewChosenData" prefHeight="39.0" prefWidth="357.0" promptText="View Chosen Data:" />
+   </children>
+</AnchorPane>
