@@ -109,7 +109,19 @@ public class AssignPupilToCourseController implements IController {
     @FXML
     void AssignPupilCourse(ActionEvent event) {
     	
-    	if(checkCourseID==1 && checkPupilID==1 && ExeReFLAG==1)
+    	if(ExeReFLAG==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabele Request ID.", ButtonType.OK).showAndWait();
+    	}
+    	else if(checkPupilID==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabele Pupil ID.", ButtonType.OK).showAndWait();
+    	}
+    	else if(checkCourseID==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabele Course ID.", ButtonType.OK).showAndWait();
+    	}
+    	else
     	{
     		loadDecision();
     	}
@@ -305,7 +317,7 @@ public class AssignPupilToCourseController implements IController {
 			{
 				InsertPupilToCourse();
 			}
-			else if(des.equals("pending"))
+			else if(des.equals("panding"))
 			{
 				new Alert(AlertType.ERROR, "No Response To This Request Yet", ButtonType.OK).showAndWait();
 			}

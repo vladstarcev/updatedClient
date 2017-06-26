@@ -114,7 +114,19 @@ public class DeletePupilFromCourseController implements IController
 	@FXML
 	void DeletePupilCourse(ActionEvent event)
 	{
-    	if(checkCourseID==1 && checkPupilID==1 && ExeReFLAG==1)
+    	if(ExeReFLAG==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabele Request ID.", ButtonType.OK).showAndWait();
+    	}
+    	else if(checkPupilID==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabele Pupil ID.", ButtonType.OK).showAndWait();
+    	}
+    	else if(checkCourseID==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabele Course ID.", ButtonType.OK).showAndWait();
+    	}
+    	else
     	{
     		loadDecision();
     	}
@@ -184,7 +196,7 @@ public class DeletePupilFromCourseController implements IController
 		data.add("userID");
 		data.add(PupilIDTextField.getText());
 		data.add("courseID");
-		data.add("CourseIDTextField");
+		data.add(CourseIDTextField.getText());
 
 		try
 		{
@@ -212,6 +224,7 @@ public class DeletePupilFromCourseController implements IController
 		assert DeleteLable != null : "fx:id=\"DeleteLable\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
 		assert CourseIDLable != null : "fx:id=\"CourseIDLable\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
 
+		Main.client.controller=this;
 		PupilID="";
 		CourseID="";
 	    checkCourseID=0;
@@ -283,7 +296,7 @@ public class DeletePupilFromCourseController implements IController
 		String des="";
 		if(arr.isEmpty()==true)
 		{
-			new Alert(AlertType.ERROR, "Exceptional Request for assigning pupil to course by details you entered not exist.", ButtonType.OK).showAndWait();	
+			new Alert(AlertType.ERROR, "Exceptional Request for delete pupil to course by details you entered not exist.", ButtonType.OK).showAndWait();	
 		}
 		else
 		{
@@ -300,13 +313,13 @@ public class DeletePupilFromCourseController implements IController
 			}
 			if(des.equals("deny"))
 			{
-				new Alert(AlertType.ERROR, "The requst to assign pupil to this course not confirmed", ButtonType.OK).showAndWait();
+				new Alert(AlertType.ERROR, "The request to delete pupil to this course not confirmed", ButtonType.OK).showAndWait();
 			}
 			else if(des.equals("confirm"))
 			{
 				DeletePupilFromCourse();
 			}
-			else if(des.equals("pending"))
+			else if(des.equals("panding"))
 			{
 				new Alert(AlertType.ERROR, "No Response To This Request Yet", ButtonType.OK).showAndWait();
 			}
@@ -322,7 +335,7 @@ public class DeletePupilFromCourseController implements IController
 			}
 			else
 			{
-				new Alert(AlertType.INFORMATION, "Pupil Succesfully Delited From Course", ButtonType.OK).showAndWait();
+				new Alert(AlertType.INFORMATION, "Pupil Succesfully Deleted From Course", ButtonType.OK).showAndWait();
 				UserWindow.closeUserWindow(getClass(), (Stage) DeleteButton.getScene().getWindow());	
 			}
 		}
