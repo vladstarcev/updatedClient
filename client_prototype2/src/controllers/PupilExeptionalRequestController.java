@@ -72,12 +72,19 @@ public class PupilExeptionalRequestController implements IController {
     @FXML
     private Label CourseListLable;
     
+    @FXML
+    private Label ChooseClassLabel;
+    
+    @FXML
+    private ComboBox<String> ChooseClassCB;
+    
     private int ReqIDflag;
 	private String cbCourseIDName;
 	private String cbPupilIDName;
 	private String Operation;
 	private String PupilID;
 	private String CourseID; 
+	private String cbClassIDName;
 
     @FXML
     void CeckIdAvailability(ActionEvent event) {
@@ -103,6 +110,10 @@ public class PupilExeptionalRequestController implements IController {
     void ChooseCourse(ActionEvent event) {
 
     	cbCourseIDName=ChooseCourseComboBox.getSelectionModel().getSelectedItem();
+		String[] temp=cbCourseIDName.split(":");
+		CourseID=temp[0];
+		
+		loadClasses();
     }
 
     @FXML
@@ -159,6 +170,10 @@ public class PupilExeptionalRequestController implements IController {
     	{
     		new Alert(AlertType.ERROR, "Please Choose Course For The Request", ButtonType.OK).showAndWait();
     	}
+    	else if(cbClassIDName.equals(""))
+    	{
+    		new Alert(AlertType.ERROR, "Please Choose Class For The Request", ButtonType.OK).showAndWait();
+    	}
     	else if(Operation.equals(""))
     	{
     		new Alert(AlertType.ERROR, "Please Choose Operation For Request", ButtonType.OK).showAndWait();
@@ -173,6 +188,34 @@ public class PupilExeptionalRequestController implements IController {
     	}
     		
 
+    }
+    
+   void loadClasses()
+   {
+   		ArrayList<String> data = new ArrayList<String>();
+		data.add("Load class in Course");
+		data.add("select");
+		data.add("course_in_class");
+		data.add("courseId");
+		data.add(CourseID);
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+   }
+    
+    
+    @FXML
+    void ChooseClass(ActionEvent event) {
+
+    	cbClassIDName=ChooseClassCB.getSelectionModel().getSelectedItem();
+    	String[] Temp=cbClassIDName.split(":");
+    	cbClassIDName=Temp[0];
     }
 
     @FXML
@@ -250,12 +293,15 @@ public class PupilExeptionalRequestController implements IController {
  		data.add("descision");
  		data.add("CourseID");
  		data.add("userID");
+ 		data.add("classId");
  		data.add("values");
  		data.add(RequestIdTextField.getText());
  		data.add(str);
  		data.add("panding");
  		data.add(CourseID);
  		data.add(PupilID);
+ 		data.add(cbClassIDName);
+ 		
 
  		try
  		{
@@ -272,11 +318,13 @@ public class PupilExeptionalRequestController implements IController {
         assert ChooseCourseComboBox != null : "fx:id=\"ChooseCourseComboBox\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert AssignPupil != null : "fx:id=\"AssignPupil\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert RequestIdTextField != null : "fx:id=\"RequestIdTextField\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
+        assert ChooseClassCB != null : "fx:id=\"ChooseClassCB\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert CheckIdButton != null : "fx:id=\"CheckIdButton\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert ChoosePupilComboBox != null : "fx:id=\"ChoosePupilComboBox\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert PupilExeptionalLable != null : "fx:id=\"PupilExeptionalLable\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert RequestIdLable != null : "fx:id=\"RequestIdLable\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
+        assert ChooseClassLabel != null : "fx:id=\"ChooseClassLabel\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert ChooseOperationMenuButton != null : "fx:id=\"ChooseOperationMenuButton\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert OperationLable != null : "fx:id=\"OperationLable\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         assert DeletePupil != null : "fx:id=\"DeletePupil\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
@@ -291,6 +339,8 @@ public class PupilExeptionalRequestController implements IController {
     	Operation="";
     	PupilID="";
     	CourseID=""; 
+    	cbClassIDName="";
+    	
         
         loadPupils();
         loadCourses();
@@ -398,6 +448,24 @@ public class PupilExeptionalRequestController implements IController {
 				new Alert(AlertType.INFORMATION, "Exceptional Request Opened Susccesfully", ButtonType.OK).showAndWait();
 				UserWindow.closeUserWindow(getClass(), (Stage) OperationLable.getScene().getWindow());
 			}
-		}		
+		}	
+		
+		if(type.equals("Load class in Course"))
+		{
+			ChooseClassCB.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String ClassId = map.get("classId");
+				ChooseClassCB.getItems().add(ClassId);
+			}
+		}
 	}
 }

@@ -17,6 +17,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class TeacherExeptionalRequestController implements IController {
 
@@ -68,6 +70,7 @@ public class TeacherExeptionalRequestController implements IController {
     private String courseid;
     private String StudyUnit;
 	private String CourseWeeklyHour;
+	private String CBTeacherId;
 
     @FXML
     void ChooseClass(ActionEvent event) {
@@ -81,15 +84,37 @@ public class TeacherExeptionalRequestController implements IController {
     @FXML
     void ChooseTeacher(ActionEvent event) {
 
+    	CBTeacherId=ListTeacherComboBox.getSelectionModel().getSelectedItem();
+    	String[] Temp=CBTeacherId.split(":");
+    	CBTeacherId=Temp[0];
     }
 
     @FXML
     void SendToSchoolManager(ActionEvent event) {
 
+    	if(ExFlag==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Availabile Request ID.", ButtonType.OK).showAndWait();
+    		
+    	}
+    	else if(ClassID.equals(""))
+    	{
+    		new Alert(AlertType.ERROR, "Please Choose Class For The Request", ButtonType.OK).showAndWait();
+    	}
+    	else if(CBTeacherId.equals(""))
+    	{
+    		new Alert(AlertType.ERROR, "Please Choose Course And Teacher For The Request", ButtonType.OK).showAndWait();
+    	}
+    	else
+    	{
+    	CheckItISnOSameTeacher();
+    	}
     }
 
     @FXML
     void BackToMenu(ActionEvent event) {
+
+    	UserWindow.closeUserWindow(getClass(), (Stage) ListTeacherComboBox.getScene().getWindow());
 
     }
 
@@ -116,6 +141,8 @@ public class TeacherExeptionalRequestController implements IController {
     @FXML
     void ChooseCourse(ActionEvent event) {
 
+    	courseid=ListCurseComboBox.getSelectionModel().getSelectedItem();
+    	loadStudyUnit();
     }
     
     void loadClassIDAndName()
@@ -191,6 +218,59 @@ public class TeacherExeptionalRequestController implements IController {
 				e.printStackTrace();
 			}
 	 }
+	 
+	void CheckItISnOSameTeacher()
+	{
+    	ArrayList<String> data = new ArrayList<String>();
+		data.add("Load Teacher In Course In Class");
+		data.add("select");
+		data.add("course_in_class");
+		data.add("classId");
+		data.add(ClassID);
+		data.add("courseId");
+		data.add(courseid);
+		data.add("teacherId");
+		data.add(CBTeacherId);
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	 void OpenExeptionalRequest()
+	{
+			ArrayList<String> data = new ArrayList<String>();
+	 		data.add("Insert new Exeptional Request");
+	 		data.add("insert");
+	 		data.add("exceptional_request");
+	 		data.add("exceptonalRequestID");
+	 		data.add("type");
+	 		data.add("descision");
+	 		data.add("CourseID");
+	 		data.add("userID");
+	 		data.add("classId");
+	 		data.add("values");
+	 		data.add(RequestIdTextField.getText());
+	 		data.add("Re-Assign");
+	 		data.add("panding");
+	 		data.add(courseid);
+	 		data.add(CBTeacherId);
+	 		data.add(ClassID);
+
+	 		try
+	 		{
+	 			Main.client.sendToServer(data);
+	 		}
+	 		catch (IOException e)
+	 		{
+	 			e.printStackTrace();
+	 		}
+	}
 
 
     @FXML
@@ -215,6 +295,7 @@ public class TeacherExeptionalRequestController implements IController {
         courseid="";
         StudyUnit="";
     	CourseWeeklyHour="";
+    	CBTeacherId="";
         loadClassIDAndName();
     }
 
@@ -265,6 +346,7 @@ public class TeacherExeptionalRequestController implements IController {
 		
 		if(type.equals("Load Course in class"))
 		{
+			ListCurseComboBox.getItems().clear();
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
@@ -278,7 +360,6 @@ public class TeacherExeptionalRequestController implements IController {
 				courseid= map.get("courseId");
 				ListCurseComboBox.getItems().add(courseid);
 			}
-			loadStudyUnit();
 		}
 		
 		if(type.equals("Load Study Unit"))
@@ -316,6 +397,27 @@ public class TeacherExeptionalRequestController implements IController {
 				String username = map.get("userName");
 				String userID = map.get("userId");
 				ListTeacherComboBox.getItems().add(userID + ": " + username);
+			}
+		}
+		
+		if(type.equals("Load Teacher In Course In Class"))
+		{
+			if(arr.size()!=0)
+			{
+				new Alert(AlertType.ERROR, "Teacher Already Assigned To This Course In This Class.", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				OpenExeptionalRequest();
+			}
+		}
+		
+		if(type.equals("Insert new Exeptional Request"))
+		{
+			if(arr.size()> 0)
+			{
+				new Alert(AlertType.INFORMATION, "Exceptional Request Opened Susccesfully", ButtonType.OK).showAndWait();
+				UserWindow.closeUserWindow(getClass(), (Stage) CheckIdButton.getScene().getWindow());
 			}
 		}
 	}

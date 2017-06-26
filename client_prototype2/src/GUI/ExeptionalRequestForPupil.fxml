@@ -29,5 +29,7 @@
       <Label fx:id="OperationLable" layoutX="27.0" layoutY="256.0" prefHeight="26.0" prefWidth="270.0" text="Choose Your Operation:" />
       <Button fx:id="SendButton" layoutX="99.0" layoutY="465.0" mnemonicParsing="false" onAction="#SendToSchoolManager" prefHeight="36.0" prefWidth="316.0" text="Send Exeptional Requset To School Manager" />
       <Button fx:id="BackButton" layoutX="540.0" layoutY="465.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="36.0" prefWidth="165.0" text="Back To Menu" />
+      <ComboBox fx:id="ChooseClassCB" layoutX="325.0" layoutY="379.0" onAction="#ChooseClass" prefHeight="36.0" prefWidth="180.0" promptText="Choose:" />
+      <Label fx:id="ChooseClassLabel" layoutX="327.0" layoutY="345.0" prefHeight="19.0" prefWidth="189.0" text="Choose Class ID From The List:" />
    </children>
 </AnchorPane>

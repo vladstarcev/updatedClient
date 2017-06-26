@@ -298,6 +298,7 @@ public class AssignPupilToCourseController implements IController {
 			}
 			if(des.equals("deny"))
 			{
+				
 				new Alert(AlertType.ERROR, "The requst to assign pupil to this course not confirmed", ButtonType.OK).showAndWait();
 			}
 			else if(des.equals("confirm"))
