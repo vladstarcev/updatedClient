@@ -256,7 +256,7 @@ public class TeacherExeptionalRequestController implements IController {
 	 		data.add("classId");
 	 		data.add("values");
 	 		data.add(RequestIdTextField.getText());
-	 		data.add("Re-Assign");
+	 		data.add("Reassign");
 	 		data.add("panding");
 	 		data.add(courseid);
 	 		data.add(CBTeacherId);
