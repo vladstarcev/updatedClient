@@ -298,7 +298,7 @@ public class DeletePupilFromCourseController implements IController
 				}
 			   des=map.get("descision");
 			}
-			if(des.equals("diny"))
+			if(des.equals("deny"))
 			{
 				new Alert(AlertType.ERROR, "The requst to assign pupil to this course not confirmed", ButtonType.OK).showAndWait();
 			}
