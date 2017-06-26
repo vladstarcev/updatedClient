@@ -101,7 +101,7 @@ public class AddUserController implements IController {
 		if (msg == null)
 		{
 			// error
-			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, "Error during executing the action.", ButtonType.OK).showAndWait();
 			return;
 		}
 		ArrayList<String> arr = (ArrayList<String>) msg;
@@ -110,7 +110,7 @@ public class AddUserController implements IController {
 		{
 			if (arr.size() == 0)
 			{
-				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
+				new Alert(AlertType.ERROR, "The course is already in DB", ButtonType.OK).showAndWait();
 			}
 			else
 			{
