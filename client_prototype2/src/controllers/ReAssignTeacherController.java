@@ -1,130 +1,566 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import ui.UserWindow;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class ReAssignTeacherController implements IController
-{
+public class ReAssignTeacherController implements IController {
 
-	@FXML
-	private ResourceBundle resources;
+    @FXML
+    private ResourceBundle resources;
 
-	@FXML
-	private URL location;
+    @FXML
+    private URL location;
 
-	@FXML
-	private TextField ClassIDTextField;
+    @FXML
+    private TextField ClassIDTextField;
 
-	@FXML
-	private Button CheckRequestButton;
+    @FXML
+    private Button CheckRequestButton;
 
-	@FXML
-	private Button BackButton;
+    @FXML
+    private TextField CourseIDTextField;
 
-	@FXML
-	private Label TeacherIdLabel;
+    @FXML
+    private Button BackButton;
 
-	@FXML
-	private Label ClassIDLable;
+    @FXML
+    private Label TeacherIdLabel;
 
-	@FXML
-	private Label ReAssignLable;
+    @FXML
+    private Label ClassIDLable;
 
-	@FXML
-	private TextField TecherIDTextField1;
+    @FXML
+    private Label ReAssignLable;
 
-	@FXML
-	private Button CheckTeacherButton;
+    @FXML
+    private Button CheckTeacherButton;
 
-	@FXML
-	private Button CheckCourseButton;
+    @FXML
+    private Button CheckCourseButton;
 
-	@FXML
-	private TextField TecherIDTextField;
+    @FXML
+    private TextField TeacherIdTextFieald;
 
-	@FXML
-	private TextField TeacherIdTextFieald;
+    @FXML
+    private Label RequestIdLabel;
 
-	@FXML
-	private Label RequestIdLabel;
+    @FXML
+    private Button CheckClassButton;
 
-	@FXML
-	private Button CheckClassButton;
+    @FXML
+    private Button ReAssignTeacherButton;
 
-	@FXML
-	private Button ReAssignTeacherButton;
+    @FXML
+    private Label CourseIDLable;
 
-	@FXML
-	private Label CourseIDLable;
+    @FXML
+    private TextField ExReTextField1;
+    
+    private int ExFlag;
+	private int courseIDF;
+	private int classIDF;
+	private int teacherIDF;
+	private String courseHours;
+	private String NewTeacherWorkHours;
+	private String OldTeacherWorkHours;
+	private String OldTeacherID;
+	
+    @FXML
+    void CheckRequestID(ActionEvent event) {
 
-	@FXML
-	void CheckRequestID(ActionEvent event)
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Existing Request ID");
+		data.add("select");
+		data.add("exceptional_request");
+		data.add("exceptonalRequestID");
+		data.add(ExReTextField1.getText());
+		data.add("type");
+		data.add("Reassign");
+
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+    }
+
+    @FXML
+    void CheckCourseID(ActionEvent event) {
+
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Course ID");
+		data.add("select");
+		data.add("courses");
+		data.add("courseId");
+		data.add(CourseIDTextField.getText());
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+    }
+
+    @FXML
+    void BackToMenu(ActionEvent event) {
+
+    	UserWindow.closeUserWindow(getClass(), (Stage) CheckCourseButton.getScene().getWindow());
+
+    }
+
+    @FXML
+    void ReAssignTeacher(ActionEvent event) {
+
+    	if(ExFlag==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Exist Request ID And Check It.", ButtonType.OK).showAndWait();
+    	}
+    	else if(courseIDF==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Course ID And Check It.", ButtonType.OK).showAndWait();
+    	}
+    	else if(classIDF==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Class ID And Check It", ButtonType.OK).showAndWait();
+    	}
+    	else if(teacherIDF==0)
+    	{
+    		new Alert(AlertType.ERROR, "Enter Teacher ID And Check It", ButtonType.OK).showAndWait();
+    	}
+    	else
+    	{
+    		loadDecision();
+    	}
+
+    }
+
+    @FXML
+    void CheckClassID(ActionEvent event) {
+
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Class ID");
+		data.add("select");
+		data.add("class");
+		data.add("classId");
+		data.add(ClassIDTextField.getText());
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+    }
+
+    @FXML
+    void getTeacherID(ActionEvent event) {
+
+    	teacherIDF=0;
+    }
+
+    @FXML
+    void CheckTeacherID(ActionEvent event) {
+
+    	ArrayList<String> data = new ArrayList<String>();
+		data.add("Check Teacher ID");
+		data.add("select");
+		data.add("teacher");
+		data.add("userID");
+		data.add(TeacherIdTextFieald.getText());
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+    }
+    
+	void loadDecision()
+	 {
+		ArrayList<String> data = new ArrayList<String>();
+  		data.add("Check Exeptional Request Descision");
+  		data.add("select");
+  		data.add("exceptional_request");
+  		data.add("exceptonalRequestID");
+  		data.add(ExReTextField1.getText());
+  		data.add("type");
+  		data.add("Reassign");
+  		data.add("CourseID");
+  		data.add(CourseIDTextField.getText());
+  		data.add("userID");
+  		data.add(TeacherIdTextFieald.getText());
+  		data.add("classId");
+  		data.add(ClassIDTextField.getText());
+  		
+  		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		} 
+	 }
+	
+	void reassignTeacher()
 	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Update Teacher To Course In Class");
+		data.add("update");
+		data.add("course_in_class");
+		data.add("teacherId");
+		data.add(TeacherIdTextFieald.getText());
+		data.add("conditions");
+		data.add("classId");
+		data.add(ClassIDTextField.getText());
+		data.add("courseId");
+		data.add(CourseIDTextField.getText());
 
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
-	@FXML
-	void CheckCourseID(ActionEvent event)
+	void ChangeTeacherHours()
 	{
+		int num=Integer.parseInt(NewTeacherWorkHours);
+		num=num+Integer.parseInt(courseHours);
+		NewTeacherWorkHours=Integer.toString(num);
+		
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Update New Teacher Hours");
+		data.add("update");
+		data.add("teacher");
+		data.add("workHours");
+		data.add(NewTeacherWorkHours);
+		data.add("conditions");
+		data.add("userId");
+		data.add(TeacherIdTextFieald.getText());
+	
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	void loadOldTeacher()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Load Old Teacher");
+		data.add("select");
+		data.add("course_in_class");
+		data.add("classId");
+		data.add(ClassIDTextField.getText());
+		data.add("courseId");
+		data.add(CourseIDTextField.getText());
 
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	void loadOldTeacherHours()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Load Old Teacher Hours");
+		data.add("select");
+		data.add("teacher");
+		data.add("userID");
+		data.add(OldTeacherID);
+
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	void updateOldTeacherHours()
+	{
+		int num=Integer.parseInt(OldTeacherWorkHours);
+		int num1=Integer.parseInt(courseHours);
+		num=num-num1;
+		OldTeacherWorkHours=Integer.toString(num);
+		
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("Update Old Teacher Hours");
+		data.add("update");
+		data.add("teacher");
+		data.add("workHours");
+		data.add(OldTeacherWorkHours);
+		data.add("conditions");
+		data.add("userID");
+		data.add(OldTeacherID);
+
+
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
-	@FXML
-	void BackToMenu(ActionEvent event)
-	{
+    @FXML
+    void initialize() {
+        assert ClassIDTextField != null : "fx:id=\"ClassIDTextField\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert CheckRequestButton != null : "fx:id=\"CheckRequestButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert CourseIDTextField != null : "fx:id=\"CourseIDTextField\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert TeacherIdLabel != null : "fx:id=\"TeacherIdLabel\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert ClassIDLable != null : "fx:id=\"ClassIDLable\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert ReAssignLable != null : "fx:id=\"ReAssignLable\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert CheckTeacherButton != null : "fx:id=\"CheckTeacherButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert CheckCourseButton != null : "fx:id=\"CheckCourseButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert TeacherIdTextFieald != null : "fx:id=\"TeacherIdTextFieald\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert RequestIdLabel != null : "fx:id=\"RequestIdLabel\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert CheckClassButton != null : "fx:id=\"CheckClassButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert ReAssignTeacherButton != null : "fx:id=\"ReAssignTeacherButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert CourseIDLable != null : "fx:id=\"CourseIDLable\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
+        assert ExReTextField1 != null : "fx:id=\"ExReTextField1\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
 
-	}
+        Main.client.controller=this;
+        
+		ExFlag=0;
+		courseIDF=0;
+		classIDF=0;
+		teacherIDF=0;
+		courseHours="";
+		NewTeacherWorkHours="";
+		OldTeacherWorkHours="";
+		OldTeacherID="";
 
-	@FXML
-	void ReAssignTeacher(ActionEvent event)
-	{
-
-	}
-
-	@FXML
-	void CheckClassID(ActionEvent event)
-	{
-
-	}
-
-	@FXML
-	void CheckTeacherID(ActionEvent event)
-	{
-
-	}
-
-	@FXML
-	void initialize()
-	{
-		assert ClassIDTextField != null : "fx:id=\"ClassIDTextField\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert CheckRequestButton != null : "fx:id=\"CheckRequestButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert TeacherIdLabel != null : "fx:id=\"TeacherIdLabel\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert ClassIDLable != null : "fx:id=\"ClassIDLable\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert ReAssignLable != null : "fx:id=\"ReAssignLable\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert TecherIDTextField1 != null : "fx:id=\"TecherIDTextField1\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert CheckTeacherButton != null : "fx:id=\"CheckTeacherButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert CheckCourseButton != null : "fx:id=\"CheckCourseButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert TecherIDTextField != null : "fx:id=\"TecherIDTextField\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert TeacherIdTextFieald != null : "fx:id=\"TeacherIdTextFieald\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert RequestIdLabel != null : "fx:id=\"RequestIdLabel\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert CheckClassButton != null : "fx:id=\"CheckClassButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert ReAssignTeacherButton != null : "fx:id=\"ReAssignTeacherButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-		assert CourseIDLable != null : "fx:id=\"CourseIDLable\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
-
-	}
+    }
 
 	@Override
-	public void handleAnswer(Object msg)
-	{
+	public void handleAnswer(Object result) {
 		// TODO Auto-generated method stub
+		
 
+		if (result == null)
+		{
+			// error
+			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
+			return;
+		}
+
+		ArrayList<String> arr = (ArrayList<String>) result;
+		String type = arr.remove(0);
+		
+		if(type.equals("Check Existing Request ID"))
+		{
+			if(arr.size()!=0)
+			{
+				ExFlag=1;
+				new Alert(AlertType.INFORMATION, "Exceptional Request Has Found", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				
+				new Alert(AlertType.ERROR, "Exceptional Request Not Found", ButtonType.OK).showAndWait();
+			}
+		}
+		
+		if(type.equals("Check Class ID"))
+		{
+			if(arr.size()!=0)
+			{
+				classIDF=1;
+				new Alert(AlertType.INFORMATION, "Class ID Has Found", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				
+				new Alert(AlertType.ERROR, "Class ID Not Found", ButtonType.OK).showAndWait();
+			}
+		}
+		
+		
+		if(type.equals("Check Course ID"))
+		{
+			if(arr.size()!=0)
+			{
+				courseIDF=1;
+				new Alert(AlertType.INFORMATION, "Course ID Has Found", ButtonType.OK).showAndWait();
+				for (String row : arr)
+				{
+					String[] cols = row.split(";");
+					HashMap<String, String> map = new HashMap<>();
+					for (String col : cols)
+					{
+						String[] field = col.split("=");
+						map.put(field[0], field[1]);
+					}
+
+					courseHours= map.get("weeklyStudyHours");
+				}
+			}
+			else
+			{
+				
+				new Alert(AlertType.ERROR, "Course ID Not Found", ButtonType.OK).showAndWait();
+			}
+		}
+		
+		if(type.equals("Check Teacher ID"))
+		{
+			if(arr.size()!=0)
+			{
+				teacherIDF=1;
+				new Alert(AlertType.INFORMATION, "Teacher  ID Has Found", ButtonType.OK).showAndWait();
+				for (String row : arr)
+				{
+					String[] cols = row.split(";");
+					HashMap<String, String> map = new HashMap<>();
+					for (String col : cols)
+					{
+						String[] field = col.split("=");
+						map.put(field[0], field[1]);
+					}
+
+					NewTeacherWorkHours= map.get("workHours");
+				}
+			}
+			else
+			{
+				
+				new Alert(AlertType.ERROR, "Teacher ID Not Found", ButtonType.OK).showAndWait();
+			}
+		}
+		
+		if(type.equals("Check Exeptional Request Descision"))
+		{
+			String DES="";
+			if(arr.size()==0)
+			{
+				new Alert(AlertType.ERROR, "Not Found Exceptional Request For This Details", ButtonType.OK).showAndWait();
+			}
+			else
+			{
+				for (String row : arr)
+				{
+					String[] cols = row.split(";");
+					HashMap<String, String> map = new HashMap<>();
+					for (String col : cols)
+					{
+						String[] field = col.split("=");
+						map.put(field[0], field[1]);
+					}
+
+					DES = map.get("descision");
+				}
+				
+				if(DES.equals("confirm"))
+				{
+					loadOldTeacher();
+					reassignTeacher();
+				}
+				else if(DES.equals("deny"))
+				{
+					new Alert(AlertType.INFORMATION, "Exceptional Request For This Details Deny", ButtonType.OK).showAndWait();
+				}
+				else if(DES.equals("panding"))
+				{
+					new Alert(AlertType.ERROR, "Exceptional Request For This Details Not Responsed Yet", ButtonType.OK).showAndWait();
+				}
+			}
+		}
+		
+		if(type.equals("Update Teacher To Course In Class"))
+		{
+			new Alert(AlertType.INFORMATION, "Re-Assiggn Of Teacher To Course In Clsss Succes.", ButtonType.OK).showAndWait();
+			ChangeTeacherHours();
+		}
+		
+		if(type.equals("Load Old Teacher"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				OldTeacherID= map.get("teacherId");
+				loadOldTeacherHours();
+			}
+		}
+		
+		if(type.equals("Load Old Teacher Hours"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				OldTeacherWorkHours= map.get("workHours");
+				updateOldTeacherHours();
+			}
+		}
+		
+		if(type.equals("Update Old Teacher Hours"))
+		{
+			new Alert(AlertType.INFORMATION, "New And Old Teachers Work Hours Updated.", ButtonType.OK).showAndWait();
+			UserWindow.closeUserWindow(getClass(), (Stage) CheckCourseButton.getScene().getWindow());
+		}
 	}
 }
