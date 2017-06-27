@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -43,6 +44,10 @@ public class PupilShowEvaluationFormController implements IController {
     @FXML
     private Label FinalGradeLabel;
     
+    private String courseId;
+    private String grade;
+    private String comments;
+    
     @FXML
     void PupilFinalGrade(ActionEvent event) {
 
@@ -63,14 +68,20 @@ public class PupilShowEvaluationFormController implements IController {
         assert FinalGradeLabel != null : "fx:id=\"FinalGradeLabel\" was not injected: check your FXML file 'PupilEvaluationForm.fxml'.";
 
         Main.client.controller=this;
+
     }
     
-    void loadEvaluationForm()
+    void loadEvaluationForm(String course)
     {
     	ArrayList<String> data = new ArrayList<String>();
     	data.add("load evaluation form");
     	data.add("select");
-    	data.add("courses");
+    	data.add("evaluation_form");
+    	data.add("courseID");
+    	data.add(course);
+    	data.add("pupilID");
+    	data.add(Main.userId);
+    	
     	try
     	{
     		Main.client.sendToServer(data);
@@ -82,8 +93,32 @@ public class PupilShowEvaluationFormController implements IController {
     }
 
 	@Override
-	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
-		
+	public void handleAnswer(Object result) {
+	 	if (result == null)
+	 	{
+	 		// error
+	
+	 		return;
+	 	}
+	 	ArrayList<String> arr = (ArrayList<String>) result;
+	 	String type = arr.remove(0);
+	 	if (type.equals("load evaluation form"))
+	 	{
+	 		for (String row : arr)
+	 		{	
+	 			String[] cols = row.split(";");
+	 			HashMap<String, String> map = new HashMap<>();
+	 			for (String col : cols)
+	 			{
+	 				String[] field = col.split("=");
+	 				map.put(field[0], field[1]);
+	 			}
+	 			grade = map.get("finalGrade");
+	 			comments = map.get("generalComments");
+	 		}
+	 		FinalGradeTextField.setText(grade);
+	 		CommentsTextArea.setText(comments);
+	 	}
+	 	
 	}
 }
