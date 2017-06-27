@@ -15,7 +15,7 @@
       </Label>
       <MenuButton fx:id="TeacherMenuButton" layoutX="121.0" layoutY="202.0" mnemonicParsing="false" onAction="#TeacherChooseOperation" prefHeight="42.0" prefWidth="260.0" text="Choose">
         <items>
-          <MenuItem fx:id="DefineAssignment" mnemonicParsing="false" onAction="#DefineAssignmentWindow" onMenuValidation="#Define" text="Defina Assignment" />
+          <MenuItem fx:id="DefineAssignment" mnemonicParsing="false" onAction="#DefineAssignmentWindow" onMenuValidation="#Define" text="Define Assignment" />
           <MenuItem fx:id="EvaluationForm" mnemonicParsing="false" onAction="#EvaluationFormWindow" onMenuValidation="#GradeAndComments" text="Create Evaluation Form" />
         </items>
       </MenuButton>
