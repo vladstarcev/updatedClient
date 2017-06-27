@@ -18,6 +18,7 @@ import ui.UserWindow;
 
 public class AddUserController implements IController {
 
+	boolean userExist;
     @FXML
     private Label fNameLblb;
 
@@ -56,7 +57,26 @@ public class AddUserController implements IController {
 
     @FXML
     void AddUser(ActionEvent event) {
+    	checkUser(idTxt.getText());
+    }
+    
+    public void checkUser(String id){
+    	ArrayList<String> data = new ArrayList<>();
+    	data.add("check user");
+    	data.add("select");
+    	data.add("user");
+    	data.add("userId");
+    	data.add(id);
     	
+    	try {
+			Main.client.sendToServer(data);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    public void addToDB(){
     	ArrayList<String> data = new ArrayList<>();
     	data.add("add user");
     	data.add("insert");
@@ -82,9 +102,7 @@ public class AddUserController implements IController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
     }
-
     @FXML
     void backToMenu(ActionEvent event) {
     	
@@ -110,13 +128,25 @@ public class AddUserController implements IController {
 		{
 			if (arr.size() == 0)
 			{
-				new Alert(AlertType.ERROR, "The course is already in DB", ButtonType.OK).showAndWait();
+				new Alert(AlertType.ERROR, "The user is already in DB", ButtonType.OK).showAndWait();
 			}
 			else
 			{
 				new Alert(AlertType.INFORMATION, "User was successfully added to DB", ButtonType.OK).showAndWait();
 			}
 		}
+		else if (type.equals("check user")){
+			if (arr.size() == 0)
+			{
+				
+				addToDB();
+				
+			}
+			else{
+				new Alert(AlertType.ERROR, "The user is already in DB", ButtonType.OK).showAndWait();
+			}
+		}
+		//new Alert(AlertType.ERROR, "User was successfully added to DB", ButtonType.OK).showAndWait();
 		UserWindow.closeUserWindow(getClass(), (Stage)cancelBtn.getScene().getWindow());
 	}
 
