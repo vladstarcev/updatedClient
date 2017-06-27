@@ -10,11 +10,14 @@ import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
@@ -112,6 +115,10 @@ public class PupilFileController implements IController {
     void ShowEvaluationForm(ActionEvent event) {
     	PupilShowEvaluationFormController = new PupilShowEvaluationFormController();
     	courseId = CourseComboBox.getSelectionModel().getSelectedItem();
+    	if(courseId==null){
+    		new Alert(AlertType.ERROR, "Missing Course!", ButtonType.OK).showAndWait();
+    		return;
+    	}
     	String[] ans = courseId.split(":");
     	PupilShowEvaluationFormController.loadEvaluationForm(ans[0]);
     	UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilEvaluationForm", getClass());
