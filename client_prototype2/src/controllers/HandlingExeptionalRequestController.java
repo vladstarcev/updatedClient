@@ -63,7 +63,6 @@ public class HandlingExeptionalRequestController implements IController{
     private String req;
     @FXML
     void ChooseExeptionalRequst(ActionEvent event) {
-    	req = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -75,6 +74,7 @@ public class HandlingExeptionalRequestController implements IController{
     void ConformExeptionalRequest(ActionEvent event) {
     	DecisionMenu.setText(ConformMenuItem.getText());
     	des= DecisionMenu.getText();
+
     }
 
     @FXML
@@ -96,6 +96,8 @@ public class HandlingExeptionalRequestController implements IController{
 
     @FXML
     void SendAnswar(ActionEvent event) {
+    	req = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
+    	com = commentTF.getText();
     	if(req==null) 	new Alert(AlertType.ERROR, "No request selected!", ButtonType.OK).showAndWait();
     	else if(des==null) 	new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
     	else{
@@ -134,18 +136,19 @@ public class HandlingExeptionalRequestController implements IController{
     
     void updateDescision(String descision)
     {
-		String selectedDes = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
-		if (selectedDes == null)
+		String selectedER = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
+		if (selectedER == null)
 			return;
+		String[] ans = selectedER.split(":");
     	ArrayList<String> data = new ArrayList<String>();
     	data.add("update descision");
     	data.add("update");
     	data.add("exceptional_request");
-		data.add("decision");
+		data.add("descision");
 		data.add(descision);
 		data.add("conditions");
-		data.add("decision");
-		data.add(null);
+		data.add("exceptonalRequestID");
+		data.add(ans[0]);
 
     	try
     	{
@@ -162,15 +165,16 @@ public class HandlingExeptionalRequestController implements IController{
 		String selectedER = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
 		if (selectedER == null)
 			return;
-    	ArrayList<String> data = new ArrayList<String>();
+		String[] ans = selectedER.split(":");
+		ArrayList<String> data = new ArrayList<String>();
     	data.add("update descision");
     	data.add("update");
     	data.add("exceptional_request");
 		data.add("comment");
 		data.add(comment);
 		data.add("conditions");
-		data.add("comment");
-		data.add(null);
+		data.add("exceptonalRequestID");
+		data.add(ans[0]);
 
     	try
     	{

@@ -1,29 +1,39 @@
 package controllers;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
-public class CreateEvaluationFormController implements IController {
+public class CreateEvaluationFormController implements IController  {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ComboBox<String> chooseCourseCB;
 
     @FXML
     private Label EvaluationFormWindowLabel;
-
-    @FXML
-    private Label PupilIDLabel;
 
     @FXML
     private Label GradeLabel;
@@ -32,16 +42,19 @@ public class CreateEvaluationFormController implements IController {
     private Label CommentsLabel;
 
     @FXML
-    private TextField PupilIDTextField;
+    private Label PupilLabel;
 
     @FXML
     private TextArea CommentsTextArea;
 
     @FXML
-    private Button BackButton;
-    
+    private ComboBox<String> choosePupilCB;
+
     @FXML
-    private Button CheckPupilBtn;
+    private Button BackButton;
+
+    @FXML
+    private Label CourseLabel;
 
     @FXML
     private Button CreateEvaluationFormButton;
@@ -49,14 +62,156 @@ public class CreateEvaluationFormController implements IController {
     @FXML
     private TextField PupilGradeTextLabel;
 
+
+	private HashMap<String, HashMap<String, String>> allCourses;
+	private HashMap<String, HashMap<String, String>> allPupils;
+
+	private String courseId;
+	private String classId;
+	private String pupilId;
+
     @FXML
-    void CheckPupil(ActionEvent event) {
+    void EnterPupilGrade(ActionEvent event) {
+
+    }
+
+    @FXML
+    void CreateEvaluationForm(ActionEvent event) {
+        String selectedCourse= chooseCourseCB.getSelectionModel().getSelectedItem();
+        if (selectedCourse == null){
+    		new Alert(AlertType.ERROR, "Missing Course!", ButtonType.OK).showAndWait();
+        	return;
+        }
+
+       	String selectedPupil= choosePupilCB.getSelectionModel().getSelectedItem();
+       	if (selectedPupil == null){
+       		new Alert(AlertType.ERROR, "Missing Pupil!", ButtonType.OK).showAndWait();
+       		return;
+        }
+        	
+	   	String comments = CommentsTextArea.getText();
+	   	String grade = PupilGradeTextLabel.getText();
+	   	if (grade.equals("")){
+	   		new Alert(AlertType.ERROR, "Missing grade!", ButtonType.OK).showAndWait();
+	   		return;
+	   	}
+	   	for(int i=0;i<grade.length();i++)
+	   	{
+	   		if(!(grade.charAt(i)<='9'&&grade.charAt(i)>='0')){
+	    		new Alert(AlertType.ERROR, "Error grade!", ButtonType.OK).showAndWait();
+	   			return;
+	   		}
+	   	}
+	   	int g = Integer.valueOf(grade);
+    	if(g>100||g<0){
+    		new Alert(AlertType.ERROR, "Error grade!", ButtonType.OK).showAndWait();
+	   		return;
+    	}
     	ArrayList<String> data = new ArrayList<String>();
-		data.add("Check Pupil");
+    	data.add("create evaluation form");
+    	data.add("insert");
+    	data.add("evaluation_form");
+		data.add("fileNumber");
+		data.add("generalComments");
+		data.add("finalGrade");
+		
+		data.add("values");
+		String fileNum = pupilId + courseId;
+		data.add(fileNum);
+		data.add(comments);
+		data.add(grade);
+		try 
+		{
+			Main.client.sendToServer(data);
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		new Alert(AlertType.INFORMATION, "Evaluation Form was created successfully!", ButtonType.OK).showAndWait();
+   
+
+    }
+
+    @FXML
+    void BackToMenu(ActionEvent event) {
+    	UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
+    }
+
+    @FXML
+    void chooseCourse(ActionEvent event) {
+        loadPupilsInCourse(courseId,classId);
+    }
+
+    @FXML
+    void choosePupil(ActionEvent event) {
+
+    }
+    void loadAllCourses()
+    {
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("load Courses");
+    	data.add("select");
+    	data.add("courses");
+    	try
+	  	{
+    		Main.client.sendToServer(data);
+	  	}
+    	catch (IOException e)
+    	{
+    		e.printStackTrace();
+    	}
+    }
+	    
+    
+
+    
+    void loadCoursesOfTeacher()
+    {
+    	  ArrayList<String> data = new ArrayList<String>();
+    	  data.add("load courses of teacher");
+    	  data.add("select");
+    	  data.add("course_in_class");
+    	  data.add("teacherId");
+    	  data.add(Main.userId);
+    	  try
+    	  {
+    	   Main.client.sendToServer(data);
+    	  }
+    	  catch (IOException e)
+    	  {
+    	   e.printStackTrace();
+    	  }
+    }
+    void loadPupilsInCourse(String courseId, String classId)
+    {
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("load pupils in course");
+   	  	data.add("select");
+   	  	data.add("pupil_in_course");
+   	  	data.add("courseID");
+   	  	data.add(courseId);
+   	  	data.add("classID");
+   	  	data.add(classId);
+   	  	try
+   		 {
+   	  		Main.client.sendToServer(data);
+   		 }
+   	  	catch (IOException e)
+   	  	{
+   	  		e.printStackTrace();
+   	  	}
+    }
+    void loadAllPupils()
+    {
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("load all pupils");
 		data.add("select");
-		data.add("pupil");
-		data.add("userID");
-		data.add(PupilIDTextField.getText());
+		data.add("user");
+		data.add("permission");
+		data.add("6");
+
 		try
 		{
 			Main.client.sendToServer(data);
@@ -66,63 +221,100 @@ public class CreateEvaluationFormController implements IController {
 			e.printStackTrace();
 		}
     }
-
-    @FXML
-    void EnterPupilGrade(ActionEvent event) {
-
-    }
-
-    @FXML
-    void CreateEvaluationForm(ActionEvent event) {
-    	ArrayList<String> data = new ArrayList<>();
-    	data.add("create evaluation form");
-    	data.add("insert");
-    	data.add("evaluation_form");
-    	//data.add("fileNumber");
-    	data.add("generalComments");
-    	data.add("finalGrade");
-    	//data.add("format");
-    	
-    	data.add("values");
-    	//data.add(); //number of file
-    	data.add(CommentsTextArea.getText());
-    	data.add(PupilGradeTextLabel.getText());
-    	//data.add(); //format of file
-    }
-
-    @FXML
-    void BackToMenu(ActionEvent event) {
-    	UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
-    }
     
     @FXML
-    void initialize(){
-    	Main.client.controller=this;
+    void initialize() {
+        assert chooseCourseCB != null : "fx:id=\"chooseCourseCB\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert EvaluationFormWindowLabel != null : "fx:id=\"EvaluationFormWindowLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert GradeLabel != null : "fx:id=\"GradeLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert CommentsLabel != null : "fx:id=\"CommentsLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert PupilLabel != null : "fx:id=\"PupilLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert CommentsTextArea != null : "fx:id=\"CommentsTextArea\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert choosePupilCB != null : "fx:id=\"choosePupilCB\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert CourseLabel != null : "fx:id=\"CourseLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert CreateEvaluationFormButton != null : "fx:id=\"CreateEvaluationFormButton\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+        assert PupilGradeTextLabel != null : "fx:id=\"PupilGradeTextLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
+
+        Main.client.controller=this;
+        allCourses = new HashMap<>();
+        allPupils = new HashMap<>();
+        loadAllCourses();
     }
 
 	@Override
-	public void handleAnswer(Object msg) {
-		if (msg == null)
+	public void handleAnswer(Object result) {
+		if (result == null)
 		{
-			// error
-			new Alert(AlertType.ERROR, "Error during executing the action.", ButtonType.OK).showAndWait();
+		   // error
 			return;
 		}
-		ArrayList<String> arr = (ArrayList<String>) msg;
+
+		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
-		
-		if (type.equals("Check Pupil"))
+		if (type.equals("load Courses"))
 		{
-			if (arr.size() == 0)
+		   for (String row : arr)
+		   {
+			   String[] cols = row.split(";");
+			   HashMap<String, String> map = new HashMap<>();
+			   for (String col : cols)
+			   {
+				   String[] field = col.split("=");
+				   map.put(field[0], field[1]);
+			   }
+			   allCourses.put(map.get("courseId"), map);
+		   	}
+		 	loadCoursesOfTeacher();
+		}
+
+		else if (type.equals("load courses of teacher"))
+		{
+			for (String row : arr)
 			{
-				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
-			}
-			else
-			{
-				new Alert(AlertType.INFORMATION, "Pupil has found.", ButtonType.OK).showAndWait();
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+			    courseId = map.get("courseId");
+			    classId = map.get("classId");
+			    chooseCourseCB.getItems().add(courseId + ": " + allCourses.get(courseId).get("courseName"));
+			    loadAllPupils();
 			}
 		}
-		
-	}
+		else if(type.equals("load all pupils"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				allPupils.put(map.get("userId"), map);
+			}
 
+		}
+		else if (type.equals("load pupils in course"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				pupilId = map.get("userID");
+				choosePupilCB.getItems().add(pupilId + ": " + allPupils.get(pupilId).get("userFirstName") + " "
+						+ allPupils.get(pupilId).get("userLastName"));			}
+		}
+
+	}
 }

@@ -31,6 +31,9 @@ public class BlockParentBySchoolManagerController implements IController {
     private Button BlockParentButton;
 
     @FXML
+    private Button FreeParentButton;
+
+    @FXML
     private Label BlockUserLabel;
 
     @FXML
@@ -42,6 +45,9 @@ public class BlockParentBySchoolManagerController implements IController {
     @FXML
     private Button BackButton;
 
+    private String ParentId;
+    private boolean flagFound =false;
+    private String access;
     
 	void findPupil()
 	{
@@ -61,29 +67,50 @@ public class BlockParentBySchoolManagerController implements IController {
 		}
 	}
 	
-	void updateParentPermission(String ParentId)
+	void updateParentPermission(String ParentId, String acc)
 	{
 		ArrayList<String> data = new ArrayList<String>();
-		data.add("Block Parent");
-		data.add("update");
-		data.add("user");
-		data.add("permission");
-		data.add("0");
-		data.add("conditions");
-		data.add("userId");
-		data.add(ParentId);
-		data.add("permission");
-		data.add("6");
-
+		if(acc.equals("block"))
+		{
+			if (access.equals("1")){
+				new Alert(AlertType.ERROR, "Parent is already Block!", ButtonType.OK).showAndWait();
+				return;
+			}
+	    	
+			data.add("Block Parent");
+			data.add("update");
+			data.add("pupil");
+			data.add("ParentAccess");
+			data.add("1");
+			data.add("conditions");
+			data.add("userID");
+			data.add(PupilIDTextField.getText());
+		}
+		else if(acc.equals("free"))
+		{
+			if (access.equals("0")){
+				new Alert(AlertType.ERROR, "Parent is already free!", ButtonType.OK).showAndWait();
+				return;
+			}
+	    	
+			data.add("Free Parent");
+			data.add("update");
+			data.add("pupil");
+			data.add("ParentAccess");
+			data.add("0");
+			data.add("conditions");
+			data.add("userID");
+			data.add(PupilIDTextField.getText());
+			try
+			{
+				Main.client.sendToServer(data);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
 		
-		try
-		{
-			Main.client.sendToServer(data);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
     
@@ -96,6 +123,7 @@ public class BlockParentBySchoolManagerController implements IController {
     @FXML
     void BlockParent(ActionEvent event) {
     	findPupil();
+    	updateParentPermission(ParentId,"block");
     }
 
     @FXML
@@ -104,7 +132,11 @@ public class BlockParentBySchoolManagerController implements IController {
 
     }
 
-    
+    @FXML
+    void FreeParent(ActionEvent event) {
+    	findPupil();
+		updateParentPermission(ParentId,"free");
+    }
     
     
     @FXML
@@ -114,6 +146,7 @@ public class BlockParentBySchoolManagerController implements IController {
         assert PupilIDTextField != null : "fx:id=\"PupilIDTextField\" was not injected: check your FXML file 'SchoolManagerBlockUser.fxml'.";
         assert EnterPupilIDLabel != null : "fx:id=\"EnterPupilIDLabel\" was not injected: check your FXML file 'SchoolManagerBlockUser.fxml'.";
         assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SchoolManagerBlockUser.fxml'.";
+        assert FreeParentButton != null : "fx:id=\"FreeParentButton\" was not injected: check your FXML file 'SchoolManagerBlockUser.fxml'.";
 
         Main.client.controller=this;
     }
@@ -134,10 +167,12 @@ public class BlockParentBySchoolManagerController implements IController {
 		{
 			if (arr.size() == 0)
 			{
+				flagFound =false;
 				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
 			}
 			else
 			{
+				flagFound =true;
 				for (String row : arr)
 				{
 					String[] cols = row.split(";");
@@ -146,17 +181,15 @@ public class BlockParentBySchoolManagerController implements IController {
 					{
 						String[] field = col.split("=");
 						map.put(field[0], field[1]);
-						System.out.println(field[0]+ " "+ field[1]);
 					}
-					String ParentId = map.get("parentID");
-					updateParentPermission(ParentId);
+					ParentId = map.get("parentID");
+					access = map.get("ParentAccess");
 				}
 			}
 		}
-		else if(type.equals("Block Parent"))
-		{
+		else if(type.equals("Free Parent"))
+			new Alert(AlertType.INFORMATION, "Parent Free Successfully!", ButtonType.OK).showAndWait();
+		else if (type.equals("Block Parent"))
 			new Alert(AlertType.INFORMATION, "Parent Blocked Successfully!", ButtonType.OK).showAndWait();
-		}
-
 	}
 }

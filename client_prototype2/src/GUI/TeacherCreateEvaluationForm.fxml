@@ -14,16 +14,15 @@
             <Font name="Bookman Old Style Bold" size="42.0" />
          </font>
       </Label>
-      <Label fx:id="PupilIDLabel" layoutX="27.0" layoutY="117.0" text="Enter Pupil ID:" />
-      <TextField fx:id="PupilIDTextField" layoutX="28.0" layoutY="150.0" />
-      <Label fx:id="GradeLabel" layoutX="24.0" layoutY="192.0" text="Enter Grade:" />
-      <TextField fx:id="PupilGradeTextLabel" layoutX="28.0" layoutY="223.0" onAction="#EnterPupilGrade" />
-      <Label fx:id="CommentsLabel" layoutX="28.0" layoutY="273.0" text="Comments:" />
-      <TextArea fx:id="CommentsTextArea" layoutX="24.0" layoutY="301.0" prefHeight="104.0" prefWidth="280.0" />
-      <Button fx:id="CreateEvaluationFormButton" layoutX="27.0" layoutY="418.0" mnemonicParsing="false" onAction="#CreateEvaluationForm" text="Create Evaluation Form" />
-      <Button fx:id="BackButton" layoutX="28.0" layoutY="471.0" mnemonicParsing="false" onAction="#BackToMenu" text="Back To Menu" />
-      <Button layoutX="326.0" layoutY="322.0" mnemonicParsing="false" text="Upload Pupil Solution " />
-      <Hyperlink layoutX="326.0" layoutY="361.0" prefHeight="31.0" prefWidth="229.0" text="pupil solution with comments" />
-      <Button fx:id="CheckPupilBtn" layoutX="356.0" layoutY="150.0" mnemonicParsing="false" onAction="#CheckPupil" prefHeight="31.0" prefWidth="123.0" text="Check Pupil" />
+      <Label fx:id="PupilLabel" layoutX="33.0" layoutY="195.0" text="Choose Pupil:" />
+      <Label fx:id="GradeLabel" layoutX="36.0" layoutY="253.0" text="Enter Grade:" />
+      <TextField fx:id="PupilGradeTextLabel" layoutX="132.0" layoutY="249.0" onAction="#EnterPupilGrade" prefHeight="25.0" prefWidth="51.0" />
+      <Label fx:id="CommentsLabel" layoutX="33.0" layoutY="297.0" text="Comments:" />
+      <TextArea fx:id="CommentsTextArea" layoutX="33.0" layoutY="332.0" prefHeight="170.0" prefWidth="328.0" />
+      <Button fx:id="CreateEvaluationFormButton" layoutX="399.0" layoutY="385.0" mnemonicParsing="false" onAction="#CreateEvaluationForm" text="Create Evaluation Form" />
+      <Button fx:id="BackButton" layoutX="422.0" layoutY="429.0" mnemonicParsing="false" onAction="#BackToMenu" text="Back To Menu" />
+      <ComboBox fx:id="chooseCourseCB" layoutX="132.0" layoutY="137.0" onAction="#chooseCourse" prefWidth="150.0" />
+      <Label fx:id="CourseLabel" layoutX="36.0" layoutY="141.0" text="Choose Course:" />
+      <ComboBox fx:id="choosePupilCB" layoutX="132.0" layoutY="191.0" onAction="#choosePupil" prefWidth="150.0" />
    </children>
 </AnchorPane>
