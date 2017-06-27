@@ -19,8 +19,8 @@
       <Label fx:id="ChooseLable" layoutX="41.0" layoutY="195.0" text="Choose Your Operation:" />
       <MenuButton fx:id="ChooseMenuButton" layoutX="41.0" layoutY="232.0" mnemonicParsing="false" onAction="#ChooseOperation" prefHeight="37.0" prefWidth="175.0" text="Choose">
         <items>
-          <MenuItem id="PupilEvaluationForm" mnemonicParsing="false" text="Show Evaluation Form" />
-          <MenuItem id="PupilGradeSheet" mnemonicParsing="false" text="Show Grade Sheet" />
+          <MenuItem id="PupilEvaluationForm" fx:id="showEvaluationFormItem" mnemonicParsing="false" onAction="#ShowEvaluationForm" text="Show Evaluation Form" />
+          <MenuItem id="PupilGradeSheet" fx:id="ShowGradeSheetIten" mnemonicParsing="false" onAction="#ShowGradeSheet" text="Show Grade Sheet" />
         </items>
       </MenuButton>
    </children>
