@@ -27,7 +27,7 @@ public class PupilFileController implements IController {
     private MenuButton ChooseMenuButton;
 
     @FXML
-    private ComboBox<?> CourseComboBox;
+    private ComboBox<String> CourseComboBox;
 
     @FXML
     private Button BackButton;
@@ -38,6 +38,7 @@ public class PupilFileController implements IController {
     @FXML
     private Label ChooseLable;
 
+    private String courseId;
     @FXML
     void ShowCourseList(ActionEvent event) {
 

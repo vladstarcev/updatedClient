@@ -10,18 +10,24 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class DefineAssignmentController implements IController {
 
@@ -53,6 +59,8 @@ public class DefineAssignmentController implements IController {
 	private Label EnterClassIdLabel;
 
 	private File AssignmentFile;
+	private boolean flagAss=false;
+	private boolean flagCourse=false;
 
 	@FXML
 	void EnterClassID(ActionEvent event) {
@@ -71,50 +79,117 @@ public class DefineAssignmentController implements IController {
 
 	}
 
+	void checkExistingAss(String assName,String courseId)
+	{
+
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("check assignment name");
+		data.add("select");
+		data.add("assignment_in_course");
+		data.add("assignmentName");
+		data.add(assName);
+		data.add("courseID");
+		data.add(courseId);
+		
+		
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	void searchCourseId(String courseId)
+	{
+		ArrayList<String> data = new ArrayList<String>();
+		data.add("search courseId");
+		data.add("select");
+		data.add("courses");
+		data.add("courseId");
+		data.add(courseId);
+		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	
 	@FXML
 	void DefineAssignment(ActionEvent event) {
-		System.out.println("Defining assignment");
-
 		// TODO change class id to course id
-		LocalDateTime dueDate = DueDatePicker.getValue().atStartOfDay();
-		String classId = EnterClassIDTextField.getText();
+		String courseId = EnterClassIDTextField.getText();
+		String assName = EnterAssNameTF.getText();
 
 		if (AssignmentFile == null) {
-			System.out.println("Assignment file is null!");
-			// TODO show error (must pick a file before sending)
+			new Alert(AlertType.ERROR, "Missing assignment file!", ButtonType.OK).showAndWait();
 			return;
 		}
-
-		byte[] contents;
-		try {
-			contents = Files.readAllBytes(AssignmentFile.toPath());
-		} catch (IOException e) {
-			System.out.println("Exception while reading file");
-			// TODO show error
-			e.printStackTrace();
+		else if(assName.equals("")) {
+			new Alert(AlertType.ERROR, "Missing assignment name!", ButtonType.OK).showAndWait();
 			return;
 		}
+		else if(courseId.equals("")){
+			new Alert(AlertType.ERROR, "Missing course Id!", ButtonType.OK).showAndWait();
+			return;
+		}
+		else if(DueDatePicker.getValue()==null)
+			new Alert(AlertType.ERROR, "Missing date!", ButtonType.OK).showAndWait();
+		else{
+			byte[] contents;
+			try {
+				contents = Files.readAllBytes(AssignmentFile.toPath());
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+				return;
+			}
+			searchCourseId(courseId);
+			if(flagCourse)
+			{
+				checkExistingAss(assName,courseId);
+				if(flagAss)
+				{
+					LocalDateTime dueDate = DueDatePicker.getValue().atStartOfDay();
+		
+					java.util.List<Object> values = new ArrayList<>();
+					values.add("add assignment");
+					values.add(dueDate);
+					values.add(courseId);
+					values.add(contents);
+					values.add(AssignmentFile.getName());
+					values.add(EnterAssNameTF.getText());
+			
+					try 
+					{
+						Main.client.sendToServer(values);
+					} 
+					catch (IOException e) 
+					{
+						e.printStackTrace();
+					}
+					new Alert(AlertType.INFORMATION, "Assignment was defined successfully!", ButtonType.OK).showAndWait();
+				}
 
-		java.util.List<Object> values = new ArrayList<>();
-		values.add("add assignment");
-		values.add(dueDate);
-		values.add(classId);
-		values.add(contents);
-		values.add(AssignmentFile.getName());
-		values.add(EnterAssNameTF.getText());
-
-		try {
-			System.out.println("Sending to server");
-			Main.client.sendToServer(values);
-			System.out.println("Sent!");
-		} catch (IOException e) {
-			e.printStackTrace();
+			}
 		}
 
 	}
 
 	@FXML
 	void BackToMenu(ActionEvent event) {
+	     UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());     
 
 	}
 
@@ -144,8 +219,56 @@ public class DefineAssignmentController implements IController {
 	}
 
 	@Override
-	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
-		System.out.println("got answer! " + msg);
+	public void handleAnswer(Object result) {
+		if (result == null)
+		{
+			// error
+
+			return;
+		}
+
+		ArrayList<String> arr = (ArrayList<String>) result;
+		String type = arr.remove(0);
+		if (type.equals("search courseId"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+			
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+			}
+			if(arr.size()==0){
+				new Alert(AlertType.ERROR, "Course Id is not exist!", ButtonType.OK).showAndWait();
+				flagCourse=false;
+			}
+			else flagCourse=true;
+
+		}
+		else if (type.equals("check assignment name"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+			
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+			}
+			if(arr.size()!=0){
+				new Alert(AlertType.ERROR, "Assignment name is already exist!", ButtonType.OK).showAndWait();
+				flagAss=false;
+			}
+			else flagAss=true;
+		}
 	}
 }
