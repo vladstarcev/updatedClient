@@ -1,16 +1,21 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class PupilShowEvaluationFormController implements IController {
 
@@ -37,7 +42,7 @@ public class PupilShowEvaluationFormController implements IController {
 
     @FXML
     private Label FinalGradeLabel;
-
+    
     @FXML
     void PupilFinalGrade(ActionEvent event) {
 
@@ -45,7 +50,7 @@ public class PupilShowEvaluationFormController implements IController {
 
     @FXML
     void BackToMenu(ActionEvent event) {
-
+        UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
     }
 
     @FXML
@@ -58,6 +63,22 @@ public class PupilShowEvaluationFormController implements IController {
         assert FinalGradeLabel != null : "fx:id=\"FinalGradeLabel\" was not injected: check your FXML file 'PupilEvaluationForm.fxml'.";
 
         Main.client.controller=this;
+    }
+    
+    void loadEvaluationForm()
+    {
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("load evaluation form");
+    	data.add("select");
+    	data.add("courses");
+    	try
+    	{
+    		Main.client.sendToServer(data);
+    	}
+    	catch (IOException e)
+    	{
+    		e.printStackTrace();
+    	}	
     }
 
 	@Override

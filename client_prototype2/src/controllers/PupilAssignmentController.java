@@ -268,7 +268,7 @@ public class PupilAssignmentController implements IController {
 	 				String[] field = col.split("=");
 	 				map.put(field[0], field[1]);
 	 			}
-		
+		 		
 	 			String courseId = map.get("courseID");
 	 			chooseCourseCB.getItems().add(courseId + ": " + allCourses.get(courseId).get("courseName"));
 	 		}
@@ -276,6 +276,7 @@ public class PupilAssignmentController implements IController {
 	 	}
 	 	else if (type.equals("load all assignmens"))
 	 	{
+
 	 		for (String row : arr)
 	 		{
 	 			String[] cols = row.split(";");
@@ -291,6 +292,8 @@ public class PupilAssignmentController implements IController {
 	 	
 	 	else if (type.equals("load assignment of course"))
 	 	{
+	 		while(chooseAssCB.getItems().size()>0) chooseAssCB.getItems().remove(0);
+
 	 		for (String row : arr)
 	 		{
 	 			String[] cols = row.split(";");

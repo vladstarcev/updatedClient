@@ -114,12 +114,18 @@ public class CreateEvaluationFormController implements IController  {
 		data.add("fileNumber");
 		data.add("generalComments");
 		data.add("finalGrade");
+		data.add("courseID");
+		data.add("pupilID");
+
 		
 		data.add("values");
 		String fileNum = pupilId + courseId;
 		data.add(fileNum);
 		data.add(comments);
 		data.add(grade);
+		data.add(courseId);
+		data.add(pupilId);
+
 		try 
 		{
 			Main.client.sendToServer(data);
@@ -141,6 +147,7 @@ public class CreateEvaluationFormController implements IController  {
 
     @FXML
     void chooseCourse(ActionEvent event) {
+    	
         loadPupilsInCourse(courseId,classId);
     }
 
@@ -302,6 +309,7 @@ public class CreateEvaluationFormController implements IController  {
 		}
 		else if (type.equals("load pupils in course"))
 		{
+			while(choosePupilCB.getItems().size()>0) chooseCourseCB.getItems().remove(0);
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
@@ -311,6 +319,7 @@ public class CreateEvaluationFormController implements IController  {
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
+				
 				pupilId = map.get("userID");
 				choosePupilCB.getItems().add(pupilId + ": " + allPupils.get(pupilId).get("userFirstName") + " "
 						+ allPupils.get(pupilId).get("userLastName"));			}
