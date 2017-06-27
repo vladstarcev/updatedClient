@@ -115,7 +115,6 @@ public class PupilFileController implements IController {
     	String[] ans = courseId.split(":");
     	PupilShowEvaluationFormController.loadEvaluationForm(ans[0]);
     	UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilEvaluationForm", getClass());
-
     }
 
     @FXML
@@ -180,20 +179,6 @@ public class PupilFileController implements IController {
 	 			CourseComboBox.getItems().add(courseId + ": " + allCourses.get(courseId).get("courseName"));
 	 		}		
 	 	}
-	 	else if (type.equals("load evaluation form"))
-	 	{
-	 		for (String row : arr)
-	 		{	
-	 			String[] cols = row.split(";");
-	 			HashMap<String, String> map = new HashMap<>();
-	 			for (String col : cols)
-	 			{
-	 				String[] field = col.split("=");
-	 				map.put(field[0], field[1]);
-	 			}
-	 			grade = map.get("finalGrade");
-	 			comments = map.get("generalComments");
-	 		}
-	 	}
+
 	}
 }
