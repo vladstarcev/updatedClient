@@ -113,12 +113,6 @@ public class BlockParentBySchoolManagerController implements IController {
 		
 	}
 
-    
-    
-    @FXML
-    void EnterPupilID(ActionEvent event) {
-
-    }
 
     @FXML
     void BlockParent(ActionEvent event) {
