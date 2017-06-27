@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class TeacherMainWindowController implements IController {
 
@@ -40,22 +42,22 @@ public class TeacherMainWindowController implements IController {
 
     @FXML
     void TeacherChooseOperation(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void DefineAssignmentWindow(ActionEvent event) {
-
+    	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "TeacherDefineAssignment", getClass());
     }
 
     @FXML
     void Define(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void EvaluationFormWindow(ActionEvent event) {
-
+    	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "TeacherCreateEvaluationForm", getClass());
     }
 
     @FXML

@@ -50,13 +50,13 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void SchoolManagerMenu(ActionEvent event)
 	{
-
+		
 	}
 
 	@FXML
 	void BlockUser(ActionEvent event)
 	{
-
+		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(), "SchoolManagerBlockUser", getClass());  
 	}
 
 	@FXML
@@ -68,8 +68,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void ReportGeneration(ActionEvent event)
 	{
-		UserWindow.createUserWindow((Stage) SchoolManagerMenuLabel.getScene().getWindow(),
-				"SchoolManagerReportGeneration", getClass());
+		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(),"SchoolManagerReportGeneration", getClass());
 
 	}
 
@@ -82,7 +81,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void HandlingExeptionalRequest(ActionEvent event)
 	{
-
+		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(),"SchoolManagerHandlingExeptionalRequest", getClass());
 	}
 
 	@FXML
@@ -94,7 +93,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void ViewAllData(ActionEvent event)
 	{
-
+		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(),"SchoolManagerViewAllData", getClass());
 	}
 
 	@FXML
@@ -106,16 +105,17 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void initialize()
 	{
-		assert HandlingExeptionalRequestMenuItem != null : "fx:id=\"HandlingExeptionalRequestMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
-		assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
-		assert MenuButton != null : "fx:id=\"MenuButton\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
-		assert ReportGenarationMenuItem != null : "fx:id=\"ReportGenarationMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
-		assert SchoolManagerMenuLabel != null : "fx:id=\"SchoolManagerMenuLabel\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
-		assert BlockUserMenuItem != null : "fx:id=\"BlockUserMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
-		assert ViewSystemData != null : "fx:id=\"ViewSystemData\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
-		assert ChooseOperationLabel != null : "fx:id=\"ChooseOperationLabel\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert HandlingExeptionalRequestMenuItem != null : "fx:id=\"HandlingExeptionalRequestMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert MenuButton != null : "fx:id=\"MenuButton\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert ReportGenarationMenuItem != null : "fx:id=\"ReportGenarationMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert SchoolManagerMenuLabel != null : "fx:id=\"SchoolManagerMenuLabel\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert BlockUserMenuItem != null : "fx:id=\"BlockUserMenuItem\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert ViewSystemData != null : "fx:id=\"ViewSystemData\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
+        assert ChooseOperationLabel != null : "fx:id=\"ChooseOperationLabel\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
 
 		Main.client.controller = this;
+		
 	}
 
 	@Override
