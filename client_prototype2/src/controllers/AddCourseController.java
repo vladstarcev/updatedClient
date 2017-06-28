@@ -288,7 +288,6 @@ public class AddCourseController implements IController{
 	public void handleAnswer(Object result) {
 		// TODO Auto-generated method stub
 		
-		
 	 	if (result == null)
 	 	{
 	 		// error
