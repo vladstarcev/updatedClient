@@ -199,7 +199,8 @@ public class DefineAssignmentController implements IController {
 
 		// TODO add extension filter from DB
 		chooser.setTitle("Choose assignment file");
-
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"));
 		AssignmentFile = chooser.showOpenDialog(DefineAssignmentButton.getScene().getWindow());
 	}
 
