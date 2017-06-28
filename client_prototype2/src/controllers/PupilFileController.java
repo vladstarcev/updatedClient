@@ -10,6 +10,9 @@ import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -121,12 +124,12 @@ public class PupilFileController implements IController {
     	}
     	String[] ans = courseId.split(":");
     	PupilShowEvaluationFormController.loadEvaluationForm(ans[0]);
-    	UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilEvaluationForm", getClass());
-    }
+		UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilEvaluationForm", getClass());
+     }
 
     @FXML
     void ShowGradeSheet(ActionEvent event) {
-
+    	
     }
     
     @FXML

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -11,10 +12,13 @@ import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
@@ -47,7 +51,10 @@ public class PupilShowEvaluationFormController implements IController {
     private String courseId;
     private String grade;
     private String comments;
+    private boolean flagEvaluation;
     
+    private PupilFileController PupilFileController = new PupilFileController();
+
     @FXML
     void PupilFinalGrade(ActionEvent event) {
 
@@ -89,9 +96,9 @@ public class PupilShowEvaluationFormController implements IController {
     	catch (IOException e)
     	{
     		e.printStackTrace();
-    	}	
+    	}
     }
-
+    
 	@Override
 	public void handleAnswer(Object result) {
 	 	if (result == null)
@@ -104,6 +111,16 @@ public class PupilShowEvaluationFormController implements IController {
 	 	String type = arr.remove(0);
 	 	if (type.equals("load evaluation form"))
 	 	{
+	 		if(arr.size()==0){
+	 			flagEvaluation=false;
+	 	    	Alert a = new Alert(AlertType.ERROR, "No Evaluation Form!", ButtonType.OK);
+	 	    	Optional<ButtonType> res = a.showAndWait();
+	 	    	if (res.get() == ButtonType.OK){
+	 	           UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
+	 	    	}
+	 	    	
+		   		return;
+	 		}
 	 		for (String row : arr)
 	 		{	
 	 			String[] cols = row.split(";");
@@ -118,6 +135,7 @@ public class PupilShowEvaluationFormController implements IController {
 	 		}
 	 		FinalGradeTextField.setText(grade);
 	 		CommentsTextArea.setText(comments);
+	 		flagEvaluation=true;
 	 	}
 	 	
 	}
