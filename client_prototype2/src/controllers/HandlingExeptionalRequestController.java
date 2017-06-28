@@ -61,8 +61,14 @@ public class HandlingExeptionalRequestController implements IController{
     private String com;
     private String des;
     private String req;
+    private String UserID;
+    private String AvailableHours;
+    private String CourseID;
+    
     @FXML
     void ChooseExeptionalRequst(ActionEvent event) {
+    	
+    	req=ExeptionalRequstBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -84,6 +90,7 @@ public class HandlingExeptionalRequestController implements IController{
 
     @FXML
     void DenyExeptionalRequest(ActionEvent event) {
+    	
     	DecisionMenu.setText(DenyMenuItem.getText());
     	des= DecisionMenu.getText();
 
@@ -96,11 +103,33 @@ public class HandlingExeptionalRequestController implements IController{
 
     @FXML
     void SendAnswar(ActionEvent event) {
+    	
     	req = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
     	com = commentTF.getText();
-    	if(req==null) 	new Alert(AlertType.ERROR, "No request selected!", ButtonType.OK).showAndWait();
-    	else if(des==null) 	new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
-    	else{
+    	if(req.equals("")) 	new Alert(AlertType.ERROR, "No request selected!", ButtonType.OK).showAndWait();
+    	else if(des.equals("")) 	new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
+    	else if(des.equals("confirm"))
+    	{
+    		
+    		loadUserID();
+    		if(req.contentEquals("Reassign"))
+    		{
+    			checkTeacherHours();
+    		}
+    		else if(req.contentEquals("assign"))
+    		{
+    			checkPreCourses();
+    		}
+    		else
+    		{
+    	    	updateDescision(des);
+    	    	updateComment(com);
+    			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
+    		}
+    	}
+    		
+    	else	
+    	{
 	    	updateDescision(des);
 	    	updateComment(com);
 			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
@@ -123,6 +152,8 @@ public class HandlingExeptionalRequestController implements IController{
     	data.add("load all exeptional request");
     	data.add("select");
     	data.add("exceptional_request");
+    	data.add("descision");
+    	data.add("panding");
 
     	try
     	{
@@ -185,7 +216,87 @@ public class HandlingExeptionalRequestController implements IController{
     		e.printStackTrace();
     	}
     }
+    
+    void loadUserID()
+    {
+    	String[] temp=req.split(":");
+    	String reqID=temp[0];
+    	
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("load userID");
+    	data.add("select");
+    	data.add("exceptional_request");
+    	data.add("exceptonalRequestID");
+    	data.add(reqID);
 
+    	try
+    	{
+    		Main.client.sendToServer(data);
+    	}
+    	catch (IOException e)
+    	{
+    		e.printStackTrace();
+    	}
+    	
+    	
+    }
+    
+    void checkTeacherHours()
+    {
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("check teacher hours");
+    	data.add("select");
+    	data.add("teacher");
+    	data.add("userID");
+    	data.add(UserID);
+
+    	try
+    	{
+    		Main.client.sendToServer(data);
+    	}
+    	catch (IOException e)
+    	{
+    		e.printStackTrace();
+    	}
+    }
+
+	void LoadCourseWeekHours()
+	{
+	   	ArrayList<String> data = new ArrayList<String>();
+    	data.add("check course hours");
+    	data.add("select");
+    	data.add("courses");
+    	data.add("courseId");
+    	data.add(CourseID);
+
+    	try
+    	{
+    		Main.client.sendToServer(data);
+    	}
+    	catch (IOException e)
+    	{
+    		e.printStackTrace();
+    	}
+	}
+	
+	void checkPreCourses()
+	{
+	   	ArrayList<String> data = new ArrayList<String>();
+    	data.add("check pre course of course");
+    	data.add("select");
+    	data.add("courses");
+    	data.add("courseId");
+    	data.add(CourseID);
+
+    	try
+    	{
+    		Main.client.sendToServer(data);
+    	}
+    	catch (IOException e)
+    	{
+    		e.printStackTrace();
+    	}
+	}
     
 
     
@@ -204,6 +315,12 @@ public class HandlingExeptionalRequestController implements IController{
 
         Main.client.controller=this;
         allExeptionalRequests = new HashMap<>();
+        com="";
+        des="";
+        req="";
+        UserID="";
+        AvailableHours="";
+        CourseID="";
         loadAllExeptionalRequest();
 
     }
@@ -233,8 +350,77 @@ public class HandlingExeptionalRequestController implements IController{
 				}
 				allExeptionalRequests.put(map.get("exceptonalRequestID"), map);
 				String ER = map.get("exceptonalRequestID");
-				ExeptionalRequstBox.getItems().add(ER + ": " + allExeptionalRequests.get(ER).get("type"));
+				UserID=map.get("userID");
+				String TYPE1=map.get("type");
+				String Course  =map.get("CourseID");
+				String Class=map.get("classId");
+				if(TYPE1.equals("assign")||TYPE1.equals("delete"))
+				{
+				ExeptionalRequstBox.getItems().add(ER + ": " + allExeptionalRequests.get(ER).get("type") + "Pupil with ID: " + UserID + " To Course With ID: " + Course + " In Class With ID: " + Class);
+				}
+				else if(TYPE1.equals("Reassign"))
+				{
+					ExeptionalRequstBox.getItems().add(ER + ": " + allExeptionalRequests.get(ER).get("type") + " Teacher with ID: " + UserID + " To Course With ID: " + Course + " In Class With ID: " + Class);
+				}
 			}
-		}		
+		}
+		
+		if(type.equals("load userID"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				UserID=map.get("userID");
+				CourseID=map.get("CourseID");
+			}
+		}
+		
+		if(type.equals("check teacher hours"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				String MaxHours=map.get("MaxHoursForWeek");
+				String WorkHours=map.get("workHours");
+				int AvailableHours1=Integer.parseInt(MaxHours)-Integer.parseInt(WorkHours);
+				AvailableHours=Integer.toString(AvailableHours1);
+			}
+			
+			LoadCourseWeekHours();
+		}
+		
+		if(type.equals("check course hours"))
+		{
+			int num=0;
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				String courseHours=map.get("weeklyStudyHours");
+				num=Integer.parseInt(AvailableHours)-Integer.parseInt(courseHours);
+			}
+			
+			if(num<0)
+			{
+				new Alert(AlertType.INFORMATION, "Avialable Hours Of Teacher Not Enough For The Course!", ButtonType.OK).showAndWait();
+			}
+		}
 	}
 }
