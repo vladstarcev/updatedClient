@@ -13,55 +13,83 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
+/**
+ * The Class SecretaryMainWindowController.
+ */
 public class SecretaryMainWindowController implements IController{
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Choose menu button. */
     @FXML
     private MenuButton ChooseMenuButton;
 
+    /** The Assign pupil. */
     @FXML
     private MenuItem AssignPupil;
 
+    /** The Open course. */
     @FXML
     private MenuItem OpenCourse;
 
+    /** The Assign pupil to class. */
     @FXML
     private MenuItem AssignPupilToClass;
 
+    /** The Secretary menu lable. */
     @FXML
     private Label SecretaryMenuLable;
 
+    /** The Open exeptional requst menu. */
     @FXML
     private MenuItem OpenExeptionalRequstMenu;
 
+    /** The Choose operational menu. */
     @FXML
     private Label ChooseOperationalMenu;
 
+    /** The Log out button. */
     @FXML
     private Button LogOutButton;
 
+    /** The Re assign. */
     @FXML
     private MenuItem ReAssign;
 
+    /** The Delete pupil. */
     @FXML
     private MenuItem DeletePupil;
 
+    /** The Open semester. */
     @FXML
     private MenuItem OpenSemester;
 
+    /** The Define class. */
     @FXML
     private MenuItem DefineClass;
 
+    /**
+     * Choose operation.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseOperation(ActionEvent event) {
 
     }
 
+    /**
+     * Open exeptional requst window.
+     *
+     * @param event the event
+     */
     @FXML
     void OpenExeptionalRequstWindow(ActionEvent event) {
 
@@ -70,6 +98,11 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Assign pupil to class window.
+     *
+     * @param event the event
+     */
     @FXML
     void AssignPupilToClassWindow(ActionEvent event) {
 
@@ -78,6 +111,11 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Open course window.
+     *
+     * @param event the event
+     */
     @FXML
     void OpenCourseWindow(ActionEvent event) {
     	
@@ -85,6 +123,11 @@ public class SecretaryMainWindowController implements IController{
 				getClass());
     }
 
+    /**
+     * Open semester window.
+     *
+     * @param event the event
+     */
     @FXML
     void OpenSemesterWindow(ActionEvent event) {
 
@@ -93,6 +136,11 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Define class window.
+     *
+     * @param event the event
+     */
     @FXML
     void DefineClassWindow(ActionEvent event) {
 
@@ -101,6 +149,11 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Assign pupil to course.
+     *
+     * @param event the event
+     */
     @FXML
     void AssignPupilToCourse(ActionEvent event) {
 
@@ -109,6 +162,11 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Delete pupil from course.
+     *
+     * @param event the event
+     */
     @FXML
     void DeletePupilFromCourse(ActionEvent event) {
 
@@ -117,6 +175,11 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Re assign teacher.
+     *
+     * @param event the event
+     */
     @FXML
     void ReAssignTeacher(ActionEvent event) {
 
@@ -125,6 +188,11 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Secretary log out.
+     *
+     * @param event the event
+     */
     @FXML
     void SecretaryLogOut(ActionEvent event) {
 
@@ -132,6 +200,9 @@ public class SecretaryMainWindowController implements IController{
 
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert ChooseMenuButton != null : "fx:id=\"ChooseMenuButton\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
@@ -148,6 +219,7 @@ public class SecretaryMainWindowController implements IController{
         assert DefineClass != null : "fx:id=\"DefineClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
 
     }
+
 
 	@Override
 	public void handleAnswer(Object msg) {
