@@ -14,10 +14,8 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="addUserBtn" layoutX="66.0" layoutY="151.0" mnemonicParsing="false" onAction="#addUser" prefHeight="31.0" prefWidth="127.0" text="Add new user" />
-      <Button fx:id="addCourseBtn" layoutX="66.0" layoutY="213.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="31.0" prefWidth="127.0" text="Add new course" />
-      <Button fx:id="deleteUserBtn" layoutX="263.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="31.0" prefWidth="166.0" text="Delete existing user" />
-      <Button fx:id="deleteCourseBtn" layoutX="263.0" layoutY="213.0" mnemonicParsing="false" onAction="#deleteCourse" prefHeight="31.0" prefWidth="166.0" text="Delete existing course" />
-      <Button fx:id="LogOutButton" layoutX="211.0" layoutY="311.0" mnemonicParsing="false" onAction="#LogOutSystemManager" text="Log Out" />
+      <Button fx:id="addCourseBtn" layoutX="148.0" layoutY="114.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="53.0" prefWidth="166.0" text="Add new course" />
+      <Button fx:id="deleteCourseBtn" layoutX="143.0" layoutY="191.0" mnemonicParsing="false" onAction="#deleteCourse" prefHeight="53.0" prefWidth="174.0" text="Delete existing course" />
+      <Button fx:id="LogOutButton" layoutX="202.0" layoutY="289.0" mnemonicParsing="false" onAction="#LogOutSystemManager" text="Log Out" />
    </children>
 </AnchorPane>

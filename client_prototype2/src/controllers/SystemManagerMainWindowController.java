@@ -20,13 +20,7 @@ public class SystemManagerMainWindowController implements IController {
     private URL location;
 
     @FXML
-    private Button deleteUserBtn;
-
-    @FXML
     private Button addCourseBtn;
-
-    @FXML
-    private Button addUserBtn;
 
     @FXML
     private Button deleteCourseBtn;
@@ -35,45 +29,32 @@ public class SystemManagerMainWindowController implements IController {
     private Button LogOutButton;
 
     @FXML
-    void addUser(ActionEvent event) {
-    	
-    	UserWindow.createUserWindow((Stage)addUserBtn.getScene().getWindow(), "SystemManagerAddUser", getClass());
-		Main.stack.push("SystemManagerAddUser");
-    }
-
-    @FXML
     void addCourse(ActionEvent event) {
 
     	UserWindow.createUserWindow((Stage)addCourseBtn.getScene().getWindow(), "SystemManagerAddCourse", getClass());
-		Main.stack.push("SystemManagerAddCourse");
-    }
-
-    @FXML
-    void deleteUser(ActionEvent event) {
-    	UserWindow.createUserWindow((Stage)deleteUserBtn.getScene().getWindow(), "SystemManagerDeleteUser", getClass());
-		Main.stack.push("SystemManagerDeleteUser");
     }
 
     @FXML
     void deleteCourse(ActionEvent event) {
+
     	UserWindow.createUserWindow((Stage)deleteCourseBtn.getScene().getWindow(), "SystemManagerDeleteCourse", getClass());
-		Main.stack.push("SystemManagerDeleteCourse");
     }
 
     @FXML
     void LogOutSystemManager(ActionEvent event) {
-
+    	
+    	UserWindow.closeUserWindow(getClass(), (Stage) deleteCourseBtn.getScene().getWindow());
     }
 
     @FXML
     void initialize() {
-        assert deleteUserBtn != null : "fx:id=\"deleteUserBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
         assert addCourseBtn != null : "fx:id=\"addCourseBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
-        assert addUserBtn != null : "fx:id=\"addUserBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
         assert deleteCourseBtn != null : "fx:id=\"deleteCourseBtn\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
         assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
 
         Main.client.controller=this;
+        
+        
     }
 
 	@Override
