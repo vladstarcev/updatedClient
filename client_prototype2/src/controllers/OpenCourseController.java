@@ -20,33 +20,33 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
-public class OpenCourseController implements IController
-{
 
-	@FXML
-	private ResourceBundle resources;
+public class OpenCourseController implements IController{
 
-	@FXML
-	private URL location;
+    @FXML
+    private ResourceBundle resources;
 
-	@FXML
-	private ComboBox<String> ChooseCourseComboBox;
+    @FXML
+    private URL location;
 
-	@FXML
-	private ComboBox<String> ChooseClassComboBox;
+    @FXML
+    private ComboBox<String> ChooseCourseComboBox;
 
-	@FXML
-	private Label OpenCourseLable;
+    @FXML
+    private ComboBox<String> ChooseClassComboBox;
 
-	@FXML
-	private Button OpenButton;
+    @FXML
+    private Label OpenCourseLable;
 
-	@FXML
-	private Button BackButton;
+    @FXML
+    private Button OpenButton;
 
-	@FXML
-	private ComboBox<String> ChooseTeacherComboBox;
+    @FXML
+    private Button BackButton;
 
+    @FXML
+    private ComboBox<String> ChooseTeacherComboBox;
+    
 	private String StudyUnit;
 	private String cbCourseName;
 	private String cbClassName;
@@ -57,39 +57,68 @@ public class OpenCourseController implements IController
 	private int TeacherAvailableHours;
 	private String classID;
 	private String TeachingHours;
+	private int chooseCourseFlag;
+	private int chooseClassFlag;
+	private int chooseTeacherFlag;
+	
 
-	@FXML
-	void BackToMenu(ActionEvent event)
-	{
-		StudyUnit = "";
-		UserWindow.closeUserWindow(getClass(), (Stage) OpenCourseLable.getScene().getWindow());
-	}
 
-	@FXML
-	void CourseList(ActionEvent event)
-	{
+    @FXML
+    void BackToMenu(ActionEvent event) {
+
+    	UserWindow.closeUserWindow(getClass(), (Stage) OpenCourseLable.getScene().getWindow());
+    }
+
+    @FXML
+    void CourseList(ActionEvent event) {
+
 		cbCourseName = ChooseCourseComboBox.getSelectionModel().getSelectedItem();
+		String[] temp=cbCourseName.split(":");
+		cbCourseName=temp[0];
+		chooseCourseFlag=1;
 		loadStudyUnit();
-	}
 
-	@FXML
-	void OpenCourseInClass(ActionEvent event)
-	{
-		checkIFcourseAlreadyOpen();
-	}
+    }
 
-	@FXML
-	void ChooseTeacher(ActionEvent event)
-	{
-		cbTeacherDetails = ChooseTeacherComboBox.getSelectionModel().getSelectedItem();
-	}
+    @FXML
+    void OpenCourseInClass(ActionEvent event) {
 
-	@FXML
-	void ChooseClass(ActionEvent event)
-	{
-		cbClassName = ChooseClassComboBox.getSelectionModel().getSelectedItem();
+		if(chooseCourseFlag==0)
+		{
+			new Alert(AlertType.ERROR, "Choose Course From List First.", ButtonType.OK).showAndWait();
+		}
+		else if(chooseClassFlag==0)
+		{
+			new Alert(AlertType.ERROR, "Choose Class From List First.", ButtonType.OK).showAndWait();
+		}
+		else if(chooseTeacherFlag==0)
+		{
+			new Alert(AlertType.ERROR, "Choose Teacher From List First.", ButtonType.OK).showAndWait();
+		}
+		else
+		{
+		    checkIFcourseAlreadyOpen();
+		}
+
+    }
+
+    @FXML
+    void ChooseTeacher(ActionEvent event) {
+
+    	cbTeacherDetails = ChooseTeacherComboBox.getSelectionModel().getSelectedItem();
+		chooseTeacherFlag=1;
+
+    }
+
+    @FXML
+    void ChooseClass(ActionEvent event) {
+
+    	cbClassName = ChooseClassComboBox.getSelectionModel().getSelectedItem();
 		loadClassID();
-	}
+		chooseClassFlag=1;
+
+    }
+    
 
 	void loadCourses()
 	{
@@ -106,7 +135,7 @@ public class OpenCourseController implements IController
 		{
 			e.printStackTrace();
 		}
-		loadStudyUnit();
+		//loadStudyUnit();
 	}
 
 	void loadAllClass()
@@ -212,7 +241,7 @@ public class OpenCourseController implements IController
 		data.add("Load Available Hours");
 		data.add("select");
 		data.add("teacher");
-		data.add("userId");
+		data.add("userID");
 		data.add(TeacherID);
 
 		try
@@ -271,36 +300,42 @@ public class OpenCourseController implements IController
 		}
 	}
 
-	@FXML
-	void initialize()
-	{
-		assert ChooseCourseComboBox != null : "fx:id=\"ChooseCourseComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
-		assert ChooseClassComboBox != null : "fx:id=\"ChooseClassComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
-		assert OpenCourseLable != null : "fx:id=\"OpenCourseLable\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
-		assert OpenButton != null : "fx:id=\"OpenButton\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
-		assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
-		assert ChooseTeacherComboBox != null : "fx:id=\"ChooseTeacherComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
+
+    @FXML
+    void initialize() {
+        assert ChooseCourseComboBox != null : "fx:id=\"ChooseCourseComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
+        assert ChooseClassComboBox != null : "fx:id=\"ChooseClassComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
+        assert OpenCourseLable != null : "fx:id=\"OpenCourseLable\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
+        assert OpenButton != null : "fx:id=\"OpenButton\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
+        assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
+        assert ChooseTeacherComboBox != null : "fx:id=\"ChooseTeacherComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
 
 		Main.client.controller = this;
 		StudyUnit = "";
 		cbCourseName = "";
 		cbClassName = "";
 		cbTeacherDetails = "";
+		CourseID="";
 		TeacherID = "";
 		CourseWeeklyHour = "";
-		TeacherAvailableHours = 0;
+		TeacherAvailableHours = -1;
 		classID = "";
 		TeachingHours = "";
+		chooseCourseFlag=0;
+		chooseClassFlag=0;
+		chooseTeacherFlag=0;
+		
 
 		loadCourses();
 		loadAllClass();
 
-	}
+
+    }
 
 	@Override
-	public void handleAnswer(Object msg)
-	{
+	public void handleAnswer(Object msg) {
 		// TODO Auto-generated method stub
+		
 
 		if (msg == null)
 		{
@@ -325,7 +360,8 @@ public class OpenCourseController implements IController
 				}
 
 				String coursename = map.get("courseName");
-				ChooseCourseComboBox.getItems().add(coursename);
+				String coursID=map.get("courseId");
+				ChooseCourseComboBox.getItems().add(coursename + ": " + coursID);
 			}
 		}
 		if (type.equals("Load Study Unit"))
@@ -363,8 +399,7 @@ public class OpenCourseController implements IController
 				String classname = map.get("className");
 				ChooseClassComboBox.getItems().add(classname);
 			}
-			loadCourses();
-			
+		//	loadCourses();
 		}
 
 		if (type.equals("Load ClassID"))
@@ -398,7 +433,7 @@ public class OpenCourseController implements IController
 
 				String username = map.get("userName");
 				String userID = map.get("userId");
-				ChooseTeacherComboBox.getItems().add(username + " : " + userID);
+				ChooseTeacherComboBox.getItems().add(username + " :" + userID);
 			}
 			//loadClassID();
 		}
@@ -409,8 +444,7 @@ public class OpenCourseController implements IController
 			{
 				new Alert(AlertType.ERROR, "Course is already opened in this class", ButtonType.OK).showAndWait();
 			}
-			else
-				checkMaximumHours();
+			else checkMaximumHours();
 		}
 
 		if (type.equals("Load Available Hours"))
@@ -439,11 +473,11 @@ public class OpenCourseController implements IController
 			}
 			else
 			{
-				new Alert(AlertType.INFORMATION, "Course Opened Succesfully", ButtonType.OK).showAndWait();
 				int num = Integer.parseInt(TeachingHours);
 				num = num + CourseHours;
 				TeachingHours = Integer.toString(num);
 				InsertCourseToClass();
+				new Alert(AlertType.INFORMATION, "Course Opened Succesfully", ButtonType.OK).showAndWait();
 			}
 		}
 
@@ -464,3 +498,4 @@ public class OpenCourseController implements IController
 		}
 	}
 }
+
