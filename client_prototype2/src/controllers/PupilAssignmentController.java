@@ -116,6 +116,7 @@ public class PupilAssignmentController implements IController {
 		// TODO add extension filter from DB
 		chooser.setTitle("Choose assignment solution file");
 		AssignmentFile = chooser.showOpenDialog(UploadButton.getScene().getWindow());
+		
     }
 
     @FXML
