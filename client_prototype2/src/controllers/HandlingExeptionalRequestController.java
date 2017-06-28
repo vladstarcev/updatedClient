@@ -58,17 +58,18 @@ public class HandlingExeptionalRequestController implements IController{
     private Button SendAnswarButton;
 
     private HashMap<String, HashMap<String, String>> allExeptionalRequests;
-    private String com;
     private String des;
     private String req;
     private String UserID;
     private String AvailableHours;
     private String CourseID;
+    private String reqType;
     
     @FXML
     void ChooseExeptionalRequst(ActionEvent event) {
     	
     	req=ExeptionalRequstBox.getSelectionModel().getSelectedItem();
+    	loadUserID();
     }
 
     @FXML
@@ -85,7 +86,7 @@ public class HandlingExeptionalRequestController implements IController{
 
     @FXML
     void Confirm(ActionEvent event) {
-
+    
     }
 
     @FXML
@@ -105,25 +106,18 @@ public class HandlingExeptionalRequestController implements IController{
     void SendAnswar(ActionEvent event) {
     	
     	req = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
-    	com = commentTF.getText();
     	if(req.equals("")) 	new Alert(AlertType.ERROR, "No request selected!", ButtonType.OK).showAndWait();
-    	else if(des.equals("")) 	new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
+    	else if(des.equals("")) new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
     	else if(des.equals("confirm"))
     	{
-    		
-    		loadUserID();
-    		if(req.contentEquals("Reassign"))
+    	  		
+    		if(reqType.equals("Reassign"))
     		{
     			checkTeacherHours();
-    		}
-    		else if(req.contentEquals("assign"))
-    		{
-    			checkPreCourses();
     		}
     		else
     		{
     	    	updateDescision(des);
-    	    	updateComment(com);
     			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
     		}
     	}
@@ -131,7 +125,6 @@ public class HandlingExeptionalRequestController implements IController{
     	else	
     	{
 	    	updateDescision(des);
-	    	updateComment(com);
 			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
     	}
     }
@@ -143,7 +136,6 @@ public class HandlingExeptionalRequestController implements IController{
 
     @FXML
     void commentTextField(ActionEvent event) {
-      	com = commentTF.getText();
     }
 
     void loadAllExeptionalRequest()
@@ -177,32 +169,6 @@ public class HandlingExeptionalRequestController implements IController{
     	data.add("exceptional_request");
 		data.add("descision");
 		data.add(descision);
-		data.add("conditions");
-		data.add("exceptonalRequestID");
-		data.add(ans[0]);
-
-    	try
-    	{
-    		Main.client.sendToServer(data);
-    	}
-    	catch (IOException e)
-    	{
-    		e.printStackTrace();
-    	}
-    }
-    
-    void updateComment(String comment)
-    {
-		String selectedER = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
-		if (selectedER == null)
-			return;
-		String[] ans = selectedER.split(":");
-		ArrayList<String> data = new ArrayList<String>();
-    	data.add("update descision");
-    	data.add("update");
-    	data.add("exceptional_request");
-		data.add("comment");
-		data.add(comment);
 		data.add("conditions");
 		data.add("exceptonalRequestID");
 		data.add(ans[0]);
@@ -315,13 +281,14 @@ public class HandlingExeptionalRequestController implements IController{
 
         Main.client.controller=this;
         allExeptionalRequests = new HashMap<>();
-        com="";
         des="";
         req="";
         UserID="";
         AvailableHours="";
         CourseID="";
+        reqType="";
         loadAllExeptionalRequest();
+     
 
     }
 
@@ -378,6 +345,7 @@ public class HandlingExeptionalRequestController implements IController{
 				}
 				UserID=map.get("userID");
 				CourseID=map.get("CourseID");
+				reqType=map.get("type");
 			}
 		}
 		

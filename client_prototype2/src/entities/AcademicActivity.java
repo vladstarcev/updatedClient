@@ -1,4 +1,9 @@
 package entities;
+/**
+ * 
+ * @author gal
+ *
+ */
 
 public class AcademicActivity {
 	
@@ -6,6 +11,12 @@ public class AcademicActivity {
 	private String AcademicActivityName;
 	private String TypeOfActivity;
 	
+	/**
+	 * 
+	 * @param ID
+	 * @param Name
+	 * @param Type
+	 */
 	public AcademicActivity(String ID, String Name, String Type)
 	{
 		AcademicActivityID=ID;
