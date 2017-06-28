@@ -30,16 +30,16 @@ public class SystemManagerMainWindowController implements IController {
 
     @FXML
     void addCourse(ActionEvent event) {
-
-    	UserWindow.createUserWindow((Stage)addCourseBtn.getScene().getWindow(), "SystemManagerAddCourse", getClass());
     	Main.stack.push("SystemManagerDeleteCourse");
+    	UserWindow.createUserWindow((Stage)addCourseBtn.getScene().getWindow(), "SystemManagerAddCourse", getClass());
+    	
     }
 
     @FXML
     void deleteCourse(ActionEvent event) {
-
-    	UserWindow.createUserWindow((Stage)deleteCourseBtn.getScene().getWindow(), "SystemManagerDeleteCourse", getClass());
     	Main.stack.push("SystemManagerDeleteCourse");
+    	UserWindow.createUserWindow((Stage)deleteCourseBtn.getScene().getWindow(), "SystemManagerDeleteCourse", getClass());
+    	
     }
 
     @FXML

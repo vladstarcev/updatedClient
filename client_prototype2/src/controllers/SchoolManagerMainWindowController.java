@@ -68,6 +68,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void ReportGeneration(ActionEvent event)
 	{
+		Main.stack.push("SchoolManagerReportGeneration"); 
 		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(),"SchoolManagerReportGeneration", getClass());
 
 	}

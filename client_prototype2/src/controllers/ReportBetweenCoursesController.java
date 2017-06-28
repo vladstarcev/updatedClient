@@ -78,7 +78,7 @@ public class ReportBetweenCoursesController implements IController
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
-		//UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());   
+		UserWindow.closeUserWindow(getClass(), (Stage) ReportLabel1.getScene().getWindow()); 
 	}
 
 	@FXML

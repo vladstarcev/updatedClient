@@ -44,7 +44,7 @@ public class ReportGenerationController implements IController
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
-
+		UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
 	}
 
 	@FXML
@@ -56,7 +56,7 @@ public class ReportGenerationController implements IController
 	@FXML
 	void ClassesOfTeacher(ActionEvent event)
 	{
-
+		Main.stack.push("SchoolManagerReportGeneration");
 		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
 				"ReportBetweenClassesOfSpecificTeacher", getClass());
 
@@ -65,14 +65,14 @@ public class ReportGenerationController implements IController
 	@FXML
 	void CoursesInClass(ActionEvent event)
 	{
-
+		Main.stack.push("SchoolManagerReportGeneration");
 		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(), "ReportBetweenDiferentCoursesOfSpecificClass", getClass());
 	}
 
 	@FXML
 	void TeachersInClass(ActionEvent event)
 	{
-
+		Main.stack.push("SchoolManagerReportGeneration");
 		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
 				"ReportBetweenTeachersOfSpecificClass", getClass());
 	}

@@ -191,8 +191,6 @@ public class ReportBetweenClassesController implements IController
 		assert SemesterTextField != null : "fx:id=\"SemesterTextField\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 
 		Main.client.controller = this;
-		
-		SemesterTextField.setText("111111 222222 333333 444444");
 
 		SemesterID = new ArrayList<String>();
 		Teacher = "";
@@ -226,7 +224,6 @@ public class ReportBetweenClassesController implements IController
 		if (type.equals("histogram 1"))
 		{
 			XYChart.Series<String, Double> series = new XYChart.Series<>();
-			//HashMap<String, String> map = new HashMap<>();
 			
 			for (String row : arr)
 			{
@@ -236,15 +233,10 @@ public class ReportBetweenClassesController implements IController
 				for (String col : cols)
 				{
 					String[] field = col.split("=");
-					//map.put(field[0], field[1]);
 					values.add(field[1]);
 				}
 				series.getData().add(new XYChart.Data<>(values.get(0),Double.parseDouble(values.get(1))));
 			}
-			
-			/*for(String key : map.keySet()){
-				series.getData().add(new XYChart.Data<>(key,Double.parseDouble(map.get(key))));
-			}*/
 			
 			ReportBarChart.getData().add(series);
 			

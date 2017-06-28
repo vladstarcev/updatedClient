@@ -21,6 +21,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class ReportBetweenTeachersController implements IController
 {
@@ -76,7 +78,7 @@ public class ReportBetweenTeachersController implements IController
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
-
+		UserWindow.closeUserWindow(getClass(), (Stage) ReportLabel1.getScene().getWindow());
 	}
 
 	@FXML
