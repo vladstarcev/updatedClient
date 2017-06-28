@@ -21,15 +21,13 @@ public class Main extends Application
 		//UserWindow.createUserWindow(primaryStage, "loginFrame", getClass());
 		//stack.push("loginFrame");
 		
-		
 		///*********************************test********************************/
 
-		 UserWindow.createUserWindow(primaryStage, "TeacherCreateEvaluationForm", getClass());
-	     stack.push("TeacherCreateEvaluationForm");
-	     userId = "111118888";
+		 UserWindow.createUserWindow(primaryStage, "PupilFile", getClass());
+	     stack.push("PupilFile");
+	     userId = "333333333";
 
 		///*********************************test********************************/
-	
 	}
 
 	public static void main(String[] args)
