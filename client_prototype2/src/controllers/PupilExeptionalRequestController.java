@@ -133,6 +133,7 @@ public class PupilExeptionalRequestController implements IController {
     void AssignPupilToCourse(ActionEvent event) {
 
     	Operation="assign";
+    	ChooseOperationMenuButton.setText(AssignPupil.getText());
     }
 
     @FXML
@@ -146,6 +147,7 @@ public class PupilExeptionalRequestController implements IController {
     void DeletePupilFromCourse(ActionEvent event) {
     	
     	Operation="delete";
+    	ChooseOperationMenuButton.setText(DeletePupil.getText());
 
     }
 

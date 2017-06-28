@@ -217,7 +217,7 @@ public class PupilFileController implements IController {
      */
     @FXML
     void ShowGradeSheet(ActionEvent event) {
-    	setGradeSheet();
+    	setGradeSheet(gradeSheet);
     }
 
     
@@ -279,6 +279,8 @@ public class PupilFileController implements IController {
 		 		
 	 			String courseId = map.get("courseID");
 	 			CourseComboBox.getItems().add(courseId + ": " + allCourses.get(courseId).get("courseName"));
+	 	        loadGradeSheets();
+
 	 		}		
 	 	}
 	 	else if (type.equals("load grade sheet"))
@@ -306,46 +308,55 @@ public class PupilFileController implements IController {
     /**
      * Sets the grade sheet.
      */
-    void setGradeSheet()
+    void setGradeSheet(String str)
     {
-    	Stage stage = new Stage();
-    	Scene scene = new Scene(new Group());
-        stage.setTitle("Grade Sheet");
-        stage.setWidth(340);
-        stage.setHeight(500);
-        
-    	TableView<Course> table = new TableView<Course>();
-    	ObservableList<Course> courses = null;
+    	 TableView<Course> table = new TableView<Course>();
+    	 ObservableList<Course> data;
+    	 data = getInitialTableData();
+    	 table.setItems(data);
+
+    	    Course course;
+    	    String[] courses = str.split("\n");
+    	    for(String c : courses)
+    	    {
+    	    	String[] ans = c.split("\t");
+    	    	if(ans[2]!=null) course = new Course(ans[0], ans[1], ans[2]);
+    	    	else course = new Course(ans[0], ans[1],"");
+    	    	if(data==null)data = FXCollections.observableArrayList(course);
+    	    	else data.add(course);
+    	    }
     	
-       	final Label label = new Label("Grade Sheet");
+    	Stage stage = new Stage();
+        Scene scene = new Scene(new Group());
+        stage.setTitle("Grade Sheet");
+        stage.setWidth(430);
+        stage.setHeight(500);
+ 
+        final Label label = new Label("Grade Sheet");
         label.setFont(new Font("Arial", 20));
+ 
         table.setEditable(true);
-        
-        TableColumn<Course,String> courseIdCol = new TableColumn("Course ID");
-        courseIdCol.setMinWidth(100);
-        courseIdCol.setCellValueFactory(new PropertyValueFactory<>("courseId"));
-        
-        TableColumn<Course,String> courseNameCol = new TableColumn("Course Name");
-        courseNameCol.setMinWidth(100);
-        courseNameCol.setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        
-        
-        TableColumn<Course,String> gradeCol = new TableColumn("Grade");
+ 
+        TableColumn CourseIdCol = new TableColumn("Course ID");
+        CourseIdCol.setMinWidth(100);
+        CourseIdCol.setCellValueFactory(
+                new PropertyValueFactory<Course, String>("CourseId"));
+ 
+        TableColumn CourseNameCol = new TableColumn("Course Name");
+        CourseNameCol.setMinWidth(100);
+        CourseNameCol.setCellValueFactory(
+                new PropertyValueFactory<Course, String>("CourseName"));
+ 
+        TableColumn gradeCol = new TableColumn("Grade");
         gradeCol.setMinWidth(100);
-        gradeCol.setCellValueFactory(new PropertyValueFactory<>("courseGrade"));
-        
-        if(courses==null){
-        	courses = FXCollections.observableArrayList(new Course("Dekel","556","80")); //add new course
-        	courseIdCol.setCellValueFactory(new PropertyValueFactory<Course,String>("Course ID"));
-        	courseNameCol.setCellValueFactory(new PropertyValueFactory<Course,String>("Course Name"));
-        	gradeCol.setCellValueFactory(new PropertyValueFactory<Course,String>("Grade"));
-	    	
-            table.setItems(courses);        	
-        }
-        
-        table.getColumns().addAll(courseIdCol, courseNameCol, gradeCol);
+        gradeCol.setCellValueFactory(
+                new PropertyValueFactory<Course, String>("email"));
+ 
+        table.setItems(data);
+        table.getColumns().addAll(CourseIdCol, CourseNameCol, gradeCol);
+ 
         final VBox vbox = new VBox();
-        vbox.setSpacing(7);
+        vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
         vbox.getChildren().addAll(label, table);
  
@@ -354,87 +365,48 @@ public class PupilFileController implements IController {
         stage.setScene(scene);
         stage.show();
     }
+ 
     
-    
-	/**
-	 * The Class Course.
-	 */
+    private ObservableList<Course> getInitialTableData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	public static class Course {
-		 
-        /** The course id. */
-        private String courseId;
-        
-        /** The course name. */
-        private String courseName;
-        
-        /** The course grade. */
-        private String courseGrade;
+    	 
+        private final SimpleStringProperty CourseId;
+        private final SimpleStringProperty CourseName;
+        private final SimpleStringProperty email;
  
-        /**
-         * Instantiates a new course.
-         *
-         * @param courseId the course id
-         * @param name the name
-         * @param grade the grade
-         */
-        public Course (String courseId, String name, String grade) {
-            this.courseId = courseId;
-            this.courseName = name;
-            this.courseGrade = grade;
+        private Course(String id, String name, String grade) {
+            this.CourseId = new SimpleStringProperty(id);
+            this.CourseName = new SimpleStringProperty(name);
+            this.email = new SimpleStringProperty(grade);
         }
  
-        /**
-         * Gets the id.
-         *
-         * @return the id
-         */
-        public String getId() {
-            return courseId;
-        }
-        
-        /**
-         * Sets the id.
-         *
-         * @param id the new id
-         */
-        public void setId(String id) {
-            courseId = id;
-        }
-        
-        /**
-         * Gets the name.
-         *
-         * @return the name
-         */
-        public String getName() {
-            return courseName;
-        }
-        
-        /**
-         * Sets the name.
-         *
-         * @param name the new name
-         */
-        public void setName(String name) {
-        	courseName = name;
+        public String getCourseId() {
+            return CourseId.get();
         }
  
-        /**
-         * Gets the grade.
-         *
-         * @return the grade
-         */
-        public String getGrade() {
-            return courseGrade;
+        public void setCourseId(String id) {
+            CourseId.set(id);
         }
  
-        /**
-         * Sets the grade.
-         *
-         * @param g the new grade
-         */
-        public void setGrade(String g) {
-            courseGrade = g;
+        public String getCourseName() {
+            return CourseName.get();
+        }
+ 
+        public void setCourseName(String cName) {
+            CourseName.set(cName);
+        }
+ 
+        public String getEmail() {
+            return email.get();
+        }
+ 
+        public void setEmail(String grade) {
+            email.set(grade);
         }
     }
 }

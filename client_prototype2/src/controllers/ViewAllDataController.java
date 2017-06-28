@@ -86,6 +86,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllPupil(ActionEvent event)
 	{
+		MenuButton.setText(DisplayPupils.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Pupil Data");
 		data.add("select");
@@ -106,6 +107,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllParents(ActionEvent event)
 	{
+		MenuButton.setText(DisplayParents.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Parent Data");
 		data.add("select");
@@ -126,6 +128,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllTeachers(ActionEvent event)
 	{
+		MenuButton.setText(DisplayTeachers.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Teacher Data");
 		data.add("select");
@@ -146,6 +149,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllClasses(ActionEvent event)
 	{
+		MenuButton.setText(DisplayClasses.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Class Data");
 		data.add("select");
@@ -163,6 +167,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllAcademicActivities(ActionEvent event)
 	{
+		MenuButton.setText(DisplayAcademicActivities.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Academic Activities Data");
 		data.add("select");
@@ -180,6 +185,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllSemester(ActionEvent event)
 	{
+		MenuButton.setText(DisplaySemesters.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Semester Data");
 		data.add("select");
@@ -197,6 +203,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllExeptionalRequests(ActionEvent event)
 	{
+		MenuButton.setText(DisplayExeptionalRequests.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Exeptional Requests Data");
 		data.add("select");
@@ -214,6 +221,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplayAllAssignments(ActionEvent event)
 	{
+		MenuButton.setText(DisplayAssignments.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Assignments Data");
 		data.add("select");
@@ -231,6 +239,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplaySecretaryData(ActionEvent event)
 	{
+		MenuButton.setText(DisplaySecretary.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Secretary Data");
 		data.add("select");
@@ -251,6 +260,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void DisplaySystemManagerData(ActionEvent event)
 	{
+		MenuButton.setText(DisplaySystemManager.getText());
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("System Manager Data");
 		data.add("select");
