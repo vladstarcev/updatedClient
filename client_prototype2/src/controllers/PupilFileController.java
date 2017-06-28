@@ -217,7 +217,7 @@ public class PupilFileController implements IController {
      */
     @FXML
     void ShowGradeSheet(ActionEvent event) {
-    	setGradeSheet();
+    	setGradeSheet(gradeSheet);
     }
 
     
@@ -279,6 +279,8 @@ public class PupilFileController implements IController {
 		 		
 	 			String courseId = map.get("courseID");
 	 			CourseComboBox.getItems().add(courseId + ": " + allCourses.get(courseId).get("courseName"));
+	 	        loadGradeSheets();
+
 	 		}		
 	 	}
 	 	else if (type.equals("load grade sheet"))
@@ -306,28 +308,31 @@ public class PupilFileController implements IController {
     /**
      * Sets the grade sheet.
      */
-    void setGradeSheet()
+    void setGradeSheet(String str)
     {
     	 TableView<Course> table = new TableView<Course>();
     	 ObservableList<Course> data;
     	 data = getInitialTableData();
     	 table.setItems(data);
 
-    	    data = FXCollections.observableArrayList(
-    	            new Course("Jacob", "Smith", "100"),
-    	            new Course("Isabella", "Johnson", "80"),
-    	            new Course("Ethan", "Williams", "70"),
-    	            new Course("Emma", "Jones", "55"),
-    	            new Course("Michael", "Brown", "90")
-    	        );
+    	    Course course;
+    	    String[] courses = str.split("\n");
+    	    for(String c : courses)
+    	    {
+    	    	String[] ans = c.split("\t");
+    	    	if(ans[2]!=null) course = new Course(ans[0], ans[1], ans[2]);
+    	    	else course = new Course(ans[0], ans[1],"");
+    	    	if(data==null)data = FXCollections.observableArrayList(course);
+    	    	else data.add(course);
+    	    }
     	
     	Stage stage = new Stage();
         Scene scene = new Scene(new Group());
-        stage.setTitle("Table View Sample");
-        stage.setWidth(450);
+        stage.setTitle("Grade Sheet");
+        stage.setWidth(430);
         stage.setHeight(500);
  
-        final Label label = new Label("Address Book");
+        final Label label = new Label("Grade Sheet");
         label.setFont(new Font("Arial", 20));
  
         table.setEditable(true);
@@ -374,34 +379,34 @@ public class PupilFileController implements IController {
         private final SimpleStringProperty CourseName;
         private final SimpleStringProperty email;
  
-        private Course(String fName, String lName, String email) {
-            this.CourseId = new SimpleStringProperty(fName);
-            this.CourseName = new SimpleStringProperty(lName);
-            this.email = new SimpleStringProperty(email);
+        private Course(String id, String name, String grade) {
+            this.CourseId = new SimpleStringProperty(id);
+            this.CourseName = new SimpleStringProperty(name);
+            this.email = new SimpleStringProperty(grade);
         }
  
         public String getCourseId() {
             return CourseId.get();
         }
  
-        public void setCourseId(String fName) {
-            CourseId.set(fName);
+        public void setCourseId(String id) {
+            CourseId.set(id);
         }
  
         public String getCourseName() {
             return CourseName.get();
         }
  
-        public void setCourseName(String fName) {
-            CourseName.set(fName);
+        public void setCourseName(String cName) {
+            CourseName.set(cName);
         }
  
         public String getEmail() {
             return email.get();
         }
  
-        public void setEmail(String fName) {
-            email.set(fName);
+        public void setEmail(String grade) {
+            email.set(grade);
         }
     }
 }
