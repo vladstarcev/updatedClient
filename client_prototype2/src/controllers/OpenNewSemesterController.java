@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -53,6 +54,9 @@ public class OpenNewSemesterController implements IController
 
 	@FXML
 	private MenuItem SemesterB;
+	
+    @FXML
+    private MenuButton StatusMenu;
 
 	@FXML
 	private Button CheckActivitiesButton;
@@ -65,6 +69,9 @@ public class OpenNewSemesterController implements IController
 
 	@FXML
 	private Button SendButton;
+	
+    @FXML
+    private MenuButton SemesterMenu;
 
 	@FXML
 	private Label TypeLable;
@@ -196,6 +203,7 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	void SemA(ActionEvent event)
 	{
+		SemesterMenu.setText(SemesterA.getText());
 		Type = "A";
 		TypeFlag = 1;
 		new Alert(AlertType.INFORMATION, "Type that was chosen for this semester is: A.", ButtonType.OK).showAndWait();
@@ -204,6 +212,7 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	void SemB(ActionEvent event)
 	{
+		SemesterMenu.setText(SemesterB.getText());
 		Type = "B";
 		TypeFlag = 1;
 		new Alert(AlertType.INFORMATION, "Type that was chosen for this semester is: B.", ButtonType.OK).showAndWait();
@@ -212,6 +221,7 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	void CurrentSEM(ActionEvent event)
 	{
+		StatusMenu.setText(CurrentSEMMenu.getText());
 		Status = "Current";
 		StatusFlag = 1;
 		new Alert(AlertType.INFORMATION, "Status that was chosen for this semester is: Current.", ButtonType.OK)
