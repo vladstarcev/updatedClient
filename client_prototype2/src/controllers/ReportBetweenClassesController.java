@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -13,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -36,7 +39,7 @@ public class ReportBetweenClassesController implements IController
 	private Button DisplayButton;
 
 	@FXML
-	private BarChart<String, String> ReportBarChart;
+	private BarChart<String, Double> ReportBarChart;
 
 	@FXML
 	private Label SemesterLabel;
@@ -130,7 +133,7 @@ public class ReportBetweenClassesController implements IController
 	{
 		if (TeacherFLAG == 1 && SemesterFLAG == 1)
 		{
-			SelectedTeacher = Teacher.substring(0, 8);
+			SelectedTeacher = Teacher.substring(0, 9);
 			if (SelectedTeacher == null)
 				return;
 
@@ -188,6 +191,8 @@ public class ReportBetweenClassesController implements IController
 		assert SemesterTextField != null : "fx:id=\"SemesterTextField\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 
 		Main.client.controller = this;
+		
+		SemesterTextField.setText("111111 222222 333333 444444");
 
 		SemesterID = new ArrayList<String>();
 		Teacher = "";
@@ -217,19 +222,33 @@ public class ReportBetweenClassesController implements IController
 
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
-
+		
 		if (type.equals("histogram 1"))
 		{
+			XYChart.Series<String, Double> series = new XYChart.Series<>();
+			//HashMap<String, String> map = new HashMap<>();
+			
 			for (String row : arr)
 			{
+				ArrayList<String> values = new ArrayList<>();
 				String[] cols = row.split(";");
-				HashMap<String, String> map = new HashMap<>();
+				
 				for (String col : cols)
 				{
 					String[] field = col.split("=");
-					map.put(field[0], field[1]);
+					//map.put(field[0], field[1]);
+					values.add(field[1]);
 				}
+				series.getData().add(new XYChart.Data<>(values.get(0),Double.parseDouble(values.get(1))));
 			}
+			
+			/*for(String key : map.keySet()){
+				series.getData().add(new XYChart.Data<>(key,Double.parseDouble(map.get(key))));
+			}*/
+			
+			ReportBarChart.getData().add(series);
+			System.out.println("check");
+			
 		}
 		if (type.equals("Teacher List"))
 		{
@@ -237,6 +256,7 @@ public class ReportBetweenClassesController implements IController
 			{
 				String[] cols = row.split(";");
 				HashMap<String, String> map = new HashMap<>();
+				ArrayList<String> values = new ArrayList<>();
 				for (String col : cols)
 				{
 					String[] field = col.split("=");
