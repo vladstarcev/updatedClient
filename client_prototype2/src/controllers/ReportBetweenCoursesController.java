@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -57,7 +58,7 @@ public class ReportBetweenCoursesController implements IController
 	private Label ChooseLabel;
 
 	@FXML
-	private BarChart<String, String> ReportChart;
+	private BarChart<String, Double> ReportChart;
 
 	@FXML
 	private CategoryAxis SpecificClassAxis;
@@ -130,14 +131,14 @@ public class ReportBetweenCoursesController implements IController
 	{
 		if (ClassFLAG == 1 && SemesterFLAG == 1)
 		{
-			SelectedClass = Class.substring(0, 8);
+			SelectedClass = Class.substring(0, 4);
 			if (SelectedClass == null)
 				return;
 
 			ReportChart.getData().clear();
 			ArrayList<String> data = new ArrayList<String>();
-			data.add("histogram 2"); // for answer
-			data.add("histogram 2"); // for sql type
+			data.add("histogram 3"); // for answer
+			data.add("histogram 3"); // for sql type
 			data.add(SelectedClass);
 			data.add(SemesterID.get(0));
 			data.add(SemesterID.get(1));
@@ -196,7 +197,7 @@ public class ReportBetweenCoursesController implements IController
 		ClassFLAG = 0;
 		SemesterFLAG = 0;
 
-		ReportChart.getXAxis().setLabel("Different Classes");
+		ReportChart.getXAxis().setLabel("Different Courses");
 		ReportChart.getXAxis().setMaxWidth(0.3);
 		ReportChart.getYAxis().setLabel("Average Grade");
 		ReportChart.setTitle("");
@@ -217,18 +218,24 @@ public class ReportBetweenCoursesController implements IController
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
 
-		if (type.equals("histogram 2"))
+		if (type.equals("histogram 3"))
 		{
+			XYChart.Series<String, Double> series = new XYChart.Series<>();
+			
 			for (String row : arr)
 			{
+				ArrayList<String> values = new ArrayList<>();
 				String[] cols = row.split(";");
-				HashMap<String, String> map = new HashMap<>();
+				
 				for (String col : cols)
 				{
 					String[] field = col.split("=");
-					map.put(field[0], field[1]);
+					values.add(field[1]);
 				}
+				series.getData().add(new XYChart.Data<>(values.get(0),Double.parseDouble(values.get(1))));
 			}
+			
+			ReportChart.getData().add(series);
 		}
 
 		if (type.equals("Class List"))

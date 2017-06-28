@@ -247,7 +247,6 @@ public class ReportBetweenClassesController implements IController
 			}*/
 			
 			ReportBarChart.getData().add(series);
-			System.out.println("check");
 			
 		}
 		if (type.equals("Teacher List"))

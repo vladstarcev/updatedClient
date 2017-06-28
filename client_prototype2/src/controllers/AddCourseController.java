@@ -96,6 +96,10 @@ public class AddCourseController implements IController{
       	{
     		new Alert(AlertType.ERROR, "Enter Currect Weekly Study Hours and Check It.", ButtonType.OK).showAndWait();
     	}
+    	else if(!(unitTxt.getText().equals(idTxt.getText().substring(0, 2))))
+    	{
+    		new Alert(AlertType.ERROR, "Course ID Not Match For Study Unit.", ButtonType.OK).showAndWait();
+    	}
     	else
     	{
     		ArrayList<String> data = new ArrayList<>();
