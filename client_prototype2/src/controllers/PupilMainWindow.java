@@ -17,52 +17,88 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class PupilMainWindow.
+ */
 public class PupilMainWindow implements IController{
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Choose menu button. */
     @FXML
     private MenuButton ChooseMenuButton;
     
+    /** The upload ass. */
     @FXML
     private MenuItem uploadAss;
 
+    /** The Pupil file. */
     @FXML
     private MenuItem PupilFile;
 
+    /** The Pupil menu lable. */
     @FXML
     private Label PupilMenuLable;
 
+    /** The Log out button. */
     @FXML
     private Button LogOutButton;
 
+    /** The Choose operation lable. */
     @FXML
     private Label ChooseOperationLable;
    
+    /**
+     * Pupil choose operation.
+     *
+     * @param event the event
+     */
     @FXML
     void PupilChooseOperation(ActionEvent event) {
      System.out.println("TUDO BOM");
     }
 
+    /**
+     * Pupil log out.
+     *
+     * @param event the event
+     */
     @FXML
     void PupilLogOut(ActionEvent event) {
      UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "loginFrame", getClass());
     }
+    
+    /**
+     * Upload ass.
+     *
+     * @param event the event
+     */
     @FXML
     void uploadAss(ActionEvent event) {
   UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilAssignment", getClass());  
 
     }
 
+    /**
+     * Open pupil file.
+     *
+     * @param event the event
+     */
     @FXML
     void openPupilFile(ActionEvent event) {
   UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilFile", getClass());
 
     }
+    
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert ChooseMenuButton != null : "fx:id=\"ChooseMenuButton\" was not injected: check your FXML file 'PupilMainWindow.fxml'.";
@@ -76,6 +112,9 @@ public class PupilMainWindow implements IController{
         loadPupil();
     }
 
+ /**
+  * Load pupil.
+  */
  void loadPupil()
  {
   ArrayList<String> data = new ArrayList<String>();
@@ -96,6 +135,9 @@ public class PupilMainWindow implements IController{
  }
 
  
+ /* (non-Javadoc)
+  * @see interfaces.IController#handleAnswer(java.lang.Object)
+  */
  @Override
  public void handleAnswer(Object result) {
   if (result == null)
