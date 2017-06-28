@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -65,6 +66,9 @@ public class CreateEvaluationFormController implements IController  {
 
 	private HashMap<String, HashMap<String, String>> allCourses;
 	private HashMap<String, HashMap<String, String>> allPupils;
+	private HashMap<String, HashMap<String, String>> coursesOfTeacher;
+	private ArrayList<String> pupilInClass;
+	private HashMap<String,String> courseClass;
 
 	private String courseId;
 	private String classId;
@@ -136,7 +140,6 @@ public class CreateEvaluationFormController implements IController  {
 			e.printStackTrace();
 		}
 		new Alert(AlertType.INFORMATION, "Evaluation Form was created successfully!", ButtonType.OK).showAndWait();
-   
 
     }
 
@@ -147,13 +150,17 @@ public class CreateEvaluationFormController implements IController  {
 
     @FXML
     void chooseCourse(ActionEvent event) {
-    	
-        loadPupilsInCourse(courseId,classId);
+    	String arr = chooseCourseCB.getSelectionModel().getSelectedItem();
+    	String[] ans = arr.split(":");
+    	courseId=ans[0];
+    	classId = coursesOfTeacher.get(courseId).get("classId");
+    	while(pupilInClass.size()>0) pupilInClass.remove(0);
+        loadPupilInClass(classId);
     }
 
     @FXML
     void choosePupil(ActionEvent event) {
-
+    	
     }
     void loadAllCourses()
     {
@@ -171,9 +178,6 @@ public class CreateEvaluationFormController implements IController  {
     	}
     }
 	    
-    
-
-    
     void loadCoursesOfTeacher()
     {
     	  ArrayList<String> data = new ArrayList<String>();
@@ -191,25 +195,7 @@ public class CreateEvaluationFormController implements IController  {
     	   e.printStackTrace();
     	  }
     }
-    void loadPupilsInCourse(String courseId, String classId)
-    {
-    	ArrayList<String> data = new ArrayList<String>();
-    	data.add("load pupils in course");
-   	  	data.add("select");
-   	  	data.add("pupil_in_course");
-   	  	data.add("courseID");
-   	  	data.add(courseId);
-   	  	data.add("classID");
-   	  	data.add(classId);
-   	  	try
-   		 {
-   	  		Main.client.sendToServer(data);
-   		 }
-   	  	catch (IOException e)
-   	  	{
-   	  		e.printStackTrace();
-   	  	}
-    }
+    
     void loadAllPupils()
     {
 		ArrayList<String> data = new ArrayList<String>();
@@ -229,6 +215,44 @@ public class CreateEvaluationFormController implements IController  {
 		}
     }
     
+    void loadPupilInClass(String classId)
+    {
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("load pupils in class");
+   	  	data.add("select field");
+   	  	data.add("pupil_ID");
+   	  	data.add("pupil_in_class");
+   	  	data.add("class_ID");
+   	  	data.add(classId);
+   	  	try
+   		 {
+   	  		Main.client.sendToServer(data);
+   		 }
+   	  	catch (IOException e)
+   	  	{
+   	  		e.printStackTrace();
+   	  	}
+    }
+    
+    void loadPupilsInCourse(String courseId)
+    {
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("load pupils in course");
+   	  	data.add("select field");
+   	  	data.add("userID");
+   	  	data.add("pupil_in_course");
+   	  	data.add("courseID");
+   	  	data.add(courseId);
+   	  	try
+   		 {
+   	  		Main.client.sendToServer(data);
+   		 }
+   	  	catch (IOException e)
+   	  	{
+   	  		e.printStackTrace();
+   	  	}
+    }
+    
     @FXML
     void initialize() {
         assert chooseCourseCB != null : "fx:id=\"chooseCourseCB\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
@@ -246,7 +270,10 @@ public class CreateEvaluationFormController implements IController  {
         Main.client.controller=this;
         allCourses = new HashMap<>();
         allPupils = new HashMap<>();
+        coursesOfTeacher = new HashMap<>();
+        pupilInClass = new ArrayList<>();
         loadAllCourses();
+        loadAllPupils();
     }
 
 	@Override
@@ -285,11 +312,10 @@ public class CreateEvaluationFormController implements IController  {
 				{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
-				}
+				}			    
+				coursesOfTeacher.put(map.get("courseId"), map);
 			    courseId = map.get("courseId");
-			    classId = map.get("classId");
 			    chooseCourseCB.getItems().add(courseId + ": " + allCourses.get(courseId).get("courseName"));
-			    loadAllPupils();
 			}
 		}
 		else if(type.equals("load all pupils"))
@@ -305,11 +331,31 @@ public class CreateEvaluationFormController implements IController  {
 				}
 				allPupils.put(map.get("userId"), map);
 			}
+		}
+		else if(type.equals("load pupils in class"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+					pupilInClass.add(field[1]);
+				}
+			}
+	        loadPupilsInCourse(courseId);
+
 
 		}
 		else if (type.equals("load pupils in course"))
 		{
-			while(choosePupilCB.getItems().size()>0) chooseCourseCB.getItems().remove(0);
+			while(choosePupilCB.getItems().size()>0)
+			{
+				choosePupilCB.getItems().remove(0);
+			}
+
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
@@ -321,8 +367,11 @@ public class CreateEvaluationFormController implements IController  {
 				}
 				
 				pupilId = map.get("userID");
-				choosePupilCB.getItems().add(pupilId + ": " + allPupils.get(pupilId).get("userFirstName") + " "
-						+ allPupils.get(pupilId).get("userLastName"));			}
+				for(String pupil : pupilInClass){
+					if(pupilId.equals(pupil))choosePupilCB.getItems().add(pupilId + ": " + allPupils.get(pupilId).get("userFirstName") + " "
+							+ allPupils.get(pupilId).get("userLastName"));
+				}
+			}
 		}
 
 	}

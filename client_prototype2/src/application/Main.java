@@ -24,11 +24,9 @@ public class Main extends Application
 		
 		///*********************************test********************************/
 
-		
-		 UserWindow.createUserWindow(primaryStage, "PupilFile", getClass());
-	     stack.push("PupilFile");
-	     userId = "333333333";
-
+		 UserWindow.createUserWindow(primaryStage, "TeacherCreateEvaluationForm", getClass());
+	     stack.push("TeacherCreateEvaluationForm");
+	     userId = "111118888";
 
 		///*********************************test********************************/
 	
