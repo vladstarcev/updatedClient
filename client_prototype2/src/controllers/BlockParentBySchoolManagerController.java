@@ -11,15 +11,13 @@ import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
-import ui.UserWindow;
 
-public class BlockParentBySchoolManagerController implements IController {
+public class BlockParentBySchoolManagerController  implements IController {
 
     @FXML
     private ResourceBundle resources;
@@ -29,9 +27,6 @@ public class BlockParentBySchoolManagerController implements IController {
 
     @FXML
     private Button BlockParentButton;
-
-    @FXML
-    private Button FreeParentButton;
 
     @FXML
     private Label BlockUserLabel;
@@ -45,11 +40,37 @@ public class BlockParentBySchoolManagerController implements IController {
     @FXML
     private Button BackButton;
 
-    private String ParentId;
-    private boolean flagFound =false;
-    private String access;
+    @FXML
+    private Button FreeParentButton;
     
-	void findPupil()
+
+    private String ParentId;
+    private boolean flagBlock;
+    private String access;
+
+    @FXML
+    void EnterPupilID(ActionEvent event) {
+
+    }
+
+    @FXML
+    void BlockParent(ActionEvent event) {
+    	flagBlock = true;
+    	findPupil();
+    }
+
+    @FXML
+    void BackToMenu(ActionEvent event) {
+
+    }
+
+    @FXML
+    void FreeParent(ActionEvent event) {
+    	flagBlock = false;
+    	findPupil();
+    }
+    
+    void findPupil()
 	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("find Pupil");
@@ -66,7 +87,7 @@ public class BlockParentBySchoolManagerController implements IController {
 			e.printStackTrace();
 		}
 	}
-	
+    
 	void updateParentPermission(String ParentId, String acc)
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -101,38 +122,17 @@ public class BlockParentBySchoolManagerController implements IController {
 			data.add("conditions");
 			data.add("userID");
 			data.add(PupilIDTextField.getText());
-			try
-			{
-				Main.client.sendToServer(data);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
 		}
-		
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
-
-
-    @FXML
-    void BlockParent(ActionEvent event) {
-    	findPupil();
-    	updateParentPermission(ParentId,"block");
-    }
-
-    @FXML
-    void BackToMenu(ActionEvent event) {
-    	UserWindow.createUserWindow((Stage) BackButton.getScene().getWindow(), "SchoolManagerMainWindow", getClass());
-
-    }
-
-    @FXML
-    void FreeParent(ActionEvent event) {
-    	findPupil();
-		updateParentPermission(ParentId,"free");
-    }
-    
-    
+	    
     @FXML
     void initialize() {
         assert BlockParentButton != null : "fx:id=\"BlockParentButton\" was not injected: check your FXML file 'SchoolManagerBlockUser.fxml'.";
@@ -147,7 +147,7 @@ public class BlockParentBySchoolManagerController implements IController {
 
 	@Override
 	public void handleAnswer(Object result) {
-		
+
 		if (result == null)
 		{
 			// error
@@ -161,29 +161,29 @@ public class BlockParentBySchoolManagerController implements IController {
 		{
 			if (arr.size() == 0)
 			{
-				flagFound =false;
 				new Alert(AlertType.ERROR, "Pupil has not found.", ButtonType.OK).showAndWait();
+				return;
 			}
-			else
+			for (String row : arr)
 			{
-				flagFound =true;
-				for (String row : arr)
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
 				{
-					String[] cols = row.split(";");
-					HashMap<String, String> map = new HashMap<>();
-					for (String col : cols)
-					{
-						String[] field = col.split("=");
-						map.put(field[0], field[1]);
-					}
-					ParentId = map.get("parentID");
-					access = map.get("ParentAccess");
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
 				}
+				ParentId = map.get("parentID");
+				access = map.get("ParentAccess");
 			}
+	    	if(flagBlock==true) updateParentPermission(ParentId,"block");
+	    	else updateParentPermission(ParentId,"free");
+
+
 		}
 		else if(type.equals("Free Parent"))
 			new Alert(AlertType.INFORMATION, "Parent Free Successfully!", ButtonType.OK).showAndWait();
 		else if (type.equals("Block Parent"))
-			new Alert(AlertType.INFORMATION, "Parent Blocked Successfully!", ButtonType.OK).showAndWait();
+			new Alert(AlertType.INFORMATION, "Parent Blocked Successfully!", ButtonType.OK).showAndWait();		
 	}
 }
