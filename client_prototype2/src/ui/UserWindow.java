@@ -58,4 +58,33 @@ public class UserWindow
 			e.printStackTrace();
 		}
 	}
+	
+	public static void exitToMenu(Class<?> c, Stage s)
+	{
+		s.close();
+		for(int i=1;i<Main.stack.size();i++){
+			Main.stack.pop();
+		}
+		
+		String name = Main.stack.peek();
+		/*if(Main.stack.size()>1)
+			name = Main.stack.pop();*/
+		
+		try
+		{
+			URL url = c.getResource("/GUI/" + name + ".fxml");
+			FXMLLoader fxmlLoader = new FXMLLoader(url);
+			Parent root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setTitle(name);
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.setResizable(false);
+			stage.show();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
