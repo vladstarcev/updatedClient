@@ -32,6 +32,26 @@ public class DeleteCourseController implements IController {
 
     @FXML
     void DeleteCourse(ActionEvent event) {
+    		
+    	ArrayList<String> data = new ArrayList<>();
+    	data.add("check if course exist");
+    	data.add("select");
+    	data.add("courses");
+    	data.add("courseId");
+    	data.add(idTxt.getText());
+    	
+    	try
+    	{
+    	 Main.client.sendToServer(data);
+		}
+    	catch (IOException e)
+    	{
+			e.printStackTrace();
+		}
+    }
+    
+    void delete(){
+    	
     	ArrayList<String> data = new ArrayList<>();
     	data.add("delete course");
     	data.add("delete");
@@ -45,16 +65,24 @@ public class DeleteCourseController implements IController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
     }
 
     @FXML
     void BackToMenu(ActionEvent event) {
+    	
     	UserWindow.closeUserWindow(getClass(), (Stage)cancelBtn.getScene().getWindow());
     }
     
     @FXML
     void initialize(){
-    	Main.client.controller=this;
+    	
+        assert idTxt != null : "fx:id=\"idTxt\" was not injected: check your FXML file 'SystemManagerDeleteCourse.fxml'.";
+        assert cancelBtn != null : "fx:id=\"cancelBtn\" was not injected: check your FXML file 'SystemManagerDeleteCourse.fxml'.";
+        assert enterLab != null : "fx:id=\"enterLab\" was not injected: check your FXML file 'SystemManagerDeleteCourse.fxml'.";
+        assert deleteBtn != null : "fx:id=\"deleteBtn\" was not injected: check your FXML file 'SystemManagerDeleteCourse.fxml'.";
+    	
+        Main.client.controller=this;
     }
 
 	@Override
@@ -65,21 +93,27 @@ public class DeleteCourseController implements IController {
 			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
 			return;
 		}
+		
 		ArrayList<String> arr = (ArrayList<String>) msg;
 		String type = arr.remove(0);
-		if (type.equals("delete course"))
+		
+		if (type.equals("check if course exist"))
 		{
 			if (arr.size() == 0)
 			{
-				new Alert(AlertType.ERROR, "There is no user with such ID", ButtonType.OK).showAndWait();
+				new Alert(AlertType.ERROR, "Course Not Exist", ButtonType.OK).showAndWait();
 			}
 			else
 			{
-				new Alert(AlertType.INFORMATION, "Course was successfully deleted from DB", ButtonType.OK).showAndWait();
+				delete();
 			}
 		}
-		UserWindow.closeUserWindow(getClass(), (Stage)cancelBtn.getScene().getWindow());
 		
+		if(type.equals("delete course"))
+		{
+			new Alert(AlertType.INFORMATION, "Course Succesfully From DB", ButtonType.OK).showAndWait();
+			UserWindow.closeUserWindow(getClass(), (Stage)cancelBtn.getScene().getWindow());
+		}
 	}
 
 }
