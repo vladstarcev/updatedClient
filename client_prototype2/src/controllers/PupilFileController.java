@@ -35,47 +35,73 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class PupilFileController.
+ */
 public class PupilFileController implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Pupil file label. */
     @FXML
     private Label PupilFileLabel;
 
+    /** The Choose menu button. */
     @FXML
     private MenuButton ChooseMenuButton;
 
+    /** The show evaluation form item. */
     @FXML
     private MenuItem showEvaluationFormItem;
     
+    /** The Show grade sheet iten. */
     @FXML
     private MenuItem ShowGradeSheetIten;
     
+    /** The Course combo box. */
     @FXML
     private ComboBox<String> CourseComboBox;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Choose course label. */
     @FXML
     private Label ChooseCourseLabel;
 
+    /** The Choose lable. */
     @FXML
     private Label ChooseLable;
 
+    /** The Pupil show evaluation form controller. */
     private PupilShowEvaluationFormController PupilShowEvaluationFormController;
+	
+	/** The all courses. */
 	private HashMap<String, HashMap<String, String>> allCourses;
     
+	/** The course id. */
 	private String courseId;
+    
+    /** The grade. */
     private String grade;
+    
+    /** The comments. */
     private String comments;
+    
+    /** The grade sheet. */
     private String gradeSheet="";
     
     
+    /**
+     * Load all courses.
+     */
     void loadAllCourses()
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -92,6 +118,9 @@ public class PupilFileController implements IController {
     	}	
     }
     
+    /**
+     * Load grade sheets.
+     */
     void loadGradeSheets()
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -111,7 +140,10 @@ public class PupilFileController implements IController {
 	 	}
     }
     
-	 void loadCoursesOfPupil()
+	 /**
+ 	 * Load courses of pupil.
+ 	 */
+ 	void loadCoursesOfPupil()
 	 {
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("load courses of pupil");
@@ -130,21 +162,41 @@ public class PupilFileController implements IController {
 	 	}
 	 }
     
+    /**
+     * Show course list.
+     *
+     * @param event the event
+     */
     @FXML
     void ShowCourseList(ActionEvent event) {
 
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
         UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
     }
 
+    /**
+     * Choose operation.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseOperation(ActionEvent event) {
 
     }
     
+    /**
+     * Show evaluation form.
+     *
+     * @param event the event
+     */
     @FXML
     void ShowEvaluationForm(ActionEvent event) {
     	PupilShowEvaluationFormController = new PupilShowEvaluationFormController();
@@ -158,59 +210,20 @@ public class PupilFileController implements IController {
 		UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilEvaluationForm", getClass());
      }
 
+    /**
+     * Show grade sheet.
+     *
+     * @param event the event
+     */
     @FXML
     void ShowGradeSheet(ActionEvent event) {
     	setGradeSheet();
     }
-    
-    void setGradeSheet()
-    {
-    	TableView table = new TableView();
-    	ObservableList<Course> courses;
-        
-        Course course1 = new Course("1111", "ffff", "70");
-        courses = FXCollections.observableArrayList(course1);
 
-    	Stage stage = new Stage();
-    	Scene scene = new Scene(new Group());
-        stage.setTitle("Grade Sheet");
-        stage.setWidth(340);
-        stage.setHeight(500);
-        
-       	final Label label = new Label("Grade Sheet");
-        label.setFont(new Font("Arial", 20));
-        table.setEditable(true);
-        
-        TableColumn courseIdCol = new TableColumn("Course ID");
-        courseIdCol.setMinWidth(100);
-        courseIdCol.setCellValueFactory(
-                new PropertyValueFactory<>("courseId"));
-        
-        TableColumn courseNameCol = new TableColumn("Course Name");
-        courseNameCol.setMinWidth(100);
-        courseNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("courseName"));
-        
-        
-        TableColumn gradeCol = new TableColumn("Grade");
-        gradeCol.setMinWidth(100);
-        gradeCol.setCellValueFactory(
-                new PropertyValueFactory<>("courseGrade"));
- 
-        
-        table.setItems(courses);
-        table.getColumns().addAll(courseIdCol, courseNameCol, gradeCol);
-        final VBox vbox = new VBox();
-        vbox.setSpacing(7);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(label, table);
- 
-        ((Group) scene.getRoot()).getChildren().addAll(vbox);
- 
-        stage.setScene(scene);
-        stage.show();
-    }
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert PupilFileLabel != null : "fx:id=\"PupilFileLabel\" was not injected: check your FXML file 'PupilFile.fxml'.";
@@ -289,40 +302,139 @@ public class PupilFileController implements IController {
 	 	}
 
 	}
+	
+    /**
+     * Sets the grade sheet.
+     */
+    void setGradeSheet()
+    {
+    	Stage stage = new Stage();
+    	Scene scene = new Scene(new Group());
+        stage.setTitle("Grade Sheet");
+        stage.setWidth(340);
+        stage.setHeight(500);
+        
+    	TableView<Course> table = new TableView<Course>();
+    	ObservableList<Course> courses = null;
+    	
+       	final Label label = new Label("Grade Sheet");
+        label.setFont(new Font("Arial", 20));
+        table.setEditable(true);
+        
+        TableColumn<Course,String> courseIdCol = new TableColumn("Course ID");
+        courseIdCol.setMinWidth(100);
+        courseIdCol.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+        
+        TableColumn<Course,String> courseNameCol = new TableColumn("Course Name");
+        courseNameCol.setMinWidth(100);
+        courseNameCol.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        
+        
+        TableColumn<Course,String> gradeCol = new TableColumn("Grade");
+        gradeCol.setMinWidth(100);
+        gradeCol.setCellValueFactory(new PropertyValueFactory<>("courseGrade"));
+        
+        if(courses==null){
+        	courses = FXCollections.observableArrayList(new Course("Dekel","556","80")); //add new course
+        	courseIdCol.setCellValueFactory(new PropertyValueFactory<Course,String>("Course ID"));
+        	courseNameCol.setCellValueFactory(new PropertyValueFactory<Course,String>("Course Name"));
+        	gradeCol.setCellValueFactory(new PropertyValueFactory<Course,String>("Grade"));
+	    	
+            table.setItems(courses);        	
+        }
+        
+        table.getColumns().addAll(courseIdCol, courseNameCol, gradeCol);
+        final VBox vbox = new VBox();
+        vbox.setSpacing(7);
+        vbox.setPadding(new Insets(10, 0, 0, 10));
+        vbox.getChildren().addAll(label, table);
+ 
+        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+ 
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    
+	/**
+	 * The Class Course.
+	 */
 	public static class Course {
 		 
-        private SimpleStringProperty courseId;
-        private SimpleStringProperty courseName;
-        private SimpleStringProperty courseGrade;
+        /** The course id. */
+        private String courseId;
+        
+        /** The course name. */
+        private String courseName;
+        
+        /** The course grade. */
+        private String courseGrade;
  
-        private Course (String Id, String name, String g) {
-            this.courseId = new SimpleStringProperty(Id);
-            this.courseName = new SimpleStringProperty(name);
-            this.courseGrade = new SimpleStringProperty(g);
+        /**
+         * Instantiates a new course.
+         *
+         * @param courseId the course id
+         * @param name the name
+         * @param grade the grade
+         */
+        public Course (String courseId, String name, String grade) {
+            this.courseId = courseId;
+            this.courseName = name;
+            this.courseGrade = grade;
         }
  
+        /**
+         * Gets the id.
+         *
+         * @return the id
+         */
         public String getId() {
-            return courseId.get();
+            return courseId;
         }
         
+        /**
+         * Sets the id.
+         *
+         * @param id the new id
+         */
         public void setId(String id) {
-            courseId.set(id);
+            courseId = id;
         }
         
+        /**
+         * Gets the name.
+         *
+         * @return the name
+         */
         public String getName() {
-            return courseName.get();
+            return courseName;
         }
         
+        /**
+         * Sets the name.
+         *
+         * @param name the new name
+         */
         public void setName(String name) {
-        	courseName.set(name);
+        	courseName = name;
         }
  
+        /**
+         * Gets the grade.
+         *
+         * @return the grade
+         */
         public String getGrade() {
-            return courseGrade.get();
+            return courseGrade;
         }
  
+        /**
+         * Sets the grade.
+         *
+         * @param g the new grade
+         */
         public void setGrade(String g) {
-            courseGrade.set(g);
+            courseGrade = g;
         }
     }
 }
