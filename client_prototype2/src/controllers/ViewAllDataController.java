@@ -3,17 +3,23 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 public class ViewAllDataController implements IController
 {
@@ -55,7 +61,7 @@ public class ViewAllDataController implements IController
 	private MenuItem DisplayParents;
 
 	@FXML
-	private ComboBox<?> DataComboBox;
+	private ComboBox<String> DataComboBox;
 
 	@FXML
 	private MenuItem DisplayClasses;
@@ -160,7 +166,7 @@ public class ViewAllDataController implements IController
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Academic Activities Data");
 		data.add("select");
-		data.add("academic_activities");
+		data.add("academic_activity");
 		try
 		{
 			Main.client.sendToServer(data);
@@ -265,7 +271,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
-
+		UserWindow.closeUserWindow(getClass(), (Stage) ViewLabel.getScene().getWindow());
 	}
 
 	@FXML
@@ -302,6 +308,227 @@ public class ViewAllDataController implements IController
 	public void handleAnswer(Object msg)
 	{
 		// TODO Auto-generated method stub
+		
+		if (msg == null)
+		{
+			// error
+			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
+			return;
+		}
 
+		ArrayList<String> arr = (ArrayList<String>) msg;
+		String type = arr.remove(0);
+		
+		if(type.equals("Pupil Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String userID = map.get("userId");
+				String userFName=map.get("userFirstName");
+				String userLname=map.get("userLastName");
+				DataComboBox.getItems().add("ID: " + userID + ", First Name: " + userFName + ", Last Name:  " + userLname);
+			}
+		}
+		
+		if(type.equals("Parent Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String userID = map.get("userId");
+				String userFName=map.get("userFirstName");
+				String userLname=map.get("userLastName");
+				DataComboBox.getItems().add("ID: " + userID + ", First Name: " + userFName + ", Last Name:  " + userLname);
+			}
+		}
+		
+		if(type.equals("Teacher Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String userID = map.get("userId");
+				String userFName=map.get("userFirstName");
+				String userLname=map.get("userLastName");
+				DataComboBox.getItems().add("ID: " + userID + ", First Name: " + userFName + ", Last Name:  " + userLname);
+			}
+		}
+		
+		if(type.equals("Class Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String classId= map.get("classId");
+				String className=map.get("className");
+				String AssignedPupils=map.get("AssignedPupils");
+				DataComboBox.getItems().add("Class ID: " + classId + ", Class Name: " + className + ", Assigned Pupils:  " + AssignedPupils);
+			}
+			
+		}
+		
+		if(type.equals("Academic Activities Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String academicActivityId= map.get("academicActivityId");
+				String academicActivityName=map.get("academicActivityName");
+				String typeOfActivity=map.get("typeOfActivity");
+				DataComboBox.getItems().add("Academic Activity Id: " + academicActivityId + ", Academic Activity Name: " + academicActivityName + ", Type Of Activity: " + typeOfActivity);
+			}
+		}
+		
+		if(type.equals("Semester Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String semesterId= map.get("semesterId");
+				String semesterType=map.get("semesterType");
+				String semesterStatus=map.get("semesterStatus");
+				DataComboBox.getItems().add("Semester ID: " + semesterId + ", Semester Type: " + semesterType + ", Semester Status: " + semesterStatus);
+			}
+		}
+		
+		if(type.equals("Exeptional Requests Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String exceptonalRequestID= map.get("exceptonalRequestID");
+				String type1=map.get("type");
+				String descision=map.get("descision");
+				if(type1.equals("assign"))
+				{
+				DataComboBox.getItems().add("Exceptonal Request ID: " + exceptonalRequestID + ", Request Type: " + type1 + " pupil to course, Descision: " + descision);
+				}
+				if(type1.equals("delete"))
+				{
+				DataComboBox.getItems().add("Exceptonal Request ID: " + exceptonalRequestID + ", Request Type: " + type1 + " pupil from course, Descision: " + descision);
+				}
+				if(type1.equals("Reassign"))
+				{
+				DataComboBox.getItems().add("Exceptonal Request ID: " + exceptonalRequestID + ", Request Type: " + type1 + " teacher to course in class, Descision: " + descision);
+				}
+			}
+		}
+		
+		if(type.equals("Assignments Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String assignmentName= map.get("assignmentName");
+				String dueDate=map.get("dueDate");
+				String courseId=map.get("courseId");
+				DataComboBox.getItems().add("Assignment Name: " + assignmentName + ", Due Date: " + dueDate + ", For Course: " + courseId);
+			}
+		}
+		
+		if(type.equals("Secretary Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String userID = map.get("userId");
+				String userFName=map.get("userFirstName");
+				String userLname=map.get("userLastName");
+				DataComboBox.getItems().add("ID: " + userID + ", First Name: " + userFName + ", Last Name:  " + userLname);
+			}
+		}
+		
+		if(type.equals("System Manager Data"))
+		{
+			DataComboBox.getItems().clear();
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+
+				String userID = map.get("userId");
+				String userFName=map.get("userFirstName");
+				String userLname=map.get("userLastName");
+				DataComboBox.getItems().add("ID: " + userID + ", First Name: " + userFName + ", Last Name:  " + userLname);
+			}
+		}
 	}
 }
