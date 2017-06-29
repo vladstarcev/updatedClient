@@ -169,7 +169,7 @@ public class TeacherExeptionalRequestController implements IController {
     }
 
     /**
-     * Ceck id availability.
+     * Check id availability.
      *
      * @param event the event
      */
