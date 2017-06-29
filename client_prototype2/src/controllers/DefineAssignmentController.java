@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.Format;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -210,7 +211,11 @@ public class DefineAssignmentController implements IController {
 				if(flagAss)
 				{
 					LocalDateTime dueDate = DueDatePicker.getValue().atStartOfDay();
-		
+					String s = AssignmentFile.getName();
+					String format = null;
+					int i = s.lastIndexOf('.');
+					if (i > 0 &&  i < s.length() - 1) format = s.substring(i+1).toLowerCase();
+					
 					java.util.List<Object> values = new ArrayList<>();
 					values.add("add assignment");
 					values.add(dueDate);
