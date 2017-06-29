@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.UserController;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,6 +53,7 @@ public class PupilShowEvaluationFormController implements IController {
     private String grade;
     private String comments;
     private boolean flagEvaluation;
+    private String  UserID;
     
     private PupilFileController PupilFileController = new PupilFileController();
 
@@ -74,6 +76,7 @@ public class PupilShowEvaluationFormController implements IController {
         assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'PupilEvaluationForm.fxml'.";
         assert FinalGradeLabel != null : "fx:id=\"FinalGradeLabel\" was not injected: check your FXML file 'PupilEvaluationForm.fxml'.";
 
+        UserID=UserController.CurrentUserID;
         Main.client.controller=this;
 
     }
@@ -87,7 +90,7 @@ public class PupilShowEvaluationFormController implements IController {
     	data.add("courseID");
     	data.add(course);
     	data.add("pupilID");
-    	data.add(Main.userId);
+    	data.add(UserID);
     	
     	try
     	{
