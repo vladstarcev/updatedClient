@@ -106,7 +106,7 @@ public class AddCourseController implements IController{
     /**
      * Adding course to semester.
      *
-     * @param event the event
+     * @param event - enter Course
      */
     @FXML
     void addCourse(ActionEvent event) {
@@ -164,7 +164,7 @@ public class AddCourseController implements IController{
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - back to Secretary Menu
      */
     @FXML
     void backToMenu(ActionEvent event) { 
@@ -175,7 +175,7 @@ public class AddCourseController implements IController{
     /**
      * Checking the validation of study unit.
      *
-     * @param event the event
+     * @param event - enter Study Unit
      */
     @FXML
     void CheckStudyUnit(ActionEvent event) {
@@ -207,7 +207,7 @@ public class AddCourseController implements IController{
     /**
      * Checking the validation of weekly hours.
      *
-     * @param event the event
+     * @param event - enter weekly hours
      */
     @FXML
     void checkHours(ActionEvent event) {
@@ -261,7 +261,7 @@ public class AddCourseController implements IController{
     /**
      * Checking the course name.
      *
-     * @param event the event
+     * @param event - enter Course Name
      */
     @FXML
     void checkCourseName(ActionEvent event) {
@@ -286,7 +286,7 @@ public class AddCourseController implements IController{
     /**
      * Checking the validation of course ID.
      *
-     * @param event the event
+     * @param event - enter Course ID
      */
     @FXML
     void checkCourseID(ActionEvent event) {
