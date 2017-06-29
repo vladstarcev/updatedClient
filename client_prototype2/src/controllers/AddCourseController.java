@@ -169,7 +169,7 @@ public class AddCourseController implements IController{
     @FXML
     void backToMenu(ActionEvent event) { ///problem? 
 
-    	UserWindow.closeUserWindow(getClass(), (Stage) checkCourseNameBTN.getScene().getWindow());
+    	UserWindow.closeUserWindow(getClass(), (Stage) cancelBtn.getScene().getWindow());
     }
 
     /**
@@ -295,8 +295,17 @@ public class AddCourseController implements IController{
     	{
     		new Alert(AlertType.ERROR, "Course ID must Contain 5 digits", ButtonType.OK).showAndWait();
     	}
+
     	else
     	{
+    	   	for(int i=0;i<idTxt.getText().length();i++)
+    	   	{
+    	   		if(!(idTxt.getText().charAt(i)<='9'&&idTxt.getText().charAt(i)>='0')){
+    	    		new Alert(AlertType.ERROR, "Course must contain numbers!", ButtonType.OK).showAndWait();
+    	   			return;
+    	   		}
+    	   	}
+    	   	
     		ArrayList<String> data = new ArrayList<String>();
     		data.add("check if course exist");
     		data.add("select");
@@ -337,7 +346,6 @@ public class AddCourseController implements IController{
         assert CheckStudyUnitBTN != null : "fx:id=\"CheckStudyUnitBTN\" was not injected: check your FXML file 'SystemManagerAddCourse.fxml'.";
 
         Main.client.controller=this;
-        Main.stack.push("SystemManagerAddCourse");
         CourseIDf=0;
         CourseNamef=0;
         StuduUnit=0;

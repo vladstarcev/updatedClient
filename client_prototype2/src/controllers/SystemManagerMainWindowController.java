@@ -44,7 +44,7 @@ public class SystemManagerMainWindowController implements IController {
      */
     @FXML
     void addCourse(ActionEvent event) {
-    	Main.stack.push("SystemManagerDeleteCourse");
+    	Main.stack.push("SystemManagerAddCourse");
     	UserWindow.createUserWindow((Stage)addCourseBtn.getScene().getWindow(), "SystemManagerAddCourse", getClass());
     	
     }
@@ -69,7 +69,7 @@ public class SystemManagerMainWindowController implements IController {
     @FXML
     void LogOutSystemManager(ActionEvent event) {
     	
-    	UserWindow.closeUserWindow(getClass(), (Stage) deleteCourseBtn.getScene().getWindow());
+    	UserWindow.closeUserWindow(getClass(), (Stage) LogOutButton.getScene().getWindow());
     }
 
     /**
