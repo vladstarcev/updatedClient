@@ -45,7 +45,7 @@ public class DefineClassController implements IController
 	@FXML
 	private TextField ClassNameTextField;
 
-	/** The Enter M aximum pupil label. */
+	/** The Enter Maximum pupil label. */
 	@FXML
 	private Label EnterMAximumPupilLabel;
 
@@ -132,6 +132,13 @@ public class DefineClassController implements IController
 	@FXML
 	void DefineClass(ActionEvent event)
 	{
+		try{
+    		Integer.parseInt(MaximumPupilInClassTextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "The capacity must be a number!", ButtonType.OK).showAndWait();
+    		return;
+    	}
 
 		if (MaximumPupilInClassTextField.getText().startsWith("-") || MaximumPupilInClassTextField.getText().equals("0")
 				|| MaximumPupilInClassTextField.getText().isEmpty())
@@ -240,6 +247,13 @@ public class DefineClassController implements IController
 	@FXML
 	void CheckAvailability1(ActionEvent event)
 	{
+		try{
+    		Integer.parseInt(CheckAvailabilityButton1.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter 4-digit number", ButtonType.OK).showAndWait();
+    		return;
+    	}
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Class ID");
