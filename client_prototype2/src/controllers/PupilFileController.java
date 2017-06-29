@@ -209,7 +209,7 @@ public class PupilFileController implements IController {
     		return;
     	}
     	String[] ans = courseId.split(":");
-    	PupilShowEvaluationFormController.loadEvaluationForm(ans[0]);
+    	PupilShowEvaluationFormController.loadEvaluationForm(ans[0],UserID);
 		UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilEvaluationForm", getClass());
      }
 

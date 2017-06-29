@@ -113,7 +113,6 @@ public class PupilShowEvaluationFormController implements IController {
 
         UserID=UserController.CurrentUserID;
         Main.client.controller=this;
-
     }
     
     /**
@@ -121,7 +120,7 @@ public class PupilShowEvaluationFormController implements IController {
      *
      * @param course the course
      */
-    void loadEvaluationForm(String course)
+    void loadEvaluationForm(String course,String ID)
     {
     	ArrayList<String> data = new ArrayList<String>();
     	data.add("load evaluation form");
@@ -130,7 +129,7 @@ public class PupilShowEvaluationFormController implements IController {
     	data.add("courseID");
     	data.add(course);
     	data.add("pupilID");
-    	data.add(UserID);
+    	data.add(ID);
     	
     	try
     	{
