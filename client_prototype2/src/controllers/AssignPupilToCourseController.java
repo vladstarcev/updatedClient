@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class AssignPupilToCourseController.
+ * The Class AssignPupilToCourseController - this class is assigning pupil to course .
  */
 public class AssignPupilToCourseController implements IController {
 
@@ -36,7 +36,7 @@ public class AssignPupilToCourseController implements IController {
 	@FXML
 	private Button CheckPupilButton;
 
-	/** The Pupil I dlabla. */
+	/** The Pupil ID label. */
 	@FXML
 	private Label PupilIDlabla;
 
@@ -44,11 +44,11 @@ public class AssignPupilToCourseController implements IController {
 	@FXML
 	private Button CheckCourseButton;
 
-	/** The Request id text field. */
+	/** The Request id in text field. */
 	@FXML
 	private TextField RequestIdTextField;
 
-	/** The Pupil I dtext field. */
+	/** The Pupil ID in text field. */
 	@FXML
 	private TextField PupilIDtextField;
 
@@ -64,11 +64,11 @@ public class AssignPupilToCourseController implements IController {
 	@FXML
 	private Label RequestIdLabel;
 
-	/** The Assign pupil course lable 1. */
+	/** The Assign pupil course label 1. */
 	@FXML
 	private Label AssignPupilCourseLable1;
 
-	/** The Course I dtext field. */
+	/** The Course Id in text field. */
 	@FXML
 	private TextField CourseIDtextField;
 
@@ -76,7 +76,7 @@ public class AssignPupilToCourseController implements IController {
 	@FXML
 	private Button BackButton;
 
-	/** The Course I dlable. */
+	/** The Course Id label. */
 	@FXML
 	private Label CourseIDlable;
 
@@ -86,13 +86,13 @@ public class AssignPupilToCourseController implements IController {
     /** The check pupil ID. */
     private int checkPupilID;
     
-    /** The Exe re FLAG. */
+    /** The Exceptional request FLAG. */
     private int ExeReFLAG;
     
     /**
-     * Check pupil ID.
+     * checking the pupil ID.
      *
-     * @param event the event
+     * @param event - the action of enter Pupil ID
      */
     @FXML
     void CheckPupilID(ActionEvent event) {
@@ -114,9 +114,9 @@ public class AssignPupilToCourseController implements IController {
     }
 
     /**
-     * Check course ID.
+     * checking the course ID .
      *
-     * @param event the event
+     * @param event - the action of enter Course ID
      */
     @FXML
     void CheckCourseID(ActionEvent event) {
@@ -139,9 +139,9 @@ public class AssignPupilToCourseController implements IController {
     }
 
     /**
-     * Assign pupil course.
+     * checking the Assigning pupil to course.
      *
-     * @param event the event
+     * @param event - action that checking exceptional request flags , checking if the pupil Id entered correct, checking if the Course Id entered correct
      */
     @FXML
     void AssignPupilCourse(ActionEvent event) {
@@ -167,7 +167,7 @@ public class AssignPupilToCourseController implements IController {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - action that back to Secretary Menu
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -176,9 +176,9 @@ public class AssignPupilToCourseController implements IController {
     }
     
 	/**
-	 * Check request ID.
+	 * checking the request ID of Exceptional request.
 	 *
-	 * @param event the event
+	 * @param event 
 	 */
 	@FXML
 	void CheckRequestID(ActionEvent event)
@@ -259,7 +259,7 @@ public class AssignPupilToCourseController implements IController {
 	}
 	
 	/**
-	 * Load decision.
+	 * Loading the decision of School Manager.
 	 */
 	void loadDecision()
 	 {
@@ -289,7 +289,9 @@ public class AssignPupilToCourseController implements IController {
 	 }
     
 
-
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */  
 	@Override
 	public void handleAnswer(Object result) {
 		// TODO Auto-generated method stub
