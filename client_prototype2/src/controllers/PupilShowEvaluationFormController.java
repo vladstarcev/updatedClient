@@ -112,6 +112,7 @@ public class PupilShowEvaluationFormController implements IController {
         assert FinalGradeLabel != null : "fx:id=\"FinalGradeLabel\" was not injected: check your FXML file 'PupilEvaluationForm.fxml'.";
 
         UserID=UserController.CurrentUserID;
+        Main.stack.push("PupilEvaluationForm");
         Main.client.controller=this;
     }
     

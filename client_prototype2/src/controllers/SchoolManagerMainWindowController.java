@@ -178,6 +178,8 @@ public class SchoolManagerMainWindowController implements IController
 
 		Main.client.controller = this;
 		
+		Main.stack.push("SchoolManagerMainWindow");
+		
 	}
 
 	@Override

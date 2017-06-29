@@ -240,6 +240,8 @@ public class PupilFileController implements IController {
 
         UserID=UserController.CurrentUserID;
         Main.client.controller=this;
+        Main.stack.push("PupilFile");
+        
         allCourses = new HashMap<>();
         loadAllCourses();
     }

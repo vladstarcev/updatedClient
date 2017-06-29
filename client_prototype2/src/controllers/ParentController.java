@@ -54,6 +54,8 @@ public class ParentController implements IController
 
 		UserID=UserController.CurrentUserID;
 		Main.client.controller = this;
+		Main.stack.push("Parent");
+		
 		allPupils = new HashMap<>();
 		loadAllPupils();
 	}

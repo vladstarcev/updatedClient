@@ -372,6 +372,8 @@ public class TeacherExeptionalRequestController implements IController {
         assert ListCLassComboBox != null : "fx:id=\"ListCLassComboBox\" was not injected: check your FXML file 'ExeptionalRequestForTeacher.fxml'.";
 
         Main.client.controller=this;
+        Main.stack.push("ExeptionalRequestForTeacher");
+        
         ExFlag=0;
         cbClass="";
         ClassID="";

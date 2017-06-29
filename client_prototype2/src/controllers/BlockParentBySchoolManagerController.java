@@ -195,6 +195,7 @@ public class BlockParentBySchoolManagerController  implements IController {
         assert FreeParentButton != null : "fx:id=\"FreeParentButton\" was not injected: check your FXML file 'SchoolManagerBlockUser.fxml'.";
 
         Main.client.controller=this;
+        Main.stack.push("SchoolManagerBlockUser");
     }
 
 

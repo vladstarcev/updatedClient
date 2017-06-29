@@ -3,6 +3,7 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Main;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -219,6 +220,9 @@ public class SecretaryMainWindowController implements IController{
         assert OpenSemester != null : "fx:id=\"OpenSemester\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
         assert DefineClass != null : "fx:id=\"DefineClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
 
+        Main.client.controller=this;
+        Main.stack.push("SecretaryMainWindow");
+        
     }
 
 

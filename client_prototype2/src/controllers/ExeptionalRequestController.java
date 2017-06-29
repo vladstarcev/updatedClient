@@ -97,6 +97,7 @@ public class ExeptionalRequestController implements IController
 		assert PupilButton != null : "fx:id=\"PupilButton\" was not injected: check your FXML file 'SecretaryOpenExeptionalRequest.fxml'.";
 
 		Main.client.controller = this;
+		Main.stack.push("SecretaryOpenExeptionalRequest");
 	}
 
 	

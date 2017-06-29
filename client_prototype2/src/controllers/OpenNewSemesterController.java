@@ -385,6 +385,7 @@ public class OpenNewSemesterController implements IController
 
 		ActivityID = new ArrayList<String>();
 		SemID = new ArrayList<String>();
+		
 		Type = "";
 		Status = "";
 		SemesterID = "";

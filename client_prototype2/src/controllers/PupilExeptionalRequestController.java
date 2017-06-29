@@ -445,6 +445,8 @@ public class PupilExeptionalRequestController implements IController {
         assert CourseListLable != null : "fx:id=\"CourseListLable\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
         
         Main.client.controller=this;
+        Main.stack.push("ExeptionalRequestForPupil");
+        
         ReqIDflag=0;
     	cbCourseIDName="";
     	cbPupilIDName="";

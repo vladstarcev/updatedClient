@@ -279,6 +279,8 @@ public class DefineClassController implements IController
 		assert DefineClassButton != null : "fx:id=\"DefineClassButton\" was not injected: check your FXML file 'SecretaryDefineClass.fxml'.";
 
 		Main.client.controller = this;
+		Main.stack.push("SecretaryDefineClass");
+		
 		classID = new ArrayList<String>();
 		className = new ArrayList<String>();
 		ClassNAME = "";

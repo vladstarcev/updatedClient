@@ -294,6 +294,8 @@ public class PupilAssignmentController implements IController {
 
         UserID=UserController.CurrentUserID;
         Main.client.controller=this;
+        Main.stack.push("PupilAssignment");
+        
         allCourses = new HashMap<>();
         allAss =  new HashMap<>();
         loadAllCourses();

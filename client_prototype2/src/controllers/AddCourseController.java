@@ -337,7 +337,7 @@ public class AddCourseController implements IController{
         assert CheckStudyUnitBTN != null : "fx:id=\"CheckStudyUnitBTN\" was not injected: check your FXML file 'SystemManagerAddCourse.fxml'.";
 
         Main.client.controller=this;
-        
+        Main.stack.push("SystemManagerAddCourse");
         CourseIDf=0;
         CourseNamef=0;
         StuduUnit=0;

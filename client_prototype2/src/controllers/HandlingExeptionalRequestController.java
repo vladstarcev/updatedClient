@@ -375,6 +375,8 @@ public class HandlingExeptionalRequestController implements IController{
 
 
         Main.client.controller=this;
+        Main.stack.push("SchoolManagerHandlingExeptionalRequest");
+        
         allExeptionalRequests = new HashMap<>();
         des="";
         req="";

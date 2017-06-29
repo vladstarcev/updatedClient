@@ -278,6 +278,7 @@ public class DefineAssignmentController implements IController {
 		assert EnterAssNameTF != null : "fx:id=\"EnterAssNameTF\" was not injected: check your FXML file 'TeacherDefineAssignment.fxml'.";
 
 		Main.client.controller = this;
+		Main.stack.push("TeacherDefineAssignment");
 	}
 
 	@Override

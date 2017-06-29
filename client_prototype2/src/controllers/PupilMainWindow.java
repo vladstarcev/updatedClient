@@ -115,6 +115,8 @@ public class PupilMainWindow implements IController{
 
         UserID=UserController.CurrentUserID;
         Main.client.controller=this; 
+        Main.stack.push("PupilMainWindow");
+        
         loadPupil();
     }
 

@@ -285,6 +285,8 @@ public class DeletePupilFromCourseController implements IController
 		assert CourseIDLable != null : "fx:id=\"CourseIDLable\" was not injected: check your FXML file 'SecretaryDeletePupilFromCourse.fxml'.";
 
 		Main.client.controller=this;
+		 Main.stack.push("SecretaryDeletePupilFromCourse");
+		
 		PupilID="";
 		CourseID="";
 	    checkCourseID=0;

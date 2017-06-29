@@ -404,6 +404,8 @@ public class OpenCourseController implements IController{
         assert ChooseTeacherComboBox != null : "fx:id=\"ChooseTeacherComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
 
 		Main.client.controller = this;
+		Main.stack.push("SecretaryOpenCourse");
+		
 		StudyUnit = "";
 		cbCourseName = "";
 		cbClassName = "";

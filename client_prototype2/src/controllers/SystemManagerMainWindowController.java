@@ -83,6 +83,8 @@ public class SystemManagerMainWindowController implements IController {
 
         Main.client.controller=this;
         
+        Main.stack.push("SystemManagerMainWindow");
+        
         
     }
 

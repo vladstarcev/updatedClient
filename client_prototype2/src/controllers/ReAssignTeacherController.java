@@ -464,6 +464,7 @@ public class ReAssignTeacherController implements IController {
         assert ExReTextField1 != null : "fx:id=\"ExReTextField1\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
 
         Main.client.controller=this;
+        Main.stack.push("SecretaryReAssignTeacher");
         
 		ExFlag=0;
 		courseIDF=0;

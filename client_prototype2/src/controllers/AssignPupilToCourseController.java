@@ -224,7 +224,7 @@ public class AssignPupilToCourseController implements IController {
 
 
         Main.client.controller=this;
-        
+        Main.stack.push("SecretaryAssignPupilToCourse");
         checkCourseID=0;
         checkPupilID=0;
         ExeReFLAG=0;

@@ -107,6 +107,7 @@ public class DeleteCourseController implements IController {
         assert deleteBtn != null : "fx:id=\"deleteBtn\" was not injected: check your FXML file 'SystemManagerDeleteCourse.fxml'.";
     	
         Main.client.controller=this;
+        Main.stack.push("SystemManagerDeleteCourse");
     }
 
 	@Override

@@ -346,6 +346,8 @@ public class CreateEvaluationFormController implements IController  {
         assert PupilGradeTextLabel != null : "fx:id=\"PupilGradeTextLabel\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";
 
         Main.client.controller=this;
+        Main.stack.push("TeacherCreateEvaluationForm");
+        
         allCourses = new HashMap<>();
         allPupils = new HashMap<>();
         coursesOfTeacher = new HashMap<>();

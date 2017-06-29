@@ -353,7 +353,8 @@ public class AssignPupilToClassController implements IController
         assert BackButton != null : "fx:id=\"BackButton\" was not injected: check your FXML file 'SecretaryAssignPupilToClass.fxml'.";
         assert PupilIdLable != null : "fx:id=\"PupilIdLable\" was not injected: check your FXML file 'SecretaryAssignPupilToClass.fxml'.";
         assert SendButton1 != null : "fx:id=\"SendButton1\" was not injected: check your FXML file 'SecretaryAssignPupilToClass.fxml'.";
-		Main.client.controller = this;
+		
+        Main.client.controller = this;
 		Main.stack.push("SecretaryAssignPupilToClass");
 
 		PreCoursesID = new ArrayList<String>();

@@ -128,6 +128,8 @@ public class TeacherMainWindowController implements IController {
         assert TeacherMainLable != null : "fx:id=\"TeacherMainLable\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
 
         Main.client.controller=this;
+        
+        Main.stack.push("TeacherMainWindow");
     }
 
 

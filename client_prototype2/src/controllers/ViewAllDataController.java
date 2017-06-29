@@ -400,6 +400,8 @@ public class ViewAllDataController implements IController
 		assert ChooseLabel != null : "fx:id=\"ChooseLabel\" was not injected: check your FXML file 'SchoolManagerViewAllData.fxml'.";
 
 		Main.client.controller = this;
+		
+		 Main.stack.push("SchoolManagerViewAllData");
 
 		DATA = "";
 	}
