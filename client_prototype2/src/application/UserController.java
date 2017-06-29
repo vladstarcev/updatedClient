@@ -81,7 +81,7 @@ public class UserController implements IController {
 		}
 		if(permission.equals("3"))
 		{
-			UserWindow.createUserWindow((Stage) loginBtn.getScene().getWindow(), "SecretaryManagerMainWindow", getClass());
+			UserWindow.createUserWindow((Stage) loginBtn.getScene().getWindow(), "SecretaryMainWindow", getClass());
 		}
 		if(permission.equals("4"))
 		{
@@ -127,7 +127,7 @@ public class UserController implements IController {
 		{
 			if(arr.size()==0)
 			{
-				new Alert(AlertType.ERROR, "Wrong Password OR ID", ButtonType.OK);
+				new Alert(AlertType.ERROR, "Wrong Password OR ID", ButtonType.OK).showAndWait();
 			}
 			else
 			{

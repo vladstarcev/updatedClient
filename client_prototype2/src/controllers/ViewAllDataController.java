@@ -401,7 +401,7 @@ public class ViewAllDataController implements IController
 
 		Main.client.controller = this;
 		
-		 Main.stack.push("SchoolManagerViewAllData");
+		Main.stack.push("SchoolManagerViewAllData");
 
 		DATA = "";
 	}

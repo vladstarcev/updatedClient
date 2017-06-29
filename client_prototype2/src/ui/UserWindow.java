@@ -38,8 +38,8 @@ public class UserWindow
 		Main.stack.pop(); // current window
 		
 		String name = Main.stack.peek();
-		/*if(Main.stack.size()>1)
-			name = Main.stack.pop();*/
+		if(Main.stack.size()>1)
+			name = Main.stack.pop();
 		
 		try
 		{
