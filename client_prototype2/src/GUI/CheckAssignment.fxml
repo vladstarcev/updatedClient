@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="399.0" prefWidth="458.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="TeacherCheckAssignmentController">
+   <children>
+      <Label alignment="CENTER" layoutX="7.0" prefHeight="62.0" prefWidth="445.0" text="Teacher Check Assignment " underline="true">
+         <font>
+            <Font name="Bookman Old Style Bold" size="28.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ChooseCourseCB" layoutX="59.0" layoutY="93.0" onAction="#ChooseCourse" prefHeight="31.0" prefWidth="319.0" promptText="Choose Course" />
+      <ComboBox fx:id="ChooseAssCB" layoutX="59.0" layoutY="155.0" onAction="#ChooseAss" prefHeight="31.0" prefWidth="319.0" promptText="Choose Assignment" />
+      <Button fx:id="DownloadAssbutton" layoutX="100.0" layoutY="299.0" mnemonicParsing="false" onAction="#DownloadAss" prefHeight="31.0" prefWidth="237.0" text="Download Assignment" />
+      <ComboBox fx:id="ChoosePupilCB" layoutX="59.0" layoutY="217.0" onAction="#ChoosePupil" prefHeight="31.0" prefWidth="319.0" promptText="Choose Pupil" />
+   </children>
+</AnchorPane>

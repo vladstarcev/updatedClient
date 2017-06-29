@@ -16,8 +16,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		stack = new Stack<>();
 		client = new SchoolClient("localhost", 5556);
-		UserWindow.createUserWindow(primaryStage, "PupilAssignment", getClass());
-		stack.push("PupilAssignment");
+		UserWindow.createUserWindow(primaryStage, "loginFrame", getClass());
+		stack.push("loginFrame");
 
 		/// *********************************test********************************/
 
