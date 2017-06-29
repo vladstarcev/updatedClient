@@ -91,7 +91,7 @@ public class HandlingExeptionalRequestController implements IController{
     
     /** The req type. */
     private String reqType;
-    
+      
     /**
      * Choose exeptional requst.
      *
@@ -168,19 +168,20 @@ public class HandlingExeptionalRequestController implements IController{
     void SendAnswar(ActionEvent event) {
     	
     	req = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
-    	if(req.equals("")) 	new Alert(AlertType.ERROR, "No request selected!", ButtonType.OK).showAndWait();
-    	else if(des.equals("")) new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
-    	else if(des.equals("confirm"))
+    	if(req==null){
+    		new Alert(AlertType.ERROR, "No request selected!", ButtonType.OK).showAndWait();
+    		return;
+    	}
+    	if(des.equals("")){
+    		new Alert(AlertType.ERROR, "No descition excepted!", ButtonType.OK).showAndWait();
+    		return;
+    	}
+    	if(des.equals("confirm"))
     	{
     	  		
     		if(reqType.equals("Reassign"))
     		{
     			checkTeacherHours();
-    		}
-    		else
-    		{
-    	    	updateDescision(des);
-    			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
     		}
     	}
     		
@@ -188,6 +189,8 @@ public class HandlingExeptionalRequestController implements IController{
     	{
 	    	updateDescision(des);
 			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
+			while(ExeptionalRequstBox.getItems().size()>0) ExeptionalRequstBox.getItems().remove(0);
+			loadAllExeptionalRequest();
     	}
     }
 
@@ -485,7 +488,12 @@ public class HandlingExeptionalRequestController implements IController{
 			if(num<0)
 			{
 				new Alert(AlertType.INFORMATION, "Avialable Hours Of Teacher Not Enough For The Course!", ButtonType.OK).showAndWait();
+				return;
 			}
+			updateDescision(des);
+			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
+			while(ExeptionalRequstBox.getItems().size()>0) ExeptionalRequstBox.getItems().remove(0);
+			loadAllExeptionalRequest();
 		}
 	}
 }

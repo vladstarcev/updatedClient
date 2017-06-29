@@ -38,6 +38,10 @@ public class TeacherMainWindowController implements IController {
     /** The Evaluation form. */
     @FXML
     private MenuItem EvaluationForm;
+    
+    @FXML
+    private MenuItem checkAssMenuItem;
+
 
     /** The Teacher choose lable. */
     @FXML
@@ -103,6 +107,11 @@ public class TeacherMainWindowController implements IController {
 
     	
     }
+    
+    @FXML
+    void checkAss(ActionEvent event) {
+
+    }
 
     /**
      * Log out teacher.
@@ -123,6 +132,7 @@ public class TeacherMainWindowController implements IController {
         assert DefineAssignment != null : "fx:id=\"DefineAssignment\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
         assert TeacherMenuButton != null : "fx:id=\"TeacherMenuButton\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
         assert EvaluationForm != null : "fx:id=\"EvaluationForm\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
+        assert checkAssMenuItem != null : "fx:id=\"checkAssMenuItem\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
         assert TeacherChooseLable != null : "fx:id=\"TeacherChooseLable\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
         assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
         assert TeacherMainLable != null : "fx:id=\"TeacherMainLable\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
