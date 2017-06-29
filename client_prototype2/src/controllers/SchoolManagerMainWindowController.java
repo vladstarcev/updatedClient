@@ -136,7 +136,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void HandlingExeptionalRequestOperation(ActionEvent event)
 	{
-
+		
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	void SchoolManagerLogOut(ActionEvent event)
 	{
-
+		UserWindow.closeUserWindow(getClass(), (Stage)ChooseOperationLabel.getScene().getWindow());
 	}
 
 	/**

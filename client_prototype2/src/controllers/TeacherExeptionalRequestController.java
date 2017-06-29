@@ -502,7 +502,7 @@ public class TeacherExeptionalRequestController implements IController {
 			if(arr.size()> 0)
 			{
 				new Alert(AlertType.INFORMATION, "Exceptional Request Opened Susccesfully", ButtonType.OK).showAndWait();
-				UserWindow.closeUserWindow(getClass(), (Stage) CheckIdButton.getScene().getWindow());
+				UserWindow.exitToMenu(getClass(), (Stage) CheckIdButton.getScene().getWindow());
 			}
 		}
 	}

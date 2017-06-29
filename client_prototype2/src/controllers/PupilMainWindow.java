@@ -76,7 +76,8 @@ public class PupilMainWindow implements IController{
      */
     @FXML
     void PupilLogOut(ActionEvent event) {
-     UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "loginFrame", getClass());
+    	
+    	UserWindow.closeUserWindow(getClass(), (Stage)PupilMenuLable.getScene().getWindow());
     }
     
     /**
