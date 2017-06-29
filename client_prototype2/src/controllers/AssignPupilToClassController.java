@@ -21,7 +21,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class AssignPupilToClassController.
+ * The Class AssignPupilToClassController - this class is assigning pupil to class.
  */
 public class AssignPupilToClassController implements IController
 {
@@ -38,7 +38,7 @@ public class AssignPupilToClassController implements IController
     @FXML
     private Button SendButton2;
 
-    /** The Assign pupil class lable 2. */
+    /** The Assign pupil class label 2. */
     @FXML
     private Label AssignPupilClassLable2;
 
@@ -50,7 +50,7 @@ public class AssignPupilToClassController implements IController
     @FXML
     private TextField ClassIDTextField;
 
-    /** The Assign pupil class lable 1. */
+    /** The Assign pupil class label 1. */
     @FXML
     private Label AssignPupilClassLable1;
 
@@ -58,7 +58,7 @@ public class AssignPupilToClassController implements IController
     @FXML
     private Button AssignButton;
 
-    /** The Class id lable. */
+    /** The Class id label. */
     @FXML
     private Label ClassIdLable;
 
@@ -66,7 +66,7 @@ public class AssignPupilToClassController implements IController
     @FXML
     private Button BackButton;
 
-    /** The Pupil id lable. */
+    /** The Pupil id label. */
     @FXML
     private Label PupilIdLable;
 
@@ -77,7 +77,7 @@ public class AssignPupilToClassController implements IController
 	/** The Courses ID. */
 	private ArrayList<String> CoursesID;
 	
-	/** The Pre courses ID. */
+	/** The Pre-courses ID. */
 	private ArrayList<String> PreCoursesID;
 	
 	/** The Old courses ID. */
@@ -89,10 +89,10 @@ public class AssignPupilToClassController implements IController
 	/** The pupil ID. */
 	private String pupilID;
 
-	/** The pupil FLAG. */
+	/** The pupil flag. */
 	private int pupilFLAG;
 	
-	/** The class FLAG. */
+	/** The class flag. */
 	private int classFLAG;
 	
 	/** The Assigned. */
@@ -226,7 +226,7 @@ public class AssignPupilToClassController implements IController
 	}
 
 	/**
-	 * Assign pupil to class.
+	 * Assigning pupil to class.
 	 *
 	 * @param event the event
 	 */
@@ -243,13 +243,12 @@ public class AssignPupilToClassController implements IController
 		}
 		else
 		{
-			new Alert(AlertType.ERROR, "Enter Proper Pupil/Class ID And Check them Before Assigning .", ButtonType.OK)
-					.showAndWait();
+			new Alert(AlertType.ERROR, "Enter Proper Pupil/Class ID And Check them Before Assigning .", ButtonType.OK).showAndWait();
 		}
 	}
 
 	/**
-	 * Check if pupil already assigned to class.
+	 * Checking if the pupil is already assigned in class.
 	 */
 	void CheackIfPupilAlreadyAssignedToClass()
 	{
@@ -271,7 +270,7 @@ public class AssignPupilToClassController implements IController
 	}
 
 	/**
-	 * Load courses in class.
+	 * Loading courses in class.
 	 */
 	void loadCoursesInClass()
 	{
@@ -317,7 +316,7 @@ public class AssignPupilToClassController implements IController
 	}
 
 	/**
-	 * Check class capacity.
+	 * Checking the capacity of class.
 	 */
 	void CheckClassCapacity()
 	{
@@ -399,7 +398,7 @@ public class AssignPupilToClassController implements IController
 	}
 	
 	/**
-	 * Insert pupil in course.
+	 * Insert pupil to course.
 	 */
 	void InsertPupilInCourse()
 	{
@@ -511,7 +510,6 @@ public class AssignPupilToClassController implements IController
 		updateAssignedPupilsInClass();
 		InsertPupilInCourse();
 		new Alert(AlertType.INFORMATION, "PUPIL ADD SUCCESFULLY TO CLASS.", ButtonType.OK).showAndWait();
-		//ñâéøú çìåïïïïïïïïïïïïïïïïïï
 	}
 	
 	/**
@@ -544,7 +542,7 @@ public class AssignPupilToClassController implements IController
 	}
 	
 	/**
-	 * Load assigned pupil to old class.
+	 * Loading assigned pupil to old class.
 	 */
 	void loadAssignedPupilToOldClass()
 	{
@@ -565,7 +563,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
-	
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{

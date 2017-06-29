@@ -18,6 +18,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import ui.UserWindow;
 
 
 /**
@@ -34,11 +36,11 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	private URL location;
 
-	/** The Open semester lable. */
+	/** The Open semester label. */
 	@FXML
 	private Label OpenSemesterLable;
 
-	/** The Status lable. */
+	/** The Status label. */
 	@FXML
 	private Label StatusLable;
 
@@ -229,7 +231,7 @@ public class OpenNewSemesterController implements IController
 	}
 
 	/**
-	 * Load acaemic activities.
+	 * Load academic activities.
 	 *
 	 * @param ID the id
 	 */
@@ -263,8 +265,7 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
-		Type = "";
-		Status = "";
+		UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
 	}
 
 	/**
@@ -318,6 +319,13 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	void CheckSemesterID(ActionEvent event)
 	{
+		try{
+    		Integer.parseInt(CheckIDButton.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Enter a 6-digits number", ButtonType.OK).showAndWait();
+    		return;
+    	}
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Semester ID");
 		data.add("select");
