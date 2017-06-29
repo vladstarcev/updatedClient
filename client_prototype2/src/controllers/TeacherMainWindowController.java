@@ -122,7 +122,7 @@ public class TeacherMainWindowController implements IController {
     @FXML
     void LogOutTeacher(ActionEvent event) {
 
-    	UserWindow.closeUserWindow(getClass(), (Stage) TeacherMenuButton.getScene().getWindow());
+    	UserWindow.exitToMenu(getClass(), (Stage) TeacherMenuButton.getScene().getWindow());
     }
 
     /**
