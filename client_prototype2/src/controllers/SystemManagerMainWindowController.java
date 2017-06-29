@@ -69,7 +69,7 @@ public class SystemManagerMainWindowController implements IController {
     @FXML
     void LogOutSystemManager(ActionEvent event) {
     	
-    	UserWindow.closeUserWindow(getClass(), (Stage) deleteCourseBtn.getScene().getWindow());
+    	UserWindow.closeUserWindow(getClass(), (Stage) LogOutButton.getScene().getWindow());
     }
 
     /**
