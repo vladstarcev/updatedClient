@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.UserController;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,6 +64,7 @@ public class PupilAssignmentController implements IController {
 	private HashMap<String, HashMap<String, String>> allCourses;
 	private HashMap<String, HashMap<String, String>> allAss;
 	private File AssignmentFile;
+	private String UserID;
 
  
     @FXML
@@ -164,7 +166,7 @@ public class PupilAssignmentController implements IController {
 		 data.add("select");
 		 data.add("pupil_in_course");
 	 	data.add("userID");
-	 	data.add(Main.userId);
+	 	data.add(UserID);
 	
 	 	try
 	 	{
@@ -225,6 +227,7 @@ public class PupilAssignmentController implements IController {
         assert ProgressUpload != null : "fx:id=\"ProgressUpload\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
         assert CourseTextField != null : "fx:id=\"CourseTextField\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
 
+        UserID=UserController.CurrentUserID;
         Main.client.controller=this;
         allCourses = new HashMap<>();
         allAss =  new HashMap<>();

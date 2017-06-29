@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import application.Main;
+import application.UserController;
 import entities.*;
 import interfaces.IController;
 import javafx.event.ActionEvent;
@@ -29,6 +30,8 @@ public class ParentController implements IController
 
 	private HashMap<String, HashMap<String, String>> allPupils;
 
+	private String UserID;
+	
 	@FXML
 	void initialize()
 	{
@@ -38,6 +41,7 @@ public class ParentController implements IController
 
 		//Main.stack.push("Parent");
 
+		UserID=UserController.CurrentUserID;
 		Main.client.controller = this;
 		allPupils = new HashMap<>();
 		loadAllPupils();
@@ -70,7 +74,7 @@ public class ParentController implements IController
 		data.add("select");
 		data.add("pupil");
 		data.add("parentID");
-		data.add(Main.userId);
+		data.add(UserID);
 
 		try
 		{

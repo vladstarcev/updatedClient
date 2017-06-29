@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.UserController;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,6 +54,8 @@ public class PupilMainWindow implements IController{
     /** The Choose operation lable. */
     @FXML
     private Label ChooseOperationLable;
+    
+    private String UserID;
    
     /**
      * Pupil choose operation.
@@ -108,6 +111,7 @@ public class PupilMainWindow implements IController{
         assert PupilFile != null : "fx:id=\"PupilFile\" was not injected: check your FXML file 'PupilMainWindow.fxml'.";
         assert ChooseOperationLable != null : "fx:id=\"ChooseOperationLable\" was not injected: check your FXML file 'PupilMainWindow.fxml'.";
 
+        UserID=UserController.CurrentUserID;
         Main.client.controller=this; 
         loadPupil();
     }
