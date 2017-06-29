@@ -12,12 +12,14 @@ public class Main extends Application
 	public static SchoolClient client;
 	public static Object paramater;
 	public static String userId = null;
+	public static String ip;
+	public static String port;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
 		stack = new Stack<>();
-		client = new SchoolClient("localhost", 5556);
+		client = new SchoolClient(ip, Integer.parseInt(port));
 		stack.push("loginFrame");
 		UserWindow.createUserWindow(primaryStage, "loginFrame", getClass());
 		
@@ -34,6 +36,8 @@ public class Main extends Application
 
 	public static void main(String[] args)
 	{
+		ip=args[0];
+		port=args[1];
 		launch(args);
 	}
 }
