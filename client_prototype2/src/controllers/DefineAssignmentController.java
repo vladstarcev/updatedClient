@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.concurrent.Semaphore;
+
+import javax.xml.transform.OutputKeys;
 
 import application.Main;
 import interfaces.IController;
@@ -73,17 +76,20 @@ public class DefineAssignmentController implements IController {
 
 	/** The Assignment file. */
 	private File AssignmentFile;
-	
+
 	/** The flag ass. */
-	private boolean flagAss=false;
-	
+	private volatile boolean isExistingAssignment = false;
+
 	/** The flag course. */
-	private boolean flagCourse=false;
+	private volatile boolean isExistingCourse = false;
+	
+	private Semaphore semaphore = new Semaphore(0);
 
 	/**
 	 * Enter class ID.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void EnterClassID(ActionEvent event) {
@@ -93,7 +99,8 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Enter due date.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void EnterDueDate(ActionEvent event) {
@@ -105,7 +112,8 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Enter ass name.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void EnterAssName(ActionEvent event) {
@@ -115,11 +123,12 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Check existing ass.
 	 *
-	 * @param assName the ass name
-	 * @param courseId the course id
+	 * @param assName
+	 *            the ass name
+	 * @param courseId
+	 *            the course id
 	 */
-	void checkExistingAss(String assName,String courseId)
-	{
+	void checkExistingAss(String assName, String courseId) {
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("check assignment name");
@@ -129,50 +138,42 @@ public class DefineAssignmentController implements IController {
 		data.add(assName);
 		data.add("courseID");
 		data.add(courseId);
-		
-		
-		
-		try
-		{
+
+		try {
 			Main.client.sendToServer(data);
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 	/**
 	 * Search course id.
 	 *
-	 * @param courseId the course id
+	 * @param courseId
+	 *            the course id
 	 */
-	void searchCourseId(String courseId)
-	{
+	void searchCourseId(String courseId) {
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("search courseId");
 		data.add("select");
 		data.add("courses");
 		data.add("courseId");
 		data.add(courseId);
-		
-		try
-		{
+
+		try {
 			Main.client.sendToServer(data);
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	/**
 	 * Define assignment.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void DefineAssignment(ActionEvent event) {
@@ -183,87 +184,102 @@ public class DefineAssignmentController implements IController {
 		if (AssignmentFile == null) {
 			new Alert(AlertType.ERROR, "Missing assignment file!", ButtonType.OK).showAndWait();
 			return;
-		}
-		else if(assName.equals("")) {
+		} else if (assName.equals("")) {
 			new Alert(AlertType.ERROR, "Missing assignment name!", ButtonType.OK).showAndWait();
 			return;
-		}
-		else if(courseId.equals("")){
+		} else if (courseId.equals("")) {
 			new Alert(AlertType.ERROR, "Missing course Id!", ButtonType.OK).showAndWait();
 			return;
-		}
-		else if(DueDatePicker.getValue()==null)
+		} else if (DueDatePicker.getValue() == null) {
 			new Alert(AlertType.ERROR, "Missing date!", ButtonType.OK).showAndWait();
-		else{
-			byte[] contents;
-			try {
-				contents = Files.readAllBytes(AssignmentFile.toPath());
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-				return;
-			}
-			searchCourseId(courseId);
-			if(flagCourse)
-			{
-				checkExistingAss(assName,courseId);
-				if(flagAss)
-				{
-					LocalDateTime dueDate = DueDatePicker.getValue().atStartOfDay();
-					String s = AssignmentFile.getName();
-					String format = null;
-					int i = s.lastIndexOf('.');
-					if (i > 0 &&  i < s.length() - 1) format = s.substring(i+1).toLowerCase();
-					
-					java.util.List<Object> values = new ArrayList<>();
-					values.add("add assignment");
-					values.add(dueDate);
-					values.add(courseId);
-					values.add(contents);
-					values.add(AssignmentFile.getName());
-					values.add(EnterAssNameTF.getText());
-			
-					try 
-					{
-						Main.client.sendToServer(values);
-					} 
-					catch (IOException e) 
-					{
-						e.printStackTrace();
-					}
-					new Alert(AlertType.INFORMATION, "Assignment was defined successfully!", ButtonType.OK).showAndWait();
-				}
-
-			}
+			return;
 		}
+
+		Main.client.runOnUiThread(false);
+		searchCourseId(courseId);
+		checkExistingAss(assName, courseId);
+		semaphore.acquireUninterruptibly(2);
+		Main.client.runOnUiThread(true);
+
+		System.out.println("Checks completed");
+		
+		if (isExistingAssignment) {
+			new Alert(AlertType.ERROR, "Assignment already exists", ButtonType.OK).showAndWait();
+			return;
+		}
+
+		if (!isExistingCourse) {
+			new Alert(AlertType.ERROR, "Course does not exist", ButtonType.OK).showAndWait();
+			return;
+		}
+
+		byte[] contents;
+		try {
+			contents = Files.readAllBytes(AssignmentFile.toPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+
+		LocalDateTime dueDate = DueDatePicker.getValue().atStartOfDay();
+
+		if (dueDate.isBefore(LocalDateTime.now())) {
+			new Alert(AlertType.ERROR, "Due date must be in the future", ButtonType.OK).showAndWait();
+			return;
+		}
+
+		String s = AssignmentFile.getName();
+		String format = null;
+		int i = s.lastIndexOf('.');
+		if (i > 0 && i < s.length() - 1)
+			format = s.substring(i + 1).toLowerCase();
+
+		java.util.List<Object> values = new ArrayList<>();
+		values.add("add assignment");
+		values.add(dueDate);
+		values.add(courseId);
+		values.add(contents);
+		values.add(AssignmentFile.getName());
+		values.add(EnterAssNameTF.getText());
+
+		try {
+			Main.client.sendToServer(values);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		new Alert(AlertType.INFORMATION, "Assignment was defined successfully!", ButtonType.OK).showAndWait();
+		
+		isExistingAssignment = false;
+		isExistingCourse = false;
 
 	}
 
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event) {
-	     UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());     
+		UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
 
 	}
 
 	/**
 	 * Choose file to upload.
 	 *
-	 * @param event the event
+	 * @param event
+	 *            the event
 	 */
 	@FXML
 	void ChooseFileToUpload(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
 
 		// TODO add extension filter from DB
+
 		chooser.setTitle("Choose assignment file");
-        chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"));
+		chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.*"));
 		AssignmentFile = chooser.showOpenDialog(DefineAssignmentButton.getScene().getWindow());
 	}
 
@@ -288,55 +304,25 @@ public class DefineAssignmentController implements IController {
 
 	@Override
 	public void handleAnswer(Object result) {
-		if (result == null)
-		{
+		System.out.println("got answer");
+		if (result == null) {
 			// error
-
+			System.out.println("error");
 			return;
 		}
 
 		ArrayList<String> arr = (ArrayList<String>) result;
+		System.out.println("SIZE " + arr.size() + " CONTENTS " + arr.toString());
+
 		String type = arr.remove(0);
-		if (type.equals("search courseId"))
-		{
-			for (String row : arr)
-			{
-				String[] cols = row.split(";");
-				HashMap<String, String> map = new HashMap<>();
-			
-				for (String col : cols)
-				{
-					String[] field = col.split("=");
-					map.put(field[0], field[1]);
-				}
 
-			}
-			if(arr.size()==0){
-				new Alert(AlertType.ERROR, "Course Id is not exist!", ButtonType.OK).showAndWait();
-				flagCourse=false;
-			}
-			else flagCourse=true;
-
+		if (type.equals("search courseId")) {
+			isExistingCourse = !arr.isEmpty();
+			System.out.println("FINISHED WITH " + isExistingCourse);
+		} else if (type.equals("check assignment name")) {
+			isExistingAssignment = !arr.isEmpty();
 		}
-		else if (type.equals("check assignment name"))
-		{
-			for (String row : arr)
-			{
-				String[] cols = row.split(";");
-				HashMap<String, String> map = new HashMap<>();
-			
-				for (String col : cols)
-				{
-					String[] field = col.split("=");
-					map.put(field[0], field[1]);
-				}
-
-			}
-			if(arr.size()!=0){
-				new Alert(AlertType.ERROR, "Assignment name is already exist!", ButtonType.OK).showAndWait();
-				flagAss=false;
-			}
-			else flagAss=true;
-		}
+		
+		semaphore.release();
 	}
 }
