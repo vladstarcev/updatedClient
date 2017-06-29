@@ -243,13 +243,13 @@ public class AssignPupilToClassController implements IController
 		}
 		else
 		{
-			new Alert(AlertType.ERROR, "Enter Proper Pupil/Class ID And Ceack them Before Assigning .", ButtonType.OK)
+			new Alert(AlertType.ERROR, "Enter Proper Pupil/Class ID And Check them Before Assigning .", ButtonType.OK)
 					.showAndWait();
 		}
 	}
 
 	/**
-	 * Cheack if pupil already assigned to class.
+	 * Check if pupil already assigned to class.
 	 */
 	void CheackIfPupilAlreadyAssignedToClass()
 	{
@@ -725,6 +725,7 @@ public class AssignPupilToClassController implements IController
 		}
 		if (type.equals("Assign Pupil To Class"))
 		{
+			if (Assigned==1) return;
 			updateAssignedPupilsInClass();
 			InsertPupilInCourse();
 			new Alert(AlertType.INFORMATION, "PUPIL ADD SUCCESFULLY TO CLASS.", ButtonType.OK).showAndWait();

@@ -11,15 +11,20 @@ public class Main extends Application {
 	public static SchoolClient client;
 	public static Object paramater;
 	public static String userId = null;
+	public static String ip;
+	public static String port;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stack = new Stack<>();
-		client = new SchoolClient("localhost", 5556);
-		UserWindow.createUserWindow(primaryStage, "loginFrame", getClass());
+		client = new SchoolClient(ip, Integer.parseInt(port));
 		stack.push("loginFrame");
 
-		/// *********************************test********************************/
+		UserWindow.createUserWindow(primaryStage, "loginFrame", getClass());
+		
+		
+		///*********************************test********************************/
+
 
 		// UserWindow.createUserWindow(primaryStage, "PupilFile", getClass());
 		// stack.push("PupilFile");
@@ -29,7 +34,14 @@ public class Main extends Application {
 		/// *********************************test********************************/
 	}
 
-	public static void main(String[] args) {
+
+
+
+	public static void main(String[] args)
+	{
+		ip=args[0];
+		port=args[1];
+
 		launch(args);
 	}
 }

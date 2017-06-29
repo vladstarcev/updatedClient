@@ -21,7 +21,7 @@
       <TextArea fx:id="CommentsTextArea" layoutX="33.0" layoutY="332.0" prefHeight="170.0" prefWidth="328.0" />
       <Button fx:id="CreateEvaluationFormButton" layoutX="399.0" layoutY="385.0" mnemonicParsing="false" onAction="#CreateEvaluationForm" text="Create Evaluation Form" />
       <Button fx:id="BackButton" layoutX="422.0" layoutY="429.0" mnemonicParsing="false" onAction="#BackToMenu" text="Back To Menu" />
-      <ComboBox fx:id="chooseCourseCB" layoutX="132.0" layoutY="137.0" onAction="#chooseCourse" prefWidth="150.0" />
+      <ComboBox fx:id="chooseCourseCB" layoutX="150.0" layoutY="136.0" onAction="#chooseCourse" prefWidth="150.0" />
       <Label fx:id="CourseLabel" layoutX="36.0" layoutY="141.0" text="Choose Course:" />
       <ComboBox fx:id="choosePupilCB" layoutX="132.0" layoutY="191.0" onAction="#choosePupil" prefWidth="150.0" />
    </children>
