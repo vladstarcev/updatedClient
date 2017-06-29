@@ -7,47 +7,43 @@ import interfaces.IController;
 import javafx.application.Platform;
 import OCSF.*;
 
-public class SchoolClient extends AbstractClient
-{
+public class SchoolClient extends AbstractClient {
+	private boolean runOnUi = true;
 	public User user;
 	public IController controller;
 
-	public SchoolClient(String host, int port) throws IOException
-	{
+	public SchoolClient(String host, int port) throws IOException {
 		super(host, port);
 		openConnection();
 	}
 
-	public void handleMessageFromServer(Object msg)
-	{
-		if (controller != null)
-		{
-			try
-			{
-				Platform.runLater(new Runnable()
-				{
+	public void runOnUiThread(boolean run) {
+		runOnUi = run;
+	}
+
+	public void handleMessageFromServer(Object msg) {
+		if (controller != null) {
+			try {
+				if (!runOnUi) {
+					controller.handleAnswer(msg);
+					return;
+				}
+				Platform.runLater(new Runnable() {
 					@Override
-					public void run()
-					{
+					public void run() {
 						controller.handleAnswer(msg);
 					}
 				});
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public void quit()
-	{
-		try
-		{
+	public void quit() {
+		try {
 			closeConnection();
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 		}
 		System.exit(0);
 	}
