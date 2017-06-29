@@ -192,7 +192,8 @@ public class HandlingExeptionalRequestController implements IController{
 	    	updateDescision(des);
 			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
 			String selected = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
-			ExeptionalRequstBox.getItems().remove(selected);
+			//ExeptionalRequstBox.getItems().remove(selected);
+			
     	}
     }
 
