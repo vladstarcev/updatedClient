@@ -126,7 +126,7 @@ public class PupilMainWindow implements IController{
   data.add("select");
   data.add("pupil");
   data.add("userID");
-  data.add(Main.userId);
+  data.add(UserID);
 
   try
   {

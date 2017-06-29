@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.UserController;
 import interfaces.IController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -98,7 +99,7 @@ public class PupilFileController implements IController {
     /** The grade sheet. */
     private String gradeSheet="";
     
-    
+    private String  UserID;
     /**
      * Load all courses.
      */
@@ -128,7 +129,7 @@ public class PupilFileController implements IController {
     	data.add("select");
     	data.add("pupil_in_course");
     	data.add("userID");
-    	data.add(Main.userId);
+    	data.add(UserID);
 
 	 	try
 	 	{
@@ -150,7 +151,7 @@ public class PupilFileController implements IController {
 		data.add("select");
 		data.add("pupil_in_course");
 	 	data.add("userID");
-	 	data.add(Main.userId);
+	 	data.add(UserID);
 	
 	 	try
 	 	{
@@ -235,6 +236,7 @@ public class PupilFileController implements IController {
         assert ShowGradeSheetIten != null : "fx:id=\"ShowGradeSheetIten\" was not injected: check your FXML file 'PupilFile.fxml'.";
         assert ChooseLable != null : "fx:id=\"ChooseLable\" was not injected: check your FXML file 'PupilFile.fxml'.";
 
+        UserID=UserController.CurrentUserID;
         Main.client.controller=this;
         allCourses = new HashMap<>();
         loadAllCourses();
