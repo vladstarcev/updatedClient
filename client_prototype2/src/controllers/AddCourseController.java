@@ -19,11 +19,11 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class AddCourseController.
+ * The Class AddCourseController - this class adding a course to DB from the System manager
  */
 public class AddCourseController implements IController{
 
-    /** The resources. */
+    /** The resources . */
     @FXML
     private ResourceBundle resources;
 
@@ -35,76 +35,76 @@ public class AddCourseController implements IController{
     @FXML
     private Label OpenLabel;
 
-    /** The id txt. */
+    /** The id text. */
     @FXML
     private TextField idTxt;
 
-    /** The cancel btn. */
+    /** The cancel button. */
     @FXML
     private Button cancelBtn;
 
-    /** The name txt. */
+    /** The name text. */
     @FXML
     private TextField nameTxt;
 
-    /** The unit txt. */
+    /** The unit text. */
     @FXML
     private TextField unitTxt;
 
-    /** The check hours BTN. */
+    /** The check hours Button. */
     @FXML
     private Button checkHoursBTN;
 
-    /** The course name lbl. */
+    /** The course name label. */
     @FXML
     private Label courseNameLbl;
 
-    /** The id lbl. */
+    /** The id label. */
     @FXML
     private Label idLbl;
 
-    /** The add btn. */
+    /** The add Button. */
     @FXML
     private Button addBtn;
 
-    /** The check course name BTN. */
+    /** The check course name Button. */
     @FXML
     private Button checkCourseNameBTN;
 
-    /** The hours txt. */
+    /** The hours text. */
     @FXML
     private TextField hoursTxt;
 
-    /** The s unit lbl. */
+    /** The s unit label. */
     @FXML
     private Label sUnitLbl;
 
-    /** The hours lbl. */
+    /** The hours label. */
     @FXML
     private Label hoursLbl;
 
-    /** The check course IDBTN. */
+    /** The check courseID Button. */
     @FXML
     private Button checkCourseIDBTN;
 
-    /** The Check study unit BTN. */
+    /** The Check study unit Button. */
     @FXML
     private Button CheckStudyUnitBTN;
     
-    /** The Course I df. */
+    /** The Course ID flag. */
     private int CourseIDf;
     
-    /** The Course namef. */
+    /** The Course name flag. */
     private int CourseNamef;
     
-    /** The Studu unit. */
+    /** The Study unit. */
     private int StuduUnit;
     
     /** The Weekly hours. */
     private int WeeklyHours;
 
     /**
-     * Adds the course.
+     * Adding course to semester.
      *
      * @param event the event
      */
@@ -167,13 +167,13 @@ public class AddCourseController implements IController{
      * @param event the event
      */
     @FXML
-    void backToMenu(ActionEvent event) { ///problem? 
+    void backToMenu(ActionEvent event) { 
 
     	UserWindow.closeUserWindow(getClass(), (Stage) cancelBtn.getScene().getWindow());
     }
 
     /**
-     * Check study unit.
+     * Checking the validation of study unit.
      *
      * @param event the event
      */
@@ -205,7 +205,7 @@ public class AddCourseController implements IController{
     }
 
     /**
-     * Check hours.
+     * Checking the validation of weekly hours.
      *
      * @param event the event
      */
@@ -259,7 +259,7 @@ public class AddCourseController implements IController{
     }
 
     /**
-     * Check course name.
+     * Checking the course name.
      *
      * @param event the event
      */
@@ -284,7 +284,7 @@ public class AddCourseController implements IController{
     }
 
     /**
-     * Check course ID.
+     * Checking the validation of course ID.
      *
      * @param event the event
      */
@@ -352,6 +352,9 @@ public class AddCourseController implements IController{
         WeeklyHours=0;
     }
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result) {
 		// TODO Auto-generated method stub
