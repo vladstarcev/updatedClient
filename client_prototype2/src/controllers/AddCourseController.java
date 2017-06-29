@@ -18,64 +18,96 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class AddCourseController.
+ */
 public class AddCourseController implements IController{
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Open label. */
     @FXML
     private Label OpenLabel;
 
+    /** The id txt. */
     @FXML
     private TextField idTxt;
 
+    /** The cancel btn. */
     @FXML
     private Button cancelBtn;
 
+    /** The name txt. */
     @FXML
     private TextField nameTxt;
 
+    /** The unit txt. */
     @FXML
     private TextField unitTxt;
 
+    /** The check hours BTN. */
     @FXML
     private Button checkHoursBTN;
 
+    /** The course name lbl. */
     @FXML
     private Label courseNameLbl;
 
+    /** The id lbl. */
     @FXML
     private Label idLbl;
 
+    /** The add btn. */
     @FXML
     private Button addBtn;
 
+    /** The check course name BTN. */
     @FXML
     private Button checkCourseNameBTN;
 
+    /** The hours txt. */
     @FXML
     private TextField hoursTxt;
 
+    /** The s unit lbl. */
     @FXML
     private Label sUnitLbl;
 
+    /** The hours lbl. */
     @FXML
     private Label hoursLbl;
 
+    /** The check course IDBTN. */
     @FXML
     private Button checkCourseIDBTN;
 
+    /** The Check study unit BTN. */
     @FXML
     private Button CheckStudyUnitBTN;
     
+    /** The Course I df. */
     private int CourseIDf;
+    
+    /** The Course namef. */
     private int CourseNamef;
+    
+    /** The Studu unit. */
     private int StuduUnit;
+    
+    /** The Weekly hours. */
     private int WeeklyHours;
 
+    /**
+     * Adds the course.
+     *
+     * @param event the event
+     */
     @FXML
     void addCourse(ActionEvent event) {
 
@@ -129,12 +161,22 @@ public class AddCourseController implements IController{
     	
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void backToMenu(ActionEvent event) { ///problem? 
 
     	UserWindow.closeUserWindow(getClass(), (Stage) checkCourseNameBTN.getScene().getWindow());
     }
 
+    /**
+     * Check study unit.
+     *
+     * @param event the event
+     */
     @FXML
     void CheckStudyUnit(ActionEvent event) {
 
@@ -162,6 +204,11 @@ public class AddCourseController implements IController{
     	}
     }
 
+    /**
+     * Check hours.
+     *
+     * @param event the event
+     */
     @FXML
     void checkHours(ActionEvent event) {
     	
@@ -211,6 +258,11 @@ public class AddCourseController implements IController{
     	}
     }
 
+    /**
+     * Check course name.
+     *
+     * @param event the event
+     */
     @FXML
     void checkCourseName(ActionEvent event) {
 
@@ -231,6 +283,11 @@ public class AddCourseController implements IController{
 		}
     }
 
+    /**
+     * Check course ID.
+     *
+     * @param event the event
+     */
     @FXML
     void checkCourseID(ActionEvent event) {
 
@@ -258,6 +315,9 @@ public class AddCourseController implements IController{
     	}
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert OpenLabel != null : "fx:id=\"OpenLabel\" was not injected: check your FXML file 'SystemManagerAddCourse.fxml'.";

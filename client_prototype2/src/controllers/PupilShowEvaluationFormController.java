@@ -23,50 +23,85 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
+/**
+ * The Class PupilShowEvaluationFormController.
+ */
 public class PupilShowEvaluationFormController implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Final grade text field. */
     @FXML
     private TextField FinalGradeTextField;
 
+    /** The Comments label. */
     @FXML
     private Label CommentsLabel;
 
+    /** The Form menu label. */
     @FXML
     private Label FormMenuLabel;
 
+    /** The Comments text area. */
     @FXML
     private TextArea CommentsTextArea;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Final grade label. */
     @FXML
     private Label FinalGradeLabel;
     
+    /** The course id. */
     private String courseId;
+    
+    /** The grade. */
     private String grade;
+    
+    /** The comments. */
     private String comments;
+    
+    /** The flag evaluation. */
     private boolean flagEvaluation;
+    
+    /** The User ID. */
     private String  UserID;
     
+    /** The Pupil file controller. */
     private PupilFileController PupilFileController = new PupilFileController();
 
+    /**
+     * Pupil final grade.
+     *
+     * @param event the event
+     */
     @FXML
     void PupilFinalGrade(ActionEvent event) {
 
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
         UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert FinalGradeTextField != null : "fx:id=\"FinalGradeTextField\" was not injected: check your FXML file 'PupilEvaluationForm.fxml'.";
@@ -81,6 +116,11 @@ public class PupilShowEvaluationFormController implements IController {
 
     }
     
+    /**
+     * Load evaluation form.
+     *
+     * @param course the course
+     */
     void loadEvaluationForm(String course)
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -101,7 +141,7 @@ public class PupilShowEvaluationFormController implements IController {
     		e.printStackTrace();
     	}
     }
-    
+   
 	@Override
 	public void handleAnswer(Object result) {
 	 	if (result == null)

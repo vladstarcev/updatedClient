@@ -22,63 +22,103 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class CreateEvaluationFormController.
+ */
 public class CreateEvaluationFormController implements IController  {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The choose course CB. */
     @FXML
     private ComboBox<String> chooseCourseCB;
 
+    /** The Evaluation form window label. */
     @FXML
     private Label EvaluationFormWindowLabel;
 
+    /** The Grade label. */
     @FXML
     private Label GradeLabel;
 
+    /** The Comments label. */
     @FXML
     private Label CommentsLabel;
 
+    /** The Pupil label. */
     @FXML
     private Label PupilLabel;
 
+    /** The Comments text area. */
     @FXML
     private TextArea CommentsTextArea;
 
+    /** The choose pupil CB. */
     @FXML
     private ComboBox<String> choosePupilCB;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Course label. */
     @FXML
     private Label CourseLabel;
 
+    /** The Create evaluation form button. */
     @FXML
     private Button CreateEvaluationFormButton;
 
+    /** The Pupil grade text label. */
     @FXML
     private TextField PupilGradeTextLabel;
 
 
+	/** The all courses. */
 	private HashMap<String, HashMap<String, String>> allCourses;
+	
+	/** The all pupils. */
 	private HashMap<String, HashMap<String, String>> allPupils;
+	
+	/** The courses of teacher. */
 	private HashMap<String, HashMap<String, String>> coursesOfTeacher;
+	
+	/** The pupil in class. */
 	private ArrayList<String> pupilInClass;
+	
+	/** The course class. */
 	private HashMap<String,String> courseClass;
 
+	/** The course id. */
 	private String courseId;
+	
+	/** The class id. */
 	private String classId;
+	
+	/** The pupil id. */
 	private String pupilId;
 
+    /**
+     * Enter pupil grade.
+     *
+     * @param event the event
+     */
     @FXML
     void EnterPupilGrade(ActionEvent event) {
 
     }
 
+    /**
+     * Creates the evaluation form.
+     *
+     * @param event the event
+     */
     @FXML
     void CreateEvaluationForm(ActionEvent event) {
         String selectedCourse= chooseCourseCB.getSelectionModel().getSelectedItem();
@@ -143,11 +183,21 @@ public class CreateEvaluationFormController implements IController  {
 
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
     	UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
     }
 
+    /**
+     * Choose course.
+     *
+     * @param event the event
+     */
     @FXML
     void chooseCourse(ActionEvent event) {
     	String arr = chooseCourseCB.getSelectionModel().getSelectedItem();
@@ -158,10 +208,19 @@ public class CreateEvaluationFormController implements IController  {
         loadPupilInClass(classId);
     }
 
+    /**
+     * Choose pupil.
+     *
+     * @param event the event
+     */
     @FXML
     void choosePupil(ActionEvent event) {
     	
     }
+    
+    /**
+     * Load all courses.
+     */
     void loadAllCourses()
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -178,6 +237,9 @@ public class CreateEvaluationFormController implements IController  {
     	}
     }
 	    
+    /**
+     * Load courses of teacher.
+     */
     void loadCoursesOfTeacher()
     {
     	  ArrayList<String> data = new ArrayList<String>();
@@ -196,6 +258,9 @@ public class CreateEvaluationFormController implements IController  {
     	  }
     }
     
+    /**
+     * Load all pupils.
+     */
     void loadAllPupils()
     {
 		ArrayList<String> data = new ArrayList<String>();
@@ -215,6 +280,11 @@ public class CreateEvaluationFormController implements IController  {
 		}
     }
     
+    /**
+     * Load pupil in class.
+     *
+     * @param classId the class id
+     */
     void loadPupilInClass(String classId)
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -234,6 +304,11 @@ public class CreateEvaluationFormController implements IController  {
    	  	}
     }
     
+    /**
+     * Load pupils in course.
+     *
+     * @param courseId the course id
+     */
     void loadPupilsInCourse(String courseId)
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -253,6 +328,9 @@ public class CreateEvaluationFormController implements IController  {
    	  	}
     }
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert chooseCourseCB != null : "fx:id=\"chooseCourseCB\" was not injected: check your FXML file 'TeacherCreateEvaluationForm.fxml'.";

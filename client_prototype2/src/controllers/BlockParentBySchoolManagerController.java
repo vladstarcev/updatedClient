@@ -19,60 +19,100 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+
+/**
+ * The Class BlockParentBySchoolManagerController.
+ */
 public class BlockParentBySchoolManagerController  implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Block parent button. */
     @FXML
     private Button BlockParentButton;
 
+    /** The Block user label. */
     @FXML
     private Label BlockUserLabel;
 
+    /** The Pupil ID text field. */
     @FXML
     private TextField PupilIDTextField;
 
+    /** The Enter pupil ID label. */
     @FXML
     private Label EnterPupilIDLabel;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Free parent button. */
     @FXML
     private Button FreeParentButton;
     
 
+    /** The Parent id. */
     private String ParentId;
+    
+    /** The flag block. */
     private boolean flagBlock;
+    
+    /** The access. */
     private String access;
 
+    /**
+     * Enter pupil ID.
+     *
+     * @param event the event
+     */
     @FXML
     void EnterPupilID(ActionEvent event) {
 
     }
 
+    /**
+     * Block parent.
+     *
+     * @param event the event
+     */
     @FXML
     void BlockParent(ActionEvent event) {
     	flagBlock = true;
     	findPupil();
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
     	UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
 
     }
 
+    /**
+     * Free parent.
+     *
+     * @param event the event
+     */
     @FXML
     void FreeParent(ActionEvent event) {
     	flagBlock = false;
     	findPupil();
     }
     
+    /**
+     * Find pupil.
+     */
     void findPupil()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -91,6 +131,12 @@ public class BlockParentBySchoolManagerController  implements IController {
 		}
 	}
     
+	/**
+	 * Update parent permission.
+	 *
+	 * @param ParentId the parent id
+	 * @param acc the acc
+	 */
 	void updateParentPermission(String ParentId, String acc)
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -136,6 +182,9 @@ public class BlockParentBySchoolManagerController  implements IController {
 		}
 	}
 	    
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert BlockParentButton != null : "fx:id=\"BlockParentButton\" was not injected: check your FXML file 'SchoolManagerBlockUser.fxml'.";
@@ -147,6 +196,7 @@ public class BlockParentBySchoolManagerController  implements IController {
 
         Main.client.controller=this;
     }
+
 
 	@Override
 	public void handleAnswer(Object result) {

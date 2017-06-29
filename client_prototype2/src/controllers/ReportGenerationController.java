@@ -14,45 +14,71 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class ReportGenerationController.
+ */
 public class ReportGenerationController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Report menu button. */
 	@FXML
 	private MenuButton ReportMenuButton;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Between courses. */
 	@FXML
 	private MenuItem BetweenCourses;
 
+	/** The Between teachers. */
 	@FXML
 	private MenuItem BetweenTeachers;
 
+	/** The Report window label. */
 	@FXML
 	private Label ReportWindowLabel;
 
+	/** The Between classes. */
 	@FXML
 	private MenuItem BetweenClasses;
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
 		UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
 	}
 
+	/**
+	 * Choose report.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ChooseReport(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Classes of teacher.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ClassesOfTeacher(ActionEvent event)
 	{
@@ -62,6 +88,11 @@ public class ReportGenerationController implements IController
 
 	}
 
+	/**
+	 * Courses in class.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CoursesInClass(ActionEvent event)
 	{
@@ -69,6 +100,11 @@ public class ReportGenerationController implements IController
 		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(), "ReportBetweenDiferentCoursesOfSpecificClass", getClass());
 	}
 
+	/**
+	 * Teachers in class.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void TeachersInClass(ActionEvent event)
 	{
@@ -77,6 +113,9 @@ public class ReportGenerationController implements IController
 				"ReportBetweenTeachersOfSpecificClass", getClass());
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{

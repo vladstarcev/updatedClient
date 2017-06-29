@@ -25,48 +25,75 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
+/**
+ * The Class PupilAssignmentController.
+ */
 public class PupilAssignmentController implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Upload text field. */
     @FXML
     private Label UploadTextField;
 
+    /** The choose course CB. */
     @FXML
     private ComboBox<String> chooseCourseCB;
 
+    /** The Assignment text field. */
     @FXML
     private Label AssignmentTextField;
 
+    /** The Upload button. */
     @FXML
     private Button UploadButton;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The File hyper link. */
     @FXML
     private Hyperlink FileHyperLink;
 
+    /** The choose ass CB. */
     @FXML
     private ComboBox<String> chooseAssCB;
 
+    /** The Progress upload. */
     @FXML
     private ProgressIndicator ProgressUpload;
 
+    /** The Course text field. */
     @FXML
     private Label CourseTextField;
 
 	    
+	/** The all courses. */
 	private HashMap<String, HashMap<String, String>> allCourses;
+	
+	/** The all ass. */
 	private HashMap<String, HashMap<String, String>> allAss;
+	
+	/** The Assignment file. */
 	private File AssignmentFile;
+	
+	/** The User ID. */
 	private String UserID;
 
  
+    /**
+     * Upload solution file.
+     *
+     * @param event the event
+     */
     @FXML
     void UploadSolutionFile(ActionEvent event) {
     	String selectedCourse = chooseCourseCB.getSelectionModel().getSelectedItem();
@@ -111,6 +138,11 @@ public class PupilAssignmentController implements IController {
     	
     }
 
+    /**
+     * Choose solution file.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseSolutionFile(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
@@ -121,11 +153,21 @@ public class PupilAssignmentController implements IController {
 		
     }
 
+    /**
+     * Back to pupil menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToPupilMenu(ActionEvent event) {
      UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());     
     }
 
+    /**
+     * Choose course.
+     *
+     * @param event the event
+     */
     @FXML
     void chooseCourse(ActionEvent event) {
      String selectedCourse= chooseCourseCB.getSelectionModel().getSelectedItem();
@@ -134,6 +176,11 @@ public class PupilAssignmentController implements IController {
      	loadAssOfCourse(ans[0]);
      }
 
+    /**
+     * Choose ass.
+     *
+     * @param event the event
+     */
     @FXML
     void chooseAss(ActionEvent event) {
      String selectedAss= chooseAssCB.getSelectionModel().getSelectedItem();
@@ -141,6 +188,9 @@ public class PupilAssignmentController implements IController {
     }
 
 
+    /**
+     * Load all courses.
+     */
     void loadAllCourses()
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -159,7 +209,10 @@ public class PupilAssignmentController implements IController {
     
 
 
-	 void loadCoursesOfPupil()
+	 /**
+ 	 * Load courses of pupil.
+ 	 */
+ 	void loadCoursesOfPupil()
 	 {
 		 ArrayList<String> data = new ArrayList<String>();
 		 data.add("load courses of pupil");
@@ -178,7 +231,10 @@ public class PupilAssignmentController implements IController {
 	 	}
 	 }
 	    
-	 void loadAllAss()
+	 /**
+ 	 * Load all ass.
+ 	 */
+ 	void loadAllAss()
 	 {
 		  ArrayList<String> data = new ArrayList<String>();
 		  data.add("load all assignments");
@@ -196,7 +252,12 @@ public class PupilAssignmentController implements IController {
 		   
 	 }
 	 
-	 void loadAssOfCourse(String courseId)
+	 /**
+ 	 * Load ass of course.
+ 	 *
+ 	 * @param courseId the course id
+ 	 */
+ 	void loadAssOfCourse(String courseId)
 	 {  
 		 ArrayList<String> data = new ArrayList<String>();
 		 data.add("load assignment of course");
@@ -215,6 +276,10 @@ public class PupilAssignmentController implements IController {
 		 }
 	  
 	}
+	
+	/**
+	 * Initialize.
+	 */
 	@FXML
     void initialize() {
         assert UploadTextField != null : "fx:id=\"UploadTextField\" was not injected: check your FXML file 'PupilAssignment.fxml'.";
@@ -234,6 +299,7 @@ public class PupilAssignmentController implements IController {
         loadAllCourses();
     }
 
+	
 	@Override
 	public void handleAnswer(Object result) 
  	{

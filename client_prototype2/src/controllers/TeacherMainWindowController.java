@@ -14,66 +14,110 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class TeacherMainWindowController.
+ */
 public class TeacherMainWindowController implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Define assignment. */
     @FXML
     private MenuItem DefineAssignment;
 
+    /** The Teacher menu button. */
     @FXML
     private MenuButton TeacherMenuButton;
 
+    /** The Evaluation form. */
     @FXML
     private MenuItem EvaluationForm;
 
+    /** The Teacher choose lable. */
     @FXML
     private Label TeacherChooseLable;
 
+    /** The Log out button. */
     @FXML
     private Button LogOutButton;
 
+    /** The Teacher main lable. */
     @FXML
     private Label TeacherMainLable;
 
+    /**
+     * Teacher choose operation.
+     *
+     * @param event the event
+     */
     @FXML
     void TeacherChooseOperation(ActionEvent event) {
     	
     }
 
+    /**
+     * Define assignment window.
+     *
+     * @param event the event
+     */
     @FXML
     void DefineAssignmentWindow(ActionEvent event) {
     	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "TeacherDefineAssignment", getClass());
     	Main.stack.push("TeacherMainWindow");
     }
 
+    /**
+     * Define.
+     *
+     * @param event the event
+     */
     @FXML
     void Define(ActionEvent event) {
     	
     }
 
+    /**
+     * Evaluation form window.
+     *
+     * @param event the event
+     */
     @FXML
     void EvaluationFormWindow(ActionEvent event) {
     	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "TeacherCreateEvaluationForm", getClass());
     	Main.stack.push("TeacherMainWindow");
     }
 
+    /**
+     * Grade and comments.
+     *
+     * @param event the event
+     */
     @FXML
     void GradeAndComments(ActionEvent event) {
 
     	
     }
 
+    /**
+     * Log out teacher.
+     *
+     * @param event the event
+     */
     @FXML
     void LogOutTeacher(ActionEvent event) {
 
     	UserWindow.closeUserWindow(getClass(), (Stage) TeacherMenuButton.getScene().getWindow());
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert DefineAssignment != null : "fx:id=\"DefineAssignment\" was not injected: check your FXML file 'TeacherMainWindow.fxml'.";
@@ -85,6 +129,7 @@ public class TeacherMainWindowController implements IController {
 
         Main.client.controller=this;
     }
+
 
 	@Override
 	public void handleAnswer(Object msg) {

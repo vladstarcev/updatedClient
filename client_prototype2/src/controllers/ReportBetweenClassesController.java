@@ -26,60 +26,95 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class ReportBetweenClassesController.
+ */
 public class ReportBetweenClassesController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Display button. */
 	@FXML
 	private Button DisplayButton;
 
+	/** The Report bar chart. */
 	@FXML
 	private BarChart<String, Double> ReportBarChart;
 
+	/** The Semester label. */
 	@FXML
 	private Label SemesterLabel;
 
+	/** The Specific teacher axis. */
 	@FXML
 	private CategoryAxis SpecificTeacherAxis;
 
+	/** The Check semester button. */
 	@FXML
 	private Button CheckSemesterButton;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Choose combo box. */
 	@FXML
 	private ComboBox<String> ChooseComboBox;
 
+	/** The Report label 1. */
 	@FXML
 	private Label ReportLabel1;
 
+	/** The Choose label. */
 	@FXML
 	private Label ChooseLabel;
 
+	/** The Different classes axis. */
 	@FXML
 	private NumberAxis DifferentClassesAxis;
 
+	/** The Semester text field. */
 	@FXML
 	private TextField SemesterTextField;
 
+	/** The Semester ID. */
 	private ArrayList<String> SemesterID;
+	
+	/** The Teacher. */
 	private String Teacher;
+	
+	/** The Selected teacher. */
 	private String SelectedTeacher;
+	
+	/** The Semester FLAG. */
 	private int SemesterFLAG;
+	
+	/** The Teacher FLAG. */
 	private int TeacherFLAG;
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
 		UserWindow.closeUserWindow(getClass(), (Stage) ReportLabel1.getScene().getWindow());
 	}
 
+	/**
+	 * Choose teacher.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ChooseTeacher(ActionEvent event)
 	{
@@ -92,6 +127,9 @@ public class ReportBetweenClassesController implements IController
 
 	}
 
+	/**
+	 * Load teachers.
+	 */
 	void loadTeachers()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -110,6 +148,11 @@ public class ReportBetweenClassesController implements IController
 		}
 	}
 
+	/**
+	 * Check semester ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckSemesterID(ActionEvent event)
 	{
@@ -128,6 +171,11 @@ public class ReportBetweenClassesController implements IController
 		}
 	}
 
+	/**
+	 * Display report.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayReport(ActionEvent event)
 	{
@@ -175,6 +223,9 @@ public class ReportBetweenClassesController implements IController
 
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{
@@ -208,6 +259,7 @@ public class ReportBetweenClassesController implements IController
 
 	}
 
+	
 	@Override
 	public void handleAnswer(Object result)
 	{

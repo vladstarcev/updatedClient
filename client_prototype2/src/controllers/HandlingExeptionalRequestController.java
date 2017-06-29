@@ -22,49 +22,81 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class HandlingExeptionalRequestController.
+ */
 public class HandlingExeptionalRequestController implements IController{
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The comment TF. */
     @FXML
     private TextField commentTF;
 
+    /** The Deny menu item. */
     @FXML
     private MenuItem DenyMenuItem;
 
+    /** The Comments label. */
     @FXML
     private Label CommentsLabel;
 
+    /** The Exeptional requst box. */
     @FXML
     private ComboBox<String> ExeptionalRequstBox;
 
+    /** The Handle exeptional request label. */
     @FXML
     private Label HandleExeptionalRequestLabel;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Conform menu item. */
     @FXML
     private MenuItem ConformMenuItem;
 
+    /** The Decision menu. */
     @FXML
     private MenuButton DecisionMenu;
 
+    /** The Send answar button. */
     @FXML
     private Button SendAnswarButton;
 
+    /** The all exeptional requests. */
     private HashMap<String, HashMap<String, String>> allExeptionalRequests;
+    
+    /** The des. */
     private String des;
+    
+    /** The req. */
     private String req;
+    
+    /** The User ID. */
     private String UserID;
+    
+    /** The Available hours. */
     private String AvailableHours;
+    
+    /** The Course ID. */
     private String CourseID;
+    
+    /** The req type. */
     private String reqType;
     
+    /**
+     * Choose exeptional requst.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseExeptionalRequst(ActionEvent event) {
     	
@@ -72,11 +104,21 @@ public class HandlingExeptionalRequestController implements IController{
     	loadUserID();
     }
 
+    /**
+     * Choose decision.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseDecision(ActionEvent event) {
 
     }
 
+    /**
+     * Conform exeptional request.
+     *
+     * @param event the event
+     */
     @FXML
     void ConformExeptionalRequest(ActionEvent event) {
     	DecisionMenu.setText(ConformMenuItem.getText());
@@ -84,11 +126,21 @@ public class HandlingExeptionalRequestController implements IController{
 
     }
 
+    /**
+     * Confirm.
+     *
+     * @param event the event
+     */
     @FXML
     void Confirm(ActionEvent event) {
     
     }
 
+    /**
+     * Deny exeptional request.
+     *
+     * @param event the event
+     */
     @FXML
     void DenyExeptionalRequest(ActionEvent event) {
     	
@@ -97,11 +149,21 @@ public class HandlingExeptionalRequestController implements IController{
 
     }
 
+    /**
+     * Deny.
+     *
+     * @param event the event
+     */
     @FXML
     void Deny(ActionEvent event) {
 
     }
 
+    /**
+     * Send answar.
+     *
+     * @param event the event
+     */
     @FXML
     void SendAnswar(ActionEvent event) {
     	
@@ -129,15 +191,28 @@ public class HandlingExeptionalRequestController implements IController{
     	}
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
     	UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
     }
 
+    /**
+     * Comment text field.
+     *
+     * @param event the event
+     */
     @FXML
     void commentTextField(ActionEvent event) {
     }
 
+    /**
+     * Load all exeptional request.
+     */
     void loadAllExeptionalRequest()
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -157,6 +232,11 @@ public class HandlingExeptionalRequestController implements IController{
     	}
     }
     
+    /**
+     * Update descision.
+     *
+     * @param descision the descision
+     */
     void updateDescision(String descision)
     {
 		String selectedER = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
@@ -183,6 +263,9 @@ public class HandlingExeptionalRequestController implements IController{
     	}
     }
     
+    /**
+     * Load user ID.
+     */
     void loadUserID()
     {
     	String[] temp=req.split(":");
@@ -207,6 +290,9 @@ public class HandlingExeptionalRequestController implements IController{
     	
     }
     
+    /**
+     * Check teacher hours.
+     */
     void checkTeacherHours()
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -226,6 +312,9 @@ public class HandlingExeptionalRequestController implements IController{
     	}
     }
 
+	/**
+	 * Load course week hours.
+	 */
 	void LoadCourseWeekHours()
 	{
 	   	ArrayList<String> data = new ArrayList<String>();
@@ -245,6 +334,9 @@ public class HandlingExeptionalRequestController implements IController{
     	}
 	}
 	
+	/**
+	 * Check pre courses.
+	 */
 	void checkPreCourses()
 	{
 	   	ArrayList<String> data = new ArrayList<String>();
@@ -266,6 +358,9 @@ public class HandlingExeptionalRequestController implements IController{
     
 
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert commentTF != null : "fx:id=\"commentTF\" was not injected: check your FXML file 'SchoolManagerHandlingExeptionalRequest.fxml'.";
@@ -293,7 +388,7 @@ public class HandlingExeptionalRequestController implements IController{
     }
 
     
-  
+
 	@Override
 	public void handleAnswer(Object result) {
 		if (result == null)

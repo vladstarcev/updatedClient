@@ -12,30 +12,45 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class ExeptionalRequestController.
+ */
 public class ExeptionalRequestController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 	
+    /** The Teacher button. */
     @FXML
     private Button TeacherButton;
 
+	/** The Choose exeptional request label. */
 	@FXML
 	private Label ChooseExeptionalRequestLabel;
 	
+    /** The Exeptional request label. */
     @FXML
     private Label ExeptionalRequestLabel;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+    /** The Pupil button. */
     @FXML
     private Button PupilButton;
 
+	/**
+	 * Delete or assign pupil.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DeleteOrAssignPupil(ActionEvent event)
 	{
@@ -44,6 +59,11 @@ public class ExeptionalRequestController implements IController
 
 	}
 
+	/**
+	 * Re assign teacher.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ReAssignTeacher(ActionEvent event)
 	{
@@ -52,6 +72,11 @@ public class ExeptionalRequestController implements IController
 				getClass());
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
@@ -59,6 +84,9 @@ public class ExeptionalRequestController implements IController
 		UserWindow.closeUserWindow(getClass(), (Stage) ExeptionalRequestLabel.getScene().getWindow());
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{
@@ -71,6 +99,7 @@ public class ExeptionalRequestController implements IController
 		Main.client.controller = this;
 	}
 
+	
 	@Override
 	public void handleAnswer(Object msg)
 	{

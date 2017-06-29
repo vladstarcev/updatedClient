@@ -22,70 +22,110 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
+/**
+ * The Class PupilExeptionalRequestController.
+ */
 public class PupilExeptionalRequestController implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Choose course combo box. */
     @FXML
     private ComboBox<String> ChooseCourseComboBox;
 
+    /** The Assign pupil. */
     @FXML
     private MenuItem AssignPupil;
 
+    /** The Request id text field. */
     @FXML
     private TextField RequestIdTextField;
 
+    /** The Check id button. */
     @FXML
     private Button CheckIdButton;
 
+    /** The Choose pupil combo box. */
     @FXML
     private ComboBox<String> ChoosePupilComboBox;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Pupil exeptional lable. */
     @FXML
     private Label PupilExeptionalLable;
 
+    /** The Request id lable. */
     @FXML
     private Label RequestIdLable;
 
+    /** The Choose operation menu button. */
     @FXML
     private MenuButton ChooseOperationMenuButton;
 
+    /** The Operation lable. */
     @FXML
     private Label OperationLable;
 
+    /** The Delete pupil. */
     @FXML
     private MenuItem DeletePupil;
 
+    /** The Send button. */
     @FXML
     private Button SendButton;
 
+    /** The Pupil id lable. */
     @FXML
     private Label PupilIdLable;
 
+    /** The Course list lable. */
     @FXML
     private Label CourseListLable;
     
+    /** The Choose class label. */
     @FXML
     private Label ChooseClassLabel;
     
+    /** The Choose class CB. */
     @FXML
     private ComboBox<String> ChooseClassCB;
     
+    /** The Req I dflag. */
     private int ReqIDflag;
+	
+	/** The cb course ID name. */
 	private String cbCourseIDName;
+	
+	/** The cb pupil ID name. */
 	private String cbPupilIDName;
+	
+	/** The Operation. */
 	private String Operation;
+	
+	/** The Pupil ID. */
 	private String PupilID;
+	
+	/** The Course ID. */
 	private String CourseID; 
+	
+	/** The cb class ID name. */
 	private String cbClassIDName;
 
+    /**
+     * Ceck id availability.
+     *
+     * @param event the event
+     */
     @FXML
     void CeckIdAvailability(ActionEvent event) {
 
@@ -106,6 +146,11 @@ public class PupilExeptionalRequestController implements IController {
 		}
     }
 
+    /**
+     * Choose course.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseCourse(ActionEvent event) {
 
@@ -116,12 +161,22 @@ public class PupilExeptionalRequestController implements IController {
 		loadClasses();
     }
 
+    /**
+     * Choose pupil.
+     *
+     * @param event the event
+     */
     @FXML
     void ChoosePupil(ActionEvent event) {
 
     	cbPupilIDName=ChoosePupilComboBox.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Choose operation.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseOperation(ActionEvent event) {
     	
@@ -129,6 +184,11 @@ public class PupilExeptionalRequestController implements IController {
     	
     }
 
+    /**
+     * Assign pupil to course.
+     *
+     * @param event the event
+     */
     @FXML
     void AssignPupilToCourse(ActionEvent event) {
 
@@ -136,6 +196,11 @@ public class PupilExeptionalRequestController implements IController {
     	ChooseOperationMenuButton.setText(AssignPupil.getText());
     }
 
+    /**
+     * Assign pupil menu.
+     *
+     * @param event the event
+     */
     @FXML
     void AssignPupilMenu(ActionEvent event) {
     	
@@ -143,6 +208,11 @@ public class PupilExeptionalRequestController implements IController {
 
     }
 
+    /**
+     * Delete pupil from course.
+     *
+     * @param event the event
+     */
     @FXML
     void DeletePupilFromCourse(ActionEvent event) {
     	
@@ -151,11 +221,21 @@ public class PupilExeptionalRequestController implements IController {
 
     }
 
+    /**
+     * Delete pupil menu.
+     *
+     * @param event the event
+     */
     @FXML
     void DeletePupilMenu(ActionEvent event) {
 
     }
 
+    /**
+     * Send to school manager.
+     *
+     * @param event the event
+     */
     @FXML
     void SendToSchoolManager(ActionEvent event) {
     	
@@ -192,6 +272,9 @@ public class PupilExeptionalRequestController implements IController {
 
     }
     
+   /**
+    * Load classes.
+    */
    void loadClasses()
    {
    		ArrayList<String> data = new ArrayList<String>();
@@ -212,6 +295,11 @@ public class PupilExeptionalRequestController implements IController {
    }
     
     
+    /**
+     * Choose class.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseClass(ActionEvent event) {
 
@@ -220,6 +308,11 @@ public class PupilExeptionalRequestController implements IController {
     	cbClassIDName=Temp[0];
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
     	
@@ -227,6 +320,9 @@ public class PupilExeptionalRequestController implements IController {
 
     }
     
+    /**
+     * Load pupils.
+     */
     void loadPupils()
     {
 		ArrayList<String> data = new ArrayList<String>();
@@ -246,6 +342,9 @@ public class PupilExeptionalRequestController implements IController {
 		}
     }
     
+     /**
+      * Load courses.
+      */
      void loadCourses()
      {
  		ArrayList<String> data = new ArrayList<String>();
@@ -263,6 +362,9 @@ public class PupilExeptionalRequestController implements IController {
  		}
      }
      
+     /**
+      * Load pupil in course.
+      */
      void loadPupilInCourse()
      {
     	ArrayList<String> data = new ArrayList<String>();
@@ -284,6 +386,11 @@ public class PupilExeptionalRequestController implements IController {
  		}
      }
      
+     /**
+      * Insert exceptional requst.
+      *
+      * @param str the str
+      */
      void InsertExceptionalRequst(String str)
      {
  		ArrayList<String> data = new ArrayList<String>();
@@ -315,6 +422,9 @@ public class PupilExeptionalRequestController implements IController {
  		}
      }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert ChooseCourseComboBox != null : "fx:id=\"ChooseCourseComboBox\" was not injected: check your FXML file 'ExeptionalRequestForPupil.fxml'.";
@@ -348,6 +458,7 @@ public class PupilExeptionalRequestController implements IController {
         loadCourses();
     }
 
+	
 	@Override
 	public void handleAnswer(Object result)
 	{

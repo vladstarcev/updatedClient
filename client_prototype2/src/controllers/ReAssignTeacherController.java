@@ -19,68 +19,109 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+
+/**
+ * The Class ReAssignTeacherController.
+ */
 public class ReAssignTeacherController implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Class ID text field. */
     @FXML
     private TextField ClassIDTextField;
 
+    /** The Check request button. */
     @FXML
     private Button CheckRequestButton;
 
+    /** The Course ID text field. */
     @FXML
     private TextField CourseIDTextField;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Teacher id label. */
     @FXML
     private Label TeacherIdLabel;
 
+    /** The Class ID lable. */
     @FXML
     private Label ClassIDLable;
 
+    /** The Re assign lable. */
     @FXML
     private Label ReAssignLable;
 
+    /** The Check teacher button. */
     @FXML
     private Button CheckTeacherButton;
 
+    /** The Check course button. */
     @FXML
     private Button CheckCourseButton;
 
+    /** The Teacher id text fieald. */
     @FXML
     private TextField TeacherIdTextFieald;
 
+    /** The Request id label. */
     @FXML
     private Label RequestIdLabel;
 
+    /** The Check class button. */
     @FXML
     private Button CheckClassButton;
 
+    /** The Re assign teacher button. */
     @FXML
     private Button ReAssignTeacherButton;
 
+    /** The Course ID lable. */
     @FXML
     private Label CourseIDLable;
 
+    /** The Ex re text field 1. */
     @FXML
     private TextField ExReTextField1;
     
+    /** The Ex flag. */
     private int ExFlag;
+	
+	/** The course IDF. */
 	private int courseIDF;
+	
+	/** The class IDF. */
 	private int classIDF;
+	
+	/** The teacher IDF. */
 	private int teacherIDF;
+	
+	/** The course hours. */
 	private String courseHours;
+	
+	/** The New teacher work hours. */
 	private String NewTeacherWorkHours;
+	
+	/** The Old teacher work hours. */
 	private String OldTeacherWorkHours;
+	
+	/** The Old teacher ID. */
 	private String OldTeacherID;
 	
+    /**
+     * Check request ID.
+     *
+     * @param event the event
+     */
     @FXML
     void CheckRequestID(ActionEvent event) {
 
@@ -104,6 +145,11 @@ public class ReAssignTeacherController implements IController {
 
     }
 
+    /**
+     * Check course ID.
+     *
+     * @param event the event
+     */
     @FXML
     void CheckCourseID(ActionEvent event) {
 
@@ -125,6 +171,11 @@ public class ReAssignTeacherController implements IController {
 
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
 
@@ -132,6 +183,11 @@ public class ReAssignTeacherController implements IController {
 
     }
 
+    /**
+     * Re assign teacher.
+     *
+     * @param event the event
+     */
     @FXML
     void ReAssignTeacher(ActionEvent event) {
 
@@ -158,6 +214,11 @@ public class ReAssignTeacherController implements IController {
 
     }
 
+    /**
+     * Check class ID.
+     *
+     * @param event the event
+     */
     @FXML
     void CheckClassID(ActionEvent event) {
 
@@ -179,12 +240,23 @@ public class ReAssignTeacherController implements IController {
 
     }
 
+    /**
+     * Gets the teacher ID.
+     *
+     * @param event the event
+     * @return the teacher ID
+     */
     @FXML
     void getTeacherID(ActionEvent event) {
 
     	teacherIDF=0;
     }
 
+    /**
+     * Check teacher ID.
+     *
+     * @param event the event
+     */
     @FXML
     void CheckTeacherID(ActionEvent event) {
 
@@ -206,6 +278,9 @@ public class ReAssignTeacherController implements IController {
 
     }
     
+	/**
+	 * Load decision.
+	 */
 	void loadDecision()
 	 {
 		ArrayList<String> data = new ArrayList<String>();
@@ -234,6 +309,9 @@ public class ReAssignTeacherController implements IController {
 		} 
 	 }
 	
+	/**
+	 * Reassign teacher.
+	 */
 	void reassignTeacher()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -258,6 +336,9 @@ public class ReAssignTeacherController implements IController {
 		}
 	}
 
+	/**
+	 * Change teacher hours.
+	 */
 	void ChangeTeacherHours()
 	{
 		int num=Integer.parseInt(NewTeacherWorkHours);
@@ -284,6 +365,9 @@ public class ReAssignTeacherController implements IController {
 		}
 	}
 	
+	/**
+	 * Load old teacher.
+	 */
 	void loadOldTeacher()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -305,6 +389,9 @@ public class ReAssignTeacherController implements IController {
 		}
 	}
 	
+	/**
+	 * Load old teacher hours.
+	 */
 	void loadOldTeacherHours()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -324,6 +411,9 @@ public class ReAssignTeacherController implements IController {
 		}
 	}
 	
+	/**
+	 * Update old teacher hours.
+	 */
 	void updateOldTeacherHours()
 	{
 		int num=Integer.parseInt(OldTeacherWorkHours);
@@ -352,6 +442,9 @@ public class ReAssignTeacherController implements IController {
 		}
 	}
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert ClassIDTextField != null : "fx:id=\"ClassIDTextField\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
@@ -383,6 +476,7 @@ public class ReAssignTeacherController implements IController {
 
     }
 
+	
 	@Override
 	public void handleAnswer(Object result) {
 		// TODO Auto-generated method stub

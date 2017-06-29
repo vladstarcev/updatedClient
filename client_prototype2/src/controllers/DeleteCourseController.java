@@ -16,20 +16,33 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
+/**
+ * The Class DeleteCourseController.
+ */
 public class DeleteCourseController implements IController {
 
+    /** The id txt. */
     @FXML
     private TextField idTxt;
 
+    /** The cancel btn. */
     @FXML
     private Button cancelBtn;
 
+    /** The enter lab. */
     @FXML
     private Label enterLab;
 
+    /** The delete btn. */
     @FXML
     private Button deleteBtn;
 
+    /**
+     * Delete course.
+     *
+     * @param event the event
+     */
     @FXML
     void DeleteCourse(ActionEvent event) {
     		
@@ -50,6 +63,9 @@ public class DeleteCourseController implements IController {
 		}
     }
     
+    /**
+     * Delete.
+     */
     void delete(){
     	
     	ArrayList<String> data = new ArrayList<>();
@@ -68,12 +84,20 @@ public class DeleteCourseController implements IController {
     	
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
     	
     	UserWindow.closeUserWindow(getClass(), (Stage)cancelBtn.getScene().getWindow());
     }
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize(){
     	

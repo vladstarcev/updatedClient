@@ -21,68 +21,100 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
+/**
+ * The Class ViewAllDataController.
+ */
 public class ViewAllDataController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Display exeptional requests. */
 	@FXML
 	private MenuItem DisplayExeptionalRequests;
 
+	/** The Display academic activities. */
 	@FXML
 	private MenuItem DisplayAcademicActivities;
 
+	/** The Menu button. */
 	@FXML
 	private MenuButton MenuButton;
 
+	/** The Display assignments. */
 	@FXML
 	private MenuItem DisplayAssignments;
 
+	/** The Display secretary. */
 	@FXML
 	private MenuItem DisplaySecretary;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Display teachers. */
 	@FXML
 	private MenuItem DisplayTeachers;
 
+	/** The Display semesters. */
 	@FXML
 	private MenuItem DisplaySemesters;
 
+	/** The Display system manager. */
 	@FXML
 	private MenuItem DisplaySystemManager;
 
+	/** The Display parents. */
 	@FXML
 	private MenuItem DisplayParents;
 
+	/** The Data combo box. */
 	@FXML
 	private ComboBox<String> DataComboBox;
 
+	/** The Display classes. */
 	@FXML
 	private MenuItem DisplayClasses;
 
+	/** The Display pupils. */
 	@FXML
 	private MenuItem DisplayPupils;
 
+	/** The View label. */
 	@FXML
 	private Label ViewLabel;
 
+	/** The Choose label. */
 	@FXML
 	private Label ChooseLabel;
 
+	/** The data. */
 	private String DATA;
 
+	/**
+	 * View all options.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ViewAllOptions(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Display all pupil.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllPupil(ActionEvent event)
 	{
@@ -104,6 +136,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display all parents.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllParents(ActionEvent event)
 	{
@@ -125,6 +162,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display all teachers.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllTeachers(ActionEvent event)
 	{
@@ -146,6 +188,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display all classes.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllClasses(ActionEvent event)
 	{
@@ -164,6 +211,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display all academic activities.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllAcademicActivities(ActionEvent event)
 	{
@@ -182,6 +234,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display all semester.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllSemester(ActionEvent event)
 	{
@@ -200,6 +257,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display all exeptional requests.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllExeptionalRequests(ActionEvent event)
 	{
@@ -218,6 +280,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display all assignments.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplayAllAssignments(ActionEvent event)
 	{
@@ -236,6 +303,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display secretary data.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplaySecretaryData(ActionEvent event)
 	{
@@ -257,6 +329,11 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Display system manager data.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DisplaySystemManagerData(ActionEvent event)
 	{
@@ -278,18 +355,31 @@ public class ViewAllDataController implements IController
 		}
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
 		UserWindow.closeUserWindow(getClass(), (Stage) ViewLabel.getScene().getWindow());
 	}
 
+	/**
+	 * View chosen data.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ViewChosenData(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{

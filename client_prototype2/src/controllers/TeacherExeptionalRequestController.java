@@ -20,58 +20,93 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class TeacherExeptionalRequestController.
+ */
 public class TeacherExeptionalRequestController implements IController {
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The List teacher combo box. */
     @FXML
     private ComboBox<String> ListTeacherComboBox;
 
+    /** The Request id text field. */
     @FXML
     private TextField RequestIdTextField;
 
+    /** The Class label. */
     @FXML
     private Label ClassLabel;
 
+    /** The Teacher exeptional label. */
     @FXML
     private Label TeacherExeptionalLabel;
 
+    /** The Teacher label. */
     @FXML
     private Label TeacherLabel;
 
+    /** The Check id button. */
     @FXML
     private Button CheckIdButton;
 
+    /** The Request id label. */
     @FXML
     private Label RequestIdLabel;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Course label 1. */
     @FXML
     private Label CourseLabel1;
 
+    /** The Send button. */
     @FXML
     private Button SendButton;
 
+    /** The List curse combo box. */
     @FXML
     private ComboBox<String> ListCurseComboBox;
 
+    /** The List C lass combo box. */
     @FXML
     private ComboBox<String> ListCLassComboBox;
     
+    /** The Ex flag. */
     private int ExFlag;
+    
+    /** The cb class. */
     private String cbClass;
+    
+    /** The Class ID. */
     private String ClassID;
+    
+    /** The courseid. */
     private String courseid;
+    
+    /** The Study unit. */
     private String StudyUnit;
+	
+	/** The Course weekly hour. */
 	private String CourseWeeklyHour;
+	
+	/** The CB teacher id. */
 	private String CBTeacherId;
 
+    /**
+     * Choose class.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseClass(ActionEvent event) {
     	
@@ -81,6 +116,11 @@ public class TeacherExeptionalRequestController implements IController {
     	loadCoursesInClass(ClassID);
     }
 
+    /**
+     * Choose teacher.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseTeacher(ActionEvent event) {
 
@@ -89,6 +129,11 @@ public class TeacherExeptionalRequestController implements IController {
     	CBTeacherId=Temp[0];
     }
 
+    /**
+     * Send to school manager.
+     *
+     * @param event the event
+     */
     @FXML
     void SendToSchoolManager(ActionEvent event) {
 
@@ -111,6 +156,11 @@ public class TeacherExeptionalRequestController implements IController {
     	}
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
 
@@ -118,6 +168,11 @@ public class TeacherExeptionalRequestController implements IController {
 
     }
 
+    /**
+     * Ceck id availability.
+     *
+     * @param event the event
+     */
     @FXML
     void CeckIdAvailability(ActionEvent event) {
 
@@ -138,6 +193,11 @@ public class TeacherExeptionalRequestController implements IController {
 		}
     }
 
+    /**
+     * Choose course.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseCourse(ActionEvent event) {
 
@@ -145,6 +205,9 @@ public class TeacherExeptionalRequestController implements IController {
     	loadStudyUnit();
     }
     
+    /**
+     * Load class ID and name.
+     */
     void loadClassIDAndName()
     {
 		ArrayList<String> data = new ArrayList<String>();
@@ -162,6 +225,11 @@ public class TeacherExeptionalRequestController implements IController {
 		}
     }
     
+    /**
+     * Load courses in class.
+     *
+     * @param ClassiD the classi D
+     */
     void loadCoursesInClass(String ClassiD)
     {
     	ArrayList<String> data = new ArrayList<String>();
@@ -181,6 +249,9 @@ public class TeacherExeptionalRequestController implements IController {
 		}
     }
     
+	/**
+	 * Load study unit.
+	 */
 	void loadStudyUnit()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -200,7 +271,10 @@ public class TeacherExeptionalRequestController implements IController {
 		}
 	}
 	
-	 void loadteacher()
+	 /**
+ 	 * Loadteacher.
+ 	 */
+ 	void loadteacher()
 	 {
 			ArrayList<String> data = new ArrayList<String>();
 			data.add("Teacher List");
@@ -219,6 +293,9 @@ public class TeacherExeptionalRequestController implements IController {
 			}
 	 }
 	 
+	/**
+	 * Check it I sn O same teacher.
+	 */
 	void CheckItISnOSameTeacher()
 	{
     	ArrayList<String> data = new ArrayList<String>();
@@ -242,7 +319,10 @@ public class TeacherExeptionalRequestController implements IController {
 		}
 	}
 	
-	 void OpenExeptionalRequest()
+	 /**
+ 	 * Open exeptional request.
+ 	 */
+ 	void OpenExeptionalRequest()
 	{
 			ArrayList<String> data = new ArrayList<String>();
 	 		data.add("Insert new Exeptional Request");
@@ -273,6 +353,9 @@ public class TeacherExeptionalRequestController implements IController {
 	}
 
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert ListTeacherComboBox != null : "fx:id=\"ListTeacherComboBox\" was not injected: check your FXML file 'ExeptionalRequestForTeacher.fxml'.";

@@ -19,89 +19,146 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
+
+/**
+ * The Class OpenNewSemesterController.
+ */
 public class OpenNewSemesterController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Open semester lable. */
 	@FXML
 	private Label OpenSemesterLable;
 
+	/** The Status lable. */
 	@FXML
 	private Label StatusLable;
 
+	/** The Check ID button. */
 	@FXML
 	private Button CheckIDButton;
 
+	/** The Academic ac text field. */
 	@FXML
 	private TextField AcademicAcTextField;
 
+	/** The Semester ID lable. */
 	@FXML
 	private Label SemesterIDLable;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Current SEM menu. */
 	@FXML
 	private MenuItem CurrentSEMMenu;
 
+	/** The Academic ac ID lable. */
 	@FXML
 	private Label AcademicAcIDLable;
 
+	/** The Semester B. */
 	@FXML
 	private MenuItem SemesterB;
 	
+    /** The Status menu. */
     @FXML
     private MenuButton StatusMenu;
 
+	/** The Check activities button. */
 	@FXML
 	private Button CheckActivitiesButton;
 
+	/** The Semester A. */
 	@FXML
 	private MenuItem SemesterA;
 
+	/** The Fill form lable. */
 	@FXML
 	private Label FillFormLable;
 
+	/** The Send button. */
 	@FXML
 	private Button SendButton;
 	
+    /** The Semester menu. */
     @FXML
     private MenuButton SemesterMenu;
 
+	/** The Type lable. */
 	@FXML
 	private Label TypeLable;
 
+	/** The Semester id text field. */
 	@FXML
 	private TextField SemesterIdTextField;
 
+	/** The Activity ID. */
 	private ArrayList<String> ActivityID;
+	
+	/** The Sem ID. */
 	private ArrayList<String> SemID;
+	
+	/** The Type. */
 	private String Type;
+	
+	/** The Status. */
 	private String Status;
+	
+	/** The Semester ID. */
 	private String SemesterID;
+	
+	/** The Academic activity ID. */
 	private String AcademicActivityID;
+	
+	/** The Id flag. */
 	private int IdFlag;
+	
+	/** The Type flag. */
 	private int TypeFlag;
+	
+	/** The Status flag. */
 	private int StatusFlag;
+	
+	/** The Activity flag. */
 	private int ActivityFlag;
 
+	/**
+	 * Enter semester ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterSemesterID(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Enter academic ac ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterAcademicAcID(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Send semester form.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void SendSemesterForm(ActionEvent event)
 	{
@@ -171,6 +228,11 @@ public class OpenNewSemesterController implements IController
 
 	}
 
+	/**
+	 * Load acaemic activities.
+	 *
+	 * @param ID the id
+	 */
 	void loadAcaemicActivities(String ID)
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -193,6 +255,11 @@ public class OpenNewSemesterController implements IController
 		}
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
@@ -200,6 +267,11 @@ public class OpenNewSemesterController implements IController
 		Status = "";
 	}
 
+	/**
+	 * Sem A.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void SemA(ActionEvent event)
 	{
@@ -209,6 +281,11 @@ public class OpenNewSemesterController implements IController
 		new Alert(AlertType.INFORMATION, "Type that was chosen for this semester is: A.", ButtonType.OK).showAndWait();
 	}
 
+	/**
+	 * Sem B.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void SemB(ActionEvent event)
 	{
@@ -218,6 +295,11 @@ public class OpenNewSemesterController implements IController
 		new Alert(AlertType.INFORMATION, "Type that was chosen for this semester is: B.", ButtonType.OK).showAndWait();
 	}
 
+	/**
+	 * Current SEM.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CurrentSEM(ActionEvent event)
 	{
@@ -228,6 +310,11 @@ public class OpenNewSemesterController implements IController
 				.showAndWait();
 	}
 
+	/**
+	 * Check semester ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckSemesterID(ActionEvent event)
 	{
@@ -248,6 +335,11 @@ public class OpenNewSemesterController implements IController
 		}
 	}
 
+	/**
+	 * Check academic activities.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckAcademicActivities(ActionEvent event)
 	{
@@ -266,6 +358,9 @@ public class OpenNewSemesterController implements IController
 		}
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{
@@ -300,6 +395,7 @@ public class OpenNewSemesterController implements IController
 		ActivityFlag = 0;
 	}
 
+	
 	@Override
 	public void handleAnswer(Object result)
 	{

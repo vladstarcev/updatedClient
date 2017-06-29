@@ -19,71 +19,116 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class DefineClassController.
+ */
 public class DefineClassController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Maximum pupil in class text field. */
 	@FXML
 	private TextField MaximumPupilInClassTextField;
 
+	/** The Enter class name label. */
 	@FXML
 	private Label EnterClassNameLabel;
 
+	/** The Class name text field. */
 	@FXML
 	private TextField ClassNameTextField;
 
+	/** The Enter M aximum pupil label. */
 	@FXML
 	private Label EnterMAximumPupilLabel;
 
+	/** The Class id text field. */
 	@FXML
 	private TextField ClassIdTextField;
 
+	/** The Enter class ID label 1. */
 	@FXML
 	private Label EnterClassIDLabel1;
 
+	/** The Check availability button 2. */
 	@FXML
 	private Button CheckAvailabilityButton2;
 
+	/** The Check availability button 1. */
 	@FXML
 	private Button CheckAvailabilityButton1;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Define class label. */
 	@FXML
 	private Label DefineClassLabel;
 
+	/** The Fill form label. */
 	@FXML
 	private Label FillFormLabel;
 
+	/** The Define class button. */
 	@FXML
 	private Button DefineClassButton;
 
+	/** The class ID. */
 	private ArrayList<String> classID;
+	
+	/** The class name. */
 	private ArrayList<String> className;
+	
+	/** The Class ID. */
 	private String ClassID;
+	
+	/** The Class NAME. */
 	private String ClassNAME;
+	
+	/** The Capacity. */
 	private String Capacity;
+	
+	/** The Class name F. */
 	private int ClassNameF;
+	
+	/** The Class IDF. */
 	private int ClassIDF;
 
+	/**
+	 * Enter max pupil for class.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterMaxPupilForClass(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Enter class name.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterClassName(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Define class.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DefineClass(ActionEvent event)
 	{
@@ -106,6 +151,9 @@ public class DefineClassController implements IController
  
 	}
 
+	/**
+	 * Insert new class.
+	 */
 	void InsertNewClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -132,6 +180,11 @@ public class DefineClassController implements IController
 		}
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event) //problem here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	{
@@ -140,6 +193,11 @@ public class DefineClassController implements IController
 		UserWindow.closeUserWindow(getClass(), (Stage) EnterClassNameLabel.getScene().getWindow());
 	}
 
+	/**
+	 * Check availability 2.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckAvailability2(ActionEvent event)
 	{
@@ -163,12 +221,22 @@ public class DefineClassController implements IController
 
 	}
 
+	/**
+	 * Enter class ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterClassID(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Check availability 1.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckAvailability1(ActionEvent event)
 	{
@@ -191,6 +259,9 @@ public class DefineClassController implements IController
 		}
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{
@@ -217,6 +288,7 @@ public class DefineClassController implements IController
 		ClassIDF = 0;
 
 	}
+
 
 	@Override
 	public void handleAnswer(Object msg)

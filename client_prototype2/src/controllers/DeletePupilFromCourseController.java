@@ -19,57 +19,88 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class DeletePupilFromCourseController.
+ */
 public class DeletePupilFromCourseController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Check pupil button. */
 	@FXML
 	private Button CheckPupilButton;
 
+	/** The Check course button. */
 	@FXML
 	private Button CheckCourseButton;
 
+	/** The Request id text field. */
 	@FXML
 	private TextField RequestIdTextField;
 
+	/** The Check request button. */
 	@FXML
 	private Button CheckRequestButton;
 
+	/** The Pupil ID lable. */
 	@FXML
 	private Label PupilIDLable;
 
+	/** The Pupil ID text field. */
 	@FXML
 	private TextField PupilIDTextField;
 
+	/** The Delete button. */
 	@FXML
 	private Button DeleteButton;
 
+	/** The Course ID text field. */
 	@FXML
 	private TextField CourseIDTextField;
 
+	/** The Request id label. */
 	@FXML
 	private Label RequestIdLabel;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Delete lable. */
 	@FXML
 	private Label DeleteLable;
 
+	/** The Course ID lable. */
 	@FXML
 	private Label CourseIDLable;
 	
+	/** The Pupil ID. */
 	private String PupilID;
+	
+	/** The Course ID. */
 	private String CourseID;
+	
+	/** The check course ID. */
 	private int checkCourseID;
+	
+	/** The check pupil ID. */
 	private int checkPupilID;
+	
+	/** The Exe re FLAG. */
 	private int ExeReFLAG;
 
+	/**
+	 * Check pupil ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckPupilID(ActionEvent event)
 	{
@@ -90,6 +121,11 @@ public class DeletePupilFromCourseController implements IController
 		}
 	}
 
+	/**
+	 * Check course ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckCourseID(ActionEvent event)
 	{
@@ -111,6 +147,11 @@ public class DeletePupilFromCourseController implements IController
 		}
 	}
 
+	/**
+	 * Delete pupil course.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DeletePupilCourse(ActionEvent event)
 	{
@@ -132,6 +173,9 @@ public class DeletePupilFromCourseController implements IController
     	}
 	}
 	
+	/**
+	 * Load decision.
+	 */
 	void loadDecision()
 	 {
 		ArrayList<String> data = new ArrayList<String>();
@@ -159,6 +203,11 @@ public class DeletePupilFromCourseController implements IController
 		}  
 	 }
 
+	/**
+	 * Check request ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckRequestID(ActionEvent event)
 	{
@@ -181,12 +230,20 @@ public class DeletePupilFromCourseController implements IController
 		}
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
 		UserWindow.closeUserWindow(getClass(), (Stage) DeleteButton.getScene().getWindow());
 	}
 	
+	/**
+	 * Delete pupil from course.
+	 */
 	void DeletePupilFromCourse()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -208,6 +265,9 @@ public class DeletePupilFromCourseController implements IController
 		}
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{

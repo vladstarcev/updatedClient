@@ -19,54 +19,81 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class AssignPupilToCourseController.
+ */
 public class AssignPupilToCourseController implements IController {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Check pupil button. */
 	@FXML
 	private Button CheckPupilButton;
 
+	/** The Pupil I dlabla. */
 	@FXML
 	private Label PupilIDlabla;
 
+	/** The Check course button. */
 	@FXML
 	private Button CheckCourseButton;
 
+	/** The Request id text field. */
 	@FXML
 	private TextField RequestIdTextField;
 
+	/** The Pupil I dtext field. */
 	@FXML
 	private TextField PupilIDtextField;
 
+	/** The Check request button. */
 	@FXML
 	private Button CheckRequestButton;
 
+	/** The Assign button. */
 	@FXML
 	private Button AssignButton;
 
+	/** The Request id label. */
 	@FXML
 	private Label RequestIdLabel;
 
+	/** The Assign pupil course lable 1. */
 	@FXML
 	private Label AssignPupilCourseLable1;
 
+	/** The Course I dtext field. */
 	@FXML
 	private TextField CourseIDtextField;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Course I dlable. */
 	@FXML
 	private Label CourseIDlable;
 
+    /** The check course ID. */
     private int checkCourseID;
+    
+    /** The check pupil ID. */
     private int checkPupilID;
+    
+    /** The Exe re FLAG. */
     private int ExeReFLAG;
     
+    /**
+     * Check pupil ID.
+     *
+     * @param event the event
+     */
     @FXML
     void CheckPupilID(ActionEvent event) {
     	
@@ -86,6 +113,11 @@ public class AssignPupilToCourseController implements IController {
 		}
     }
 
+    /**
+     * Check course ID.
+     *
+     * @param event the event
+     */
     @FXML
     void CheckCourseID(ActionEvent event) {
 
@@ -106,6 +138,11 @@ public class AssignPupilToCourseController implements IController {
 		}
     }
 
+    /**
+     * Assign pupil course.
+     *
+     * @param event the event
+     */
     @FXML
     void AssignPupilCourse(ActionEvent event) {
     	
@@ -127,12 +164,22 @@ public class AssignPupilToCourseController implements IController {
     	}
     }
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
 
     	UserWindow.closeUserWindow(getClass(), (Stage) AssignPupilCourseLable1.getScene().getWindow());
     }
     
+	/**
+	 * Check request ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void CheckRequestID(ActionEvent event)
 	{
@@ -157,6 +204,9 @@ public class AssignPupilToCourseController implements IController {
 	}
 
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
 		assert CheckPupilButton != null : "fx:id=\"CheckPupilButton\" was not injected: check your FXML file 'SecretaryAssignPupilToCourse.fxml'.";
@@ -181,6 +231,9 @@ public class AssignPupilToCourseController implements IController {
     }
     
 	
+	/**
+	 * Insert pupil to course.
+	 */
 	void InsertPupilToCourse()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -205,6 +258,9 @@ public class AssignPupilToCourseController implements IController {
 		}
 	}
 	
+	/**
+	 * Load decision.
+	 */
 	void loadDecision()
 	 {
 		ArrayList<String> data = new ArrayList<String>();
@@ -232,6 +288,7 @@ public class AssignPupilToCourseController implements IController {
 		} 
 	 }
     
+
 
 	@Override
 	public void handleAnswer(Object result) {

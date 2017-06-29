@@ -36,6 +36,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
 /**
  * The Class PupilFileController.
  */
@@ -61,7 +62,7 @@ public class PupilFileController implements IController {
     @FXML
     private MenuItem showEvaluationFormItem;
     
-    /** The Show grade sheet iten. */
+    /** The Show grade sheet item. */
     @FXML
     private MenuItem ShowGradeSheetIten;
     
@@ -99,6 +100,7 @@ public class PupilFileController implements IController {
     /** The grade sheet. */
     private String gradeSheet="";
     
+    /** The User ID. */
     private String  UserID;
     /**
      * Load all courses.
@@ -242,6 +244,7 @@ public class PupilFileController implements IController {
         loadAllCourses();
     }
 
+	
 	@Override
 	public void handleAnswer(Object result) {
 	 	if (result == null)
@@ -309,6 +312,8 @@ public class PupilFileController implements IController {
 	
     /**
      * Sets the grade sheet.
+     *
+     * @param str the new grade sheet
      */
     void setGradeSheet(String str)
     {
@@ -369,44 +374,94 @@ public class PupilFileController implements IController {
     }
  
     
+    /**
+     * Gets the initial table data.
+     *
+     * @return the initial table data
+     */
     private ObservableList<Course> getInitialTableData() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
+	/**
+	 * The Class Course.
+	 */
 	public static class Course {
     	 
+        /** The Course id. */
         private final SimpleStringProperty CourseId;
+        
+        /** The Course name. */
         private final SimpleStringProperty CourseName;
+        
+        /** The email. */
         private final SimpleStringProperty email;
  
+        /**
+         * Instantiates a new course.
+         *
+         * @param id the id
+         * @param name the name
+         * @param grade the grade
+         */
         private Course(String id, String name, String grade) {
             this.CourseId = new SimpleStringProperty(id);
             this.CourseName = new SimpleStringProperty(name);
             this.email = new SimpleStringProperty(grade);
         }
  
+        /**
+         * Gets the course id.
+         *
+         * @return the course id
+         */
         public String getCourseId() {
             return CourseId.get();
         }
  
+        /**
+         * Sets the course id.
+         *
+         * @param id the new course id
+         */
         public void setCourseId(String id) {
             CourseId.set(id);
         }
  
+        /**
+         * Gets the course name.
+         *
+         * @return the course name
+         */
         public String getCourseName() {
             return CourseName.get();
         }
  
+        /**
+         * Sets the course name.
+         *
+         * @param cName the new course name
+         */
         public void setCourseName(String cName) {
             CourseName.set(cName);
         }
  
+        /**
+         * Gets the email.
+         *
+         * @return the email
+         */
         public String getEmail() {
             return email.get();
         }
  
+        /**
+         * Sets the email.
+         *
+         * @param grade the new email
+         */
         public void setEmail(String grade) {
             email.set(grade);
         }

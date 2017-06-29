@@ -16,22 +16,33 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class ParentController.
+ */
 public class ParentController implements IController
 {
 
+	/** The Parent label. */
 	@FXML
 	private Label ParentLabel;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Choose child combo box. */
 	@FXML
 	private ComboBox<String> ChooseChildComboBox;
 
+	/** The all pupils. */
 	private HashMap<String, HashMap<String, String>> allPupils;
 
+	/** The User ID. */
 	private String UserID;
 	
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{
@@ -47,6 +58,9 @@ public class ParentController implements IController
 		loadAllPupils();
 	}
 
+	/**
+	 * Load all pupils.
+	 */
 	void loadAllPupils()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -67,6 +81,9 @@ public class ParentController implements IController
 		}
 	}
 
+	/**
+	 * Load pupils parent.
+	 */
 	void loadPupilsParent()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -85,6 +102,7 @@ public class ParentController implements IController
 			e.printStackTrace();
 		}
 	}
+
 
 	@Override
 	public void handleAnswer(Object result)
@@ -132,12 +150,22 @@ public class ParentController implements IController
 		}
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event) // change to logout
 	{
 		UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
 	}
 
+	/**
+	 * Choose child.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ChooseChild(ActionEvent event)
 	{

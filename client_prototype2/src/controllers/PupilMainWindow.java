@@ -18,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
 /**
  * The Class PupilMainWindow.
  */
@@ -55,6 +56,7 @@ public class PupilMainWindow implements IController{
     @FXML
     private Label ChooseOperationLable;
     
+    /** The User ID. */
     private String UserID;
    
     /**
@@ -139,9 +141,7 @@ public class PupilMainWindow implements IController{
  }
 
  
- /* (non-Javadoc)
-  * @see interfaces.IController#handleAnswer(java.lang.Object)
-  */
+ 
  @Override
  public void handleAnswer(Object result) {
   if (result == null)

@@ -21,54 +21,100 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 
+/**
+ * The Class OpenCourseController.
+ */
 public class OpenCourseController implements IController{
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Choose course combo box. */
     @FXML
     private ComboBox<String> ChooseCourseComboBox;
 
+    /** The Choose class combo box. */
     @FXML
     private ComboBox<String> ChooseClassComboBox;
 
+    /** The Open course lable. */
     @FXML
     private Label OpenCourseLable;
 
+    /** The Open button. */
     @FXML
     private Button OpenButton;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Choose teacher combo box. */
     @FXML
     private ComboBox<String> ChooseTeacherComboBox;
     
+	/** The Study unit. */
 	private String StudyUnit;
+	
+	/** The cb course name. */
 	private String cbCourseName;
+	
+	/** The cb class name. */
 	private String cbClassName;
+	
+	/** The cb teacher details. */
 	private String cbTeacherDetails;
+	
+	/** The Course ID. */
 	private String CourseID;
+	
+	/** The Teacher ID. */
 	private String TeacherID;
+	
+	/** The Course weekly hour. */
 	private String CourseWeeklyHour;
+	
+	/** The Teacher available hours. */
 	private int TeacherAvailableHours;
+	
+	/** The class ID. */
 	private String classID;
+	
+	/** The Teaching hours. */
 	private String TeachingHours;
+	
+	/** The choose course flag. */
 	private int chooseCourseFlag;
+	
+	/** The choose class flag. */
 	private int chooseClassFlag;
+	
+	/** The choose teacher flag. */
 	private int chooseTeacherFlag;
 	
 
 
+    /**
+     * Back to menu.
+     *
+     * @param event the event
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
 
     	UserWindow.closeUserWindow(getClass(), (Stage) OpenCourseLable.getScene().getWindow());
     }
 
+    /**
+     * Course list.
+     *
+     * @param event the event
+     */
     @FXML
     void CourseList(ActionEvent event) {
 
@@ -80,6 +126,11 @@ public class OpenCourseController implements IController{
 
     }
 
+    /**
+     * Open course in class.
+     *
+     * @param event the event
+     */
     @FXML
     void OpenCourseInClass(ActionEvent event) {
 
@@ -102,6 +153,11 @@ public class OpenCourseController implements IController{
 
     }
 
+    /**
+     * Choose teacher.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseTeacher(ActionEvent event) {
 
@@ -110,6 +166,11 @@ public class OpenCourseController implements IController{
 
     }
 
+    /**
+     * Choose class.
+     *
+     * @param event the event
+     */
     @FXML
     void ChooseClass(ActionEvent event) {
 
@@ -120,6 +181,9 @@ public class OpenCourseController implements IController{
     }
     
 
+	/**
+	 * Load courses.
+	 */
 	void loadCourses()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -138,6 +202,9 @@ public class OpenCourseController implements IController{
 		//loadStudyUnit();
 	}
 
+	/**
+	 * Load all class.
+	 */
 	void loadAllClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -155,6 +222,9 @@ public class OpenCourseController implements IController{
 		}
 	}
 
+	/**
+	 * Load class ID.
+	 */
 	void loadClassID()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -174,6 +244,9 @@ public class OpenCourseController implements IController{
 		}
 	}
 
+	/**
+	 * Loadteacher.
+	 */
 	void loadteacher()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -193,6 +266,9 @@ public class OpenCourseController implements IController{
 		}
 	}
 
+	/**
+	 * Load study unit.
+	 */
 	void loadStudyUnit()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -212,6 +288,9 @@ public class OpenCourseController implements IController{
 		}
 	}
 
+	/**
+	 * Check I fcourse already open.
+	 */
 	void checkIFcourseAlreadyOpen()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -233,6 +312,9 @@ public class OpenCourseController implements IController{
 		}
 	}
 
+	/**
+	 * Check maximum hours.
+	 */
 	void checkMaximumHours()
 	{
 		String[] Temp = ChooseTeacherComboBox.getSelectionModel().getSelectedItem().split(":");
@@ -254,6 +336,9 @@ public class OpenCourseController implements IController{
 		}
 	}
 
+	/**
+	 * Insert course to class.
+	 */
 	void InsertCourseToClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -278,6 +363,11 @@ public class OpenCourseController implements IController{
 		}
 	}
 
+	/**
+	 * Update work hours teacher.
+	 *
+	 * @param S the s
+	 */
 	void UpdateWorkHoursTeacher(String S)
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -301,6 +391,9 @@ public class OpenCourseController implements IController{
 	}
 
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert ChooseCourseComboBox != null : "fx:id=\"ChooseCourseComboBox\" was not injected: check your FXML file 'SecretaryOpenCourse.fxml'.";
@@ -331,6 +424,7 @@ public class OpenCourseController implements IController{
 
 
     }
+
 
 	@Override
 	public void handleAnswer(Object msg) {

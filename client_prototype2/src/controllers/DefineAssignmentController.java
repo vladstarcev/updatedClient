@@ -29,44 +29,71 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class DefineAssignmentController.
+ */
 public class DefineAssignmentController implements IController {
 
+	/** The Enter ass name TF. */
 	@FXML
 	private TextField EnterAssNameTF;
 
+	/** The Due date picker. */
 	@FXML
 	private DatePicker DueDatePicker;
 
+	/** The Enter due date label. */
 	@FXML
 	private Label EnterDueDateLabel;
 
+	/** The Define assignment label. */
 	@FXML
 	private Label DefineAssignmentLabel;
 
+	/** The Back button. */
 	@FXML
 	private Button BackButton;
 
+	/** The Enter class ID text field. */
 	@FXML
 	private TextField EnterClassIDTextField;
 
+	/** The Upload file hyper link. */
 	@FXML
 	private Hyperlink UploadFileHyperLink;
 
+	/** The Define assignment button. */
 	@FXML
 	private Button DefineAssignmentButton;
 
+	/** The Enter class id label. */
 	@FXML
 	private Label EnterClassIdLabel;
 
+	/** The Assignment file. */
 	private File AssignmentFile;
+	
+	/** The flag ass. */
 	private boolean flagAss=false;
+	
+	/** The flag course. */
 	private boolean flagCourse=false;
 
+	/**
+	 * Enter class ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterClassID(ActionEvent event) {
 
 	}
 
+	/**
+	 * Enter due date.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterDueDate(ActionEvent event) {
 		if (DueDatePicker.getValue().isBefore(LocalDate.now())) {
@@ -74,11 +101,22 @@ public class DefineAssignmentController implements IController {
 		}
 	}
 
+	/**
+	 * Enter ass name.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void EnterAssName(ActionEvent event) {
 
 	}
 
+	/**
+	 * Check existing ass.
+	 *
+	 * @param assName the ass name
+	 * @param courseId the course id
+	 */
 	void checkExistingAss(String assName,String courseId)
 	{
 
@@ -105,6 +143,11 @@ public class DefineAssignmentController implements IController {
 		
 	}
 	
+	/**
+	 * Search course id.
+	 *
+	 * @param courseId the course id
+	 */
 	void searchCourseId(String courseId)
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -125,6 +168,11 @@ public class DefineAssignmentController implements IController {
 		
 	}
 	
+	/**
+	 * Define assignment.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void DefineAssignment(ActionEvent event) {
 		// TODO change class id to course id
@@ -187,12 +235,22 @@ public class DefineAssignmentController implements IController {
 
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event) {
 	     UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());     
 
 	}
 
+	/**
+	 * Choose file to upload.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ChooseFileToUpload(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
@@ -204,6 +262,9 @@ public class DefineAssignmentController implements IController {
 		AssignmentFile = chooser.showOpenDialog(DefineAssignmentButton.getScene().getWindow());
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize() {
 		assert DueDatePicker != null : "fx:id=\"DueDatePicker\" was not injected: check your FXML file 'TeacherDefineAssignment.fxml'.";

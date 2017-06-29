@@ -14,57 +14,90 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class SchoolManagerMainWindowController.
+ */
 public class SchoolManagerMainWindowController implements IController
 {
 
+	/** The resources. */
 	@FXML
 	private ResourceBundle resources;
 
+	/** The location. */
 	@FXML
 	private URL location;
 
+	/** The Handling exeptional request menu item. */
 	@FXML
 	private MenuItem HandlingExeptionalRequestMenuItem;
 
+	/** The Log out button. */
 	@FXML
 	private Button LogOutButton;
 
+	/** The Menu button. */
 	@FXML
 	private MenuButton MenuButton;
 
+	/** The Report genaration menu item. */
 	@FXML
 	private MenuItem ReportGenarationMenuItem;
 
+	/** The School manager menu label. */
 	@FXML
 	private Label SchoolManagerMenuLabel;
 
+	/** The Block user menu item. */
 	@FXML
 	private MenuItem BlockUserMenuItem;
 
+	/** The View system data. */
 	@FXML
 	private MenuItem ViewSystemData;
 
+	/** The Choose operation label. */
 	@FXML
 	private Label ChooseOperationLabel;
 
+	/**
+	 * School manager menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void SchoolManagerMenu(ActionEvent event)
 	{
 		
 	}
 
+	/**
+	 * Block user.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BlockUser(ActionEvent event)
 	{
 		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(), "SchoolManagerBlockUser", getClass());  
 	}
 
+	/**
+	 * Block window operation.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void BlockWindowOperation(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Report generation.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ReportGeneration(ActionEvent event)
 	{
@@ -73,36 +106,64 @@ public class SchoolManagerMainWindowController implements IController
 
 	}
 
+	/**
+	 * Report generation operation.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ReportGenerationOperation(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Handling exeptional request.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void HandlingExeptionalRequest(ActionEvent event)
 	{
 		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(),"SchoolManagerHandlingExeptionalRequest", getClass());
 	}
 
+	/**
+	 * Handling exeptional request operation.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void HandlingExeptionalRequestOperation(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * View all data.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void ViewAllData(ActionEvent event)
 	{
 		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(),"SchoolManagerViewAllData", getClass());
 	}
 
+	/**
+	 * School manager log out.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void SchoolManagerLogOut(ActionEvent event)
 	{
 
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{

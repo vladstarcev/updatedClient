@@ -19,61 +19,108 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+
+/**
+ * The Class AssignPupilToClassController.
+ */
 public class AssignPupilToClassController implements IController
 {
+    
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The Send button 2. */
     @FXML
     private Button SendButton2;
 
+    /** The Assign pupil class lable 2. */
     @FXML
     private Label AssignPupilClassLable2;
 
+    /** The Pupil id text field. */
     @FXML
     private TextField PupilIdTextField;
 
+    /** The Class ID text field. */
     @FXML
     private TextField ClassIDTextField;
 
+    /** The Assign pupil class lable 1. */
     @FXML
     private Label AssignPupilClassLable1;
 
+    /** The Assign button. */
     @FXML
     private Button AssignButton;
 
+    /** The Class id lable. */
     @FXML
     private Label ClassIdLable;
 
+    /** The Back button. */
     @FXML
     private Button BackButton;
 
+    /** The Pupil id lable. */
     @FXML
     private Label PupilIdLable;
 
+    /** The Send button 1. */
     @FXML
     private Button SendButton1;
 
+	/** The Courses ID. */
 	private ArrayList<String> CoursesID;
+	
+	/** The Pre courses ID. */
 	private ArrayList<String> PreCoursesID;
+	
+	/** The Old courses ID. */
 	private ArrayList<String> OldCoursesID;
 
+	/** The class ID. */
 	private String classID;
+	
+	/** The pupil ID. */
 	private String pupilID;
 
+	/** The pupil FLAG. */
 	private int pupilFLAG;
+	
+	/** The class FLAG. */
 	private int classFLAG;
+	
+	/** The Assigned. */
 	private int Assigned;
+	
+	/** The capacity. */
 	private String capacity="";
+	
+	/** The Assigned pupils. */
 	private String AssignedPupils ="";
+	
+	/** The Pupils courses. */
 	private ArrayList<String> PupilsCourses;
+	
+	/** The Pupils grades. */
 	private ArrayList<String> PupilsGrades;
+	
+	/** The Old class ID. */
 	private String OldClassID;
+	
+	/** The Old class assigned pupils. */
 	private String OldClassAssignedPupils;
 
+	/**
+	 * Send pupil ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	/**Function That Called When Secretary Presses On SensButton1**/
     void SendPupilID(ActionEvent event) {
@@ -95,6 +142,11 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Send class ID.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	/**Function That Called When Secretary Presses On SensButton2**/
     void SendClassID(ActionEvent event) {
@@ -118,6 +170,11 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Load pre courses.
+	 *
+	 * @param str the str
+	 */
 	void loadPreCourses(String str)
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -136,6 +193,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Load courses.
+	 */
 	void loadCourses()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -154,12 +214,22 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Back to menu.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	  void BackToMenu(ActionEvent event) {
 		
 		UserWindow.closeUserWindow(getClass(), (Stage) AssignPupilClassLable2.getScene().getWindow());
 	}
 
+	/**
+	 * Assign pupil to class.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	  void AssignPupilToClass(ActionEvent event) {
 		
@@ -178,6 +248,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Cheack if pupil already assigned to class.
+	 */
 	void CheackIfPupilAlreadyAssignedToClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -197,6 +270,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Load courses in class.
+	 */
 	void loadCoursesInClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -215,6 +291,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Insert pupil to class.
+	 */
 	void InsertPupilToClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -237,6 +316,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Check class capacity.
+	 */
 	void CheckClassCapacity()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -255,6 +337,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	void initialize()
 	{
@@ -287,6 +372,9 @@ public class AssignPupilToClassController implements IController
 		OldClassAssignedPupils="";
 	}
 	
+	/**
+	 * Update class.
+	 */
 	void UpdateClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -309,6 +397,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 	
+	/**
+	 * Insert pupil in course.
+	 */
 	void InsertPupilInCourse()
 	{
 			int i=0;
@@ -336,6 +427,9 @@ public class AssignPupilToClassController implements IController
 			}
 	}
 	
+	/**
+	 * Upload list of old class.
+	 */
 	void UploadListOfOldClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -354,6 +448,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 	
+	/**
+	 * Delete pupil in course.
+	 */
 	void deletePupilInCourse()
 	{
 		for(int i=0;i<OldCoursesID.size();i++)
@@ -382,6 +479,9 @@ public class AssignPupilToClassController implements IController
 		updateAssignedPupilsInOldClass();
 	}
 	
+	/**
+	 * Update assigned pupils in old class.
+	 */
 	void updateAssignedPupilsInOldClass()
 	{
 		int num=Integer.parseInt(OldClassAssignedPupils);
@@ -413,6 +513,9 @@ public class AssignPupilToClassController implements IController
 		//ñâéøú çìåïïïïïïïïïïïïïïïïïï
 	}
 	
+	/**
+	 * Update assigned pupils in class.
+	 */
 	void updateAssignedPupilsInClass()
 	{
 		int num=Integer.parseInt(AssignedPupils);
@@ -439,6 +542,9 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 	
+	/**
+	 * Load assigned pupil to old class.
+	 */
 	void loadAssignedPupilToOldClass()
 	{
 		ArrayList<String> data = new ArrayList<String>();
@@ -458,6 +564,7 @@ public class AssignPupilToClassController implements IController
 		}
 	}
 
+	
 	@Override
 	public void handleAnswer(Object result)
 	{
