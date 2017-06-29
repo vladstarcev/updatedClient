@@ -92,6 +92,7 @@ public class HandlingExeptionalRequestController implements IController{
     /** The req type. */
     private String reqType;
       
+    private boolean flag=false;
     /**
      * Choose exeptional requst.
      *
@@ -181,6 +182,7 @@ public class HandlingExeptionalRequestController implements IController{
     	  		
     		if(reqType.equals("Reassign"))
     		{
+    			flag=true;
     			checkTeacherHours();
     		}
     	}
@@ -189,8 +191,9 @@ public class HandlingExeptionalRequestController implements IController{
     	{
 	    	updateDescision(des);
 			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
-			while(ExeptionalRequstBox.getItems().size()>0) ExeptionalRequstBox.getItems().remove(0);
-			loadAllExeptionalRequest();
+			String selected = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
+			//ExeptionalRequstBox.getItems().remove(selected);
+			
     	}
     }
 
@@ -490,10 +493,13 @@ public class HandlingExeptionalRequestController implements IController{
 				new Alert(AlertType.INFORMATION, "Avialable Hours Of Teacher Not Enough For The Course!", ButtonType.OK).showAndWait();
 				return;
 			}
-			updateDescision(des);
-			new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
-			while(ExeptionalRequstBox.getItems().size()>0) ExeptionalRequstBox.getItems().remove(0);
-			loadAllExeptionalRequest();
+			if(flag){
+				updateDescision(des);
+				new Alert(AlertType.INFORMATION, "Your descision sent successfully!", ButtonType.OK).showAndWait();
+				String selected = ExeptionalRequstBox.getSelectionModel().getSelectedItem();
+				ExeptionalRequstBox.getItems().remove(selected);
+			}
+			
 		}
 	}
 }

@@ -106,6 +106,9 @@ public class UserController implements IController {
 
         Main.client.controller=this;
         
+        userIdTextField.setText("222222222");
+        passwordTextField.setText("kristina222");
+        
         CurrentUserID="";
         permission="";
     }
@@ -131,6 +134,7 @@ public class UserController implements IController {
 			}
 			else
 			{
+				
 				for (String row : arr)
 				{
 					String[] cols = row.split(";");
@@ -142,6 +146,7 @@ public class UserController implements IController {
 					}
 					permission=map.get("permission");
 					CurrentUserID=map.get("userId");
+					Main.userId = CurrentUserID;
 				}
 				OpenMenu();
 			}
