@@ -15,8 +15,9 @@
       </Label>
       <ComboBox fx:id="ChooseCourseCB" layoutX="59.0" layoutY="93.0" onAction="#ChooseCourse" prefHeight="31.0" prefWidth="319.0" promptText="Choose Course" />
       <ComboBox fx:id="ChooseAssCB" layoutX="59.0" layoutY="155.0" onAction="#ChooseAss" prefHeight="31.0" prefWidth="319.0" promptText="Choose Assignment" />
-      <Button fx:id="DownloadAssbutton" layoutX="100.0" layoutY="279.0" mnemonicParsing="false" onAction="#DownloadAss" prefHeight="31.0" prefWidth="237.0" text="Download Assignment" />
       <ComboBox fx:id="ChoosePupilCB" layoutX="59.0" layoutY="217.0" onAction="#ChoosePupil" prefHeight="31.0" prefWidth="319.0" promptText="Choose Pupil" />
-      <Button fx:id="BackToMenuButton" layoutX="148.0" layoutY="331.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="31.0" prefWidth="141.0" text="Back to Menu" />
+      <Button fx:id="BackToMenuButton" layoutX="148.0" layoutY="321.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="31.0" prefWidth="141.0" text="Back to Menu" />
+      <Hyperlink fx:id="DownLoadHYPERlINK" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="272.0" onAction="#DownSoulotion" prefHeight="39.0" prefWidth="181.0" text="Download Solution" />
+      <Hyperlink fx:id="UploadAssHyperLink" layoutX="266.0" layoutY="280.0" onAction="#UploadAss" text="UploaD Comments " />
    </children>
 </AnchorPane>
