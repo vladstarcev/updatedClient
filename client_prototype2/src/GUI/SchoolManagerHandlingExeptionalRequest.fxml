@@ -8,12 +8,12 @@
 
 <AnchorPane prefHeight="503.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HandlingExeptionalRequestController">
    <children>
-      <Label fx:id="HandleExeptionalRequestLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="26.0" prefHeight="42.0" prefWidth="560.0" text="Handle Exeptional Request" underline="true">
+      <Label fx:id="HandleExeptionalRequestLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="26.0" prefHeight="42.0" prefWidth="560.0" text="Handle Exceptional Request" underline="true">
          <font>
             <Font name="Bookman Old Style Bold" size="35.0" />
          </font>
       </Label>
-      <ComboBox fx:id="ExeptionalRequstBox" layoutX="63.0" layoutY="104.0" onAction="#ChooseExeptionalRequst" prefHeight="42.0" prefWidth="529.0" promptText="Choose Exeptional Request" />
+      <ComboBox fx:id="ExeptionalRequstBox" layoutX="63.0" layoutY="104.0" onAction="#ChooseExeptionalRequst" prefHeight="42.0" prefWidth="529.0" promptText="Choose Exceptional Request" />
       <MenuButton fx:id="DecisionMenu" layoutX="61.0" layoutY="186.0" mnemonicParsing="false" onAction="#ChooseDecision" prefHeight="35.0" prefWidth="529.0" text="Choose decision">
         <items>
           <MenuItem fx:id="ConformMenuItem" mnemonicParsing="false" onAction="#ConformExeptionalRequest" onMenuValidation="#Confirm" text="confirm" />

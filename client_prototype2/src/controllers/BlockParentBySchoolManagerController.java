@@ -58,7 +58,7 @@ public class BlockParentBySchoolManagerController  implements IController {
     private Button FreeParentButton;
     
 
-    /** The Parent id. */
+    /** The Parent Id. */
     private String ParentId;
     
     /** The flag block. */
@@ -70,7 +70,7 @@ public class BlockParentBySchoolManagerController  implements IController {
     /**
      * Enter pupil ID.
      *
-     * @param event the event
+     * @param event of enter pupil ID
      */
     @FXML
     void EnterPupilID(ActionEvent event) {
@@ -78,9 +78,9 @@ public class BlockParentBySchoolManagerController  implements IController {
     }
 
     /**
-     * Block parent.
+     * Block Parent.
      *
-     * @param event the event
+     * @param event - checking if the flag block is true and after that find the specific pupil
      */
     @FXML
     void BlockParent(ActionEvent event) {
@@ -91,7 +91,7 @@ public class BlockParentBySchoolManagerController  implements IController {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - the event back to menu of School Manager
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -102,7 +102,7 @@ public class BlockParentBySchoolManagerController  implements IController {
     /**
      * Free parent.
      *
-     * @param event the event
+     * @param event - checking if the flag block is false and after that find the specific pupil
      */
     @FXML
     void FreeParent(ActionEvent event) {
@@ -111,7 +111,7 @@ public class BlockParentBySchoolManagerController  implements IController {
     }
     
     /**
-     * Find pupil.
+     * Finding all the pupils.
      */
     void findPupil()
 	{
@@ -134,8 +134,8 @@ public class BlockParentBySchoolManagerController  implements IController {
 	/**
 	 * Update parent permission.
 	 *
-	 * @param ParentId the parent id
-	 * @param acc the acc
+	 * @param ParentId - the parent id
+	 * @param acc - the access of parent
 	 */
 	void updateParentPermission(String ParentId, String acc)
 	{
@@ -199,6 +199,9 @@ public class BlockParentBySchoolManagerController  implements IController {
     }
 
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */ 
 	@Override
 	public void handleAnswer(Object result) {
 

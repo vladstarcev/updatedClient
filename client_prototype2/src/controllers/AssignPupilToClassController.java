@@ -117,12 +117,11 @@ public class AssignPupilToClassController implements IController
 	private String OldClassAssignedPupils;
 
 	/**
-	 * Send pupil ID.
+	 * Function That Called When Secretary Presses On SensButton1
 	 *
-	 * @param event the event
+	 * @param event - enter the pupil ID
 	 */
 	@FXML
-	/**Function That Called When Secretary Presses On SensButton1**/
     void SendPupilID(ActionEvent event) {
 		/**Query That Asks For The Field userID Where He Equals To PupilIdTextField.getText() From pupil Table**/
 		ArrayList<String> data = new ArrayList<String>();
@@ -143,14 +142,12 @@ public class AssignPupilToClassController implements IController
 	}
 
 	/**
-	 * Send class ID.
+	 * Send class ID - Function That Called When Secretary Presses On SensButton2.
 	 *
-	 * @param event the event
+	 * @param event - class ID
 	 */
 	@FXML
-	/**Function That Called When Secretary Presses On SensButton2**/
     void SendClassID(ActionEvent event) {
-
 		/**Query That Asks For The Field classId Where He Equals To ClassIDTextField.getText() From class Table**/
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Class");
@@ -171,9 +168,9 @@ public class AssignPupilToClassController implements IController
 	}
 
 	/**
-	 * Load pre courses.
+	 * Loading all the pre-courses.
 	 *
-	 * @param str the str
+	 * @param str - string of pre-courses
 	 */
 	void loadPreCourses(String str)
 	{
@@ -194,7 +191,7 @@ public class AssignPupilToClassController implements IController
 	}
 
 	/**
-	 * Load courses.
+	 * Loading the list of courses from the DB.
 	 */
 	void loadCourses()
 	{
@@ -217,7 +214,7 @@ public class AssignPupilToClassController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - back to Secretary Menu
 	 */
 	@FXML
 	  void BackToMenu(ActionEvent event) {
@@ -228,7 +225,7 @@ public class AssignPupilToClassController implements IController
 	/**
 	 * Assigning pupil to class.
 	 *
-	 * @param event the event
+	 * @param event - enter pupil ID
 	 */
 	@FXML
 	  void AssignPupilToClass(ActionEvent event) {
@@ -239,7 +236,6 @@ public class AssignPupilToClassController implements IController
 		{
 			CheackIfPupilAlreadyAssignedToClass();
 			loadCoursesInClass();
-			//	loadCourses();
 		}
 		else
 		{
