@@ -288,7 +288,28 @@ public class AssignPupilToCourseController implements IController {
 		} 
 	 }
     
-
+	void updateDB()
+	{
+		ArrayList<String> data = new ArrayList<String>();
+   		data.add("update DB");
+   		data.add("delete");
+   		data.add("exceptional_request");
+   		data.add("CourseID");
+   		data.add(CourseIDtextField.getText());
+   		data.add("userID");
+   		data.add(PupilIDtextField.getText());
+   		data.add("exceptonalRequestID");
+   		data.add(RequestIdTextField.getText());
+		try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		} 
+	}
+	
     /**
      * Handles the answer from the server according to the type of answer.
      */  
@@ -375,6 +396,7 @@ public class AssignPupilToCourseController implements IController {
 			else if(des.equals("confirm"))
 			{
 				InsertPupilToCourse();
+				updateDB();
 			}
 			else if(des.equals("panding"))
 			{
@@ -392,6 +414,7 @@ public class AssignPupilToCourseController implements IController {
 			}
 			else
 			{
+				updateDB();
 				new Alert(AlertType.INFORMATION, "Pupil Succesfully Assigned To Course", ButtonType.OK).showAndWait();
 				UserWindow.closeUserWindow(getClass(), (Stage) AssignPupilCourseLable1.getScene().getWindow());	
 			}

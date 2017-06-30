@@ -106,8 +106,8 @@ public class UserController implements IController {
 
         Main.client.controller=this;
         
-        userIdTextField.setText("333333333");
-        passwordTextField.setText("gal333");
+        userIdTextField.setText("404040404");
+        passwordTextField.setText("oshrat404");
         
         CurrentUserID="";
         permission="";
