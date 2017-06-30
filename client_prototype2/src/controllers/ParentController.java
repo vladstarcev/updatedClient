@@ -40,6 +40,8 @@ public class ParentController implements IController
 	/** The User ID. */
 	private String UserID;
 	
+	private PupilFileController PupilFileController;
+	
 	/**
 	 * Initialize.
 	 */
@@ -174,7 +176,9 @@ public class ParentController implements IController
 		String selectedChild = ChooseChildComboBox.getSelectionModel().getSelectedItem();
 		if (selectedChild == null)
 			return;
-
+		String ans[] = selectedChild.split(":");
+		UserController.CurrentUserID = ans[0];
+		PupilFileController.ParentID = UserID;
 		UserWindow.createUserWindow((Stage) ChooseChildComboBox.getScene().getWindow(), "PupilFile", getClass());
 	}
 

@@ -102,6 +102,9 @@ public class PupilFileController implements IController {
     
     /** The User ID. */
     private String  UserID;
+    public static String ParentID;
+        
+    
     /**
      * Load all courses.
      */
@@ -182,6 +185,7 @@ public class PupilFileController implements IController {
      */
     @FXML
     void BackToMenu(ActionEvent event) {
+    	if(ParentID!=null) 	UserController.CurrentUserID = ParentID;
         UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
     }
 
@@ -292,6 +296,8 @@ public class PupilFileController implements IController {
 	 	}
 	 	else if (type.equals("load grade sheet"))
 	 	{
+ 			gradeSheet = "";
+
 	 		for (String row : arr)
 	 		{
 	 			String[] cols = row.split(";");
@@ -303,7 +309,7 @@ public class PupilFileController implements IController {
 	 			}
 		 		String grade = map.get("gradeInCourse");
 		 		String courseId = map.get("courseID");
-		 		gradeSheet += courseId + "\t" + allCourses.get(courseId).get("courseName") + "\t" ;
+		 		gradeSheet += courseId + "\t" + allCourses.get(courseId).get("courseName") + "\t " ;
 		 		if(!(grade.equals("0")))	gradeSheet+= grade;
 		 		gradeSheet+="\n";
 	 		}
