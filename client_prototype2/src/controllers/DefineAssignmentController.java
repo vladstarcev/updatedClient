@@ -35,11 +35,11 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class DefineAssignmentController.
+ * The Class DefineAssignmentController - this class is for Teacher that define assignment to all pupil that learning her course.
  */
 public class DefineAssignmentController implements IController {
 
-	/** The Enter ass name TF. */
+	/** The Enter ass name Text Field. */
 	@FXML
 	private TextField EnterAssNameTF;
 
@@ -59,7 +59,7 @@ public class DefineAssignmentController implements IController {
 	@FXML
 	private Button BackButton;
 
-	/** The Enter class ID text field. */
+	/** The Enter classID text field. */
 	@FXML
 	private TextField EnterClassIDTextField;
 
@@ -71,28 +71,29 @@ public class DefineAssignmentController implements IController {
 	@FXML
 	private Button DefineAssignmentButton;
 
-	/** The Enter class id label. */
+	/** The Enter classId label. */
 	@FXML
 	private Label EnterClassIdLabel;
 
 	/** The Assignment file. */
 	private File AssignmentFile;
 
-	/** The flag ass. */
+	/** The flag that check if the assignment is already exist. */
 	private volatile boolean isExistingAssignment = false;
 
-	/** The flag course. */
+	/** The flag that check if the course is already exist. */
 	private volatile boolean isExistingCourse = false;
 	
+	/** The UesrID. */
 	private String UserID;
 	
+	/** The semaphore is to resolve the mutual exclusion. */
 	private Semaphore semaphore = new Semaphore(0);
 
 	/**
 	 * Enter class ID.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter ClassID
 	 */
 	@FXML
 	void EnterClassID(ActionEvent event) {
@@ -102,8 +103,7 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Enter due date.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter Due Date
 	 */
 	@FXML
 	void EnterDueDate(ActionEvent event) {
@@ -113,10 +113,9 @@ public class DefineAssignmentController implements IController {
 	}
 
 	/**
-	 * Enter ass name.
+	 * Enter assignment name.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter assignment name
 	 */
 	@FXML
 	void EnterAssName(ActionEvent event) {
@@ -126,10 +125,8 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Check existing ass.
 	 *
-	 * @param assName
-	 *            the ass name
-	 * @param courseId
-	 *            the course id
+	 * @param assName - enter the assignment name
+	 * @param courseId - enter the courseId
 	 */
 	void checkExistingAss(String assName, String courseId) {
 
@@ -153,8 +150,7 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Search course id.
 	 *
-	 * @param courseId
-	 *            the course id
+	 * @param courseId - enter the course id
 	 */
 	void searchCourseId(String courseId) {
 		ArrayList<String> data = new ArrayList<String>();
@@ -178,8 +174,7 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Define assignment.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter Define Assignment
 	 */
 	@FXML
 	void DefineAssignment(ActionEvent event) {
@@ -263,8 +258,7 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Back to menu.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter back to menu 
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event) {
@@ -275,8 +269,7 @@ public class DefineAssignmentController implements IController {
 	/**
 	 * Choose file to upload.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event 
 	 */
 	@FXML
 	void ChooseFileToUpload(ActionEvent event) {
@@ -309,6 +302,9 @@ public class DefineAssignmentController implements IController {
 		Main.stack.push("TeacherDefineAssignment");
 	}
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result) {
 		System.out.println("got answer");

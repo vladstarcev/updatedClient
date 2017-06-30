@@ -114,9 +114,9 @@ public class CreateEvaluationFormController implements IController  {
     }
 
     /**
-     * Creates the evaluation form.
+     * Creating the evaluation form.
      *
-     * @param event the event
+     * @param event - checking if the user enter the all the right details and checking exceptions
      */
     @FXML
     void CreateEvaluationForm(ActionEvent event) {
@@ -185,7 +185,7 @@ public class CreateEvaluationFormController implements IController  {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - enter on Back To Mune button
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -195,7 +195,7 @@ public class CreateEvaluationFormController implements IController  {
     /**
      * Choose course.
      *
-     * @param event the event
+     * @param event 
      */
     @FXML
     void chooseCourse(ActionEvent event) {
@@ -210,7 +210,7 @@ public class CreateEvaluationFormController implements IController  {
     /**
      * Choose pupil.
      *
-     * @param event the event
+     * @param event 
      */
     @FXML
     void choosePupil(ActionEvent event) {
@@ -218,7 +218,7 @@ public class CreateEvaluationFormController implements IController  {
     }
     
     /**
-     * Load all courses.
+     * Load all Courses.
      */
     void loadAllCourses()
     {
@@ -237,7 +237,7 @@ public class CreateEvaluationFormController implements IController  {
     }
 	    
     /**
-     * Load courses of teacher.
+     * Load courses of Teacher.
      */
     void loadCoursesOfTeacher()
     {
@@ -282,7 +282,7 @@ public class CreateEvaluationFormController implements IController  {
     /**
      * Load pupil in class.
      *
-     * @param classId the class id
+     * @param classId - enter the class id
      */
     void loadPupilInClass(String classId)
     {
@@ -306,7 +306,7 @@ public class CreateEvaluationFormController implements IController  {
     /**
      * Load pupils in course.
      *
-     * @param courseId the course id
+     * @param courseId - enter the course id
      */
     void loadPupilsInCourse(String courseId)
     {
@@ -355,6 +355,10 @@ public class CreateEvaluationFormController implements IController  {
         loadAllPupils();
     }
 
+    
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result) {
 		if (result == null)
@@ -425,8 +429,6 @@ public class CreateEvaluationFormController implements IController  {
 				}
 			}
 	        loadPupilsInCourse(courseId);
-
-
 		}
 		else if (type.equals("load pupils in course"))
 		{
@@ -434,7 +436,6 @@ public class CreateEvaluationFormController implements IController  {
 			{
 				choosePupilCB.getItems().remove(0);
 			}
-
 			for (String row : arr)
 			{
 				String[] cols = row.split(";");
@@ -444,7 +445,6 @@ public class CreateEvaluationFormController implements IController  {
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-				
 				pupilId = map.get("userID");
 				for(String pupil : pupilInClass){
 					if(pupilId.equals(pupil))choosePupilCB.getItems().add(pupilId + ": " + allPupils.get(pupilId).get("userFirstName") + " "
