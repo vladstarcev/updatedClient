@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class DefineClassController.
+ * The Class DefineClassController - this class is .
  */
 public class DefineClassController implements IController
 {
@@ -53,15 +53,15 @@ public class DefineClassController implements IController
 	@FXML
 	private TextField ClassIdTextField;
 
-	/** The Enter class ID label 1. */
+	/** The Enter classID1 label . */
 	@FXML
 	private Label EnterClassIDLabel1;
 
-	/** The Check availability button 2. */
+	/** The Check availability2 button . */
 	@FXML
 	private Button CheckAvailabilityButton2;
 
-	/** The Check availability button 1. */
+	/** The Check availability1 button . */
 	@FXML
 	private Button CheckAvailabilityButton1;
 
@@ -81,25 +81,25 @@ public class DefineClassController implements IController
 	@FXML
 	private Button DefineClassButton;
 
-	/** The class ID. */
+	/** The array of class ID. */
 	private ArrayList<String> classID;
 	
-	/** The class name. */
+	/** The array of class name. */
 	private ArrayList<String> className;
 	
-	/** The Class ID. */
+	/** The ClassID. */
 	private String ClassID;
 	
-	/** The Class NAME. */
+	/** The ClassNAME. */
 	private String ClassNAME;
 	
 	/** The Capacity. */
 	private String Capacity;
 	
-	/** The Class name F. */
+	/** The ClassName F. */
 	private int ClassNameF;
 	
-	/** The Class IDF. */
+	/** The ClassID F. */
 	private int ClassIDF;
 
 	/**
