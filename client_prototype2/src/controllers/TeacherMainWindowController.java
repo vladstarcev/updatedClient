@@ -110,7 +110,7 @@ public class TeacherMainWindowController implements IController {
     
     @FXML
     void checkAss(ActionEvent event) {
-    	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "TeacherCheckAssignment", getClass());
+    	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "CheckAssignment", getClass());
     	Main.stack.push("TeacherMainWindow");
     }
 
