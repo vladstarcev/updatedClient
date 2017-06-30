@@ -11,6 +11,9 @@ import javafx.scene.control.ComboBox;
 public class TeacherCheckAssignmentController implements IController{
 
     @FXML
+    private Button BackToMenuButton;
+    
+	@FXML
     private ResourceBundle resources;
 
     @FXML
@@ -47,13 +50,20 @@ public class TeacherCheckAssignmentController implements IController{
     void ChoosePupil(ActionEvent event) {
 
     }
+     
+    @FXML
+    void BackToMenu(ActionEvent event) {
+
+    }
 
     @FXML
     void initialize() {
+        assert BackToMenuButton != null : "fx:id=\"BackToMenuButton\" was not injected: check your FXML file 'CheckAssignment.fxml'.";
         assert ChooseAssCB != null : "fx:id=\"ChooseAssCB\" was not injected: check your FXML file 'CheckAssignment.fxml'.";
         assert ChoosePupilCB != null : "fx:id=\"ChoosePupilCB\" was not injected: check your FXML file 'CheckAssignment.fxml'.";
         assert ChooseCourseCB != null : "fx:id=\"ChooseCourseCB\" was not injected: check your FXML file 'CheckAssignment.fxml'.";
         assert DownloadAssbutton != null : "fx:id=\"DownloadAssbutton\" was not injected: check your FXML file 'CheckAssignment.fxml'.";
+
 
     }
 
