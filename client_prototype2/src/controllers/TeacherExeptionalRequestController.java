@@ -136,8 +136,11 @@ public class TeacherExeptionalRequestController implements IController {
      */
     @FXML
     void SendToSchoolManager(ActionEvent event) {
-
-    	if(ExFlag==0)
+    	
+    	String req = RequestIdTextField.getText();
+    	
+    	
+    	if(ExFlag==0 || req.equals(""))
     	{
     		new Alert(AlertType.ERROR, "Enter Availabile Request ID.", ButtonType.OK).showAndWait();
     		
@@ -175,7 +178,16 @@ public class TeacherExeptionalRequestController implements IController {
      */
     @FXML
     void CeckIdAvailability(ActionEvent event) {
-
+    	
+    	String str =RequestIdTextField.getText();
+	   	for(int i=0;i<str.length();i++)
+	   	{
+	   		if(!(str.charAt(i)<='9'&&str.charAt(i)>='0')){
+	    		new Alert(AlertType.ERROR, "Error RequestID!", ButtonType.OK).showAndWait();
+	   			return;
+	   		}
+	   	}
+	   	
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Availbility Request ID");
 		data.add("select");

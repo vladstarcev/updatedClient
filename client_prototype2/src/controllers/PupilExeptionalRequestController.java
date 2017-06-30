@@ -129,6 +129,15 @@ public class PupilExeptionalRequestController implements IController {
     @FXML
     void CeckIdAvailability(ActionEvent event) {
 
+    	String str =RequestIdTextField.getText();
+	   	for(int i=0;i<str.length();i++)
+	   	{
+	   		if(!(str.charAt(i)<='9'&&str.charAt(i)>='0')){
+	    		new Alert(AlertType.ERROR, "Error RequestID!", ButtonType.OK).showAndWait();
+	   			return;
+	   		}
+	   	}
+    	
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check RequestID Availbility");
 		data.add("select");
@@ -179,9 +188,7 @@ public class PupilExeptionalRequestController implements IController {
      */
     @FXML
     void ChooseOperation(ActionEvent event) {
-    	
-    	
-    	
+	
     }
 
     /**
@@ -203,8 +210,6 @@ public class PupilExeptionalRequestController implements IController {
      */
     @FXML
     void AssignPupilMenu(ActionEvent event) {
-    	
-    	
 
     }
 
@@ -238,8 +243,9 @@ public class PupilExeptionalRequestController implements IController {
      */
     @FXML
     void SendToSchoolManager(ActionEvent event) {
-    	
-    	if(ReqIDflag==0)
+    	String req = RequestIdTextField.getText();
+
+    	if(ReqIDflag==0 || req.equals(""))
     	{
     		new Alert(AlertType.ERROR, "Enter Availabile Request ID.", ButtonType.OK).showAndWait();
     		
