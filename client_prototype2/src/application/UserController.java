@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -27,7 +28,7 @@ public class UserController implements IController {
     private URL location;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
     @FXML
     private Button loginBtn;
@@ -37,6 +38,10 @@ public class UserController implements IController {
 
     @FXML
     private Label AISFHSlable;
+
+    @FXML
+    private Label ASHlable;
+
     
     private String   permission;
     
@@ -103,6 +108,7 @@ public class UserController implements IController {
         assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'loginFrame.fxml'.";
         assert userIdTextField != null : "fx:id=\"userIdTextField\" was not injected: check your FXML file 'loginFrame.fxml'.";
         assert AISFHSlable != null : "fx:id=\"AISFHSlable\" was not injected: check your FXML file 'loginFrame.fxml'.";
+        assert ASHlable != null : "fx:id=\"ASHlable\" was not injected: check your FXML file 'loginFrame.fxml'.";
 
         Main.client.controller=this;
         
