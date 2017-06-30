@@ -18,6 +18,7 @@ import java.util.concurrent.Semaphore;
 import javax.xml.transform.OutputKeys;
 
 import application.Main;
+import application.UserController;
 import interfaces.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -82,6 +83,8 @@ public class DefineAssignmentController implements IController {
 
 	/** The flag course. */
 	private volatile boolean isExistingCourse = false;
+	
+	private String UserID;
 	
 	private Semaphore semaphore = new Semaphore(0);
 
@@ -157,9 +160,12 @@ public class DefineAssignmentController implements IController {
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("search courseId");
 		data.add("select");
-		data.add("courses");
+		data.add("course_in_class");
 		data.add("courseId");
 		data.add(courseId);
+		data.add("teacherId");
+		data.add(UserID);
+
 
 		try {
 			Main.client.sendToServer(data);
@@ -209,7 +215,7 @@ public class DefineAssignmentController implements IController {
 		}
 
 		if (!isExistingCourse) {
-			new Alert(AlertType.ERROR, "Course does not exist", ButtonType.OK).showAndWait();
+			new Alert(AlertType.ERROR, "This course is not under your supervision!", ButtonType.OK).showAndWait();
 			return;
 		}
 
@@ -299,6 +305,7 @@ public class DefineAssignmentController implements IController {
 		assert EnterAssNameTF != null : "fx:id=\"EnterAssNameTF\" was not injected: check your FXML file 'TeacherDefineAssignment.fxml'.";
 
 		Main.client.controller = this;
+        UserID=UserController.CurrentUserID;
 		Main.stack.push("TeacherDefineAssignment");
 	}
 

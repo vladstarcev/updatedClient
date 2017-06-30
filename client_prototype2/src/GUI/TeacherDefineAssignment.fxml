@@ -14,7 +14,7 @@
             <Font name="Bookman Old Style Bold" size="37.0" />
          </font>
       </Label>
-      <Label fx:id="EnterClassIdLabel" layoutX="37.0" layoutY="210.0" text="Enter Class ID For This Assignment: " />
+      <Label fx:id="EnterClassIdLabel" layoutX="37.0" layoutY="210.0" text="Enter Course ID For This Assignment: " />
       <TextField fx:id="EnterClassIDTextField" layoutX="32.0" layoutY="252.0" onAction="#EnterClassID" />
       <Label fx:id="EnterDueDateLabel" layoutX="37.0" layoutY="300.0" text="Enter Due Date:" />
       <DatePicker fx:id="DueDatePicker" layoutX="32.0" layoutY="329.0" onAction="#EnterDueDate" />
