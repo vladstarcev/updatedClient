@@ -227,6 +227,7 @@ public class TeacherCheckAssignmentController implements IController{
 
 				String AssName= map.get("assignmentName");
 				ChooseAssCB.getItems().add(AssName);
+				
 			}
 		}
 	}
