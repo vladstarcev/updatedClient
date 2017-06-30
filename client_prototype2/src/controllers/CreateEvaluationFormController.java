@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class CreateEvaluationFormController.
+ * The Class CreateEvaluationFormController - this class is creating evaluation form of pupil from teacher.
  */
 public class CreateEvaluationFormController implements IController  {
 
@@ -35,7 +35,7 @@ public class CreateEvaluationFormController implements IController  {
     @FXML
     private URL location;
 
-    /** The choose course CB. */
+    /** The choose course ComboBox. */
     @FXML
     private ComboBox<String> chooseCourseCB;
 
@@ -59,7 +59,7 @@ public class CreateEvaluationFormController implements IController  {
     @FXML
     private TextArea CommentsTextArea;
 
-    /** The choose pupil CB. */
+    /** The choose pupil ComboBox. */
     @FXML
     private ComboBox<String> choosePupilCB;
 
@@ -79,8 +79,7 @@ public class CreateEvaluationFormController implements IController  {
     @FXML
     private TextField PupilGradeTextLabel;
 
-
-	/** The all courses. */
+	/** hash map of string and hash map of all courses. */
 	private HashMap<String, HashMap<String, String>> allCourses;
 	
 	/** The all pupils. */
