@@ -202,27 +202,6 @@ public class DeletePupilFromCourseController implements IController
 			e.printStackTrace();
 		}  
 	 }
-	void updateDB()
-	{
-		ArrayList<String> data = new ArrayList<String>();
-   		data.add("update DB");
-   		data.add("delete");
-   		data.add("exceptional_request");
-   		data.add("CourseID");
-   		data.add(CourseIDTextField.getText());
-   		data.add("userID");
-   		data.add(PupilIDTextField.getText());
-   		data.add("exceptonalRequestID");
-   		data.add(RequestIdTextField.getText());
-		try
-		{
-			Main.client.sendToServer(data);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		} 
-	}
 
 	/**
 	 * Check request ID.
@@ -418,7 +397,6 @@ public class DeletePupilFromCourseController implements IController
 			}
 			else
 			{
-				updateDB();
 				new Alert(AlertType.INFORMATION, "Pupil Succesfully Deleted From Course", ButtonType.OK).showAndWait();
 				UserWindow.closeUserWindow(getClass(), (Stage) DeleteButton.getScene().getWindow());	
 			}
