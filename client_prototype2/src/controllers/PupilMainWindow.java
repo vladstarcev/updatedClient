@@ -20,7 +20,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class PupilMainWindow.
+ * The Class PupilMainWindow - this class display the pupil main window.
  */
 public class PupilMainWindow implements IController{
 
@@ -44,7 +44,7 @@ public class PupilMainWindow implements IController{
     @FXML
     private MenuItem PupilFile;
 
-    /** The Pupil menu lable. */
+    /** The Pupil menu label. */
     @FXML
     private Label PupilMenuLable;
 
@@ -52,7 +52,7 @@ public class PupilMainWindow implements IController{
     @FXML
     private Button LogOutButton;
 
-    /** The Choose operation lable. */
+    /** The Choose operation label. */
     @FXML
     private Label ChooseOperationLable;
     
@@ -62,44 +62,40 @@ public class PupilMainWindow implements IController{
     /**
      * Pupil choose operation.
      *
-     * @param event the event
+     * @param event - choose pupil operation
      */
     @FXML
     void PupilChooseOperation(ActionEvent event) {
-     System.out.println("TUDO BOM");
     }
 
     /**
      * Pupil log out.
      *
-     * @param event the event
+     * @param event - pupil log out
      */
     @FXML
-    void PupilLogOut(ActionEvent event) {
-    	
+    void PupilLogOut(ActionEvent event) {	
     	UserWindow.closeUserWindow(getClass(), (Stage)PupilMenuLable.getScene().getWindow());
     }
     
     /**
      * Upload ass.
      *
-     * @param event the event
+     * @param event - upload assignment
      */
     @FXML
     void uploadAss(ActionEvent event) {
-  UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilAssignment", getClass());  
-
+    	UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilAssignment", getClass());  
     }
 
     /**
      * Open pupil file.
      *
-     * @param event the event
+     * @param event - open pupil file
      */
     @FXML
     void openPupilFile(ActionEvent event) {
-  UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilFile", getClass());
-
+    	UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilFile", getClass());
     }
     
     /**
@@ -121,52 +117,53 @@ public class PupilMainWindow implements IController{
         loadPupil();
     }
 
- /**
-  * Load pupil.
-  */
- void loadPupil()
- {
-  ArrayList<String> data = new ArrayList<String>();
-  data.add("Client Pupil");
-  data.add("select");
-  data.add("pupil");
-  data.add("userID");
-  data.add(UserID);
-
-  try
-  {
-   Main.client.sendToServer(data);
-  }
-  catch (IOException e)
-  {
-   e.printStackTrace();
-  }
- }
-
- 
- 
- @Override
- public void handleAnswer(Object result) {
-  if (result == null)
-  {
-   // error
-
-   return;
-  }
-  ArrayList<String> arr = (ArrayList<String>) result;
-  String type = arr.remove(0);
-  if (type.equals("Client Pupil"))
-  {
-   for (String row : arr)
-   {
-    String[] cols = row.split(";");
-    HashMap<String, String> map = new HashMap<>();
-    for (String col : cols)
+    /**
+     * Load pupil.
+     */
+    void loadPupil()
     {
-     String[] field = col.split("=");
-     map.put(field[0], field[1]);
+    	ArrayList<String> data = new ArrayList<String>();
+    	data.add("Client Pupil");
+    	data.add("select");
+    	data.add("pupil");
+    	data.add("userID");
+    	data.add(UserID);
+    	try
+    	{
+    		Main.client.sendToServer(data);
+    	}
+    	catch (IOException e)
+    	{
+    		e.printStackTrace();
+    	}
     }
-   }
-  }
- }
+
+ 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
+    @Override
+    public void handleAnswer(Object result) {
+    	if (result == null)
+    	{
+    		// error
+    		return;
+    	}
+    	
+    	ArrayList<String> arr = (ArrayList<String>) result;
+    	String type = arr.remove(0);
+    	if (type.equals("Client Pupil"))
+    	{
+    		for (String row : arr)
+    		{
+    			String[] cols = row.split(";");
+    			HashMap<String, String> map = new HashMap<>();
+    			for (String col : cols)
+    			{
+    				String[] field = col.split("=");
+    				map.put(field[0], field[1]);
+    			}
+    		}
+    	}
+    }
 }

@@ -13,7 +13,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class SystemManagerMainWindowController.
+ * The Class SystemManagerMainWindowController -this class display the main window of System Manager.
  */
 public class SystemManagerMainWindowController implements IController {
 
@@ -25,11 +25,11 @@ public class SystemManagerMainWindowController implements IController {
     @FXML
     private URL location;
 
-    /** The add course btn. */
+    /** The add course button. */
     @FXML
     private Button addCourseBtn;
 
-    /** The delete course btn. */
+    /** The delete course button. */
     @FXML
     private Button deleteCourseBtn;
 
@@ -40,35 +40,32 @@ public class SystemManagerMainWindowController implements IController {
     /**
      * Adds the course.
      *
-     * @param event the event
+     * @param event - Adds the course
      */
     @FXML
     void addCourse(ActionEvent event) {
     	Main.stack.push("SystemManagerAddCourse");
-    	UserWindow.createUserWindow((Stage)addCourseBtn.getScene().getWindow(), "SystemManagerAddCourse", getClass());
-    	
+    	UserWindow.createUserWindow((Stage)addCourseBtn.getScene().getWindow(), "SystemManagerAddCourse", getClass());	
     }
 
     /**
      * Delete course.
      *
-     * @param event the event
+     * @param event - Delete course
      */
     @FXML
     void deleteCourse(ActionEvent event) {
     	Main.stack.push("SystemManagerDeleteCourse");
-    	UserWindow.createUserWindow((Stage)deleteCourseBtn.getScene().getWindow(), "SystemManagerDeleteCourse", getClass());
-    	
+    	UserWindow.createUserWindow((Stage)deleteCourseBtn.getScene().getWindow(), "SystemManagerDeleteCourse", getClass());  	
     }
 
     /**
      * Log out system manager.
      *
-     * @param event the event
+     * @param event - Log out system manager
      */
     @FXML
-    void LogOutSystemManager(ActionEvent event) {
-    	
+    void LogOutSystemManager(ActionEvent event) {    	
     	UserWindow.closeUserWindow(getClass(), (Stage) LogOutButton.getScene().getWindow());
     }
 
@@ -82,16 +79,14 @@ public class SystemManagerMainWindowController implements IController {
         assert LogOutButton != null : "fx:id=\"LogOutButton\" was not injected: check your FXML file 'SystemManagerMainWindow.fxml'.";
 
         Main.client.controller=this;
-        
-        Main.stack.push("SystemManagerMainWindow");
-        
-        
+        Main.stack.push("SystemManagerMainWindow");       
     }
 
-
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 }

@@ -26,7 +26,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class ReportBetweenTeachersController.
+ * The Class ReportBetweenTeachersController - .
  */
 public class ReportBetweenTeachersController implements IController
 {
@@ -55,7 +55,7 @@ public class ReportBetweenTeachersController implements IController
 	@FXML
 	private Label SemesterLabel;
 
-	/** The Specific class axos. */
+	/** The Specific class category axis. */
 	@FXML
 	private CategoryAxis SpecificClassAxos;
 
@@ -71,15 +71,15 @@ public class ReportBetweenTeachersController implements IController
 	@FXML
 	private ComboBox<String> ChooseComboBox;
 
-	/** The Report label 1. */
+	/** The Report label no.1. */
 	@FXML
 	private Label ReportLabel1;
 
-	/** The Different teachers axis. */
+	/** The Different teachers number axis. */
 	@FXML
 	private NumberAxis DifferentTeachersAxis;
 
-	/** The Report label 2. */
+	/** The Report label no.2. */
 	@FXML
 	private Label ReportLabel2;
 
@@ -105,7 +105,7 @@ public class ReportBetweenTeachersController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -116,12 +116,11 @@ public class ReportBetweenTeachersController implements IController
 	/**
 	 * Choose class.
 	 *
-	 * @param event the event
+	 * @param event - Choose class
 	 */
 	@FXML
 	void ChooseClass(ActionEvent event)
 	{
-
 		Class = ChooseComboBox.getSelectionModel().getSelectedItem();
 		if (Class == null)
 		{
@@ -152,7 +151,7 @@ public class ReportBetweenTeachersController implements IController
 	/**
 	 * Check semester ID.
 	 *
-	 * @param event the event
+	 * @param event - Check semester ID
 	 */
 	@FXML
 	void CheckSemesterID(ActionEvent event)
@@ -176,7 +175,7 @@ public class ReportBetweenTeachersController implements IController
 	/**
 	 * Display chart.
 	 *
-	 * @param event the event
+	 * @param event - Display chart
 	 */
 	@FXML
 	void DisplayChart(ActionEvent event)
@@ -223,7 +222,6 @@ public class ReportBetweenTeachersController implements IController
 				new Alert(AlertType.ERROR, "You must enter 4 semesters ID first!!", ButtonType.OK).showAndWait();
 			}
 		}
-
 	}
 
 	/**
@@ -262,6 +260,9 @@ public class ReportBetweenTeachersController implements IController
 		loadClasses();
 	}
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{

@@ -38,7 +38,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class PupilFileController.
+ * The Class PupilFileController - this class built the pupil file.
  */
 public class PupilFileController implements IController {
 

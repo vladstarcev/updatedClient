@@ -24,7 +24,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class PupilExeptionalRequestController.
+ * The Class PupilExeptionalRequestController this class send pupil exceptional request.
  */
 public class PupilExeptionalRequestController implements IController {
 

@@ -17,7 +17,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class SecretaryMainWindowController.
+ * The Class SecretaryMainWindowController - this class display the main window of secretary.
  */
 public class SecretaryMainWindowController implements IController{
 
@@ -45,11 +45,11 @@ public class SecretaryMainWindowController implements IController{
     @FXML
     private MenuItem AssignPupilToClass;
 
-    /** The Secretary menu lable. */
+    /** The Secretary menu label. */
     @FXML
     private Label SecretaryMenuLable;
 
-    /** The Open exeptional requst menu. */
+    /** The Open exceptional request menu. */
     @FXML
     private MenuItem OpenExeptionalRequstMenu;
 
@@ -80,7 +80,7 @@ public class SecretaryMainWindowController implements IController{
     /**
      * Choose operation.
      *
-     * @param event the event
+     * @param event - Choose operation
      */
     @FXML
     void ChooseOperation(ActionEvent event) {
@@ -88,118 +88,95 @@ public class SecretaryMainWindowController implements IController{
     }
 
     /**
-     * Open exeptional requst window.
+     * Open exceptional request window.
      *
-     * @param event the event
+     * @param event - Open exceptional request window
      */
     @FXML
     void OpenExeptionalRequstWindow(ActionEvent event) {
 
     	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(),
 				"SecretaryOpenExeptionalRequest", getClass());
-
     }
 
     /**
      * Assign pupil to class window.
      *
-     * @param event the event
+     * @param event - Assign pupil to class window
      */
     @FXML
     void AssignPupilToClassWindow(ActionEvent event) {
-
-    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryAssignPupilToClass",
-				getClass());
-
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryAssignPupilToClass",getClass());
     }
 
     /**
      * Open course window.
      *
-     * @param event the event
+     * @param event - Open course window
      */
     @FXML
-    void OpenCourseWindow(ActionEvent event) {
-    	
-    		UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenCourse",
-				getClass());
+    void OpenCourseWindow(ActionEvent event) {    	
+    		UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenCourse",getClass());
     }
 
     /**
      * Open semester window.
      *
-     * @param event the event
+     * @param event - Open semester window
      */
     @FXML
     void OpenSemesterWindow(ActionEvent event) {
-
-    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenSemester",
-				getClass());
-
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryOpenSemester",getClass());
     }
 
     /**
      * Define class window.
      *
-     * @param event the event
+     * @param event - Define class window
      */
     @FXML
     void DefineClassWindow(ActionEvent event) {
-
-    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryDefineClass",
-				getClass());
-
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryDefineClass",getClass());
     }
 
     /**
      * Assign pupil to course.
      *
-     * @param event the event
+     * @param event - Assign pupil to course
      */
     @FXML
     void AssignPupilToCourse(ActionEvent event) {
-
-		UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(),
-				"SecretaryAssignPupilToCourse", getClass());
-
+		UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(),"SecretaryAssignPupilToCourse", getClass());
     }
 
     /**
      * Delete pupil from course.
      *
-     * @param event the event
+     * @param event - Delete pupil from course
      */
     @FXML
     void DeletePupilFromCourse(ActionEvent event) {
-
-    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(),
-				"SecretaryDeletePupilFromCourse", getClass());
-
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(),"SecretaryDeletePupilFromCourse", getClass());
     }
 
     /**
-     * Re assign teacher.
+     * Request assignment teacher.
      *
-     * @param event the event
+     * @param event - Request assignment teacher
      */
     @FXML
     void ReAssignTeacher(ActionEvent event) {
-
-    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryReAssignTeacher",
-				getClass());
-
+    	UserWindow.createUserWindow((Stage) ChooseOperationalMenu.getScene().getWindow(), "SecretaryReAssignTeacher",getClass());
     }
 
     /**
      * Secretary log out.
      *
-     * @param event the event
+     * @param event - Secretary log out
      */
     @FXML
     void SecretaryLogOut(ActionEvent event) {
-
 		UserWindow.closeUserWindow(getClass(), (Stage) SecretaryMenuLable.getScene().getWindow());
-
     }
 
     /**
@@ -221,14 +198,14 @@ public class SecretaryMainWindowController implements IController{
         assert DefineClass != null : "fx:id=\"DefineClass\" was not injected: check your FXML file 'SecretaryMainWindow.fxml'.";
 
         Main.client.controller=this;
-        Main.stack.push("SecretaryMainWindow");
-        
+        Main.stack.push("SecretaryMainWindow");    
     }
 
-
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 }

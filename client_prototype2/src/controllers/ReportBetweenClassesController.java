@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class ReportBetweenClassesController.
+ * The Class ReportBetweenClassesController - .
  */
 public class ReportBetweenClassesController implements IController
 {
@@ -52,7 +52,7 @@ public class ReportBetweenClassesController implements IController
 	@FXML
 	private Label SemesterLabel;
 
-	/** The Specific teacher axis. */
+	/** The Specific teacher category axis. */
 	@FXML
 	private CategoryAxis SpecificTeacherAxis;
 
@@ -68,7 +68,7 @@ public class ReportBetweenClassesController implements IController
 	@FXML
 	private ComboBox<String> ChooseComboBox;
 
-	/** The Report label 1. */
+	/** The Report label no.1. */
 	@FXML
 	private Label ReportLabel1;
 
@@ -76,7 +76,7 @@ public class ReportBetweenClassesController implements IController
 	@FXML
 	private Label ChooseLabel;
 
-	/** The Different classes axis. */
+	/** The Different classes number axis. */
 	@FXML
 	private NumberAxis DifferentClassesAxis;
 
@@ -102,7 +102,7 @@ public class ReportBetweenClassesController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -113,7 +113,7 @@ public class ReportBetweenClassesController implements IController
 	/**
 	 * Choose teacher.
 	 *
-	 * @param event the event
+	 * @param event - Choose teacher
 	 */
 	@FXML
 	void ChooseTeacher(ActionEvent event)
@@ -124,7 +124,6 @@ public class ReportBetweenClassesController implements IController
 			new Alert(AlertType.ERROR, "Item Not Found.", ButtonType.OK).showAndWait();
 			return;
 		}
-
 	}
 
 	/**
@@ -151,7 +150,7 @@ public class ReportBetweenClassesController implements IController
 	/**
 	 * Check semester ID.
 	 *
-	 * @param event the event
+	 * @param event - Check semester ID.
 	 */
 	@FXML
 	void CheckSemesterID(ActionEvent event)
@@ -174,7 +173,7 @@ public class ReportBetweenClassesController implements IController
 	/**
 	 * Display report.
 	 *
-	 * @param event the event
+	 * @param event - Display report
 	 */
 	@FXML
 	void DisplayReport(ActionEvent event)
@@ -184,7 +183,7 @@ public class ReportBetweenClassesController implements IController
 			SelectedTeacher = Teacher.substring(0, 9);
 			if (SelectedTeacher == null)
 				return;
-
+			
 			ReportBarChart.getData().clear();
 			ArrayList<String> data = new ArrayList<String>();
 			data.add("histogram 1"); // for answer
@@ -220,7 +219,6 @@ public class ReportBetweenClassesController implements IController
 				new Alert(AlertType.ERROR, "You must enter 4 semesters ID first!!", ButtonType.OK).showAndWait();
 			}
 		}
-
 	}
 
 	/**
@@ -259,7 +257,9 @@ public class ReportBetweenClassesController implements IController
 
 	}
 
-	
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{
@@ -363,7 +363,6 @@ public class ReportBetweenClassesController implements IController
 				}
 				SemesterFLAG = 1;
 			}
-
 		}
 	}
 }

@@ -53,9 +53,7 @@ public class TeacherMainWindowController implements IController  {
 
     @FXML
     void DefineAssignmentWindow(ActionEvent event) {
-
     	UserWindow.createUserWindow((Stage) LogOutButton.getScene().getWindow(), "TeacherDefineAssignment", getClass());
-
     }
 
     @FXML
@@ -65,7 +63,6 @@ public class TeacherMainWindowController implements IController  {
 
     @FXML
     void EvaluationFormWindow(ActionEvent event) {
-
     	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "TeacherCreateEvaluationForm", getClass());
     }
 
@@ -79,13 +76,12 @@ public class TeacherMainWindowController implements IController  {
 
     	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "TeacherCheckAssignment", getClass());
 
+    	UserWindow.createUserWindow((Stage) TeacherMenuButton.getScene().getWindow(), "CheckAssignment", getClass());
     }
 
     @FXML
     void LogOutTeacher(ActionEvent event) {
-
     	UserWindow.exitToMenu(getClass(), (Stage) TeacherMenuButton.getScene().getWindow());
-
     }
 
     @FXML
@@ -107,6 +103,5 @@ public class TeacherMainWindowController implements IController  {
 	@Override
 	public void handleAnswer(Object msg) {
 		// TODO Auto-generated method stub
-		
 	}
 }

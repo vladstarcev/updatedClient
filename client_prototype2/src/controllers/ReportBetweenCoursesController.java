@@ -26,7 +26,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class ReportBetweenCoursesController.
+ * The Class ReportBetweenCoursesController - .
  */
 public class ReportBetweenCoursesController implements IController
 {
@@ -39,7 +39,7 @@ public class ReportBetweenCoursesController implements IController
 	@FXML
 	private URL location;
 
-	/** The Different courses axis. */
+	/** The Different courses number axis. */
 	@FXML
 	private NumberAxis DifferentCoursesAxis;
 
@@ -63,7 +63,7 @@ public class ReportBetweenCoursesController implements IController
 	@FXML
 	private ComboBox<String> ChooseComboBox;
 
-	/** The Report label 1. */
+	/** The Report label no.1. */
 	@FXML
 	private Label ReportLabel1;
 
@@ -71,15 +71,15 @@ public class ReportBetweenCoursesController implements IController
 	@FXML
 	private Label ChooseLabel;
 
-	/** The Report chart. */
+	/** The Report bar chart. */
 	@FXML
 	private BarChart<String, Double> ReportChart;
 
-	/** The Specific class axis. */
+	/** The Specific class category axis. */
 	@FXML
 	private CategoryAxis SpecificClassAxis;
 
-	/** The Report label 2. */
+	/** The Report label no.2. */
 	@FXML
 	private Label ReportLabel2;
 
@@ -105,7 +105,7 @@ public class ReportBetweenCoursesController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu.
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -116,7 +116,7 @@ public class ReportBetweenCoursesController implements IController
 	/**
 	 * Choose class.
 	 *
-	 * @param event the event
+	 * @param event - choose class
 	 */
 	@FXML
 	void ChooseClass(ActionEvent event)
@@ -151,7 +151,7 @@ public class ReportBetweenCoursesController implements IController
 	/**
 	 * Check semester ID.
 	 *
-	 * @param event the event
+	 * @param event - Check semester ID
 	 */
 	@FXML
 	void CheckSemesterID(ActionEvent event)
@@ -174,7 +174,7 @@ public class ReportBetweenCoursesController implements IController
 	/**
 	 * Display chart.
 	 *
-	 * @param event the event
+	 * @param event - Display chart
 	 */
 	@FXML
 	void DisplayChart(ActionEvent event)
@@ -208,8 +208,7 @@ public class ReportBetweenCoursesController implements IController
 		{
 			if (ClassFLAG == 0 && SemesterFLAG == 0)
 			{
-				new Alert(AlertType.ERROR, "You must choose class and 4 semesters ID first!!", ButtonType.OK)
-						.showAndWait();
+				new Alert(AlertType.ERROR, "You must choose class and 4 semesters ID first!!", ButtonType.OK).showAndWait();
 			}
 			if (ClassFLAG == 0)
 			{
@@ -259,7 +258,9 @@ public class ReportBetweenCoursesController implements IController
 		loadClasses();
 	}
 
-
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{

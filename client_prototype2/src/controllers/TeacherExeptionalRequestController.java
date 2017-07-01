@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class TeacherExeptionalRequestController.
+ * The Class TeacherExeptionalRequestController - this class sending exceptional request for teacher.
  */
 public class TeacherExeptionalRequestController implements IController {
 
@@ -45,7 +45,7 @@ public class TeacherExeptionalRequestController implements IController {
     @FXML
     private Label ClassLabel;
 
-    /** The Teacher exeptional label. */
+    /** The Teacher exceptional label. */
     @FXML
     private Label TeacherExeptionalLabel;
 
@@ -65,7 +65,7 @@ public class TeacherExeptionalRequestController implements IController {
     @FXML
     private Button BackButton;
 
-    /** The Course label 1. */
+    /** The Course label no.1. */
     @FXML
     private Label CourseLabel1;
 
@@ -81,16 +81,16 @@ public class TeacherExeptionalRequestController implements IController {
     @FXML
     private ComboBox<String> ListCLassComboBox;
     
-    /** The Ex flag. */
+    /** The Exceptional flag. */
     private int ExFlag;
     
-    /** The cb class. */
+    /** The combo box class. */
     private String cbClass;
     
     /** The Class ID. */
     private String ClassID;
     
-    /** The courseid. */
+    /** The course id. */
     private String courseid;
     
     /** The Study unit. */
@@ -99,17 +99,16 @@ public class TeacherExeptionalRequestController implements IController {
 	/** The Course weekly hour. */
 	private String CourseWeeklyHour;
 	
-	/** The CB teacher id. */
+	/** The Combo Box teacher id. */
 	private String CBTeacherId;
 
     /**
      * Choose class.
      *
-     * @param event the event
+     * @param event - Choose class
      */
     @FXML
     void ChooseClass(ActionEvent event) {
-    	
     	cbClass=ListCLassComboBox.getSelectionModel().getSelectedItem();
     	String[] Temp=cbClass.split(":");
     	ClassID=Temp[0];
@@ -119,11 +118,10 @@ public class TeacherExeptionalRequestController implements IController {
     /**
      * Choose teacher.
      *
-     * @param event the event
+     * @param event - Choose teacher
      */
     @FXML
     void ChooseTeacher(ActionEvent event) {
-
     	CBTeacherId=ListTeacherComboBox.getSelectionModel().getSelectedItem();
     	String[] Temp=CBTeacherId.split(":");
     	CBTeacherId=Temp[0];
@@ -132,13 +130,11 @@ public class TeacherExeptionalRequestController implements IController {
     /**
      * Send to school manager.
      *
-     * @param event the event
+     * @param event - Send to school manager
      */
     @FXML
     void SendToSchoolManager(ActionEvent event) {
-    	
     	String req = RequestIdTextField.getText();
-    	
     	
     	if(ExFlag==0 || req.equals(""))
     	{
@@ -162,23 +158,20 @@ public class TeacherExeptionalRequestController implements IController {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - enter Back to menu
      */
     @FXML
     void BackToMenu(ActionEvent event) {
-
     	UserWindow.closeUserWindow(getClass(), (Stage) ListTeacherComboBox.getScene().getWindow());
-
     }
 
     /**
      * Check id availability.
      *
-     * @param event the event
+     * @param event - Check id availability
      */
     @FXML
     void CeckIdAvailability(ActionEvent event) {
-    	
     	String str =RequestIdTextField.getText();
 	   	for(int i=0;i<str.length();i++)
 	   	{
@@ -208,11 +201,10 @@ public class TeacherExeptionalRequestController implements IController {
     /**
      * Choose course.
      *
-     * @param event the event
+     * @param event - Choose course
      */
     @FXML
     void ChooseCourse(ActionEvent event) {
-
     	courseid=ListCurseComboBox.getSelectionModel().getSelectedItem();
     	loadStudyUnit();
     }
@@ -240,7 +232,7 @@ public class TeacherExeptionalRequestController implements IController {
     /**
      * Load courses in class.
      *
-     * @param ClassiD the classi D
+     * @param ClassiD - Load courses in class
      */
     void loadCoursesInClass(String ClassiD)
     {
@@ -284,7 +276,7 @@ public class TeacherExeptionalRequestController implements IController {
 	}
 	
 	 /**
- 	 * Loadteacher.
+ 	 * Load teacher.
  	 */
  	void loadteacher()
 	 {
@@ -306,7 +298,7 @@ public class TeacherExeptionalRequestController implements IController {
 	 }
 	 
 	/**
-	 * Check it I sn O same teacher.
+	 * Check if is not the same teacher.
 	 */
 	void CheckItISnOSameTeacher()
 	{
@@ -332,7 +324,7 @@ public class TeacherExeptionalRequestController implements IController {
 	}
 	
 	 /**
- 	 * Open exeptional request.
+ 	 * Open exceptional request.
  	 */
  	void OpenExeptionalRequest()
 	{
@@ -396,10 +388,11 @@ public class TeacherExeptionalRequestController implements IController {
         loadClassIDAndName();
     }
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
-	public void handleAnswer(Object result) {
-		// TODO Auto-generated method stub
-		
+	public void handleAnswer(Object result) {		
 		if (result == null)
 		{
 			// error
@@ -434,7 +427,6 @@ public class TeacherExeptionalRequestController implements IController {
 						String[] field = col.split("=");
 						map.put(field[0], field[1]);
 					}
-
 					String classname = map.get("className");
 					String classID= map.get("classId");
 					ListCLassComboBox.getItems().add(classID + ": " + classname);
@@ -453,7 +445,6 @@ public class TeacherExeptionalRequestController implements IController {
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				courseid= map.get("courseId");
 				ListCurseComboBox.getItems().add(courseid);
 			}
@@ -470,12 +461,10 @@ public class TeacherExeptionalRequestController implements IController {
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				StudyUnit = map.get("studyUnit");
 				CourseWeeklyHour = map.get("weeklyStudyHours");
 			}
-			//loadAllClass();
-			loadteacher();
+		loadteacher();
 		}
 		
 		if(type.equals("Teacher List"))
@@ -490,7 +479,6 @@ public class TeacherExeptionalRequestController implements IController {
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String username = map.get("userName");
 				String userID = map.get("userId");
 				ListTeacherComboBox.getItems().add(userID + ": " + username);

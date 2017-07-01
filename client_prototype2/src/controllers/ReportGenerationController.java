@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class ReportGenerationController.
+ * The Class ReportGenerationController - .
  */
 public class ReportGenerationController implements IController
 {
@@ -55,7 +55,7 @@ public class ReportGenerationController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -66,7 +66,7 @@ public class ReportGenerationController implements IController
 	/**
 	 * Choose report.
 	 *
-	 * @param event the event
+	 * @param event - Choose report
 	 */
 	@FXML
 	void ChooseReport(ActionEvent event)
@@ -77,7 +77,7 @@ public class ReportGenerationController implements IController
 	/**
 	 * Classes of teacher.
 	 *
-	 * @param event the event
+	 * @param event - Classes of teacher
 	 */
 	@FXML
 	void ClassesOfTeacher(ActionEvent event)
@@ -85,13 +85,12 @@ public class ReportGenerationController implements IController
 		Main.stack.push("SchoolManagerReportGeneration");
 		UserWindow.createUserWindow((Stage) ReportWindowLabel.getScene().getWindow(),
 				"ReportBetweenClassesOfSpecificTeacher", getClass());
-
 	}
 
 	/**
 	 * Courses in class.
 	 *
-	 * @param event the event
+	 * @param event - Courses in class
 	 */
 	@FXML
 	void CoursesInClass(ActionEvent event)
@@ -103,7 +102,7 @@ public class ReportGenerationController implements IController
 	/**
 	 * Teachers in class.
 	 *
-	 * @param event the event
+	 * @param event - Teachers in class
 	 */
 	@FXML
 	void TeachersInClass(ActionEvent event)
@@ -129,10 +128,12 @@ public class ReportGenerationController implements IController
 		Main.client.controller = this;
 	}
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg)
 	{
 		// TODO Auto-generated method stub
-
 	}
 }
