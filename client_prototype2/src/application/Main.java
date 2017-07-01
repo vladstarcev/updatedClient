@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class Main extends Application - this class is the main of the client 
+ * The Class Main extends Application - this class is the main of client 
  */
 public class Main extends Application {
 	public static Stack<String> stack;
