@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import OCSF.*;
 
 public class SchoolClient extends AbstractClient {
+	
 	private boolean runOnUi = true;
 	public User user;
 	public IController controller;
