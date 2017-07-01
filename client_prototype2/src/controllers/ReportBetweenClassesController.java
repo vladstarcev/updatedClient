@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class ReportBetweenClassesController - .
+ * The Class ReportBetweenClassesController - this class present grade report between the classes.
  */
 public class ReportBetweenClassesController implements IController
 {

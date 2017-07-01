@@ -26,7 +26,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class ReportBetweenTeachersController - .
+ * The Class ReportBetweenTeachersController - this class present grade report between classes of one teacher.
  */
 public class ReportBetweenTeachersController implements IController
 {
