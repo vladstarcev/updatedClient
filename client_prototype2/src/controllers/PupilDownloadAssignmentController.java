@@ -20,31 +20,49 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class PupilDownloadAssignmentController - this class download the assignment to pupil that his teacher sent him.
+ */
 public class PupilDownloadAssignmentController implements IController{
 
+	/** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The back to menu. */
     @FXML
     private Button BackToMenuButton;
 
+    /** The download assignment hyper link. */
     @FXML
     private Hyperlink DownloadAssignmentHyperlink;
 
+    /** The choose assignment combo box. */
     @FXML
     private ComboBox<String> ChooseAssignmentCB;
 
+    /** The choose course combo box . */
     @FXML
     private ComboBox<String> ChooseCourseCB;
     
+    /** The User ID. */
     private String  UserID;
     
+    /** The Course Choice. */
     private String CourseCoice;
+    
+    /** The Course Assignment. */
     private String CourseAss;
 
+	/**
+	 * Choose Course.
+	 *
+	 * @param event - Choose Course
+	 */
     @FXML
     void ChooseCourseCB(ActionEvent event) {
     	
@@ -66,21 +84,33 @@ public class PupilDownloadAssignmentController implements IController{
  		}
     }
 
+	/**
+	 * Choose Assignment.
+	 *
+	 * @param event - Choose Assignment
+	 */
     @FXML
     void ChooseAssignment(ActionEvent event) {
-
     	CourseAss=ChooseAssignmentCB.getSelectionModel().getSelectedItem();
     }
 
+	/**
+	 * Back To Menu.
+	 *
+	 * @param event - enter back to menu
+	 */
     @FXML
     void BackToMenu(ActionEvent event) {
-
     	UserWindow.closeUserWindow(getClass(), (Stage) ChooseAssignmentCB.getScene().getWindow());
     }
 
+	/**
+	 * Download Assignment.
+	 *
+	 * @param event - Download Assignment
+	 */
     @FXML
     void DownloadAssignment(ActionEvent event) {
-
     	if(CourseCoice.equals(""))
     	{
     		new Alert(AlertType.ERROR, "Choose Course From List First.", ButtonType.OK).showAndWait();
@@ -89,12 +119,13 @@ public class PupilDownloadAssignmentController implements IController{
     	{
     		new Alert(AlertType.ERROR, "Choose Assignment From List First.", ButtonType.OK).showAndWait();
     	}
-    	else 
-    	{
-
-    	}
     }
-    
+   
+	/**
+	 * Load Course For Pupil.
+	 *
+	 * @param event - Load Course For Pupil
+	 */
     void loadCourseForPupil()
     {
 		ArrayList<String> data = new ArrayList<String>();
@@ -114,6 +145,9 @@ public class PupilDownloadAssignmentController implements IController{
 		}
     }
 
+	/**
+	 * Initialize.
+	 */
     @FXML
     void initialize() {
         assert BackToMenuButton != null : "fx:id=\"BackToMenuButton\" was not injected: check your FXML file 'PupilDownloadAssignment.fxml'.";
@@ -127,18 +161,17 @@ public class PupilDownloadAssignmentController implements IController{
         CourseCoice="";
         CourseAss="";
         
-        loadCourseForPupil(); 
-        
+        loadCourseForPupil();     
     }
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */  
 	@Override
 	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
-		
-
 		ArrayList<String> arr = (ArrayList<String>) msg;
 		String type = arr.remove(0);
-		
+	
 		if (msg == null)
 		{
 			// error
@@ -157,7 +190,6 @@ public class PupilDownloadAssignmentController implements IController{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String coursID = map.get("courseID");
 				ChooseCourseCB.getItems().add(coursID);
 			}
@@ -174,7 +206,6 @@ public class PupilDownloadAssignmentController implements IController{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String assignmentName = map.get("assignmentName");
 				ChooseAssignmentCB.getItems().add(assignmentName);
 			}
