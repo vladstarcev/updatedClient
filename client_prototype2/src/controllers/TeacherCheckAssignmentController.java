@@ -46,13 +46,11 @@ public class TeacherCheckAssignmentController implements IController {
     private String AssName;
     @FXML
     void ChooseCourse(ActionEvent event) {
-
     	CBchoice=ChooseCourseCB.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void ChooseAss(ActionEvent event) {
-
     	AssName=ChooseAssCB.getSelectionModel().getSelectedItem();
     }
 
