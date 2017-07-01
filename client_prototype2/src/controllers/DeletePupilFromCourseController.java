@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class DeletePupilFromCourseController.
+ * The Class DeletePupilFromCourseController - this class delete pupil that they are already exist in the course.
  */
 public class DeletePupilFromCourseController implements IController
 {
@@ -49,7 +49,7 @@ public class DeletePupilFromCourseController implements IController
 	@FXML
 	private Button CheckRequestButton;
 
-	/** The Pupil ID lable. */
+	/** The Pupil ID label. */
 	@FXML
 	private Label PupilIDLable;
 
@@ -65,7 +65,7 @@ public class DeletePupilFromCourseController implements IController
 	@FXML
 	private TextField CourseIDTextField;
 
-	/** The Request id label. */
+	/** The Request Id label. */
 	@FXML
 	private Label RequestIdLabel;
 
@@ -73,11 +73,11 @@ public class DeletePupilFromCourseController implements IController
 	@FXML
 	private Button BackButton;
 
-	/** The Delete lable. */
+	/** The Delete label. */
 	@FXML
 	private Label DeleteLable;
 
-	/** The Course ID lable. */
+	/** The Course ID label. */
 	@FXML
 	private Label CourseIDLable;
 	
@@ -93,13 +93,13 @@ public class DeletePupilFromCourseController implements IController
 	/** The check pupil ID. */
 	private int checkPupilID;
 	
-	/** The Exe re FLAG. */
+	/** The Exception request flag. */
 	private int ExeReFLAG;
 
 	/**
-	 * Check pupil ID.
+	 * Check if pupil ID is already exist in the DB.
 	 *
-	 * @param event the event
+	 * @param event - enter pupil ID
 	 */
 	@FXML
 	void CheckPupilID(ActionEvent event)
@@ -122,9 +122,9 @@ public class DeletePupilFromCourseController implements IController
 	}
 
 	/**
-	 * Check course ID.
+	 * Check if the course ID is already exist in the DB.
 	 *
-	 * @param event the event
+	 * @param event - enter Course ID
 	 */
 	@FXML
 	void CheckCourseID(ActionEvent event)
@@ -150,7 +150,7 @@ public class DeletePupilFromCourseController implements IController
 	/**
 	 * Delete pupil course.
 	 *
-	 * @param event the event
+	 * @param event - enter pupil
 	 */
 	@FXML
 	void DeletePupilCourse(ActionEvent event)
@@ -206,7 +206,7 @@ public class DeletePupilFromCourseController implements IController
 	/**
 	 * Check request ID.
 	 *
-	 * @param event the event
+	 * @param event - enter exceptional request ID
 	 */
 	@FXML
 	void CheckRequestID(ActionEvent event)
@@ -233,7 +233,7 @@ public class DeletePupilFromCourseController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -294,6 +294,9 @@ public class DeletePupilFromCourseController implements IController
 	    ExeReFLAG=0;
 	}
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{

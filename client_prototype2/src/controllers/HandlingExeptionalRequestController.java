@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class HandlingExeptionalRequestController.
+ * The Class HandlingExeptionalRequestController - this class.
  */
 public class HandlingExeptionalRequestController implements IController{
 
@@ -35,7 +35,7 @@ public class HandlingExeptionalRequestController implements IController{
     @FXML
     private URL location;
 
-    /** The comment TF. */
+    /** The comment Text Field. */
     @FXML
     private TextField commentTF;
 
@@ -47,11 +47,11 @@ public class HandlingExeptionalRequestController implements IController{
     @FXML
     private Label CommentsLabel;
 
-    /** The Exeptional requst box. */
+    /** The Exceptional request box. */
     @FXML
     private ComboBox<String> ExeptionalRequstBox;
 
-    /** The Handle exeptional request label. */
+    /** The Handle exceptional request label. */
     @FXML
     private Label HandleExeptionalRequestLabel;
 
@@ -67,17 +67,17 @@ public class HandlingExeptionalRequestController implements IController{
     @FXML
     private MenuButton DecisionMenu;
 
-    /** The Send answar button. */
+    /** The Send answer button. */
     @FXML
     private Button SendAnswarButton;
 
-    /** The all exeptional requests. */
+    /** The all exceptional requests. */
     private HashMap<String, HashMap<String, String>> allExeptionalRequests;
     
-    /** The des. */
+    /** The decision. */
     private String des;
     
-    /** The req. */
+    /** The request. */
     private String req;
     
     /** The User ID. */
@@ -89,14 +89,16 @@ public class HandlingExeptionalRequestController implements IController{
     /** The Course ID. */
     private String CourseID;
     
-    /** The req type. */
+    /** The request type. */
     private String reqType;
       
+    /** The boolean flag. */
     private boolean flag=false;
+    
     /**
-     * Choose exeptional requst.
+     * Choose exceptional request.
      *
-     * @param event the event
+     * @param event - enter exceptional request 
      */
     @FXML
     void ChooseExeptionalRequst(ActionEvent event) {
@@ -108,7 +110,7 @@ public class HandlingExeptionalRequestController implements IController{
     /**
      * Choose decision.
      *
-     * @param event the event
+     * @param event - enter decision
      */
     @FXML
     void ChooseDecision(ActionEvent event) {
@@ -116,9 +118,9 @@ public class HandlingExeptionalRequestController implements IController{
     }
 
     /**
-     * Conform exeptional request.
+     * Conform exceptional request.
      *
-     * @param event the event
+     * @param event - enter conform exceptional request in the menu item
      */
     @FXML
     void ConformExeptionalRequest(ActionEvent event) {
@@ -130,7 +132,7 @@ public class HandlingExeptionalRequestController implements IController{
     /**
      * Confirm.
      *
-     * @param event the event
+     * @param event -enter on confirm
      */
     @FXML
     void Confirm(ActionEvent event) {
@@ -138,7 +140,7 @@ public class HandlingExeptionalRequestController implements IController{
     }
 
     /**
-     * Deny exeptional request.
+     * Deny exceptional request.
      *
      * @param event the event
      */
@@ -153,7 +155,7 @@ public class HandlingExeptionalRequestController implements IController{
     /**
      * Deny.
      *
-     * @param event the event
+     * @param event - enter on deny decision
      */
     @FXML
     void Deny(ActionEvent event) {
@@ -161,9 +163,9 @@ public class HandlingExeptionalRequestController implements IController{
     }
 
     /**
-     * Send answar.
+     * Send answer to secretary.
      *
-     * @param event the event
+     * @param event - enter send answer 
      */
     @FXML
     void SendAnswar(ActionEvent event) {
@@ -200,7 +202,7 @@ public class HandlingExeptionalRequestController implements IController{
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - enter back to menu
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -210,14 +212,14 @@ public class HandlingExeptionalRequestController implements IController{
     /**
      * Comment text field.
      *
-     * @param event the event
+     * @param event - enter text field in comment
      */
     @FXML
     void commentTextField(ActionEvent event) {
     }
 
     /**
-     * Load all exeptional request.
+     * Load all exceptional request.
      */
     void loadAllExeptionalRequest()
     {
@@ -239,9 +241,9 @@ public class HandlingExeptionalRequestController implements IController{
     }
     
     /**
-     * Update descision.
+     * Update decision.
      *
-     * @param descision the descision
+     * @param descision - enter update decision
      */
     void updateDescision(String descision)
     {
@@ -319,7 +321,7 @@ public class HandlingExeptionalRequestController implements IController{
     }
 
 	/**
-	 * Load course week hours.
+	 * Load week hours in course.
 	 */
 	void LoadCourseWeekHours()
 	{
@@ -341,7 +343,7 @@ public class HandlingExeptionalRequestController implements IController{
 	}
 	
 	/**
-	 * Check pre courses.
+	 * Check pre-courses to this current course.
 	 */
 	void checkPreCourses()
 	{
@@ -396,7 +398,9 @@ public class HandlingExeptionalRequestController implements IController{
     }
 
     
-
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result) {
 		if (result == null)

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class ExeptionalRequestController.
+ * The Class ExeptionalRequestController - this class for all the exceptional request.
  */
 public class ExeptionalRequestController implements IController
 {
@@ -30,11 +30,11 @@ public class ExeptionalRequestController implements IController
     @FXML
     private Button TeacherButton;
 
-	/** The Choose exeptional request label. */
+	/** The Choose exceptional request label. */
 	@FXML
 	private Label ChooseExeptionalRequestLabel;
 	
-    /** The Exeptional request label. */
+    /** The Exceptional request label. */
     @FXML
     private Label ExeptionalRequestLabel;
 
@@ -49,7 +49,7 @@ public class ExeptionalRequestController implements IController
 	/**
 	 * Delete or assign pupil.
 	 *
-	 * @param event the event
+	 * @param event 
 	 */
 	@FXML
 	void DeleteOrAssignPupil(ActionEvent event)
@@ -60,9 +60,9 @@ public class ExeptionalRequestController implements IController
 	}
 
 	/**
-	 * Re assign teacher.
+	 * Request assignment teacher.
 	 *
-	 * @param event the event
+	 * @param event - enter request assignment teacher
 	 */
 	@FXML
 	void ReAssignTeacher(ActionEvent event)
@@ -75,7 +75,7 @@ public class ExeptionalRequestController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -100,7 +100,9 @@ public class ExeptionalRequestController implements IController
 		Main.stack.push("SecretaryOpenExeptionalRequest");
 	}
 
-	
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg)
 	{

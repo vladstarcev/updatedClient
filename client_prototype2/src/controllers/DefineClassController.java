@@ -90,22 +90,22 @@ public class DefineClassController implements IController
 	/** The ClassID. */
 	private String ClassID;
 	
-	/** The ClassNAME. */
+	/** The Class NAME. */
 	private String ClassNAME;
 	
 	/** The Capacity. */
 	private String Capacity;
 	
-	/** The ClassName F. */
+	/** The Class Name flag. */
 	private int ClassNameF;
 	
-	/** The ClassID F. */
+	/** The Class ID Flag. */
 	private int ClassIDF;
 
 	/**
-	 * Enter max pupil for class.
+	 * Enter maximum pupil for class.
 	 *
-	 * @param event the event
+	 * @param event - enter maximum pupil for class
 	 */
 	@FXML
 	void EnterMaxPupilForClass(ActionEvent event)
@@ -116,7 +116,7 @@ public class DefineClassController implements IController
 	/**
 	 * Enter class name.
 	 *
-	 * @param event the event
+	 * @param event - enter class name
 	 */
 	@FXML
 	void EnterClassName(ActionEvent event)
@@ -127,7 +127,7 @@ public class DefineClassController implements IController
 	/**
 	 * Define class.
 	 *
-	 * @param event the event
+	 * @param event - checking exceptions of user
 	 */
 	@FXML
 	void DefineClass(ActionEvent event)
@@ -190,7 +190,7 @@ public class DefineClassController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu button
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event) //problem here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -201,9 +201,9 @@ public class DefineClassController implements IController
 	}
 
 	/**
-	 * Check availability 2.
+	 * Check availability no.2.
 	 *
-	 * @param event the event
+	 * @param event - enter class name 
 	 */
 	@FXML
 	void CheckAvailability2(ActionEvent event)
@@ -231,7 +231,7 @@ public class DefineClassController implements IController
 	/**
 	 * Enter class ID.
 	 *
-	 * @param event the event
+	 * @param event - enter class ID
 	 */
 	@FXML
 	void EnterClassID(ActionEvent event)
@@ -240,9 +240,9 @@ public class DefineClassController implements IController
 	}
 
 	/**
-	 * Check availability 1.
+	 * Check availability no.1.
 	 *
-	 * @param event the event
+	 * @param event - enter class ID
 	 */
 	@FXML
 	void CheckAvailability1(ActionEvent event)
@@ -305,7 +305,9 @@ public class DefineClassController implements IController
 
 	}
 
-
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg)
 	{

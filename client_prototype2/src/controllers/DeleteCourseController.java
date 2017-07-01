@@ -18,30 +18,30 @@ import ui.UserWindow;
 
 
 /**
- * The Class DeleteCourseController.
+ * The Class DeleteCourseController - this class is delete existing courses.
  */
 public class DeleteCourseController implements IController {
 
-    /** The id txt. */
+    /** The id text. */
     @FXML
     private TextField idTxt;
 
-    /** The cancel btn. */
+    /** The cancel button. */
     @FXML
     private Button cancelBtn;
 
-    /** The enter lab. */
+    /** The enter label. */
     @FXML
     private Label enterLab;
 
-    /** The delete btn. */
+    /** The delete button. */
     @FXML
     private Button deleteBtn;
 
     /**
      * Delete course.
      *
-     * @param event the event
+     * @param event - enter course Id that the user want to delete
      */
     @FXML
     void DeleteCourse(ActionEvent event) {
@@ -87,7 +87,7 @@ public class DeleteCourseController implements IController {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - enter back to menu
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -110,7 +110,10 @@ public class DeleteCourseController implements IController {
         Main.stack.push("SystemManagerDeleteCourse");
     }
 
-	@Override
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
+    @Override
 	public void handleAnswer(Object msg) {
 		if (msg == null)
 		{
