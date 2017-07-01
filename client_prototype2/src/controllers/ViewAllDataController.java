@@ -23,7 +23,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class ViewAllDataController.
+ * The Class ViewAllDataController this class display all data.
  */
 public class ViewAllDataController implements IController
 {
@@ -36,7 +36,7 @@ public class ViewAllDataController implements IController
 	@FXML
 	private URL location;
 
-	/** The Display exeptional requests. */
+	/** The Display exceptional requests. */
 	@FXML
 	private MenuItem DisplayExeptionalRequests;
 
@@ -102,7 +102,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * View all options.
 	 *
-	 * @param event the event
+	 * @param event - View all options
 	 */
 	@FXML
 	void ViewAllOptions(ActionEvent event)
@@ -113,7 +113,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display all pupil.
 	 *
-	 * @param event the event
+	 * @param event - Display all pupil
 	 */
 	@FXML
 	void DisplayAllPupil(ActionEvent event)
@@ -139,7 +139,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display all parents.
 	 *
-	 * @param event the event
+	 * @param event - Display all parents
 	 */
 	@FXML
 	void DisplayAllParents(ActionEvent event)
@@ -165,7 +165,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display all teachers.
 	 *
-	 * @param event the event
+	 * @param event - Display all teachers
 	 */
 	@FXML
 	void DisplayAllTeachers(ActionEvent event)
@@ -191,7 +191,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display all classes.
 	 *
-	 * @param event the event
+	 * @param event - Display all classes
 	 */
 	@FXML
 	void DisplayAllClasses(ActionEvent event)
@@ -214,7 +214,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display all academic activities.
 	 *
-	 * @param event the event
+	 * @param event - Display all academic activities
 	 */
 	@FXML
 	void DisplayAllAcademicActivities(ActionEvent event)
@@ -237,7 +237,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display all semester.
 	 *
-	 * @param event the event
+	 * @param event - Display all semester
 	 */
 	@FXML
 	void DisplayAllSemester(ActionEvent event)
@@ -258,9 +258,9 @@ public class ViewAllDataController implements IController
 	}
 
 	/**
-	 * Display all exeptional requests.
+	 * Display all exceptional requests.
 	 *
-	 * @param event the event
+	 * @param event - Display all exceptional requests
 	 */
 	@FXML
 	void DisplayAllExeptionalRequests(ActionEvent event)
@@ -283,7 +283,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display all assignments.
 	 *
-	 * @param event the event
+	 * @param event - Display all assignments
 	 */
 	@FXML
 	void DisplayAllAssignments(ActionEvent event)
@@ -306,7 +306,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display secretary data.
 	 *
-	 * @param event the event
+	 * @param event - Display secretary data
 	 */
 	@FXML
 	void DisplaySecretaryData(ActionEvent event)
@@ -332,7 +332,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Display system manager data.
 	 *
-	 * @param event the event
+	 * @param event - Display system manager data
 	 */
 	@FXML
 	void DisplaySystemManagerData(ActionEvent event)
@@ -358,7 +358,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter Back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -369,7 +369,7 @@ public class ViewAllDataController implements IController
 	/**
 	 * View chosen data.
 	 *
-	 * @param event the event
+	 * @param event - View chosen data
 	 */
 	@FXML
 	void ViewChosenData(ActionEvent event)
@@ -406,11 +406,12 @@ public class ViewAllDataController implements IController
 		DATA = "";
 	}
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg)
 	{
-		// TODO Auto-generated method stub
-		
 		if (msg == null)
 		{
 			// error
@@ -433,7 +434,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String userID = map.get("userId");
 				String userFName=map.get("userFirstName");
 				String userLname=map.get("userLastName");
@@ -453,7 +453,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String userID = map.get("userId");
 				String userFName=map.get("userFirstName");
 				String userLname=map.get("userLastName");
@@ -473,7 +472,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String userID = map.get("userId");
 				String userFName=map.get("userFirstName");
 				String userLname=map.get("userLastName");
@@ -493,13 +491,11 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String classId= map.get("classId");
 				String className=map.get("className");
 				String AssignedPupils=map.get("AssignedPupils");
 				DataComboBox.getItems().add("Class ID: " + classId + ", Class Name: " + className + ", Assigned Pupils:  " + AssignedPupils);
-			}
-			
+			}		
 		}
 		
 		if(type.equals("Academic Activities Data"))
@@ -514,7 +510,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String academicActivityId= map.get("academicActivityId");
 				String academicActivityName=map.get("academicActivityName");
 				String typeOfActivity=map.get("typeOfActivity");
@@ -534,7 +529,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String semesterId= map.get("semesterId");
 				String semesterType=map.get("semesterType");
 				String semesterStatus=map.get("semesterStatus");
@@ -554,7 +548,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String exceptonalRequestID= map.get("exceptonalRequestID");
 				String type1=map.get("type");
 				String descision=map.get("descision");
@@ -585,7 +578,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String assignmentName= map.get("assignmentName");
 				String dueDate=map.get("dueDate");
 				String courseId=map.get("courseId");
@@ -605,7 +597,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String userID = map.get("userId");
 				String userFName=map.get("userFirstName");
 				String userLname=map.get("userLastName");
@@ -625,7 +616,6 @@ public class ViewAllDataController implements IController
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String userID = map.get("userId");
 				String userFName=map.get("userFirstName");
 				String userLname=map.get("userLastName");

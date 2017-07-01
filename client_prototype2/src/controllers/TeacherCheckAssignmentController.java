@@ -54,14 +54,12 @@ public class TeacherCheckAssignmentController implements IController{
 
     @FXML
     void ChooseCourse(ActionEvent event) {
-
     	CBchoice=ChooseCourseCB.getSelectionModel().getSelectedItem();
     	loadCourseAss();
     }
 
     @FXML
     void ChooseAss(ActionEvent event) {
-
     	AssName=ChooseAssCB.getSelectionModel().getSelectedItem();
     }
 
@@ -173,7 +171,6 @@ public class TeacherCheckAssignmentController implements IController{
 			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
 			return;
 		}
-
 		ArrayList<String> arr = (ArrayList<String>) msg;
 		String type = arr.remove(0);
 		
@@ -188,7 +185,6 @@ public class TeacherCheckAssignmentController implements IController{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String CourseID = map.get("courseId");
 				ChooseCourseCB.getItems().add(CourseID);
 			}
@@ -205,7 +201,6 @@ public class TeacherCheckAssignmentController implements IController{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String userID = map.get("userId");
 				String UserName=map.get("userFirstName");
 				String UserLName=map.get("userLastName");
@@ -224,10 +219,8 @@ public class TeacherCheckAssignmentController implements IController{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
-
 				String AssName= map.get("assignmentName");
-				ChooseAssCB.getItems().add(AssName);
-				
+				ChooseAssCB.getItems().add(AssName);			
 			}
 		}
 	}

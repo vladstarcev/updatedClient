@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class SchoolManagerMainWindowController.
+ * The Class SchoolManagerMainWindowController - this class display the main window of school manager.
  */
 public class SchoolManagerMainWindowController implements IController
 {
@@ -28,7 +28,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	private URL location;
 
-	/** The Handling exeptional request menu item. */
+	/** The Handling exceptional request menu item. */
 	@FXML
 	private MenuItem HandlingExeptionalRequestMenuItem;
 
@@ -40,7 +40,7 @@ public class SchoolManagerMainWindowController implements IController
 	@FXML
 	private MenuButton MenuButton;
 
-	/** The Report genaration menu item. */
+	/** The Report generation menu item. */
 	@FXML
 	private MenuItem ReportGenarationMenuItem;
 
@@ -63,7 +63,7 @@ public class SchoolManagerMainWindowController implements IController
 	/**
 	 * School manager menu.
 	 *
-	 * @param event the event
+	 * @param event - enter School manager menu.
 	 */
 	@FXML
 	void SchoolManagerMenu(ActionEvent event)
@@ -74,7 +74,7 @@ public class SchoolManagerMainWindowController implements IController
 	/**
 	 * Block user.
 	 *
-	 * @param event the event
+	 * @param event - enter Block user
 	 */
 	@FXML
 	void BlockUser(ActionEvent event)
@@ -85,7 +85,7 @@ public class SchoolManagerMainWindowController implements IController
 	/**
 	 * Block window operation.
 	 *
-	 * @param event the event
+	 * @param event - Block window operation
 	 */
 	@FXML
 	void BlockWindowOperation(ActionEvent event)
@@ -96,20 +96,19 @@ public class SchoolManagerMainWindowController implements IController
 	/**
 	 * Report generation.
 	 *
-	 * @param event the event
+	 * @param event - Report generation
 	 */
 	@FXML
 	void ReportGeneration(ActionEvent event)
 	{
 		Main.stack.push("SchoolManagerReportGeneration"); 
 		UserWindow.createUserWindow((Stage) MenuButton.getScene().getWindow(),"SchoolManagerReportGeneration", getClass());
-
 	}
 
 	/**
 	 * Report generation operation.
 	 *
-	 * @param event the event
+	 * @param event - Report generation
 	 */
 	@FXML
 	void ReportGenerationOperation(ActionEvent event)
@@ -118,9 +117,9 @@ public class SchoolManagerMainWindowController implements IController
 	}
 
 	/**
-	 * Handling exeptional request.
+	 * Handling exceptional request.
 	 *
-	 * @param event the event
+	 * @param event - Handling exceptional request
 	 */
 	@FXML
 	void HandlingExeptionalRequest(ActionEvent event)
@@ -129,9 +128,9 @@ public class SchoolManagerMainWindowController implements IController
 	}
 
 	/**
-	 * Handling exeptional request operation.
+	 * Handling exceptional request operation.
 	 *
-	 * @param event the event
+	 * @param event - Handling exceptional request operation
 	 */
 	@FXML
 	void HandlingExeptionalRequestOperation(ActionEvent event)
@@ -142,7 +141,7 @@ public class SchoolManagerMainWindowController implements IController
 	/**
 	 * View all data.
 	 *
-	 * @param event the event
+	 * @param event - View all data 
 	 */
 	@FXML
 	void ViewAllData(ActionEvent event)
@@ -153,7 +152,7 @@ public class SchoolManagerMainWindowController implements IController
 	/**
 	 * School manager log out.
 	 *
-	 * @param event the event
+	 * @param event - School manager log out
 	 */
 	@FXML
 	void SchoolManagerLogOut(ActionEvent event)
@@ -176,16 +175,16 @@ public class SchoolManagerMainWindowController implements IController
         assert ViewSystemData != null : "fx:id=\"ViewSystemData\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
         assert ChooseOperationLabel != null : "fx:id=\"ChooseOperationLabel\" was not injected: check your FXML file 'SchoolManagerMainWindow.fxml'.";
 
-		Main.client.controller = this;
-		
-		Main.stack.push("SchoolManagerMainWindow");
-		
+		Main.client.controller = this;		
+		Main.stack.push("SchoolManagerMainWindow");	
 	}
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg)
 	{
 		// TODO Auto-generated method stub
-
 	}
 }
