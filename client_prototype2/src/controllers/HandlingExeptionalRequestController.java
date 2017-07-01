@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class HandlingExeptionalRequestController - this class.
+ * The Class HandlingExeptionalRequestController - this class is handling exceptional request of school manager.
  */
 public class HandlingExeptionalRequestController implements IController{
 
