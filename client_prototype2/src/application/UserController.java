@@ -19,40 +19,61 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class UserController - User Controller
+ */
 public class UserController implements IController {
 
+	/** The resources . */
     @FXML
     private ResourceBundle resources;
 
+    /** The location . */
     @FXML
     private URL location;
 
+    /** The password text filed . */
     @FXML
     private PasswordField passwordTextField;
 
+    /** The login button . */
     @FXML
     private Button loginBtn;
 
+    /** The user ID text field . */
     @FXML
     private TextField userIdTextField;
 
+    /** The AISFHS label. */
     @FXML
     private Label AISFHSlable;
 
+    /** The ASH label. */
     @FXML
     private Label ASHlable;
 
-    
+    /** The permission. */
     private String   permission;
     
+    /** The current user id. */
     public static String CurrentUserID;
 	
+    /**
+     * login.
+     *
+     * @param event - enter Login
+     */
     @FXML
     void login(ActionEvent event) {
-
     	authorizeUser(userIdTextField.getText(), passwordTextField.getText());
     }
     
+    /**
+     * Adding course to semester.
+     *
+     * @param name - user ID
+     * @param pass -  user password
+     */
 	public void authorizeUser(String name, String pass)
 	{
 		Main.client.controller = this;
@@ -74,6 +95,9 @@ public class UserController implements IController {
 		}
 	}
 
+    /**
+     * open menu.
+     */
 	void OpenMenu()
 	{
 		if(permission.equals("1"))
@@ -102,6 +126,9 @@ public class UserController implements IController {
 		}
 	}
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         assert passwordTextField != null : "fx:id=\"passwordTextField\" was not injected: check your FXML file 'loginFrame.fxml'.";
@@ -119,14 +146,14 @@ public class UserController implements IController {
         permission="";
     }
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
-	public void handleAnswer(Object result) {
-		// TODO Auto-generated method stub
-		
+	public void handleAnswer(Object result) {	
 		if (result == null)
 		{
 			// error
-
 			return;
 		}	
 		ArrayList<String> arr = (ArrayList<String>) result;
@@ -156,7 +183,6 @@ public class UserController implements IController {
 				}
 				OpenMenu();
 			}
-		}
-		
+		}	
 	}
 }
