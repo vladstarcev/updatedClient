@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class ParentController.
+ * The Class ParentController - this class is for parent user.
  */
 public class ParentController implements IController
 {
@@ -108,13 +108,15 @@ public class ParentController implements IController
 	}
 
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{
 		if (result == null)
 		{
 			// error
-
 			return;
 		}
 
@@ -157,7 +159,7 @@ public class ParentController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event) // change to logout
@@ -168,7 +170,7 @@ public class ParentController implements IController
 	/**
 	 * Choose child.
 	 *
-	 * @param event the event
+	 * @param event - enter child 
 	 */
 	@FXML
 	void ChooseChild(ActionEvent event)

@@ -23,7 +23,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class OpenNewSemesterController.
+ * The Class OpenNewSemesterController - this class is open new semester.
  */
 public class OpenNewSemesterController implements IController
 {
@@ -48,11 +48,11 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	private Button CheckIDButton;
 
-	/** The Academic ac text field. */
+	/** The Academic activity text field. */
 	@FXML
 	private TextField AcademicAcTextField;
 
-	/** The Semester ID lable. */
+	/** The Semester ID label. */
 	@FXML
 	private Label SemesterIDLable;
 
@@ -60,15 +60,15 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	private Button BackButton;
 
-	/** The Current SEM menu. */
+	/** The Current semester menu. */
 	@FXML
 	private MenuItem CurrentSEMMenu;
 
-	/** The Academic ac ID lable. */
+	/** The Academic activity ID label. */
 	@FXML
 	private Label AcademicAcIDLable;
 
-	/** The Semester B. */
+	/** The Semester no.B. */
 	@FXML
 	private MenuItem SemesterB;
 	
@@ -80,11 +80,11 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	private Button CheckActivitiesButton;
 
-	/** The Semester A. */
+	/** The Semester no.A. */
 	@FXML
 	private MenuItem SemesterA;
 
-	/** The Fill form lable. */
+	/** The Fill form label. */
 	@FXML
 	private Label FillFormLable;
 
@@ -96,7 +96,7 @@ public class OpenNewSemesterController implements IController
     @FXML
     private MenuButton SemesterMenu;
 
-	/** The Type lable. */
+	/** The Type label. */
 	@FXML
 	private Label TypeLable;
 
@@ -107,7 +107,7 @@ public class OpenNewSemesterController implements IController
 	/** The Activity ID. */
 	private ArrayList<String> ActivityID;
 	
-	/** The Sem ID. */
+	/** The Semester ID. */
 	private ArrayList<String> SemID;
 	
 	/** The Type. */
@@ -137,7 +137,7 @@ public class OpenNewSemesterController implements IController
 	/**
 	 * Enter semester ID.
 	 *
-	 * @param event the event
+	 * @param event - enter semester ID
 	 */
 	@FXML
 	void EnterSemesterID(ActionEvent event)
@@ -146,9 +146,9 @@ public class OpenNewSemesterController implements IController
 	}
 
 	/**
-	 * Enter academic ac ID.
+	 * Enter academic activity ID.
 	 *
-	 * @param event the event
+	 * @param event - enter academic activity ID
 	 */
 	@FXML
 	void EnterAcademicAcID(ActionEvent event)
@@ -159,7 +159,7 @@ public class OpenNewSemesterController implements IController
 	/**
 	 * Send semester form.
 	 *
-	 * @param event the event
+	 * @param event - Send semester form.
 	 */
 	@FXML
 	void SendSemesterForm(ActionEvent event)
@@ -233,7 +233,7 @@ public class OpenNewSemesterController implements IController
 	/**
 	 * Load academic activities.
 	 *
-	 * @param ID the id
+	 * @param ID - enter academic activities id
 	 */
 	void loadAcaemicActivities(String ID)
 	{
@@ -260,7 +260,7 @@ public class OpenNewSemesterController implements IController
 	/**
 	 * Back to menu.
 	 *
-	 * @param event the event
+	 * @param event - enter back to menu
 	 */
 	@FXML
 	void BackToMenu(ActionEvent event)
@@ -269,9 +269,9 @@ public class OpenNewSemesterController implements IController
 	}
 
 	/**
-	 * Sem A.
+	 * Semester no.A.
 	 *
-	 * @param event the event
+	 * @param event - enter semester A
 	 */
 	@FXML
 	void SemA(ActionEvent event)
@@ -283,9 +283,9 @@ public class OpenNewSemesterController implements IController
 	}
 
 	/**
-	 * Sem B.
+	 * Semester no.B.
 	 *
-	 * @param event the event
+	 * @param event - enter semester A
 	 */
 	@FXML
 	void SemB(ActionEvent event)
@@ -297,9 +297,9 @@ public class OpenNewSemesterController implements IController
 	}
 
 	/**
-	 * Current SEM.
+	 * Current Semester.
 	 *
-	 * @param event the event
+	 * @param event - enter Current Semester
 	 */
 	@FXML
 	void CurrentSEM(ActionEvent event)
@@ -314,7 +314,7 @@ public class OpenNewSemesterController implements IController
 	/**
 	 * Check semester ID.
 	 *
-	 * @param event the event
+	 * @param event - enter semester ID
 	 */
 	@FXML
 	void CheckSemesterID(ActionEvent event)
@@ -346,7 +346,7 @@ public class OpenNewSemesterController implements IController
 	/**
 	 * Check academic activities.
 	 *
-	 * @param event the event
+	 * @param event - enter academic activities
 	 */
 	@FXML
 	void CheckAcademicActivities(ActionEvent event)
@@ -404,7 +404,9 @@ public class OpenNewSemesterController implements IController
 		ActivityFlag = 0;
 	}
 
-	
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{

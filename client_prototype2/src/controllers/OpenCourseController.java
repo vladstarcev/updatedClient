@@ -22,7 +22,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class OpenCourseController.
+ * The Class OpenCourseController - this class is open new course.
  */
 public class OpenCourseController implements IController{
 
@@ -42,7 +42,7 @@ public class OpenCourseController implements IController{
     @FXML
     private ComboBox<String> ChooseClassComboBox;
 
-    /** The Open course lable. */
+    /** The Open course label. */
     @FXML
     private Label OpenCourseLable;
 
@@ -64,10 +64,10 @@ public class OpenCourseController implements IController{
 	/** The cb course name. */
 	private String cbCourseName;
 	
-	/** The cb class name. */
+	/** The combo box class name. */
 	private String cbClassName;
 	
-	/** The cb teacher details. */
+	/** The combo box teacher details. */
 	private String cbTeacherDetails;
 	
 	/** The Course ID. */
@@ -102,7 +102,7 @@ public class OpenCourseController implements IController{
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event enter back to menu
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -113,7 +113,7 @@ public class OpenCourseController implements IController{
     /**
      * Course list.
      *
-     * @param event the event
+     * @param event - enter course list
      */
     @FXML
     void CourseList(ActionEvent event) {
@@ -129,7 +129,7 @@ public class OpenCourseController implements IController{
     /**
      * Open course in class.
      *
-     * @param event the event
+     * @param event - exceptional events
      */
     @FXML
     void OpenCourseInClass(ActionEvent event) {
@@ -156,7 +156,7 @@ public class OpenCourseController implements IController{
     /**
      * Choose teacher.
      *
-     * @param event the event
+     * @param event - enter teacher 
      */
     @FXML
     void ChooseTeacher(ActionEvent event) {
@@ -169,7 +169,7 @@ public class OpenCourseController implements IController{
     /**
      * Choose class.
      *
-     * @param event the event
+     * @param event - enter class
      */
     @FXML
     void ChooseClass(ActionEvent event) {
@@ -182,7 +182,7 @@ public class OpenCourseController implements IController{
     
 
 	/**
-	 * Load courses.
+	 * Load all courses.
 	 */
 	void loadCourses()
 	{
@@ -223,7 +223,7 @@ public class OpenCourseController implements IController{
 	}
 
 	/**
-	 * Load class ID.
+	 * Load all class ID.
 	 */
 	void loadClassID()
 	{
@@ -245,7 +245,7 @@ public class OpenCourseController implements IController{
 	}
 
 	/**
-	 * Loadteacher.
+	 * Load all teacher.
 	 */
 	void loadteacher()
 	{
@@ -289,7 +289,7 @@ public class OpenCourseController implements IController{
 	}
 
 	/**
-	 * Check I fcourse already open.
+	 * Check if course is already open.
 	 */
 	void checkIFcourseAlreadyOpen()
 	{
@@ -366,7 +366,7 @@ public class OpenCourseController implements IController{
 	/**
 	 * Update work hours teacher.
 	 *
-	 * @param S the s
+	 * @param S - enter new work hours
 	 */
 	void UpdateWorkHoursTeacher(String S)
 	{
@@ -427,7 +427,9 @@ public class OpenCourseController implements IController{
 
     }
 
-
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object msg) {
 		// TODO Auto-generated method stub

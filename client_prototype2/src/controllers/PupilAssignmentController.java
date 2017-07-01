@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class PupilAssignmentController.
+ * The Class PupilAssignmentController - this class receive pupil assignment from teacher.
  */
 public class PupilAssignmentController implements IController {
 
@@ -44,7 +44,7 @@ public class PupilAssignmentController implements IController {
 	@FXML
 	private Label UploadTextField;
 
-	/** The choose course CB. */
+	/** The choose course ComboBox. */
 	@FXML
 	private ComboBox<String> chooseCourseCB;
 
@@ -64,7 +64,7 @@ public class PupilAssignmentController implements IController {
 	@FXML
 	private Hyperlink FileHyperLink;
 
-	/** The choose ass CB. */
+	/** The choose ass ComboBox. */
 	@FXML
 	private ComboBox<String> chooseAssCB;
 
@@ -79,7 +79,7 @@ public class PupilAssignmentController implements IController {
 	/** The all courses. */
 	private HashMap<String, HashMap<String, String>> allCourses;
 
-	/** The all ass. */
+	/** The all assignment. */
 	private HashMap<String, HashMap<String, String>> allAss;
 
 	/** The Assignment file. */
@@ -91,8 +91,7 @@ public class PupilAssignmentController implements IController {
 	/**
 	 * Upload solution file.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter solution
 	 */
 	@FXML
 	void UploadSolutionFile(ActionEvent event) {
@@ -150,8 +149,7 @@ public class PupilAssignmentController implements IController {
 	/**
 	 * Choose solution file.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter the choose solution file
 	 */
 	@FXML
 	void ChooseSolutionFile(ActionEvent event) {
@@ -166,8 +164,7 @@ public class PupilAssignmentController implements IController {
 	/**
 	 * Back to pupil menu.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter back to pupil menu
 	 */
 	@FXML
 	void BackToPupilMenu(ActionEvent event) {
@@ -177,8 +174,7 @@ public class PupilAssignmentController implements IController {
 	/**
 	 * Choose course.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter choose course
 	 */
 	@FXML
 	void chooseCourse(ActionEvent event) {
@@ -192,8 +188,7 @@ public class PupilAssignmentController implements IController {
 	/**
 	 * Choose ass.
 	 *
-	 * @param event
-	 *            the event
+	 * @param event - enter choose assignment
 	 */
 	@FXML
 	void chooseAss(ActionEvent event) {
@@ -237,7 +232,7 @@ public class PupilAssignmentController implements IController {
 	}
 
 	/**
-	 * Load all ass.
+	 * Load all assignment.
 	 */
 	void loadAllAss() {
 		ArrayList<String> data = new ArrayList<String>();
@@ -256,8 +251,7 @@ public class PupilAssignmentController implements IController {
 	/**
 	 * Load ass of course.
 	 *
-	 * @param courseId
-	 *            the course id
+	 * @param courseId - enter course id
 	 */
 	void loadAssOfCourse(String courseId) {
 		ArrayList<String> data = new ArrayList<String>();
@@ -300,6 +294,9 @@ public class PupilAssignmentController implements IController {
 		loadAllCourses();
 	}
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result) {
 		System.out.println("got result " + result);
