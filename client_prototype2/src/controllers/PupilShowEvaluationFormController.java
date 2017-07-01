@@ -25,7 +25,7 @@ import ui.UserWindow;
 
 
 /**
- * The Class PupilShowEvaluationFormController.
+ * The Class PupilShowEvaluationFormController - this class show evaluation form of pupil.
  */
 public class PupilShowEvaluationFormController implements IController {
 
@@ -82,7 +82,7 @@ public class PupilShowEvaluationFormController implements IController {
     /**
      * Pupil final grade.
      *
-     * @param event the event
+     * @param event - Pupil final grade 
      */
     @FXML
     void PupilFinalGrade(ActionEvent event) {
@@ -92,7 +92,7 @@ public class PupilShowEvaluationFormController implements IController {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - enter back to menu.
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -119,7 +119,8 @@ public class PupilShowEvaluationFormController implements IController {
     /**
      * Load evaluation form.
      *
-     * @param course the course
+     * @param course - enter course id
+     * @param id - enter pupil id
      */
     void loadEvaluationForm(String course,String ID)
     {
@@ -142,12 +143,14 @@ public class PupilShowEvaluationFormController implements IController {
     	}
     }
    
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result) {
 	 	if (result == null)
 	 	{
 	 		// error
-	
 	 		return;
 	 	}
 	 	ArrayList<String> arr = (ArrayList<String>) result;
@@ -160,8 +163,7 @@ public class PupilShowEvaluationFormController implements IController {
 	 	    	Optional<ButtonType> res = a.showAndWait();
 	 	    	if (res.get() == ButtonType.OK){
 	 	           UserWindow.closeUserWindow(getClass(), (Stage)BackButton.getScene().getWindow());
-	 	    	}
-	 	    	
+	 	    	} 	    	
 		   		return;
 	 		}
 	 		for (String row : arr)
@@ -179,7 +181,6 @@ public class PupilShowEvaluationFormController implements IController {
 	 		FinalGradeTextField.setText(grade);
 	 		CommentsTextArea.setText(comments);
 	 		flagEvaluation=true;
-	 	}
-	 	
+	 	}	 	
 	}
 }
