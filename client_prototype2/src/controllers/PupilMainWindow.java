@@ -39,6 +39,9 @@ public class PupilMainWindow implements IController{
     /** The upload ass. */
     @FXML
     private MenuItem uploadAss;
+    
+    @FXML
+    private MenuItem DownLoadAssMenu;
 
     /** The Pupil file. */
     @FXML
@@ -96,6 +99,13 @@ public class PupilMainWindow implements IController{
     @FXML
     void openPupilFile(ActionEvent event) {
     	UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilFile", getClass());
+    }
+    
+
+    @FXML
+    void DownLoadAss(ActionEvent event) {
+
+    	UserWindow.createUserWindow((Stage) ChooseMenuButton.getScene().getWindow(), "PupilDownloadAssignment", getClass());
     }
     
     /**

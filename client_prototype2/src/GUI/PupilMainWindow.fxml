@@ -17,6 +17,7 @@
         <items>
           <MenuItem mnemonicParsing="false" onAction="#uploadAss" text="Upload Assignment Solution" />
           <MenuItem mnemonicParsing="false" onAction="#openPupilFile" text="Open Pupil File" />
+            <MenuItem fx:id="DownLoadAssMenu" mnemonicParsing="false" onAction="#DownLoadAss" text="Download Assignments" />
         </items>
       </MenuButton>
       <Label fx:id="ChooseOperationLable" layoutX="103.0" layoutY="152.0" text="Choose Your Operation:" />
