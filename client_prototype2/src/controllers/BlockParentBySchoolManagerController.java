@@ -84,6 +84,14 @@ public class BlockParentBySchoolManagerController  implements IController {
      */
     @FXML
     void BlockParent(ActionEvent event) {
+    	try{
+    		Integer.parseInt(PupilIDTextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter 6-digit pupil ID", ButtonType.OK).showAndWait();
+    		return;
+    	}
+    	
     	flagBlock = true;
     	findPupil();
     }
@@ -106,6 +114,14 @@ public class BlockParentBySchoolManagerController  implements IController {
      */
     @FXML
     void FreeParent(ActionEvent event) {
+    	
+    	try{
+    		Integer.parseInt(PupilIDTextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter 6-digit pupil ID", ButtonType.OK).showAndWait();
+    		return;
+    	}
     	flagBlock = false;
     	findPupil();
     }
