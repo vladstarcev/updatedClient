@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class ReportGenerationController - .
+ * The Class ReportGenerationController - this class produce report generation.
  */
 public class ReportGenerationController implements IController
 {
