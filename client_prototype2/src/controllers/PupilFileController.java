@@ -78,7 +78,7 @@ public class PupilFileController implements IController {
     @FXML
     private Label ChooseCourseLabel;
 
-    /** The Choose lable. */
+    /** The Choose label. */
     @FXML
     private Label ChooseLable;
 
@@ -171,7 +171,7 @@ public class PupilFileController implements IController {
     /**
      * Show course list.
      *
-     * @param event the event
+     * @param event - show course list
      */
     @FXML
     void ShowCourseList(ActionEvent event) {
@@ -181,7 +181,7 @@ public class PupilFileController implements IController {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - back to menu
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -192,7 +192,7 @@ public class PupilFileController implements IController {
     /**
      * Choose operation.
      *
-     * @param event the event
+     * @param event - choose operation
      */
     @FXML
     void ChooseOperation(ActionEvent event) {
@@ -202,7 +202,7 @@ public class PupilFileController implements IController {
     /**
      * Show evaluation form.
      *
-     * @param event the event
+     * @param event - Show evaluation form
      */
     @FXML
     void ShowEvaluationForm(ActionEvent event) {
@@ -220,7 +220,7 @@ public class PupilFileController implements IController {
     /**
      * Show grade sheet.
      *
-     * @param event the event
+     * @param event - Show grade sheet
      */
     @FXML
     void ShowGradeSheet(ActionEvent event) {
@@ -250,15 +250,17 @@ public class PupilFileController implements IController {
         loadAllCourses();
     }
 
-	
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result) {
 	 	if (result == null)
 	 	{
 	 		// error
-	
 	 		return;
 	 	}
+	 	
 	 	ArrayList<String> arr = (ArrayList<String>) result;
 	 	String type = arr.remove(0);
 	 	if (type.equals("load Courses"))
@@ -291,13 +293,11 @@ public class PupilFileController implements IController {
 	 			String courseId = map.get("courseID");
 	 			CourseComboBox.getItems().add(courseId + ": " + allCourses.get(courseId).get("courseName"));
 	 	        loadGradeSheets();
-
 	 		}		
 	 	}
 	 	else if (type.equals("load grade sheet"))
 	 	{
  			gradeSheet = "";
-
 	 		for (String row : arr)
 	 		{
 	 			String[] cols = row.split(";");
@@ -312,16 +312,14 @@ public class PupilFileController implements IController {
 		 		gradeSheet += courseId + "\t" + allCourses.get(courseId).get("courseName") + "\t " ;
 		 		if(!(grade.equals("0")))	gradeSheet+= grade;
 		 		gradeSheet+="\n";
-	 		}
-		 		
+	 		}		 		
 	 	}
-
 	}
 	
     /**
      * Sets the grade sheet.
      *
-     * @param str the new grade sheet
+     * @param str - the new grade sheet
      */
     void setGradeSheet(String str)
     {
@@ -329,17 +327,16 @@ public class PupilFileController implements IController {
     	 ObservableList<Course> data;
     	 data = getInitialTableData();
     	 table.setItems(data);
-
-    	    Course course;
-    	    String[] courses = str.split("\n");
-    	    for(String c : courses)
-    	    {
-    	    	String[] ans = c.split("\t");
-    	    	if(ans[2]!=null) course = new Course(ans[0], ans[1], ans[2]);
-    	    	else course = new Course(ans[0], ans[1],"");
-    	    	if(data==null)data = FXCollections.observableArrayList(course);
-    	    	else data.add(course);
-    	    }
+    	 Course course;
+    	 String[] courses = str.split("\n");
+    	 for(String c : courses)
+    	 {
+ 	    	String[] ans = c.split("\t");
+    	   	if(ans[2]!=null) course = new Course(ans[0], ans[1], ans[2]);
+        	else course = new Course(ans[0], ans[1],"");
+    	   	if(data==null)data = FXCollections.observableArrayList(course);
+    	   	else data.add(course);
+   	    }
     	
     	Stage stage = new Stage();
         Scene scene = new Scene(new Group());
@@ -381,7 +378,6 @@ public class PupilFileController implements IController {
         stage.show();
     }
  
-    
     /**
      * Gets the initial table data.
      *
@@ -410,9 +406,9 @@ public class PupilFileController implements IController {
         /**
          * Instantiates a new course.
          *
-         * @param id the id
-         * @param name the name
-         * @param grade the grade
+         * @param id - course id
+         * @param name - course name
+         * @param grade - email 
          */
         private Course(String id, String name, String grade) {
             this.CourseId = new SimpleStringProperty(id);

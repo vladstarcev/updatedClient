@@ -60,11 +60,11 @@ public class PupilExeptionalRequestController implements IController {
     @FXML
     private Button BackButton;
 
-    /** The Pupil exeptional lable. */
+    /** The Pupil exceptional label. */
     @FXML
     private Label PupilExeptionalLable;
 
-    /** The Request id lable. */
+    /** The Request id label. */
     @FXML
     private Label RequestIdLable;
 
@@ -72,7 +72,7 @@ public class PupilExeptionalRequestController implements IController {
     @FXML
     private MenuButton ChooseOperationMenuButton;
 
-    /** The Operation lable. */
+    /** The Operation label. */
     @FXML
     private Label OperationLable;
 
@@ -84,11 +84,11 @@ public class PupilExeptionalRequestController implements IController {
     @FXML
     private Button SendButton;
 
-    /** The Pupil id lable. */
+    /** The Pupil id label. */
     @FXML
     private Label PupilIdLable;
 
-    /** The Course list lable. */
+    /** The Course list label. */
     @FXML
     private Label CourseListLable;
     
@@ -96,17 +96,17 @@ public class PupilExeptionalRequestController implements IController {
     @FXML
     private Label ChooseClassLabel;
     
-    /** The Choose class CB. */
+    /** The Choose class Combo Box. */
     @FXML
     private ComboBox<String> ChooseClassCB;
     
-    /** The Req I dflag. */
+    /** The Request Id flag. */
     private int ReqIDflag;
 	
-	/** The cb course ID name. */
+	/** The combo box course ID name. */
 	private String cbCourseIDName;
 	
-	/** The cb pupil ID name. */
+	/** The combo box pupil ID name. */
 	private String cbPupilIDName;
 	
 	/** The Operation. */
@@ -118,13 +118,13 @@ public class PupilExeptionalRequestController implements IController {
 	/** The Course ID. */
 	private String CourseID; 
 	
-	/** The cb class ID name. */
+	/** The combo box class ID name. */
 	private String cbClassIDName;
 
     /**
-     * Ceck id availability.
+     * Check id availability.
      *
-     * @param event the event
+     * @param event - enter id availability
      */
     @FXML
     void CeckIdAvailability(ActionEvent event) {
@@ -158,7 +158,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Choose course.
      *
-     * @param event the event
+     * @param event - enter course
      */
     @FXML
     void ChooseCourse(ActionEvent event) {
@@ -173,7 +173,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Choose pupil.
      *
-     * @param event the event
+     * @param event - enter pupil id
      */
     @FXML
     void ChoosePupil(ActionEvent event) {
@@ -184,7 +184,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Choose operation.
      *
-     * @param event the event
+     * @param event operation
      */
     @FXML
     void ChooseOperation(ActionEvent event) {
@@ -194,7 +194,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Assign pupil to course.
      *
-     * @param event the event
+     * @param event - enter assignment
      */
     @FXML
     void AssignPupilToCourse(ActionEvent event) {
@@ -206,7 +206,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Assign pupil menu.
      *
-     * @param event the event
+     * @param event - pupil menu
      */
     @FXML
     void AssignPupilMenu(ActionEvent event) {
@@ -216,7 +216,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Delete pupil from course.
      *
-     * @param event the event
+     * @param event delete pupil from course id
      */
     @FXML
     void DeletePupilFromCourse(ActionEvent event) {
@@ -229,7 +229,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Delete pupil menu.
      *
-     * @param event the event
+     * @param event - delete pupil menu
      */
     @FXML
     void DeletePupilMenu(ActionEvent event) {
@@ -239,7 +239,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Send to school manager.
      *
-     * @param event the event
+     * @param event - check the request exceptional enters of user in pupil exceptional request 
      */
     @FXML
     void SendToSchoolManager(ActionEvent event) {
@@ -279,7 +279,7 @@ public class PupilExeptionalRequestController implements IController {
     }
     
    /**
-    * Load classes.
+    * Load all classes.
     */
    void loadClasses()
    {
@@ -304,7 +304,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Choose class.
      *
-     * @param event the event
+     * @param event - enter class
      */
     @FXML
     void ChooseClass(ActionEvent event) {
@@ -317,7 +317,7 @@ public class PupilExeptionalRequestController implements IController {
     /**
      * Back to menu.
      *
-     * @param event the event
+     * @param event - enter back to menu
      */
     @FXML
     void BackToMenu(ActionEvent event) {
@@ -327,7 +327,7 @@ public class PupilExeptionalRequestController implements IController {
     }
     
     /**
-     * Load pupils.
+     * Load all pupils.
      */
     void loadPupils()
     {
@@ -349,7 +349,7 @@ public class PupilExeptionalRequestController implements IController {
     }
     
      /**
-      * Load courses.
+      * Load all courses.
       */
      void loadCourses()
      {
@@ -369,7 +369,7 @@ public class PupilExeptionalRequestController implements IController {
      }
      
      /**
-      * Load pupil in course.
+      * Load all pupil in course.
       */
      void loadPupilInCourse()
      {
@@ -393,9 +393,9 @@ public class PupilExeptionalRequestController implements IController {
      }
      
      /**
-      * Insert exceptional requst.
+      * Insert exceptional request.
       *
-      * @param str the str
+      * @param str - enter comment in exceptional request
       */
      void InsertExceptionalRequst(String str)
      {
@@ -466,7 +466,10 @@ public class PupilExeptionalRequestController implements IController {
         loadCourses();
     }
 
-	
+
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */   
 	@Override
 	public void handleAnswer(Object result)
 	{
