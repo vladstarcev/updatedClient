@@ -320,7 +320,7 @@ public class OpenNewSemesterController implements IController
 	void CheckSemesterID(ActionEvent event)
 	{
 		try{
-    		Integer.parseInt(CheckIDButton.getText());
+    		Integer.parseInt(SemesterIdTextField.getText());
     	}
     	catch(NumberFormatException e){
     		new Alert(AlertType.ERROR, "Enter a 6-digits number", ButtonType.OK).showAndWait();
@@ -351,6 +351,19 @@ public class OpenNewSemesterController implements IController
 	@FXML
 	void CheckAcademicActivities(ActionEvent event)
 	{
+		String acId = AcademicAcTextField.getText();
+		String[] activities = acId.split(",");
+		for(int i=0;i<activities.length;i++){
+			try{
+	    		Integer.parseInt(activities[i].trim());
+	    	}
+	    	catch(NumberFormatException e){
+	    		new Alert(AlertType.ERROR, "Enter a 5-digits activity ID's separated by coma", ButtonType.OK).showAndWait();
+	    		return;
+	    	}
+		}
+		
+		
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Activity ID");
 		data.add("select field");

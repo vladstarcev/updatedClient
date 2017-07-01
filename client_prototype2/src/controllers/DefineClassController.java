@@ -248,7 +248,7 @@ public class DefineClassController implements IController
 	void CheckAvailability1(ActionEvent event)
 	{
 		try{
-    		Integer.parseInt(CheckAvailabilityButton1.getText());
+    		Integer.parseInt(ClassIdTextField.getText());
     	}
     	catch(NumberFormatException e){
     		new Alert(AlertType.ERROR, "Please enter 4-digit number", ButtonType.OK).showAndWait();

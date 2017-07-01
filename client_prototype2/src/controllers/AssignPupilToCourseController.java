@@ -97,6 +97,14 @@ public class AssignPupilToCourseController implements IController {
     @FXML
     void CheckPupilID(ActionEvent event) {
     	
+    	try{
+    		Integer.parseInt(PupilIDtextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter the 9-digit pupil ID!", ButtonType.OK).showAndWait();
+    		return;
+    	}
+    	
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Pupil");
 		data.add("select");
@@ -120,6 +128,14 @@ public class AssignPupilToCourseController implements IController {
      */
     @FXML
     void CheckCourseID(ActionEvent event) {
+    	
+    	try{
+    		Integer.parseInt(CourseIDtextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter the 5-digit course ID!", ButtonType.OK).showAndWait();
+    		return;
+    	}
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Course");
@@ -183,6 +199,14 @@ public class AssignPupilToCourseController implements IController {
 	@FXML
 	void CheckRequestID(ActionEvent event)
 	{
+		
+		try{
+    		Integer.parseInt(RequestIdTextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter the 4-digit request ID!", ButtonType.OK).showAndWait();
+    		return;
+    	}
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check RequestID");

@@ -124,6 +124,15 @@ public class AssignPupilToClassController implements IController
 	@FXML
     void SendPupilID(ActionEvent event) {
 		/**Query That Asks For The Field userID Where He Equals To PupilIdTextField.getText() From pupil Table**/
+		
+		try{
+    		Integer.parseInt(PupilIdTextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter 6-digit pupil ID", ButtonType.OK).showAndWait();
+    		return;
+    	}
+		
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Pupil");
 		data.add("select");
@@ -149,6 +158,15 @@ public class AssignPupilToClassController implements IController
 	@FXML
     void SendClassID(ActionEvent event) {
 		/**Query That Asks For The Field classId Where He Equals To ClassIDTextField.getText() From class Table**/
+		
+		try{
+    		Integer.parseInt(ClassIDTextField.getText());
+    	}
+    	catch(NumberFormatException e){
+    		new Alert(AlertType.ERROR, "Please enter 4-digit Class ID", ButtonType.OK).showAndWait();
+    		return;
+    	}
+		
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Class");
 		data.add("select");
