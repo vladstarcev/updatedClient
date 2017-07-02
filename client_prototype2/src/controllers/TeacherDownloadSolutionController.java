@@ -22,46 +22,71 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
+/**
+ * The Class TeacherDownloadSolutionController - this class download solution to teacher
+ */
 public class TeacherDownloadSolutionController implements IController {
 
+	/** The resources . */
     @FXML
     private ResourceBundle resources;
 
+    /** The location . */
     @FXML
     private URL location;
 
+    /** The Back To Menu Button . */    
     @FXML
     private Button BackToMenuButton;
 
+    /** The choose Course Combo box . */      
     @FXML
     private AnchorPane chooseCourseCB;
 
+    /** The check assignment . */    
     @FXML
     private Label CheckPupilAssignment;
 
+    /** The Choose Assignment Combo Box . */    
     @FXML
     private ComboBox<String> ChooseAssignmentCB;
 
+    /** The Choose Pupil Combo Box . */  
     @FXML
     private ComboBox<String> ChoosePupilCB;
 
+    /** The Choose course Combo Box . */  
     @FXML
     private ComboBox<String> ChooseCourseCB;
 
+    /** The download button . */  
     @FXML
     private Button DownloadButton;
 
-    
+    /** The combo box choice . */  
     private String CBchoice;
+    
+    /** The assignment name . */  
     private String AssName;
+    
+    /** The pupil choice . */  
     private String pupilChoice;
     
-    
+    /**
+     * choose course
+     *
+     * @param event - choose course
+     */
     @FXML
     void chooseCourse(ActionEvent event) {
        	
     }
 
+    /**
+     * choose course
+     *
+     * @param event - choose course
+     */
     @FXML
     void ChooseCourse(ActionEvent event) {
     	CBchoice=ChooseCourseCB.getSelectionModel().getSelectedItem();
@@ -82,6 +107,11 @@ public class TeacherDownloadSolutionController implements IController {
  		}
     }
 
+    /**
+     * choose assignment
+     *
+     * @param event - choose assignment
+     */
     @FXML
     void ChooseAssignment(ActionEvent event) {
     	AssName=ChooseAssignmentCB.getSelectionModel().getSelectedItem();
@@ -105,6 +135,11 @@ public class TeacherDownloadSolutionController implements IController {
 		}
     }
 
+    /**
+     * download solution
+     *
+     * @param event - download solution
+     */
     @FXML
     void DownloadSolution(ActionEvent event) {
     	if(CBchoice.equals(""))
@@ -117,17 +152,29 @@ public class TeacherDownloadSolutionController implements IController {
     	}
     }
 
+    /**
+     * back to menu
+     *
+     * @param event - back to menu
+     */
     @FXML
     void BackToMenu(ActionEvent event) {
     	UserWindow.closeUserWindow(getClass(), (Stage) BackToMenuButton.getScene().getWindow());
     }
 
+    /**
+     * choose pupil
+     *
+     * @param event - choose pupil
+     */
     @FXML
     void ChoosePupil(ActionEvent event) {
     	pupilChoice=ChoosePupilCB.getSelectionModel().getSelectedItem();
     }
 
-
+    /**
+     * initialize
+     */
     @FXML
     void initialize() {
         assert BackToMenuButton != null : "fx:id=\"BackToMenuButton\" was not injected: check your FXML file 'CheckAssignment.fxml'.";
@@ -143,10 +190,11 @@ public class TeacherDownloadSolutionController implements IController {
         loadCourses();
     }
 
+    /**
+     * Handles the answer from the server according to the type of answer.
+     */
 	@Override
 	public void handleAnswer(Object msg) {
-		// TODO Auto-generated method stub
-		
 		if (msg == null)
 		{
 			// error
@@ -206,6 +254,5 @@ public class TeacherDownloadSolutionController implements IController {
 			}
 		}
 	}
-	
 
 }
