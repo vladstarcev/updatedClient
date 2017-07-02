@@ -57,6 +57,10 @@ public class UserController implements IController {
     
     /** The current user id. */
     public static String CurrentUserID;
+    
+
+    private String Access;
+
 	
     /**
      * login.
@@ -118,13 +122,42 @@ public class UserController implements IController {
 		}
 		if(permission.equals("5"))
 		{
+			CheckPermisssion();
+			if(Access.equals("0"))
+			{
 			UserWindow.createUserWindow((Stage) loginBtn.getScene().getWindow(), "Parent", getClass());
+			}
+			else
+			{
+				new Alert(AlertType.ERROR, "User Is Blocked", ButtonType.OK).showAndWait();
+			}	
 		}
 		if(permission.equals("6"))
 		{
 			UserWindow.createUserWindow((Stage) loginBtn.getScene().getWindow(), "PupilMainWindow", getClass());
 		}
+
 	}
+		
+		void CheckPermisssion()
+		{
+			ArrayList<String> data = new ArrayList<String>();
+			data.add("check parent permission");
+			data.add("select");
+			data.add("pupil");
+			data.add("parentID");
+			data.add(CurrentUserID);
+			try
+			{
+				Main.client.sendToServer(data);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+
 
     /**
      * Initialize.
@@ -142,8 +175,9 @@ public class UserController implements IController {
         userIdTextField.setText("101010101");
         passwordTextField.setText("natan101");
         
-        CurrentUserID="101010101";
+        CurrentUserID="";
         permission="";
+        Access="";
     }
 
     /**
@@ -183,6 +217,21 @@ public class UserController implements IController {
 				}
 				OpenMenu();
 			}
-		}	
+		}
+		
+		if(type.equals("check parent permission"))
+		{
+			for (String row : arr)
+			{
+				String[] cols = row.split(";");
+				HashMap<String, String> map = new HashMap<>();
+				for (String col : cols)
+				{
+					String[] field = col.split("=");
+					map.put(field[0], field[1]);
+				}
+				Access=map.get("ParentAccess");
+			}
+		}
 	}
 }
