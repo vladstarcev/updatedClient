@@ -252,6 +252,8 @@ public class DefineAssignmentController implements IController {
 		
 		isExistingAssignment = false;
 		isExistingCourse = false;
+		
+		UserWindow.exitToMenu(getClass(), (Stage) BackButton.getScene().getWindow());
 
 	}
 
