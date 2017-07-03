@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="chooseCourseCB" onDragDetected="#chooseCourse" prefHeight="505.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TeacherDownloadSolutionController">
    <children>
-      <Label fx:id="CheckPupilAssignment" layoutX="21.0" layoutY="23.0" text="Check Pupil Assignments" underline="true">
+      <Label fx:id="CheckPupilAssignment" layoutX="21.0" layoutY="23.0" text="Check Pupil's Assignment" underline="true">
          <font>
             <Font name="Bookman Old Style Bold" size="34.0" />
          </font>

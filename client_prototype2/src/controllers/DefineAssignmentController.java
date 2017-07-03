@@ -3,6 +3,7 @@ package controllers;
 import java.awt.List;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -172,11 +173,63 @@ public class DefineAssignmentController implements IController {
 	}
 
 	/**
+	 * @throws  
 	 * Define assignment.
 	 *
 	 * @param event - enter Define Assignment
+	 * @throws  
 	 */
 	@FXML
+	void DefineAssignment(ActionEvent event) {
+		String filename = EnterAssNameTF.getText();
+		String courseId = EnterClassIDTextField.getText();
+		LocalDateTime dueDate = DueDatePicker.getValue().atStartOfDay();
+		String str = AssignmentFile.getName();
+		String extention = str.split("\\.")[1];
+		
+		if (AssignmentFile == null) {
+			new Alert(AlertType.ERROR, "Missing assignment file!", ButtonType.OK).showAndWait();
+			return;
+		} else if (filename.equals("")) {
+			new Alert(AlertType.ERROR, "Missing assignment name!", ButtonType.OK).showAndWait();
+			return;
+		} else if (courseId.equals("")) {
+			new Alert(AlertType.ERROR, "Missing course Id!", ButtonType.OK).showAndWait();
+			return;
+		} else if (DueDatePicker.getValue() == null) {
+			new Alert(AlertType.ERROR, "Missing date!", ButtonType.OK).showAndWait();
+			return;
+		}
+		
+		byte bytesarr[]=new byte [2048];
+		int bytesread = 0;
+		try {
+			
+			FileInputStream fin=new FileInputStream(AssignmentFile);
+			bytesread = fin.read(bytesarr);
+			
+		} catch (FileNotFoundException e) {e.printStackTrace();} 
+		  catch (Exception e) {e.printStackTrace();}
+		
+		ArrayList<Object> data = new ArrayList<>();
+		data.add("add assignment"); //0
+		data.add(filename);//1
+		data.add(bytesarr);//2
+		data.add(bytesread);//3
+		data.add(dueDate);//4
+		data.add(courseId);//5
+		data.add(extention);//6
+		
+		try {
+			Main.client.sendToServer(data);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	/*@FXML
 	void DefineAssignment(ActionEvent event) {
 		// TODO change class id to course id
 		String courseId = EnterClassIDTextField.getText();
@@ -255,7 +308,7 @@ public class DefineAssignmentController implements IController {
 		
 		UserWindow.exitToMenu(getClass(), (Stage) BackButton.getScene().getWindow());
 
-	}
+	}*/
 
 	/**
 	 * Back to menu.
@@ -280,7 +333,8 @@ public class DefineAssignmentController implements IController {
 		// TODO add extension filter from DB
 
 		chooser.setTitle("Choose assignment file");
-		chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.*"));
+		//chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.*"));
+		chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.pdf","*.docx","*.txt"));
 		AssignmentFile = chooser.showOpenDialog(DefineAssignmentButton.getScene().getWindow());
 	}
 
@@ -309,14 +363,20 @@ public class DefineAssignmentController implements IController {
      */   
 	@Override
 	public void handleAnswer(Object result) {
+		String ans = (String)result;
 		System.out.println("got answer");
 		if (result == null) {
 			// error
 			System.out.println("error");
 			return;
 		}
+		
+		if (ans.equals("success")){
+			new Alert(AlertType.ERROR, "The assignment was uploaded successfully!", ButtonType.OK).showAndWait();
+			UserWindow.closeUserWindow(getClass(), (Stage) BackButton.getScene().getWindow());
+		}
 
-		ArrayList<String> arr = (ArrayList<String>) result;
+		/*ArrayList<String> arr = (ArrayList<String>) result;
 		System.out.println("SIZE " + arr.size() + " CONTENTS " + arr.toString());
 
 		String type = arr.remove(0);
@@ -326,8 +386,8 @@ public class DefineAssignmentController implements IController {
 			System.out.println("FINISHED WITH " + isExistingCourse);
 		} else if (type.equals("check assignment name")) {
 			isExistingAssignment = !arr.isEmpty();
-		}
+		}*/
 		
-		semaphore.release();
+		//semaphore.release();
 	}
 }
