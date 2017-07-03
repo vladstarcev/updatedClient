@@ -240,6 +240,7 @@ public class ReportBetweenClassesController implements IController
 		assert SemesterTextField != null : "fx:id=\"SemesterTextField\" was not injected: check your FXML file 'ReportBetweenClassesOfSpecificTeacher.fxml'.";
 
 		Main.client.controller = this;
+		Main.stack.push("ReportBetweenClassesOfSpecificTeacher");
 
 		SemesterID = new ArrayList<String>();
 		Teacher = "";

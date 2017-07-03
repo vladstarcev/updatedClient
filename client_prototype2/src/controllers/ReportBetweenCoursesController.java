@@ -24,7 +24,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import ui.UserWindow;
 
-
 /**
  * The Class ReportBetweenCoursesController - this class present grade report between courses.
  */
@@ -89,16 +88,16 @@ public class ReportBetweenCoursesController implements IController
 
 	/** The Semester ID. */
 	private ArrayList<String> SemesterID;
-	
+
 	/** The Class. */
 	private String Class;
-	
+
 	/** The Selected class. */
 	private String SelectedClass;
-	
+
 	/** The Semester FLAG. */
 	private int SemesterFLAG;
-	
+
 	/** The Class FLAG. */
 	private int ClassFLAG;
 
@@ -110,7 +109,7 @@ public class ReportBetweenCoursesController implements IController
 	@FXML
 	void BackToMenu(ActionEvent event)
 	{
-		UserWindow.closeUserWindow(getClass(), (Stage) ReportLabel1.getScene().getWindow()); 
+		UserWindow.closeUserWindow(getClass(), (Stage) ReportLabel1.getScene().getWindow());
 	}
 
 	/**
@@ -208,7 +207,8 @@ public class ReportBetweenCoursesController implements IController
 		{
 			if (ClassFLAG == 0 && SemesterFLAG == 0)
 			{
-				new Alert(AlertType.ERROR, "You must choose class and 4 semesters ID first!!", ButtonType.OK).showAndWait();
+				new Alert(AlertType.ERROR, "You must choose class and 4 semesters ID first!!", ButtonType.OK)
+						.showAndWait();
 			}
 			if (ClassFLAG == 0)
 			{
@@ -242,6 +242,7 @@ public class ReportBetweenCoursesController implements IController
 		assert SemesterTextField != null : "fx:id=\"SemesterTextField\" was not injected: check your FXML file 'ReportBetweenDiferentCoursesOfSpecificClass.fxml'.";
 
 		Main.client.controller = this;
+		Main.stack.push("ReportBetweenDiferentCoursesOfSpecificClass");
 
 		SemesterID = new ArrayList<String>();
 		Class = "";
@@ -258,9 +259,9 @@ public class ReportBetweenCoursesController implements IController
 		loadClasses();
 	}
 
-    /**
-     * Handles the answer from the server according to the type of answer.
-     */   
+	/**
+	 * Handles the answer from the server according to the type of answer.
+	 */
 	@Override
 	public void handleAnswer(Object result)
 	{
@@ -276,20 +277,20 @@ public class ReportBetweenCoursesController implements IController
 		if (type.equals("histogram 3"))
 		{
 			XYChart.Series<String, Double> series = new XYChart.Series<>();
-			
+
 			for (String row : arr)
 			{
 				ArrayList<String> values = new ArrayList<>();
 				String[] cols = row.split(";");
-				
+
 				for (String col : cols)
 				{
 					String[] field = col.split("=");
 					values.add(field[1]);
 				}
-				series.getData().add(new XYChart.Data<>(values.get(0),Double.parseDouble(values.get(1))));
+				series.getData().add(new XYChart.Data<>(values.get(0), Double.parseDouble(values.get(1))));
 			}
-			
+
 			ReportChart.getData().add(series);
 		}
 

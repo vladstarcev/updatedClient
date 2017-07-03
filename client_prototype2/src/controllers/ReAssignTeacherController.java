@@ -22,7 +22,8 @@ import javafx.scene.control.TextField;
 /**
  * The Class ReAssignTeacherController - this class treats to request assignment teacher.
  */
-public class ReAssignTeacherController implements IController {
+public class ReAssignTeacherController implements IController
+{
 
 	/** The resources. */
 	@FXML
@@ -122,7 +123,8 @@ public class ReAssignTeacherController implements IController {
 	 * @param event - request ID
 	 */
 	@FXML
-	void CheckRequestID(ActionEvent event) {
+	void CheckRequestID(ActionEvent event)
+	{
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Existing Request ID");
@@ -133,9 +135,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("type");
 		data.add("Reassign");
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -146,7 +151,8 @@ public class ReAssignTeacherController implements IController {
 	 * @param event - course ID
 	 */
 	@FXML
-	void CheckCourseID(ActionEvent event) {
+	void CheckCourseID(ActionEvent event)
+	{
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Course ID");
@@ -155,9 +161,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("courseId");
 		data.add(CourseIDTextField.getText());
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -168,7 +177,8 @@ public class ReAssignTeacherController implements IController {
 	 * @param event - enter back to menu
 	 */
 	@FXML
-	void BackToMenu(ActionEvent event) {
+	void BackToMenu(ActionEvent event)
+	{
 		UserWindow.closeUserWindow(getClass(), (Stage) CheckCourseButton.getScene().getWindow());
 	}
 
@@ -178,17 +188,27 @@ public class ReAssignTeacherController implements IController {
 	 * @param event - enter exceptional input of user in request assignment teacher
 	 */
 	@FXML
-	void ReAssignTeacher(ActionEvent event) {
+	void ReAssignTeacher(ActionEvent event)
+	{
 
-		if (ExFlag == 0) {
+		if (ExFlag == 0)
+		{
 			new Alert(AlertType.ERROR, "Enter Exist Request ID And Check It.", ButtonType.OK).showAndWait();
-		} else if (courseIDF == 0) {
+		}
+		else if (courseIDF == 0)
+		{
 			new Alert(AlertType.ERROR, "Enter Course ID And Check It.", ButtonType.OK).showAndWait();
-		} else if (classIDF == 0) {
+		}
+		else if (classIDF == 0)
+		{
 			new Alert(AlertType.ERROR, "Enter Class ID And Check It", ButtonType.OK).showAndWait();
-		} else if (teacherIDF == 0) {
+		}
+		else if (teacherIDF == 0)
+		{
 			new Alert(AlertType.ERROR, "Enter Teacher ID And Check It", ButtonType.OK).showAndWait();
-		} else {
+		}
+		else
+		{
 			loadDecision();
 		}
 
@@ -200,7 +220,8 @@ public class ReAssignTeacherController implements IController {
 	 * @param event - class ID
 	 */
 	@FXML
-	void CheckClassID(ActionEvent event) {
+	void CheckClassID(ActionEvent event)
+	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Class ID");
 		data.add("select");
@@ -208,9 +229,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("classId");
 		data.add(ClassIDTextField.getText());
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -221,7 +245,8 @@ public class ReAssignTeacherController implements IController {
 	 * @param event - teacher ID
 	 */
 	@FXML
-	void getTeacherID(ActionEvent event) {
+	void getTeacherID(ActionEvent event)
+	{
 		teacherIDF = 0;
 	}
 
@@ -231,7 +256,8 @@ public class ReAssignTeacherController implements IController {
 	 * @param event  - teacher ID
 	 */
 	@FXML
-	void CheckTeacherID(ActionEvent event) {
+	void CheckTeacherID(ActionEvent event)
+	{
 
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Teacher ID");
@@ -240,9 +266,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("userID");
 		data.add(TeacherIdTextFieald.getText());
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -250,7 +279,8 @@ public class ReAssignTeacherController implements IController {
 	/**
 	 * Load decision.
 	 */
-	void loadDecision() {
+	void loadDecision()
+	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Check Exeptional Request Descision");
 		data.add("select");
@@ -266,9 +296,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("classId");
 		data.add(ClassIDTextField.getText());
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -276,7 +309,8 @@ public class ReAssignTeacherController implements IController {
 	/**
 	 * Reassign teacher.
 	 */
-	void reassignTeacher() {
+	void reassignTeacher()
+	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Update Teacher To Course In Class");
 		data.add("update");
@@ -289,9 +323,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("courseId");
 		data.add(CourseIDTextField.getText());
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -299,7 +336,8 @@ public class ReAssignTeacherController implements IController {
 	/**
 	 * Change teacher hours.
 	 */
-	void ChangeTeacherHours() {
+	void ChangeTeacherHours()
+	{
 		int num = Integer.parseInt(NewTeacherWorkHours);
 		num = num + Integer.parseInt(courseHours);
 		NewTeacherWorkHours = Integer.toString(num);
@@ -314,9 +352,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("userId");
 		data.add(TeacherIdTextFieald.getText());
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -324,7 +365,8 @@ public class ReAssignTeacherController implements IController {
 	/**
 	 * Load old teacher.
 	 */
-	void loadOldTeacher() {
+	void loadOldTeacher()
+	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Load Old Teacher");
 		data.add("select");
@@ -334,9 +376,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("courseId");
 		data.add(CourseIDTextField.getText());
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -344,7 +389,8 @@ public class ReAssignTeacherController implements IController {
 	/**
 	 * Load old teacher hours.
 	 */
-	void loadOldTeacherHours() {
+	void loadOldTeacherHours()
+	{
 		ArrayList<String> data = new ArrayList<String>();
 		data.add("Load Old Teacher Hours");
 		data.add("select");
@@ -352,9 +398,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("userID");
 		data.add(OldTeacherID);
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -362,7 +411,8 @@ public class ReAssignTeacherController implements IController {
 	/**
 	 * Update old teacher hours.
 	 */
-	void updateOldTeacherHours() {
+	void updateOldTeacherHours()
+	{
 		int num = Integer.parseInt(OldTeacherWorkHours);
 		int num1 = Integer.parseInt(courseHours);
 		num = num - num1;
@@ -378,9 +428,12 @@ public class ReAssignTeacherController implements IController {
 		data.add("userID");
 		data.add(OldTeacherID);
 
-		try {
+		try
+		{
 			Main.client.sendToServer(data);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -389,7 +442,8 @@ public class ReAssignTeacherController implements IController {
 	 * Initialize.
 	 */
 	@FXML
-	void initialize() {
+	void initialize()
+	{
 		assert ClassIDTextField != null : "fx:id=\"ClassIDTextField\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
 		assert CheckRequestButton != null : "fx:id=\"CheckRequestButton\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
 		assert CourseIDTextField != null : "fx:id=\"CourseIDTextField\" was not injected: check your FXML file 'SecretaryReAssignTeacher.fxml'.";
@@ -420,14 +474,16 @@ public class ReAssignTeacherController implements IController {
 
 	}
 
-    /**
-     * Handles the answer from the server according to the type of answer.
-     */   
+	/**
+	 * Handles the answer from the server according to the type of answer.
+	 */
 	@Override
-	public void handleAnswer(Object result) {
+	public void handleAnswer(Object result)
+	{
 		// TODO Auto-generated method stub
 
-		if (result == null) {
+		if (result == null)
+		{
 			// error
 			new Alert(AlertType.ERROR, "Item has not found.", ButtonType.OK).showAndWait();
 			return;
@@ -436,76 +492,102 @@ public class ReAssignTeacherController implements IController {
 		ArrayList<String> arr = (ArrayList<String>) result;
 		String type = arr.remove(0);
 
-		if (type.equals("Check Existing Request ID")) {
-			if (arr.size() != 0) {
+		if (type.equals("Check Existing Request ID"))
+		{
+			if (arr.size() != 0)
+			{
 				ExFlag = 1;
 				new Alert(AlertType.INFORMATION, "Exceptional Request Has Found", ButtonType.OK).showAndWait();
-			} else {
+			}
+			else
+			{
 
 				new Alert(AlertType.ERROR, "Exceptional Request Not Found", ButtonType.OK).showAndWait();
 			}
 		}
 
-		if (type.equals("Check Class ID")) {
-			if (arr.size() != 0) {
+		if (type.equals("Check Class ID"))
+		{
+			if (arr.size() != 0)
+			{
 				classIDF = 1;
 				new Alert(AlertType.INFORMATION, "Class ID Has Found", ButtonType.OK).showAndWait();
-			} else {
+			}
+			else
+			{
 
 				new Alert(AlertType.ERROR, "Class ID Not Found", ButtonType.OK).showAndWait();
 			}
 		}
 
-		if (type.equals("Check Course ID")) {
-			if (arr.size() != 0) {
+		if (type.equals("Check Course ID"))
+		{
+			if (arr.size() != 0)
+			{
 				courseIDF = 1;
 				new Alert(AlertType.INFORMATION, "Course ID Has Found", ButtonType.OK).showAndWait();
-				for (String row : arr) {
+				for (String row : arr)
+				{
 					String[] cols = row.split(";");
 					HashMap<String, String> map = new HashMap<>();
-					for (String col : cols) {
+					for (String col : cols)
+					{
 						String[] field = col.split("=");
 						map.put(field[0], field[1]);
 					}
 
 					courseHours = map.get("weeklyStudyHours");
 				}
-			} else {
+			}
+			else
+			{
 
 				new Alert(AlertType.ERROR, "Course ID Not Found", ButtonType.OK).showAndWait();
 			}
 		}
 
-		if (type.equals("Check Teacher ID")) {
-			if (arr.size() != 0) {
+		if (type.equals("Check Teacher ID"))
+		{
+			if (arr.size() != 0)
+			{
 				teacherIDF = 1;
 				new Alert(AlertType.INFORMATION, "Teacher  ID Has Found", ButtonType.OK).showAndWait();
-				for (String row : arr) {
+				for (String row : arr)
+				{
 					String[] cols = row.split(";");
 					HashMap<String, String> map = new HashMap<>();
-					for (String col : cols) {
+					for (String col : cols)
+					{
 						String[] field = col.split("=");
 						map.put(field[0], field[1]);
 					}
 
 					NewTeacherWorkHours = map.get("workHours");
 				}
-			} else {
+			}
+			else
+			{
 
 				new Alert(AlertType.ERROR, "Teacher ID Not Found", ButtonType.OK).showAndWait();
 			}
 		}
 
-		if (type.equals("Check Exeptional Request Descision")) {
+		if (type.equals("Check Exeptional Request Descision"))
+		{
 			String DES = "";
-			if (arr.size() == 0) {
+			if (arr.size() == 0)
+			{
 				new Alert(AlertType.ERROR, "Not Found Exceptional Request For This Details", ButtonType.OK)
 						.showAndWait();
-			} else {
-				for (String row : arr) {
+			}
+			else
+			{
+				for (String row : arr)
+				{
 					String[] cols = row.split(";");
 					HashMap<String, String> map = new HashMap<>();
-					for (String col : cols) {
+					for (String col : cols)
+					{
 						String[] field = col.split("=");
 						map.put(field[0], field[1]);
 					}
@@ -513,30 +595,40 @@ public class ReAssignTeacherController implements IController {
 					DES = map.get("descision");
 				}
 
-				if (DES.equals("confirm")) {
+				if (DES.equals("confirm"))
+				{
 					loadOldTeacher();
 					reassignTeacher();
-				} else if (DES.equals("deny")) {
+				}
+				else if (DES.equals("deny"))
+				{
 					new Alert(AlertType.INFORMATION, "Exceptional Request For This Details Deny", ButtonType.OK)
 							.showAndWait();
-				} else if (DES.equals("panding")) {
+				}
+				else if (DES.equals("panding"))
+				{
 					new Alert(AlertType.ERROR, "Exceptional Request For This Details Not Responsed Yet", ButtonType.OK)
 							.showAndWait();
 				}
 			}
 		}
 
-		if (type.equals("Update Teacher To Course In Class")) {
+		if (type.equals("Update Teacher To Course In Class"))
+		{
 			new Alert(AlertType.INFORMATION, "Re-Assiggn Of Teacher To Course In Clsss Succes.", ButtonType.OK)
 					.showAndWait();
+			//UserWindow.closeUserWindow(getClass(), (Stage) CheckCourseButton.getScene().getWindow());
 			ChangeTeacherHours();
 		}
 
-		if (type.equals("Load Old Teacher")) {
-			for (String row : arr) {
+		if (type.equals("Load Old Teacher"))
+		{
+			for (String row : arr)
+			{
 				String[] cols = row.split(";");
 				HashMap<String, String> map = new HashMap<>();
-				for (String col : cols) {
+				for (String col : cols)
+				{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
@@ -546,11 +638,14 @@ public class ReAssignTeacherController implements IController {
 			}
 		}
 
-		if (type.equals("Load Old Teacher Hours")) {
-			for (String row : arr) {
+		if (type.equals("Load Old Teacher Hours"))
+		{
+			for (String row : arr)
+			{
 				String[] cols = row.split(";");
 				HashMap<String, String> map = new HashMap<>();
-				for (String col : cols) {
+				for (String col : cols)
+				{
 					String[] field = col.split("=");
 					map.put(field[0], field[1]);
 				}
@@ -560,8 +655,9 @@ public class ReAssignTeacherController implements IController {
 			}
 		}
 
-		if (type.equals("Update Old Teacher Hours")) {
-			new Alert(AlertType.INFORMATION, "New And Old Teachers Work Hours Updated.", ButtonType.OK).showAndWait();
+		if (type.equals("Update Old Teacher Hours"))
+		{
+			//new Alert(AlertType.INFORMATION, "New And Old Teachers Work Hours Updated.", ButtonType.OK).showAndWait();
 			UserWindow.closeUserWindow(getClass(), (Stage) CheckCourseButton.getScene().getWindow());
 		}
 	}
