@@ -386,7 +386,7 @@ public class DefineClassController implements IController
 			if (arr.size() != 0)
 			{
 				new Alert(AlertType.INFORMATION, "Class Defined Succesfully!", ButtonType.OK).showAndWait();
-				//UserWindow.closeUserWindow(getClass(), (Stage) FillFormLabel.getScene().getWindow()); // problem here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				UserWindow.closeUserWindow(getClass(), (Stage) FillFormLabel.getScene().getWindow()); // problem here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			}
 		}
 
