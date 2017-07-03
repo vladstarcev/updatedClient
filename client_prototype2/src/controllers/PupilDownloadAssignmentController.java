@@ -1,5 +1,8 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -119,6 +122,22 @@ public class PupilDownloadAssignmentController implements IController{
     	{
     		new Alert(AlertType.ERROR, "Choose Assignment From List First.", ButtonType.OK).showAndWait();
     	}
+    	
+    	ArrayList<String> data = new ArrayList<>();
+    	
+    	data.add("get assignment");
+    	data.add(CourseAss);
+    	data.add("");
+    	
+    	try
+		{
+			Main.client.sendToServer(data);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+    	
     }
    
 	/**
@@ -169,6 +188,23 @@ public class PupilDownloadAssignmentController implements IController{
      */  
 	@Override
 	public void handleAnswer(Object msg) {
+		ArrayList<Object> a = (ArrayList<Object>)msg;
+		String check = (String)a.get(0);
+		if(check.equals("get assignment")){
+
+			String filename = "assignments/"+(String)a.get(1); 
+			byte bytesarr[] = (byte[])a.get(2);
+			int bytesread = (int)a.get(3);
+			try {
+				FileOutputStream fos=new FileOutputStream(new File(filename),true);
+				fos.write(bytesarr,0,bytesread);
+				fos.close();
+			} catch (FileNotFoundException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
+			
+			UserWindow.exitToMenu(getClass(), (Stage) BackToMenuButton.getScene().getWindow());
+			new Alert(AlertType.ERROR, "The assignment has been downloaded successfully!", ButtonType.OK).showAndWait();
+		}
+		
 		ArrayList<String> arr = (ArrayList<String>) msg;
 		String type = arr.remove(0);
 	

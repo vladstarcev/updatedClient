@@ -201,7 +201,7 @@ public class DefineAssignmentController implements IController {
 			return;
 		}
 		
-		byte bytesarr[]=new byte [2048];
+		byte bytesarr[]=new byte [1000000];
 		int bytesread = 0;
 		try {
 			
