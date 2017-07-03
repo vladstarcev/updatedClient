@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import ui.UserWindow;
 
 /**
- * The Class TeacherDownloadSolutionController - this class present the main window of teacher
+ * The Class TeacherMainWindowController - this class present the main window of teacher
  */
 public class TeacherMainWindowController implements IController  {
 
